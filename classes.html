@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/placement.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -186,75 +187,144 @@
 
     <!-- Page Content -->
     <div class="page-content">
-      <div class="page-header">
-        <h1 class="page-title">Live & Recorded Classes</h1>
-        <p class="page-subtitle">Join upcoming live sessions or watch recorded lectures.</p>
+      <div class="page-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div>
+          <h1 class="page-title">Live Classrooms & Video Masterclasses</h1>
+          <p class="page-subtitle">Join upcoming live interactive sessions or stream HD recorded engineering masterclasses.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn btn-outline btn-sm" onclick="initClassPage()">
+            <i class="fa fa-refresh"></i> Refresh Stream
+          </button>
+        </div>
       </div>
 
-      <!-- Live Classes Section -->
-      <div class="placement-panel">
-        <div class="panel-header">
-          <div class="panel-title"><i class="fa fa-video-camera text-danger"></i> Upcoming Live Classes</div>
+      <!-- ── CLASS STATS OVERVIEW ── -->
+      <div class="placement-stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));margin-bottom:24px">
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" style="color:var(--danger)">3</div>
+            <div class="placement-stat-label">Live Sessions Today</div>
+          </div>
+          <div class="placement-stat-icon" style="background:var(--danger-light);color:var(--danger)">
+            <i class="fa fa-video-camera"></i>
+          </div>
         </div>
-        <div class="class-list" id="liveClassesList">
+
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" style="color:var(--primary)">6</div>
+            <div class="placement-stat-label">HD Masterclasses</div>
+          </div>
+          <div class="placement-stat-icon indigo">
+            <i class="fa fa-film"></i>
+          </div>
+        </div>
+
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statCompletedClasses" style="color:var(--success)">1 Finished</div>
+            <div class="placement-stat-label">Progress Tracking</div>
+          </div>
+          <div class="placement-stat-icon green">
+            <i class="fa fa-check-circle"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── UPCOMING LIVE SESSIONS ── -->
+      <div class="placement-panel">
+        <div class="panel-header" style="flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="panel-title"><i class="fa fa-broadcast-tower text-danger"></i> Scheduled Virtual Classrooms</div>
+            <span class="pulse-badge-live"><span class="pulse-badge-dot"></span> Interactive WebRTC</span>
+          </div>
+          <span style="font-size:0.82rem;color:var(--text-muted)">Live with industry staff engineers</span>
+        </div>
+        
+        <div class="live-sessions-grid" id="liveClassesList">
           <!-- Populated by JS -->
         </div>
       </div>
 
-      <!-- Recorded Classes Section -->
+      <!-- ── RECORDED MASTERCLASSES THEATER ── -->
       <div class="placement-panel">
-        <div class="panel-header">
-          <div class="panel-title"><i class="fa fa-play-circle text-primary"></i> Recorded Classes</div>
-          <div class="search-bar" style="width: 250px;">
+        <div class="panel-header" style="flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="panel-title"><i class="fa fa-play-circle text-primary"></i> Engineering Masterclasses Vault</div>
+            <span class="badge badge-success" style="font-size:0.75rem">Full Length HD</span>
+          </div>
+
+          <div class="search-bar" style="width:260px;margin-bottom:0">
             <i class="fa fa-search"></i>
-            <input type="text" id="recordingsSearch" placeholder="Search recordings..." oninput="filterRecordings()">
+            <input type="text" id="recordingsSearch" placeholder="Search title, instructor..." oninput="filterRecordings()">
           </div>
         </div>
-        
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
-          <!-- Video Player -->
+
+        <!-- Track Filter Pills -->
+        <div class="note-filter-bar" id="trackFilterBar">
+          <button class="filter-btn active" onclick="filterByTrack('all', this)">All Tracks</button>
+          <button class="filter-btn" onclick="filterByTrack('Architecture', this)">System Design</button>
+          <button class="filter-btn" onclick="filterByTrack('CS Core', this)">Core CS & Algorithms</button>
+          <button class="filter-btn" onclick="filterByTrack('Web Dev', this)">Full Stack Web</button>
+          <button class="filter-btn" onclick="filterByTrack('Data Science', this)">Data Science & AI</button>
+        </div>
+
+        <div class="classes-theater-grid">
+          <!-- Left: HD Cinema Video Player -->
           <div>
-            <div class="video-player" style="position:relative;width:100%;height:380px;background:#0F172A;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border)">
+            <div class="video-player" style="position:relative;width:100%;aspect-ratio:16/9;max-height:430px;background:#0F172A;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border)">
               <!-- Dynamic Iframe Embed Container -->
               <iframe id="mainLectureIframe" style="width:100%;height:100%;border:none;display:none" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-              <div class="video-overlay" id="videoOverlay" style="position:absolute;inset:0;background:linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80') center/cover;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;z-index:2">
-                <button class="play-btn" onclick="playCurrentVideo()" style="width:68px;height:68px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(37,99,235,0.6);transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="video-overlay" id="videoOverlay" style="position:absolute;inset:0;background:linear-gradient(rgba(15,23,42,0.5), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80') center/cover;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;z-index:2">
+                <button class="play-btn" onclick="playCurrentVideo()" style="width:72px;height:72px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:1.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 35px rgba(37,99,235,0.7);transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                   <i class="fa fa-play" style="margin-left:4px"></i>
                 </button>
-                <div style="margin-top:16px;font-weight:700;font-size:1.1rem;letter-spacing:-0.3px" id="overlayTitle">System Design & Cloud Architecture</div>
-                <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:4px">Click to Stream HD Lecture</div>
+                <div style="margin-top:16px;font-weight:700;font-size:1.15rem;letter-spacing:-0.3px" id="overlayTitle">System Design & Cloud Architecture</div>
+                <div style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-top:4px">Click to Stream HD Lecture</div>
               </div>
             </div>
 
-            <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: start; flex-wrap:wrap; gap:12px">
+            <!-- Video Info & Action Bar -->
+            <div style="margin-top:18px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px">
               <div>
-                <h3 id="currentPlayerTitle" style="font-family:var(--font-display);font-size:1.2rem;margin:0 0 4px">System Design & Cloud Architecture</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem;" id="currentPlayerMeta">Instructor: Dr. Sarah Chen &nbsp;|&nbsp; 1h 24m &nbsp;|&nbsp; Streaming via YouTube Tech Cloud</p>
+                <h3 id="currentPlayerTitle" style="font-family:var(--font-display);font-size:1.25rem;font-weight:800;margin:0 0 6px;color:var(--text)">
+                  System Design & Cloud Architecture
+                </h3>
+                <p style="color:var(--text-muted);font-size:0.88rem;margin:0" id="currentPlayerMeta">
+                  Instructor: Dr. Sarah Chen &nbsp;|&nbsp; 1h 24m &nbsp;|&nbsp; Streaming via YouTube Tech Cloud
+                </p>
               </div>
               <div style="display:flex;gap:8px;align-items:center">
                 <button class="btn btn-outline btn-sm" onclick="toggleBookmarkClass()"><i class="fa fa-bookmark-o"></i> Save</button>
-                <button class="btn btn-primary btn-sm" onclick="markCompleted()"><i class="fa fa-check"></i> Mark Completed</button>
+                <button class="btn btn-primary btn-sm" onclick="markCompleted()"><i class="fa fa-check-circle"></i> Mark Completed (+50 XP)</button>
               </div>
             </div>
 
             <!-- Lecture Key Takeaways Panel -->
-            <div class="card" style="margin-top:18px;padding:16px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg)">
-              <h4 style="font-size:0.9rem;margin:0 0 8px;font-weight:700;display:flex;align-items:center;gap:6px">
-                <i class="fa fa-lightbulb-o text-warning"></i> Key Lecture Takeaways & Exam Points
-              </h4>
-              <ul id="lectureNotesList" style="margin:0;padding-left:20px;font-size:0.85rem;color:var(--text-muted);line-height:1.6">
-                <li>Distributed architectures use load balancing to prevent single points of failure.</li>
-                <li>Stateless microservices allow rapid auto-scaling in cloud environments.</li>
-                <li>Multi-tier database indexing dramatically reduces query latency.</li>
+            <div class="card" style="margin-top:20px;padding:20px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--bg)">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <h4 style="font-size:0.95rem;margin:0;font-weight:700;display:flex;align-items:center;gap:8px">
+                  <i class="fa fa-lightbulb-o text-warning"></i> Key Architecture Takeaways & Exam Points
+                </h4>
+                <a href="compiler.html" class="btn btn-outline btn-sm" style="font-size:0.75rem;padding:2px 8px">
+                  <i class="fa fa-code"></i> Try in Code Compiler
+                </a>
+              </div>
+              <ul id="lectureNotesList" style="margin:0;padding:0;list-style:none;font-size:0.88rem;color:var(--text-muted);line-height:1.6">
+                <!-- Populated by JS -->
               </ul>
             </div>
           </div>
           
-          <!-- Playlist -->
+          <!-- Right: Course Video Library Playlist -->
           <div>
-            <div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase">Course Video Library (Live Streamable)</div>
-            <div class="class-list" id="recordedClassesList" style="max-height: 520px; overflow-y: auto;">
+            <div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;justify-content:space-between">
+              <span>Course Playlist</span>
+              <span class="badge badge-primary" style="font-size:0.7rem">Interactive</span>
+            </div>
+            <div class="class-list" id="recordedClassesList" style="max-height:600px;overflow-y:auto;padding-right:4px">
               <!-- Populated by JS -->
             </div>
           </div>
