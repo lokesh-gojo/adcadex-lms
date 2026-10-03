@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/placement.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -186,60 +187,148 @@
 
     <!-- Page Content -->
     <div class="page-content">
-      <div class="page-header" style="display:flex; justify-content:space-between; align-items:flex-end;">
+      <div class="page-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
         <div>
-          <h1 class="page-title">Notes Submission</h1>
-          <p class="page-subtitle">Upload your class notes, view submissions, and get faculty feedback.</p>
+          <h1 class="page-title">Notes Submission & Faculty Review</h1>
+          <p class="page-subtitle">Upload your class study notes, track evaluations, and view faculty feedback.</p>
         </div>
-        <button class="btn btn-primary" onclick="openUploadModal()"><i class="fa fa-upload"></i> Upload Notes</button>
-      </div>
-
-      <!-- Upload Modal (Hidden by default) -->
-      <div id="uploadModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
-        <div class="placement-panel" style="width: 100%; max-width: 500px; margin: 20px;">
-          <div class="panel-header">
-            <div class="panel-title">Upload New Notes</div>
-            <button onclick="closeUploadModal()" style="background:none;border:none;font-size:1.5rem;cursor:pointer">&times;</button>
-          </div>
-          <div class="form-group">
-            <label>Subject / Course</label>
-            <select id="n_subject">
-              <option>Web Development</option>
-              <option>Data Structures</option>
-              <option>Machine Learning</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Title</label>
-            <input type="text" id="n_title" placeholder="e.g. Chapter 4 - React Hooks">
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <textarea id="n_desc" rows="3" placeholder="Brief description of what these notes cover..."></textarea>
-          </div>
-          <div class="form-group">
-            <label>File (PDF/DOCX)</label>
-            <input type="file" id="n_file">
-          </div>
-          <button class="btn btn-primary" style="width:100%" onclick="submitNotes()">Submit Notes</button>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn btn-primary" onclick="openUploadModal()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(79,70,229,0.3)">
+            <i class="fa fa-upload"></i> Upload Notes
+          </button>
         </div>
       </div>
 
+      <!-- ── NOTES OVERVIEW STATS ── -->
+      <div class="placement-stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));margin-bottom:24px">
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statTotalNotes">4</div>
+            <div class="placement-stat-label">Total Submissions</div>
+          </div>
+          <div class="placement-stat-icon indigo">
+            <i class="fa fa-book"></i>
+          </div>
+        </div>
+
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statReviewedNotes" style="color:var(--success)">3</div>
+            <div class="placement-stat-label">Faculty Approved</div>
+          </div>
+          <div class="placement-stat-icon green">
+            <i class="fa fa-check-circle"></i>
+          </div>
+        </div>
+
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statPendingNotes" style="color:var(--warning)">1</div>
+            <div class="placement-stat-label">In Review Queue</div>
+          </div>
+          <div class="placement-stat-icon amber">
+            <i class="fa fa-clock-o"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAIN NOTES PANEL ── -->
       <div class="placement-panel">
-        <div class="panel-header">
-          <div class="panel-title"><i class="fa fa-sticky-note-o text-warning"></i> My Notes</div>
-          <div class="search-bar" style="width: 250px;">
+        <div class="panel-header" style="flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="panel-title"><i class="fa fa-sticky-note text-warning"></i> My Course Notes</div>
+            <span class="badge badge-primary" style="font-size:0.75rem">Peer-Reviewed Quality</span>
+          </div>
+
+          <div class="search-bar" style="width:260px;margin-bottom:0">
             <i class="fa fa-search"></i>
-            <input type="text" id="notesSearch" placeholder="Search notes..." oninput="filterNotes()">
+            <input type="text" id="notesSearch" placeholder="Search title, keyword..." oninput="filterNotes()">
           </div>
         </div>
-        
+
+        <!-- Subject Filter Pills -->
+        <div class="note-filter-bar">
+          <button class="filter-btn active" onclick="filterBySubject('all', this)">All Subjects</button>
+          <button class="filter-btn" onclick="filterBySubject('Web Development', this)">Web Development</button>
+          <button class="filter-btn" onclick="filterBySubject('Data Structures', this)">Data Structures</button>
+          <button class="filter-btn" onclick="filterBySubject('Machine Learning', this)">Machine Learning</button>
+          <button class="filter-btn" onclick="filterBySubject('Database Systems', this)">Database Systems</button>
+        </div>
+
+        <!-- Notes Grid -->
         <div class="notes-grid" id="notesGrid">
           <!-- Populated by JS -->
         </div>
       </div>
     </div>
   </main>
+</div>
+
+<!-- ── UPLOAD NOTES MODAL ── -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa fa-upload text-primary"></i> Upload Class Notes</div>
+      <button class="modal-close" onclick="closeUploadModal()"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="padding:24px 28px">
+      <div class="form-group">
+        <label class="form-label">Subject / Course Track</label>
+        <select id="n_subject" class="form-control">
+          <option value="Web Development">Web Development</option>
+          <option value="Data Structures">Data Structures & Algorithms</option>
+          <option value="Machine Learning">Machine Learning & AI</option>
+          <option value="Database Systems">Database Management Systems</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Note Title</label>
+        <input type="text" id="n_title" class="form-control" placeholder="e.g. Chapter 4 — React Hooks Deep Dive">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Key Topics Covered / Abstract</label>
+        <textarea id="n_desc" class="form-control" rows="3" placeholder="Brief bullet points or description of what these notes summarize..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Upload File Attachment (PDF, DOCX, MD)</label>
+        <div style="border:2px dashed var(--border);border-radius:var(--radius-md);padding:20px;text-align:center;background:var(--bg)">
+          <i class="fa fa-cloud-upload" style="font-size:2rem;color:var(--primary);margin-bottom:8px"></i>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px">Drag & drop your notes file here or browse</p>
+          <input type="file" id="n_file" class="form-control" accept=".pdf,.docx,.doc,.md,.txt" style="display:inline-block;max-width:280px">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" style="padding:16px 28px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px">
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeUploadModal()">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="submitNotes()">
+        <i class="fa fa-check"></i> Submit Notes
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── IN-APP NOTE READER MODAL ── -->
+<div class="modal-overlay" id="readNoteModal">
+  <div class="modal" style="max-width:680px">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="readModalTitle">Note Preview</div>
+        <div id="readModalSubject" style="margin-top:4px"></div>
+      </div>
+      <button class="modal-close" onclick="closeReadModal()"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="padding:24px 28px;max-height:65vh;overflow-y:auto">
+      <div id="readModalFeedback" style="margin-bottom:16px;display:none"></div>
+      <div id="readModalContent"></div>
+    </div>
+    <div class="modal-footer" style="padding:14px 28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:0.82rem;color:var(--text-muted)"><i class="fa fa-shield text-success"></i> Verified Student Submission</span>
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeReadModal()">Close Preview</button>
+    </div>
+  </div>
 </div>
 
 <script src="js/app.js"></script>
