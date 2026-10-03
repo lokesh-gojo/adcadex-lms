@@ -831,4 +831,53 @@
   box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
 }
 
+/* ── Assignment Layout & Cards ─────────────────────────────────── */
+.assignment-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1.15fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .assignment-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.assignment-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.assignment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.assignment-card.active-assignment {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.2);
+  background: var(--surface);
+}
+
+.assignment-card.active-assignment::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-primary);
+}
+
+
 

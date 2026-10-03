@@ -268,6 +268,44 @@ p { color: var(--text-muted); line-height: 1.7; }
 .btn-lg  { padding: 14px 32px; font-size: 1rem; border-radius: var(--radius-md); }
 .btn-icon { width: 40px; height: 40px; padding: 0; justify-content: center; border-radius: var(--radius); }
 
+/* ── Filter Buttons & Row ────────────────────────────────────── */
+.filters-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--text);
+  background: var(--bg);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(79, 70, 229, 0.35);
+}
+
 /* ── Cards ──────────────────────────────────────────────────── */
 .card {
   background: var(--surface);

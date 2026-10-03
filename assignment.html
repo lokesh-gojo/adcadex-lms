@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/placement.css">
   <link rel="stylesheet" href="css/course.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -128,40 +129,84 @@
     </header>
 
     <div class="page-content">
-      <div class="page-header">
-        <h1 class="page-title">Assignments 📋</h1>
-        <p class="page-subtitle">Track, submit, and review all your assignments.</p>
+      <div class="page-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+        <div>
+          <h1 class="page-title">Assignments & Project Labs</h1>
+          <p class="page-subtitle">Track deadlines, submit code artifacts, and review faculty evaluations.</p>
+        </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 380px;gap:24px">
+      <!-- ── ASSIGNMENT STATS OVERVIEW ── -->
+      <div class="placement-stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));margin-bottom:24px">
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statTotalAssignments">5</div>
+            <div class="placement-stat-label">Total Assigned</div>
+          </div>
+          <div class="placement-stat-icon indigo">
+            <i class="fa fa-tasks"></i>
+          </div>
+        </div>
+
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statPendingAssignments" style="color:var(--warning)">2</div>
+            <div class="placement-stat-label">Action Required</div>
+          </div>
+          <div class="placement-stat-icon amber">
+            <i class="fa fa-clock-o"></i>
+          </div>
+        </div>
+
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statSubmittedAssignments" style="color:var(--primary)">2</div>
+            <div class="placement-stat-label">In Review Queue</div>
+          </div>
+          <div class="placement-stat-icon cyan">
+            <i class="fa fa-paper-plane"></i>
+          </div>
+        </div>
+
+        <div class="placement-stat-card">
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="statGradedAssignments" style="color:var(--success)">1</div>
+            <div class="placement-stat-label">Evaluated / Scored</div>
+          </div>
+          <div class="placement-stat-icon green">
+            <i class="fa fa-trophy"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAIN ASSIGNMENTS LAYOUT ── -->
+      <div class="assignment-layout-grid">
         <!-- Left: Assignment List -->
         <div>
-          <!-- Filters -->
-          <div class="filters-row">
-            <div style="display:flex;gap:6px;flex-wrap:wrap">
-              <button class="filter-btn active" data-filter="all">All</button>
-              <button class="filter-btn" data-filter="pending">Pending</button>
-              <button class="filter-btn" data-filter="submitted">Submitted</button>
-              <button class="filter-btn" data-filter="graded">Graded</button>
+          <!-- Filters Row -->
+          <div class="filters-row" style="background:var(--surface);padding:14px 18px;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:18px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="filter-btn active" data-filter="all"><i class="fa fa-th"></i> All</button>
+              <button class="filter-btn" data-filter="pending"><i class="fa fa-clock-o"></i> Pending</button>
+              <button class="filter-btn" data-filter="submitted"><i class="fa fa-paper-plane"></i> Submitted</button>
+              <button class="filter-btn" data-filter="graded"><i class="fa fa-check-circle"></i> Graded</button>
             </div>
-            <select id="assignmentSort" class="form-control" style="width:160px">
+            <select id="assignmentSort" class="form-control" style="width:200px;margin-bottom:0">
               <option value="due">Sort by Due Date</option>
-              <option value="points">Sort by Points</option>
+              <option value="points">Sort by Weightage</option>
               <option value="priority">Sort by Priority</option>
             </select>
           </div>
 
-          <div id="assignmentsList" style="display:flex;flex-direction:column;gap:14px"></div>
+          <div id="assignmentsList" style="display:flex;flex-direction:column;gap:14px">
+            <!-- Populated by JS -->
+          </div>
         </div>
 
-        <!-- Right: Detail Panel -->
+        <!-- Right: Sticky Detail Panel -->
         <div>
           <div class="card" id="assignmentDetail" style="position:sticky;top:calc(var(--header-h) + 24px)">
-            <div class="card-body" style="text-align:center;padding:48px 24px">
-              <div style="font-size:3rem;margin-bottom:12px;opacity:0.4">📋</div>
-              <h3 style="color:var(--text-muted)">Select an Assignment</h3>
-              <p style="font-size:0.875rem">Click any assignment to see its details.</p>
-            </div>
+            <!-- Populated by JS -->
           </div>
         </div>
       </div>
@@ -169,33 +214,56 @@
   </main>
 </div>
 
-<!-- Submit Modal -->
+<!-- ── SUBMIT MODAL ── -->
 <div class="modal-overlay" id="submitModal">
-  <div class="modal">
+  <div class="modal" style="max-width:560px">
     <div class="modal-header">
-      <span class="modal-title">Submit Assignment</span>
-      <button class="modal-close" onclick="Modal.close('submitModal')"><i class="fa fa-times"></i></button>
+      <div>
+        <div class="modal-title"><i class="fa fa-upload text-primary"></i> Submit Assignment</div>
+        <div id="submitAssignmentTitle" style="font-size:0.85rem;color:var(--text-muted);margin-top:2px"></div>
+      </div>
+      <button class="modal-close" onclick="closeSubmitModal()"><i class="fa fa-times"></i></button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="padding:24px 28px">
       <input type="hidden" id="submitAssignmentId">
-      <div class="upload-area" id="uploadArea">
-        <div class="upload-icon"><i class="fa fa-cloud-upload"></i></div>
-        <div class="upload-title">Drag & drop files here</div>
-        <div class="upload-desc">PDF, DOC, ZIP accepted · Max 50MB</div>
-        <label class="btn btn-outline btn-sm" style="margin-top:12px;cursor:pointer">
-          <i class="fa fa-folder-open"></i> Browse Files
-          <input type="file" id="fileInput" multiple style="display:none" accept=".pdf,.doc,.docx,.zip,.png,.jpg">
-        </label>
+
+      <!-- GitHub Repo Option -->
+      <div class="form-group" style="margin-bottom:18px">
+        <label class="form-label"><i class="fa fa-github"></i> GitHub Repository URL (Optional)</label>
+        <div style="position:relative">
+          <input type="url" id="submitGithubUrl" class="form-control" placeholder="https://github.com/username/project-repo" style="padding-left:36px">
+          <i class="fa fa-link" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted)"></i>
+        </div>
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">
+          Paste your public GitHub repo containing source code, tests, and documentation.
+        </div>
       </div>
-      <div id="uploadedFiles"></div>
-      <div class="form-group" style="margin-top:16px">
-        <label class="form-label">Submission Note <span style="color:var(--danger)">*</span></label>
-        <textarea id="submitText" class="form-control" placeholder="Describe what you've submitted..."></textarea>
+
+      <!-- File Dropzone -->
+      <div class="form-group" style="margin-bottom:18px">
+        <label class="form-label"><i class="fa fa-file-archive-o"></i> Upload Deliverable Files (ZIP, PDF, DOCX)</label>
+        <div class="upload-area" id="uploadArea" style="border:2px dashed var(--border);border-radius:var(--radius-md);padding:24px;text-align:center;background:var(--bg);cursor:pointer;transition:var(--transition)">
+          <div class="upload-icon" style="font-size:2rem;color:var(--primary);margin-bottom:6px"><i class="fa fa-cloud-upload"></i></div>
+          <div class="upload-title" style="font-weight:700;font-size:0.95rem;color:var(--text)">Drag & drop project files here</div>
+          <div class="upload-desc" style="font-size:0.8rem;color:var(--text-muted);margin-top:2px">PDF, DOC, ZIP accepted · Up to 50MB</div>
+          <label class="btn btn-outline btn-sm" style="margin-top:12px;cursor:pointer" onclick="event.stopPropagation()">
+            <i class="fa fa-folder-open"></i> Browse Local Files
+            <input type="file" id="fileInput" multiple style="display:none" accept=".pdf,.doc,.docx,.zip,.png,.jpg,.py,.js">
+          </label>
+        </div>
+        <div id="uploadedFiles" style="margin-top:8px"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Submission Notes & Implementation Highlights</label>
+        <textarea id="submitText" class="form-control" rows="3" placeholder="Explain your architectural decisions, features completed, and testing results..."></textarea>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="Modal.close('submitModal')">Cancel</button>
-      <button class="btn btn-primary" onclick="submitAssignment()"><i class="fa fa-paper-plane"></i> Submit</button>
+    <div class="modal-footer" style="padding:16px 28px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px">
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeSubmitModal()">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="submitAssignment()">
+        <i class="fa fa-paper-plane"></i> Confirm & Submit
+      </button>
     </div>
   </div>
 </div>
