@@ -1,51 +1,4 @@
 {
-  "companies": [
-    {
-      "id": "comp-1",
-      "name": "Prime Vector Enterprise Solutions",
-      "code": "PV-ENT",
-      "branches": [
-        "Hosur Main Campus",
-        "Bangalore Tech Hub",
-        "Chennai Innovation Center"
-      ]
-    },
-    {
-      "id": "comp-2",
-      "name": "Apex Tech Upskilling Corp",
-      "code": "APEX-UPS",
-      "branches": [
-        "Hyderabad Hub",
-        "Pune Center"
-      ]
-    }
-  ],
-  "branches": [
-    {
-      "id": "b-1",
-      "companyId": "comp-1",
-      "name": "Hosur Main Campus",
-      "code": "PV-HOS",
-      "region": "Tamil Nadu",
-      "studentCount": 450
-    },
-    {
-      "id": "b-2",
-      "companyId": "comp-1",
-      "name": "Bangalore Tech Hub",
-      "code": "PV-BLR",
-      "region": "Karnataka",
-      "studentCount": 680
-    },
-    {
-      "id": "b-3",
-      "companyId": "comp-1",
-      "name": "Chennai Innovation Center",
-      "code": "PV-MAA",
-      "region": "Tamil Nadu",
-      "studentCount": 320
-    }
-  ],
   "users": [
     {
       "id": "1",
@@ -122,6 +75,51 @@
       "department": "Corporate Relations & Placements",
       "joined": "2023-08-11",
       "avatar": "P"
+    },
+    {
+      "id": "1791046775213",
+      "name": "New Tester",
+      "email": "student_1791046775102@acadex.edu",
+      "password": "$2b$10$76OI0XFJ/r.5zMsr5bKv2ucyC8noiApnI0UldN8iPmN1V4jfKmjvW",
+      "role": "student",
+      "companyId": "comp-1",
+      "branchId": "b-1",
+      "department": "General Technology",
+      "joined": "2026-10-03",
+      "avatar": "N",
+      "weeklyStreak": 1,
+      "attendanceRate": 100,
+      "xp": 100
+    },
+    {
+      "id": "1791046852879",
+      "name": "New Tester",
+      "email": "student_1791046852770@acadex.edu",
+      "password": "$2b$10$aJbHHcJ5TPRiz8M0yC14.umHZ/kY810N.rlsI.OaWkjaNZi.7OyO.",
+      "role": "student",
+      "companyId": "comp-1",
+      "branchId": "b-1",
+      "department": "General Technology",
+      "joined": "2026-10-03",
+      "avatar": "N",
+      "weeklyStreak": 1,
+      "attendanceRate": 100,
+      "xp": 250
+    },
+    {
+      "id": "1791046900038",
+      "name": "New Tester",
+      "email": "student_1791046899922@acadex.edu",
+      "password": "$2b$10$Fn45eCaXKkGdDtG1bkdIaOyWQZQ2RMvq4vIHBFuaImWslJOsj1Waa",
+      "role": "student",
+      "companyId": "comp-1",
+      "branchId": "b-1",
+      "department": "General Technology",
+      "joined": "2026-10-03",
+      "avatar": "N",
+      "weeklyStreak": 1,
+      "attendanceRate": 100,
+      "xp": 250
     }
   ],
   "courses": [
@@ -183,77 +181,25 @@
       ]
     }
   ],
-  "liveClasses": [
-    {
-      "id": "lc-101",
-      "title": "Advanced Transformer Architectures & RAG",
-      "courseId": "1",
-      "trainer": "Dr. Sarah Chen",
-      "scheduledAt": "2026-07-28T10:00:00Z",
-      "durationMins": 90,
-      "platform": "Google Meet",
-      "joinUrl": "https://meet.google.com/pv-lms-aiml",
-      "recordingUrl": "https://drive.google.com/file/d/pv-rec-101/view",
-      "status": "Upcoming",
-      "attendeesCount": 48
-    },
-    {
-      "id": "lc-102",
-      "title": "Microservices Architecture & Event Loops in Node.js",
-      "courseId": "2",
-      "trainer": "Marcus Vance",
-      "scheduledAt": "2026-07-29T14:30:00Z",
-      "durationMins": 120,
-      "platform": "Zoom",
-      "joinUrl": "https://zoom.us/j/9876543210?pwd=pv-lms-fullstack",
-      "recordingUrl": "https://zoom.us/rec/play/pv-rec-102",
-      "status": "Scheduled",
-      "attendeesCount": 65
-    }
-  ],
-  "attendance": [
-    {
-      "id": "att-1",
-      "studentId": "1",
-      "studentName": "Alex Johnson",
-      "date": "2026-07-27",
-      "status": "Present",
-      "method": "QR Code",
-      "timestamp": "09:02 AM",
-      "branch": "Hosur Main Campus"
-    },
-    {
-      "id": "att-2",
-      "studentId": "1",
-      "studentName": "Alex Johnson",
-      "date": "2026-07-26",
-      "status": "Present",
-      "method": "Face Verification",
-      "timestamp": "08:58 AM",
-      "branch": "Hosur Main Campus"
-    },
-    {
-      "id": "att-3",
-      "studentId": "1",
-      "studentName": "Alex Johnson",
-      "date": "2026-07-25",
-      "status": "Present",
-      "method": "Manual",
-      "timestamp": "09:10 AM",
-      "branch": "Hosur Main Campus"
-    }
-  ],
   "assignments": [
     {
       "id": "1",
       "title": "Build a MERN REST API with JWT Auth",
       "course": "Full Stack",
       "due": "2026-07-28",
-      "status": "pending",
+      "status": "graded",
       "points": 100,
-      "studentId": "1",
-      "submissionUrl": "",
-      "aiFeedback": null
+      "studentId": "1791046900038",
+      "submissionUrl": "https://github.com/student/peft-lora-solution",
+      "aiFeedback": "Submission received and verified. Pending faculty evaluation.",
+      "studentName": "New Tester",
+      "submittedAt": "2026-10-03T17:01:40.411Z",
+      "notes": "Implemented rank 16 LoRA with cross-entropy evaluation metrics.",
+      "grade": "A",
+      "score": 94,
+      "feedback": "Superb architecture. Clean gradient checkpointing.",
+      "gradedBy": "Dr. Sarah Chen",
+      "gradedAt": "2026-10-03T17:01:40.422Z"
     },
     {
       "id": "2",
@@ -276,6 +222,396 @@
       "studentId": "1",
       "submissionUrl": "https://github.com/alex-pv/data-viz-lab",
       "aiFeedback": "Excellent data cleanup. Visualizations in Seaborn adhere to clean graph aesthetics. Score: 92/100."
+    }
+  ],
+  "submissions": [
+    {
+      "id": "sub-1791046900411",
+      "assignmentId": "1",
+      "assignmentTitle": "Build a MERN REST API with JWT Auth",
+      "studentId": "1791046900038",
+      "studentName": "New Tester",
+      "submissionUrl": "https://github.com/student/peft-lora-solution",
+      "notes": "Implemented rank 16 LoRA with cross-entropy evaluation metrics.",
+      "status": "graded",
+      "submittedAt": "2026-10-03T17:01:40.411Z",
+      "score": 94,
+      "grade": "A",
+      "feedback": "Superb architecture. Clean gradient checkpointing.",
+      "gradedBy": "Dr. Sarah Chen",
+      "gradedAt": "2026-10-03T17:01:40.422Z"
+    },
+    {
+      "id": "sub-1791046853150",
+      "assignmentId": "1",
+      "assignmentTitle": "Build a MERN REST API with JWT Auth",
+      "studentId": "1791046852879",
+      "studentName": "New Tester",
+      "submissionUrl": "https://github.com/student/peft-lora-solution",
+      "notes": "Implemented rank 16 LoRA with cross-entropy evaluation metrics.",
+      "status": "graded",
+      "submittedAt": "2026-10-03T17:00:53.150Z",
+      "score": 94,
+      "grade": "A",
+      "feedback": "Superb architecture. Clean gradient checkpointing.",
+      "gradedBy": "Dr. Sarah Chen",
+      "gradedAt": "2026-10-03T17:00:53.162Z"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "quiz-1",
+      "title": "JavaScript & Modern ES6+ Architecture",
+      "course": "Full Stack Engineering",
+      "category": "Frontend",
+      "durationMins": 10,
+      "passingScore": 70,
+      "totalQuestions": 5,
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which of the following creates a block-scoped variable in modern JavaScript?",
+          "options": [
+            "var",
+            "let & const",
+            "define",
+            "global"
+          ],
+          "correctIndex": 1,
+          "explanation": "'let' and 'const' provide lexical block scoping introduced in ES6, unlike 'var' which is function-scoped."
+        },
+        {
+          "id": 2,
+          "question": "What does the strict equality operator (===) compare?",
+          "options": [
+            "Values with implicit type coercion",
+            "Both value and data type without coercion",
+            "Memory addresses only",
+            "Variable string lengths"
+          ],
+          "correctIndex": 1,
+          "explanation": "'===' enforces type safety by verifying both the underlying type and exact primitive/reference value."
+        },
+        {
+          "id": 3,
+          "question": "What is returned by Array.prototype.map()?",
+          "options": [
+            "The original array modified in-place",
+            "A newly transformed array of identical length",
+            "A filtered subset of elements",
+            "A boolean flag indicating array mutation"
+          ],
+          "correctIndex": 1,
+          "explanation": "'map()' creates a brand new array containing results of calling the provided function on every element."
+        },
+        {
+          "id": 4,
+          "question": "Which keyword in JavaScript handles async Promise rejections cleanly within async functions?",
+          "options": [
+            "try / catch",
+            "onError / resume",
+            "dispatch / await",
+            "panic / recover"
+          ],
+          "correctIndex": 0,
+          "explanation": "Standard 'try/catch' blocks capture rejected promises when awaited inside async function blocks."
+        },
+        {
+          "id": 5,
+          "question": "What is the primary role of the JavaScript Event Loop?",
+          "options": [
+            "Execute synchronous CPU tasks across 16 threads",
+            "Continuously coordinate between Call Stack, Web APIs, and Task/Microtask Queues",
+            "Compile byte code directly into machine assembly",
+            "Garbage collect memory synchronously"
+          ],
+          "correctIndex": 1,
+          "explanation": "The event loop continuously monitors the Call Stack and moves tasks from Microtask and Callback Queues when stack is clear."
+        }
+      ]
+    },
+    {
+      "id": "quiz-2",
+      "title": "Generative AI, Transformers & LLM Prompting",
+      "course": "Applied AI & Machine Learning Engineering",
+      "category": "AI & ML",
+      "durationMins": 15,
+      "passingScore": 75,
+      "totalQuestions": 4,
+      "questions": [
+        {
+          "id": 1,
+          "question": "What key mechanism allows Transformer models to process all tokens in a sequence concurrently?",
+          "options": [
+            "Recurrent hidden state propagation",
+            "Multi-Head Self-Attention",
+            "Convolutional Max-Pooling",
+            "Stochastic Gradient Descent"
+          ],
+          "correctIndex": 1,
+          "explanation": "Multi-Head Self-Attention calculates pairwise token affinities simultaneously across the entire context window."
+        },
+        {
+          "id": 2,
+          "question": "What does LoRA (Low-Rank Adaptation) accomplish during LLM fine-tuning?",
+          "options": [
+            "Freezes all parameters and only modifies prompts",
+            "Decomposes weight update matrices into smaller low-rank pairs to drastically reduce GPU memory",
+            "Compresses models by discarding 80% of vocabulary",
+            "Replaces transformers with CNNs"
+          ],
+          "correctIndex": 1,
+          "explanation": "LoRA freezes pre-trained weights and injects trainable rank decomposition matrices, reducing trainable parameters up to 99%."
+        },
+        {
+          "id": 3,
+          "question": "In RAG (Retrieval-Augmented Generation), what is vector embedding used for?",
+          "options": [
+            "Encrypting user credentials",
+            "Semantic similarity search over external knowledge documents",
+            "Generating random seed weights",
+            "Compiling Python scripts into C++"
+          ],
+          "correctIndex": 1,
+          "explanation": "Embeddings map text to high-dimensional vectors so query meaning can be matched with relevant document chunks."
+        },
+        {
+          "id": 4,
+          "question": "What is the purpose of temperature in LLM sampling?",
+          "options": [
+            "Monitors CPU heat during training",
+            "Controls the randomness/creativity of token probability distribution",
+            "Sets maximum output token count",
+            "Determines context window size in gigabytes"
+          ],
+          "correctIndex": 1,
+          "explanation": "Higher temperature flattens probability distribution yielding more creative outputs, while 0.0 is deterministic and focused."
+        }
+      ]
+    },
+    {
+      "id": "quiz-3",
+      "title": "Data Structures & Algorithmic Complexity",
+      "course": "Competitive DSA & Algorithms Mastery",
+      "category": "Algorithms",
+      "durationMins": 12,
+      "passingScore": 70,
+      "totalQuestions": 4,
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the worst-case time complexity of QuickSort when a poorly chosen pivot is used?",
+          "options": [
+            "O(log N)",
+            "O(N log N)",
+            "O(N^2)",
+            "O(1)"
+          ],
+          "correctIndex": 2,
+          "explanation": "In worst case (already sorted array with first/last pivot), QuickSort partitions into 1 and N-1 elements, resulting in O(N^2)."
+        },
+        {
+          "id": 2,
+          "question": "Which data structure implements FIFO (First-In, First-Out) semantics?",
+          "options": [
+            "Stack",
+            "Queue",
+            "Max Heap",
+            "Binary Search Tree"
+          ],
+          "correctIndex": 1,
+          "explanation": "A Queue processes elements in the exact order they arrive: first-in, first-out."
+        },
+        {
+          "id": 3,
+          "question": "What is the lookup time complexity in an optimal Hash Map with balanced hashing?",
+          "options": [
+            "O(1) average",
+            "O(N log N)",
+            "O(N^2)",
+            "O(log N)"
+          ],
+          "correctIndex": 0,
+          "explanation": "With low collision probability, hash lookup resolves in O(1) constant time."
+        },
+        {
+          "id": 4,
+          "question": "Which traversal of a Binary Search Tree (BST) yields keys in strictly ascending sorted order?",
+          "options": [
+            "Pre-order",
+            "In-order",
+            "Post-order",
+            "Level-order"
+          ],
+          "correctIndex": 1,
+          "explanation": "In-order traversal visits (Left Subtree -> Root -> Right Subtree), which outputs keys in ascending sorted order for BSTs."
+        }
+      ]
+    }
+  ],
+  "quizAttempts": [
+    {
+      "id": "qa-1791046853177",
+      "quizId": "quiz-1",
+      "quizTitle": "JavaScript & Modern ES6+ Architecture",
+      "studentId": "1791046852879",
+      "studentName": "New Tester",
+      "score": 4,
+      "total": 5,
+      "percentage": 80,
+      "passed": true,
+      "xpEarned": 150,
+      "attemptNumber": 1,
+      "submittedAt": "2026-10-03T17:00:53.177Z"
+    },
+    {
+      "id": "qa-1791046900439",
+      "quizId": "quiz-1",
+      "quizTitle": "JavaScript & Modern ES6+ Architecture",
+      "studentId": "1791046900038",
+      "studentName": "New Tester",
+      "score": 4,
+      "total": 5,
+      "percentage": 80,
+      "passed": true,
+      "xpEarned": 150,
+      "attemptNumber": 1,
+      "submittedAt": "2026-10-03T17:01:40.439Z"
+    }
+  ],
+  "attendanceSessions": [
+    {
+      "id": "att-sess-1791046900449",
+      "courseId": "1",
+      "courseTitle": "Applied AI & ML",
+      "trainerId": "2",
+      "trainerName": "Dr. Sarah Chen",
+      "sessionTitle": "Neural Network Optimizers",
+      "sessionCode": "AC7737",
+      "qrToken": "qr_acad_1791046900449_f50f1b12",
+      "expiresAt": "2026-10-03T17:46:40.449Z",
+      "status": "active",
+      "createdAt": "2026-10-03T17:01:40.449Z"
+    },
+    {
+      "id": "att-sess-1791046853184",
+      "courseId": "1",
+      "courseTitle": "Applied AI & ML",
+      "trainerId": "2",
+      "trainerName": "Dr. Sarah Chen",
+      "sessionTitle": "Neural Network Optimizers",
+      "sessionCode": "AC9674",
+      "qrToken": "qr_acad_1791046853184_d6de13bd",
+      "expiresAt": "2026-10-03T17:45:53.184Z",
+      "status": "active",
+      "createdAt": "2026-10-03T17:00:53.184Z"
+    },
+    {
+      "id": "att-sess-1791046775558",
+      "courseId": "1",
+      "courseTitle": "Applied AI & ML",
+      "trainerId": "2",
+      "trainerName": "Dr. Sarah Chen",
+      "sessionTitle": "Neural Network Optimizers",
+      "sessionCode": "AC3634",
+      "qrToken": "qr_acad_1791046775558_6a6b8b2c",
+      "expiresAt": "2026-10-03T17:44:35.558Z",
+      "status": "active",
+      "createdAt": "2026-10-03T16:59:35.558Z"
+    },
+    {
+      "id": "att-sess-1",
+      "courseId": "1",
+      "courseTitle": "Applied AI & ML",
+      "trainerId": "2",
+      "sessionTitle": "Transformer Architecture & Attention Mechanisms",
+      "sessionCode": "ACAD94",
+      "qrToken": "qr_acad_session_att_sess_1_2026",
+      "expiresAt": "2026-10-04T18:00:00Z",
+      "status": "active"
+    }
+  ],
+  "attendanceRecords": [
+    {
+      "id": "ar-1791046900458",
+      "sessionId": "att-sess-1791046900449",
+      "sessionTitle": "Neural Network Optimizers",
+      "studentId": "1791046900038",
+      "studentName": "New Tester",
+      "status": "Present",
+      "method": "Session Code",
+      "timestamp": "2026-10-03T17:01:40.458Z"
+    },
+    {
+      "id": "ar-1791046853189",
+      "sessionId": "att-sess-1791046853184",
+      "sessionTitle": "Neural Network Optimizers",
+      "studentId": "1791046852879",
+      "studentName": "New Tester",
+      "status": "Present",
+      "method": "Session Code",
+      "timestamp": "2026-10-03T17:00:53.189Z"
+    },
+    {
+      "id": "ar-1791046775565",
+      "sessionId": "att-sess-1791046775558",
+      "sessionTitle": "Neural Network Optimizers",
+      "studentId": "1791046775213",
+      "studentName": "New Tester",
+      "status": "Present",
+      "method": "Session Code",
+      "timestamp": "2026-10-03T16:59:35.565Z"
+    },
+    {
+      "id": "ar-1",
+      "sessionId": "att-sess-1",
+      "studentId": "1",
+      "studentName": "Alex Johnson",
+      "status": "Present",
+      "method": "QR Code",
+      "timestamp": "2026-10-03T09:05:00Z"
+    }
+  ],
+  "certificates": [
+    {
+      "id": "ACX-2026-299948",
+      "studentId": "1",
+      "studentName": "Alex Johnson",
+      "course": "Advanced Transformer Engineering",
+      "grade": "A+",
+      "issuedDate": "2026-10-03",
+      "verificationUrl": "https://lokesh-gojo.github.io/adcadex-lms/certificates.html?id=ACX-2026-299948",
+      "blockchainProof": "0x40774e135dca87135e6efbc7d7db4824",
+      "issuedBy": "Dr. Sarah Chen",
+      "createdAt": "2026-10-03T17:01:40.475Z"
+    },
+    {
+      "id": "ACX-2026-939454",
+      "studentId": "1",
+      "studentName": "Alex Johnson",
+      "course": "Advanced Transformer Engineering",
+      "grade": "A+",
+      "issuedDate": "2026-10-03",
+      "verificationUrl": "https://lokesh-gojo.github.io/adcadex-lms/certificates.html?id=ACX-2026-939454",
+      "blockchainProof": "0xacc67c7d545aef656d94aa4da0fe28c8",
+      "issuedBy": "Dr. Sarah Chen",
+      "createdAt": "2026-10-03T17:00:53.197Z"
+    },
+    {
+      "id": "PV-2026-001",
+      "studentName": "Alex Johnson",
+      "course": "Applied AI & Machine Learning Engineering",
+      "date": "2025-10-15",
+      "verificationUrl": "https://primevector.in/verify/PV-2026-001",
+      "grade": "A+"
+    },
+    {
+      "id": "PV-2026-042",
+      "studentName": "Alex Johnson",
+      "course": "Full Stack Web Engineering",
+      "date": "2025-11-02",
+      "verificationUrl": "https://primevector.in/verify/PV-2026-042",
+      "grade": "Distinction"
     }
   ],
   "placements": [
@@ -343,6 +679,275 @@
       ]
     }
   ],
+  "placementApplications": [],
+  "forumPosts": [
+    {
+      "id": "fp-1",
+      "author": "Alex Johnson",
+      "authorRole": "student",
+      "authorAvatar": "A",
+      "title": "Best practices for state management in React 18: Context vs Zustand?",
+      "content": "We're refactoring our capstone LMS dashboard. For high-frequency state updates like live code compilation and timer ticks, should we stick with lightweight React Context or adopt Zustand/Jotai for granular selector rendering?",
+      "category": "Full Stack",
+      "tags": [
+        "React",
+        "JavaScript",
+        "Architecture"
+      ],
+      "upvotes": 18,
+      "createdAt": "2026-09-28T14:30:00Z",
+      "replies": [
+        {
+          "id": "fr-101",
+          "author": "Marcus Vance",
+          "authorRole": "mentor",
+          "authorAvatar": "M",
+          "content": "Great inquiry, Alex! For high-frequency data (like compiler output streams or sub-second timers), standard Context triggers re-renders across all consumers unless aggressively memoized. Zustand provides atomic state slicing with selector hooks (e.g. `useStore(state => state.output)`), which prevents unnecessary tree re-renders.",
+          "isVerifiedInstructor": true,
+          "upvotes": 14,
+          "createdAt": "2026-09-28T15:15:00Z"
+        },
+        {
+          "id": "fr-102",
+          "author": "Pooja Reddy",
+          "authorRole": "student",
+          "authorAvatar": "P",
+          "content": "We switched to Zustand for our placement tracker widget last week — boilerplate dropped significantly and memory usage improved noticeably.",
+          "isVerifiedInstructor": false,
+          "upvotes": 5,
+          "createdAt": "2026-09-28T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "fp-2",
+      "author": "Sneha Nair",
+      "authorRole": "student",
+      "authorAvatar": "S",
+      "title": "How to properly optimize LoRA rank and alpha when fine-tuning Llama-3?",
+      "content": "When training on enterprise domain data (like technical curriculum specs), what rank 'r' (8, 16, 32) and alpha scaling factors do you recommend to avoid catastrophic forgetting while maintaining quick convergence?",
+      "category": "AI & ML",
+      "tags": [
+        "Generative AI",
+        "LoRA",
+        "PyTorch"
+      ],
+      "upvotes": 24,
+      "createdAt": "2026-09-29T10:00:00Z",
+      "replies": [
+        {
+          "id": "fr-201",
+          "author": "Dr. Sarah Chen",
+          "authorRole": "trainer",
+          "authorAvatar": "S",
+          "content": "A standard rule of thumb in industry is setting alpha = 2 * r. For domain adaptation on structured text, r=16 and alpha=32 provides optimal capacity without overparameterization. Also ensure you target both Q, K, V attention projections and MLP layers for comprehensive transfer.",
+          "isVerifiedInstructor": true,
+          "upvotes": 22,
+          "createdAt": "2026-09-29T11:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "fp-3",
+      "author": "Rohan Verma",
+      "authorRole": "student",
+      "authorAvatar": "R",
+      "title": "Tips for Prime Tech Solutions Technical Coding Round next week",
+      "content": "To everyone attending the Prime Tech campus drive on August 5th: what algorithm topics were highlighted during the preparatory webinar yesterday?",
+      "category": "Placements",
+      "tags": [
+        "Placements",
+        "Interview",
+        "DSA"
+      ],
+      "upvotes": 31,
+      "createdAt": "2026-09-30T09:20:00Z",
+      "replies": [
+        {
+          "id": "fr-301",
+          "author": "Priya Sharma",
+          "authorRole": "placement_officer",
+          "authorAvatar": "P",
+          "content": "Focus heavily on Graph traversals (BFS/DFS cycle detection), Dynamic Programming (Knapsack & Subsequence patterns), and SQL indexing queries. We have scheduled mock interview slots this Friday in the LMS!",
+          "isVerifiedInstructor": true,
+          "upvotes": 27,
+          "createdAt": "2026-09-30T10:10:00Z"
+        }
+      ]
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-1",
+      "userId": "1",
+      "title": "New Quiz Available",
+      "message": "Full-Stack Web & Node.js Core Architecture quiz is now open for evaluation.",
+      "channel": "Academic",
+      "read": false,
+      "createdAt": "2026-10-03T16:59:34.904Z"
+    },
+    {
+      "id": "notif-1791046853150",
+      "userId": "1791046852879",
+      "title": "Assignment Submitted",
+      "message": "Your solution for \"Build a MERN REST API with JWT Auth\" was submitted successfully.",
+      "channel": "Assignment",
+      "read": false,
+      "createdAt": "2026-10-03T17:00:53.150Z"
+    },
+    {
+      "id": "notif-1791046853163",
+      "userId": "1791046852879",
+      "title": "Assignment Graded",
+      "message": "\"Build a MERN REST API with JWT Auth\" has been graded: A (94/100).",
+      "channel": "Gradebook",
+      "read": false,
+      "createdAt": "2026-10-03T17:00:53.163Z"
+    },
+    {
+      "id": "notif-1791046853197",
+      "userId": "1",
+      "title": "Certificate Issued!",
+      "message": "Your certificate for \"Advanced Transformer Engineering\" has been awarded (ID: ACX-2026-939454).",
+      "channel": "Certificate",
+      "read": false,
+      "createdAt": "2026-10-03T17:00:53.197Z"
+    },
+    {
+      "id": "notif-1791046900411",
+      "userId": "1791046900038",
+      "title": "Assignment Submitted",
+      "message": "Your solution for \"Build a MERN REST API with JWT Auth\" was submitted successfully.",
+      "channel": "Assignment",
+      "read": false,
+      "createdAt": "2026-10-03T17:01:40.411Z"
+    },
+    {
+      "id": "notif-1791046900422",
+      "userId": "1791046900038",
+      "title": "Assignment Graded",
+      "message": "\"Build a MERN REST API with JWT Auth\" has been graded: A (94/100).",
+      "channel": "Gradebook",
+      "read": false,
+      "createdAt": "2026-10-03T17:01:40.422Z"
+    },
+    {
+      "id": "notif-1791046900475",
+      "userId": "1",
+      "title": "Certificate Issued!",
+      "message": "Your certificate for \"Advanced Transformer Engineering\" has been awarded (ID: ACX-2026-299948).",
+      "channel": "Certificate",
+      "read": false,
+      "createdAt": "2026-10-03T17:01:40.476Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "comp-1",
+      "name": "Prime Vector Enterprise Solutions",
+      "code": "PV-ENT",
+      "branches": [
+        "Hosur Main Campus",
+        "Bangalore Tech Hub",
+        "Chennai Innovation Center"
+      ]
+    },
+    {
+      "id": "comp-2",
+      "name": "Apex Tech Upskilling Corp",
+      "code": "APEX-UPS",
+      "branches": [
+        "Hyderabad Hub",
+        "Pune Center"
+      ]
+    }
+  ],
+  "branches": [
+    {
+      "id": "b-1",
+      "companyId": "comp-1",
+      "name": "Hosur Main Campus",
+      "code": "PV-HOS",
+      "region": "Tamil Nadu",
+      "studentCount": 450
+    },
+    {
+      "id": "b-2",
+      "companyId": "comp-1",
+      "name": "Bangalore Tech Hub",
+      "code": "PV-BLR",
+      "region": "Karnataka",
+      "studentCount": 680
+    },
+    {
+      "id": "b-3",
+      "companyId": "comp-1",
+      "name": "Chennai Innovation Center",
+      "code": "PV-MAA",
+      "region": "Tamil Nadu",
+      "studentCount": 320
+    }
+  ],
+  "liveClasses": [
+    {
+      "id": "lc-101",
+      "title": "Advanced Transformer Architectures & RAG",
+      "courseId": "1",
+      "trainer": "Dr. Sarah Chen",
+      "scheduledAt": "2026-07-28T10:00:00Z",
+      "durationMins": 90,
+      "platform": "Google Meet",
+      "joinUrl": "https://meet.google.com/pv-lms-aiml",
+      "recordingUrl": "https://drive.google.com/file/d/pv-rec-101/view",
+      "status": "Upcoming",
+      "attendeesCount": 48
+    },
+    {
+      "id": "lc-102",
+      "title": "Microservices Architecture & Event Loops in Node.js",
+      "courseId": "2",
+      "trainer": "Marcus Vance",
+      "scheduledAt": "2026-07-29T14:30:00Z",
+      "durationMins": 120,
+      "platform": "Zoom",
+      "joinUrl": "https://zoom.us/j/9876543210?pwd=pv-lms-fullstack",
+      "recordingUrl": "https://zoom.us/rec/play/pv-rec-102",
+      "status": "Scheduled",
+      "attendeesCount": 65
+    }
+  ],
+  "attendance": [
+    {
+      "id": "att-1",
+      "studentId": "1",
+      "studentName": "Alex Johnson",
+      "date": "2026-07-27",
+      "status": "Present",
+      "method": "QR Code",
+      "timestamp": "09:02 AM",
+      "branch": "Hosur Main Campus"
+    },
+    {
+      "id": "att-2",
+      "studentId": "1",
+      "studentName": "Alex Johnson",
+      "date": "2026-07-26",
+      "status": "Present",
+      "method": "Face Verification",
+      "timestamp": "08:58 AM",
+      "branch": "Hosur Main Campus"
+    },
+    {
+      "id": "att-3",
+      "studentId": "1",
+      "studentName": "Alex Johnson",
+      "date": "2026-07-25",
+      "status": "Present",
+      "method": "Manual",
+      "timestamp": "09:10 AM",
+      "branch": "Hosur Main Campus"
+    }
+  ],
   "interviews": [
     {
       "id": "int-1",
@@ -367,24 +972,6 @@
       "round": "AI/ML Technical Round",
       "status": "Scheduled",
       "interviewer": "Dr. Chen Head of AI"
-    }
-  ],
-  "certificates": [
-    {
-      "id": "PV-2026-001",
-      "studentName": "Alex Johnson",
-      "course": "Applied AI & Machine Learning Engineering",
-      "date": "2025-10-15",
-      "verificationUrl": "https://primevector.in/verify/PV-2026-001",
-      "grade": "A+"
-    },
-    {
-      "id": "PV-2026-042",
-      "studentName": "Alex Johnson",
-      "course": "Full Stack Web Engineering",
-      "date": "2025-11-02",
-      "verificationUrl": "https://primevector.in/verify/PV-2026-042",
-      "grade": "Distinction"
     }
   ],
   "aiLogs": [
@@ -608,197 +1195,6 @@
       "appliedDate": "2026-07-24"
     }
   ],
-  "quizzes": [
-    {
-      "id": "quiz-1",
-      "title": "JavaScript & Modern ES6+ Architecture",
-      "course": "Full Stack Engineering",
-      "category": "Frontend",
-      "durationMins": 10,
-      "passingScore": 70,
-      "totalQuestions": 5,
-      "questions": [
-        {
-          "id": 1,
-          "question": "Which of the following creates a block-scoped variable in modern JavaScript?",
-          "options": [
-            "var",
-            "let & const",
-            "define",
-            "global"
-          ],
-          "correctIndex": 1,
-          "explanation": "'let' and 'const' provide lexical block scoping introduced in ES6, unlike 'var' which is function-scoped."
-        },
-        {
-          "id": 2,
-          "question": "What does the strict equality operator (===) compare?",
-          "options": [
-            "Values with implicit type coercion",
-            "Both value and data type without coercion",
-            "Memory addresses only",
-            "Variable string lengths"
-          ],
-          "correctIndex": 1,
-          "explanation": "'===' enforces type safety by verifying both the underlying type and exact primitive/reference value."
-        },
-        {
-          "id": 3,
-          "question": "What is returned by Array.prototype.map()?",
-          "options": [
-            "The original array modified in-place",
-            "A newly transformed array of identical length",
-            "A filtered subset of elements",
-            "A boolean flag indicating array mutation"
-          ],
-          "correctIndex": 1,
-          "explanation": "'map()' creates a brand new array containing results of calling the provided function on every element."
-        },
-        {
-          "id": 4,
-          "question": "Which keyword in JavaScript handles async Promise rejections cleanly within async functions?",
-          "options": [
-            "try / catch",
-            "onError / resume",
-            "dispatch / await",
-            "panic / recover"
-          ],
-          "correctIndex": 0,
-          "explanation": "Standard 'try/catch' blocks capture rejected promises when awaited inside async function blocks."
-        },
-        {
-          "id": 5,
-          "question": "What is the primary role of the JavaScript Event Loop?",
-          "options": [
-            "Execute synchronous CPU tasks across 16 threads",
-            "Continuously coordinate between Call Stack, Web APIs, and Task/Microtask Queues",
-            "Compile byte code directly into machine assembly",
-            "Garbage collect memory synchronously"
-          ],
-          "correctIndex": 1,
-          "explanation": "The event loop continuously monitors the Call Stack and moves tasks from Microtask and Callback Queues when stack is clear."
-        }
-      ]
-    },
-    {
-      "id": "quiz-2",
-      "title": "Generative AI, Transformers & LLM Prompting",
-      "course": "Applied AI & Machine Learning Engineering",
-      "category": "AI & ML",
-      "durationMins": 15,
-      "passingScore": 75,
-      "totalQuestions": 4,
-      "questions": [
-        {
-          "id": 1,
-          "question": "What key mechanism allows Transformer models to process all tokens in a sequence concurrently?",
-          "options": [
-            "Recurrent hidden state propagation",
-            "Multi-Head Self-Attention",
-            "Convolutional Max-Pooling",
-            "Stochastic Gradient Descent"
-          ],
-          "correctIndex": 1,
-          "explanation": "Multi-Head Self-Attention calculates pairwise token affinities simultaneously across the entire context window."
-        },
-        {
-          "id": 2,
-          "question": "What does LoRA (Low-Rank Adaptation) accomplish during LLM fine-tuning?",
-          "options": [
-            "Freezes all parameters and only modifies prompts",
-            "Decomposes weight update matrices into smaller low-rank pairs to drastically reduce GPU memory",
-            "Compresses models by discarding 80% of vocabulary",
-            "Replaces transformers with CNNs"
-          ],
-          "correctIndex": 1,
-          "explanation": "LoRA freezes pre-trained weights and injects trainable rank decomposition matrices, reducing trainable parameters up to 99%."
-        },
-        {
-          "id": 3,
-          "question": "In RAG (Retrieval-Augmented Generation), what is vector embedding used for?",
-          "options": [
-            "Encrypting user credentials",
-            "Semantic similarity search over external knowledge documents",
-            "Generating random seed weights",
-            "Compiling Python scripts into C++"
-          ],
-          "correctIndex": 1,
-          "explanation": "Embeddings map text to high-dimensional vectors so query meaning can be matched with relevant document chunks."
-        },
-        {
-          "id": 4,
-          "question": "What is the purpose of temperature in LLM sampling?",
-          "options": [
-            "Monitors CPU heat during training",
-            "Controls the randomness/creativity of token probability distribution",
-            "Sets maximum output token count",
-            "Determines context window size in gigabytes"
-          ],
-          "correctIndex": 1,
-          "explanation": "Higher temperature flattens probability distribution yielding more creative outputs, while 0.0 is deterministic and focused."
-        }
-      ]
-    },
-    {
-      "id": "quiz-3",
-      "title": "Data Structures & Algorithmic Complexity",
-      "course": "Competitive DSA & Algorithms Mastery",
-      "category": "Algorithms",
-      "durationMins": 12,
-      "passingScore": 70,
-      "totalQuestions": 4,
-      "questions": [
-        {
-          "id": 1,
-          "question": "What is the worst-case time complexity of QuickSort when a poorly chosen pivot is used?",
-          "options": [
-            "O(log N)",
-            "O(N log N)",
-            "O(N^2)",
-            "O(1)"
-          ],
-          "correctIndex": 2,
-          "explanation": "In worst case (already sorted array with first/last pivot), QuickSort partitions into 1 and N-1 elements, resulting in O(N^2)."
-        },
-        {
-          "id": 2,
-          "question": "Which data structure implements FIFO (First-In, First-Out) semantics?",
-          "options": [
-            "Stack",
-            "Queue",
-            "Max Heap",
-            "Binary Search Tree"
-          ],
-          "correctIndex": 1,
-          "explanation": "A Queue processes elements in the exact order they arrive: first-in, first-out."
-        },
-        {
-          "id": 3,
-          "question": "What is the lookup time complexity in an optimal Hash Map with balanced hashing?",
-          "options": [
-            "O(1) average",
-            "O(N log N)",
-            "O(N^2)",
-            "O(log N)"
-          ],
-          "correctIndex": 0,
-          "explanation": "With low collision probability, hash lookup resolves in O(1) constant time."
-        },
-        {
-          "id": 4,
-          "question": "Which traversal of a Binary Search Tree (BST) yields keys in strictly ascending sorted order?",
-          "options": [
-            "Pre-order",
-            "In-order",
-            "Post-order",
-            "Level-order"
-          ],
-          "correctIndex": 1,
-          "explanation": "In-order traversal visits (Left Subtree -> Root -> Right Subtree), which outputs keys in ascending sorted order for BSTs."
-        }
-      ]
-    }
-  ],
   "gamification": {
     "userXP": 3850,
     "level": "Expert",
@@ -981,101 +1377,5 @@
         "badge": "✨"
       }
     ]
-  },
-  "forumPosts": [
-    {
-      "id": "fp-1",
-      "author": "Alex Johnson",
-      "authorRole": "student",
-      "authorAvatar": "A",
-      "title": "Best practices for state management in React 18: Context vs Zustand?",
-      "content": "We're refactoring our capstone LMS dashboard. For high-frequency state updates like live code compilation and timer ticks, should we stick with lightweight React Context or adopt Zustand/Jotai for granular selector rendering?",
-      "category": "Full Stack",
-      "tags": [
-        "React",
-        "JavaScript",
-        "Architecture"
-      ],
-      "upvotes": 18,
-      "createdAt": "2026-09-28T14:30:00Z",
-      "replies": [
-        {
-          "id": "fr-101",
-          "author": "Marcus Vance",
-          "authorRole": "mentor",
-          "authorAvatar": "M",
-          "content": "Great inquiry, Alex! For high-frequency data (like compiler output streams or sub-second timers), standard Context triggers re-renders across all consumers unless aggressively memoized. Zustand provides atomic state slicing with selector hooks (e.g. `useStore(state => state.output)`), which prevents unnecessary tree re-renders.",
-          "isVerifiedInstructor": true,
-          "upvotes": 14,
-          "createdAt": "2026-09-28T15:15:00Z"
-        },
-        {
-          "id": "fr-102",
-          "author": "Pooja Reddy",
-          "authorRole": "student",
-          "authorAvatar": "P",
-          "content": "We switched to Zustand for our placement tracker widget last week — boilerplate dropped significantly and memory usage improved noticeably.",
-          "isVerifiedInstructor": false,
-          "upvotes": 5,
-          "createdAt": "2026-09-28T16:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "fp-2",
-      "author": "Sneha Nair",
-      "authorRole": "student",
-      "authorAvatar": "S",
-      "title": "How to properly optimize LoRA rank and alpha when fine-tuning Llama-3?",
-      "content": "When training on enterprise domain data (like technical curriculum specs), what rank 'r' (8, 16, 32) and alpha scaling factors do you recommend to avoid catastrophic forgetting while maintaining quick convergence?",
-      "category": "AI & ML",
-      "tags": [
-        "Generative AI",
-        "LoRA",
-        "PyTorch"
-      ],
-      "upvotes": 24,
-      "createdAt": "2026-09-29T10:00:00Z",
-      "replies": [
-        {
-          "id": "fr-201",
-          "author": "Dr. Sarah Chen",
-          "authorRole": "trainer",
-          "authorAvatar": "S",
-          "content": "A standard rule of thumb in industry is setting alpha = 2 * r. For domain adaptation on structured text, r=16 and alpha=32 provides optimal capacity without overparameterization. Also ensure you target both Q, K, V attention projections and MLP layers for comprehensive transfer.",
-          "isVerifiedInstructor": true,
-          "upvotes": 22,
-          "createdAt": "2026-09-29T11:45:00Z"
-        }
-      ]
-    },
-    {
-      "id": "fp-3",
-      "author": "Rohan Verma",
-      "authorRole": "student",
-      "authorAvatar": "R",
-      "title": "Tips for Prime Tech Solutions Technical Coding Round next week",
-      "content": "To everyone attending the Prime Tech campus drive on August 5th: what algorithm topics were highlighted during the preparatory webinar yesterday?",
-      "category": "Placements",
-      "tags": [
-        "Placements",
-        "Interview",
-        "DSA"
-      ],
-      "upvotes": 31,
-      "createdAt": "2026-09-30T09:20:00Z",
-      "replies": [
-        {
-          "id": "fr-301",
-          "author": "Priya Sharma",
-          "authorRole": "placement_officer",
-          "authorAvatar": "P",
-          "content": "Focus heavily on Graph traversals (BFS/DFS cycle detection), Dynamic Programming (Knapsack & Subsequence patterns), and SQL indexing queries. We have scheduled mock interview slots this Friday in the LMS!",
-          "isVerifiedInstructor": true,
-          "upvotes": 27,
-          "createdAt": "2026-09-30T10:10:00Z"
-        }
-      ]
-    }
-  ]
+  }
 }
