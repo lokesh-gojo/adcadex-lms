@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Acadex LMS Production API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: acadex_lms_api
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - JWT_SECRET=${JWT_SECRET:-acadex_secure_jwt_secret_token_cloud_2026}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://acadex_user:acadex_secure_pass@db:5432/acadex_db}
+      - SUPABASE_URL=${SUPABASE_URL:-}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY:-}
+      - CORS_ORIGIN=${CORS_ORIGIN:-*}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # PostgreSQL Relational Database (Cloud-Ready)
+  db:
+    image: postgres:16-alpine
+    container_name: acadex_postgres_db
+    restart: always
+    environment:
+      - POSTGRES_USER=acadex_user
+      - POSTGRES_PASSWORD=acadex_secure_pass
+      - POSTGRES_DB=acadex_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/src/db/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U acadex_user -d acadex_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

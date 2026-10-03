@@ -14,7 +14,7 @@ const OnlineData = {
   // Dynamically detect cloud vs local environment to prevent mixed-content or blocked localhost errors
   SERVER_URL: (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
     ? 'http://localhost:5000'
-    : (typeof window !== 'undefined' && window.PRIME_VECTOR_CLOUD_API ? window.PRIME_VECTOR_CLOUD_API : null),
+    : (typeof window !== 'undefined' ? (window.ACADEX_CLOUD_API || window.PRIME_VECTOR_CLOUD_API || localStorage.getItem('ACADEX_API_URL') || null) : null),
   isCloudDeployment: typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1',
 
   // ── HTML Entity Decoder Helper ─────────────────────────────

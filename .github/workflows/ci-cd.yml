@@ -1,0 +1,116 @@
+name: Acadex LMS Cloud CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  # ========================================================
+  # 1. Cloud Test & Security Verification
+  # ========================================================
+  test:
+    name: Run Cloud Test Suite & Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Server Dependencies in Cloud
+        working-directory: ./server
+        run: npm ci || npm install
+
+      - name: Run Automated Backend & Security Tests
+        working-directory: ./server
+        run: npm test
+
+  # ========================================================
+  # 2. Cloud Client Build
+  # ========================================================
+  build:
+    name: Build Client in Cloud
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Client Dependencies in Cloud
+        working-directory: ./client
+        run: npm ci || npm install
+
+      - name: Build Production Bundle in Cloud
+        working-directory: ./client
+        env:
+          VITE_API_URL: ${{ secrets.CLOUD_API_URL || '' }}
+        run: npm run build
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./
+
+  # ========================================================
+  # 3. Cloud Deployment to GitHub Pages
+  # ========================================================
+  deploy-pages:
+    name: Deploy to GitHub Pages (Cloud)
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ========================================================
+  # 4. Supabase Cloud Database Migration (Optional/Automated)
+  # ========================================================
+  migrate-database:
+    name: Apply Supabase Migrations in Cloud
+    runs-on: ubuntu-latest
+    needs: test
+    if: env.DATABASE_URL != ''
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        working-directory: ./server
+        run: npm install
+
+      - name: Run Database Migration in Cloud
+        working-directory: ./server
+        run: node src/db/migrateSupabase.js
