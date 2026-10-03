@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (listContainer) {
     listContainer.innerHTML = categories.map(cat => `
       <div class="progress-item">
-        <div class="progress-item-info">
-          <div class="progress-item-title">${cat.name}</div>
-          <div class="progress">
-            <div class="progress-bar" style="width: ${cat.progress}%; background: var(--primary)"></div>
-          </div>
+        <div class="progress-item-title" title="${cat.name}">
+          <i class="fa fa-check-circle-o text-primary" style="margin-right:6px"></i>${cat.name}
+        </div>
+        <div class="progress" style="height: 8px; background: rgba(255,255,255,0.06);">
+          <div class="progress-bar" style="width: ${cat.progress}%; background: linear-gradient(90deg, #4F46E5, #06B6D4)"></div>
         </div>
         <div class="progress-item-percent">${cat.progress}%</div>
       </div>
@@ -52,7 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'right' }
+          legend: {
+            position: 'right',
+            labels: {
+              color: '#94a3b8',
+              boxWidth: 12,
+              padding: 10,
+              font: {
+                size: 12,
+                family: 'Inter, sans-serif'
+              }
+            }
+          }
         },
         cutout: '70%'
       }

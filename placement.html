@@ -202,42 +202,70 @@
       <!-- Stats Box -->
       <div class="placement-stats-grid">
         <div class="placement-stat-card">
-          <div class="placement-stat-val" id="placementReadiness">85%</div>
-          <div class="placement-stat-label">Placement Readiness Score</div>
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="placementReadiness">85%</div>
+            <div class="placement-stat-label">Readiness Score</div>
+          </div>
+          <div class="placement-stat-icon indigo">
+            <i class="fa fa-tachometer"></i>
+          </div>
         </div>
+
         <div class="placement-stat-card">
-          <div class="placement-stat-val" id="aptitudeScore">78%</div>
-          <div class="placement-stat-label">Aptitude Score</div>
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="aptitudeScore">78%</div>
+            <div class="placement-stat-label">Aptitude Score</div>
+          </div>
+          <div class="placement-stat-icon cyan">
+            <i class="fa fa-calculator"></i>
+          </div>
         </div>
+
         <div class="placement-stat-card">
-          <div class="placement-stat-val" id="technicalScore">92%</div>
-          <div class="placement-stat-label">Technical Score</div>
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="technicalScore">92%</div>
+            <div class="placement-stat-label">Technical Score</div>
+          </div>
+          <div class="placement-stat-icon green">
+            <i class="fa fa-code"></i>
+          </div>
         </div>
+
         <div class="placement-stat-card">
-          <div class="placement-stat-val" id="softSkillsScore">80%</div>
-          <div class="placement-stat-label">Soft Skills</div>
+          <div class="placement-stat-info">
+            <div class="placement-stat-val" id="softSkillsScore">80%</div>
+            <div class="placement-stat-label">Soft Skills</div>
+          </div>
+          <div class="placement-stat-icon amber">
+            <i class="fa fa-comments"></i>
+          </div>
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+      <div class="placement-content-grid">
         <div>
           <!-- Current Training -->
           <div class="placement-panel">
             <div class="panel-header">
               <div class="panel-title"><i class="fa fa-briefcase text-primary"></i> Current Training Program</div>
+              <span class="badge badge-success"><i class="fa fa-circle" style="font-size:0.5rem"></i> Active Cohort</span>
             </div>
-            <div style="display:flex;gap:20px;align-items:start">
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" alt="Training" style="width:150px;height:100px;object-fit:cover;border-radius:var(--radius)">
-              <div style="flex:1">
-                <h3 style="margin-bottom:8px">Full-Stack Developer Bootcamp</h3>
-                <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:12px">Duration: 12 Weeks &nbsp;|&nbsp; Instructor: Sarah Jenkins</p>
+            <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" alt="Training" style="width:160px;height:115px;object-fit:cover;border-radius:var(--radius-md);box-shadow:var(--shadow-sm)">
+              <div style="flex:1;min-width:240px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+                  <span class="badge badge-primary" style="font-size:0.75rem">12-Week Track</span>
+                  <span style="font-size:0.82rem;color:var(--text-muted)"><i class="fa fa-calendar"></i> Graduating Dec 2026</span>
+                </div>
+                <h3 style="margin-bottom:6px;font-size:1.15rem;font-weight:700;color:var(--text)">Full-Stack Developer Bootcamp</h3>
+                <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:12px"><i class="fa fa-user-circle-o text-primary"></i> Lead Mentor: <strong>Sarah Jenkins</strong> (Staff Engineer)</p>
                 <div class="course-progress-wrap">
                   <div class="course-progress-label">
-                    <span>Overall Completion</span>
+                    <span>Curriculum Completion</span>
                     <span class="course-progress-percent">65%</span>
                   </div>
-                  <div class="progress">
-                    <div class="progress-bar" style="width:65%"></div>
+                  <div class="progress" style="height:10px">
+                    <div class="progress-bar" style="width:65%;background:var(--gradient-primary)"></div>
                   </div>
                 </div>
               </div>
@@ -248,6 +276,7 @@
           <div class="placement-panel">
             <div class="panel-header">
               <div class="panel-title"><i class="fa fa-line-chart text-primary"></i> Placement Training Progress</div>
+              <span style="font-size:0.8rem;color:var(--text-muted)">10 Assessment Modules</span>
             </div>
             <div class="progress-list" id="trainingCategoriesList">
                <!-- Populated by JS -->
@@ -260,8 +289,9 @@
           <div class="placement-panel">
             <div class="panel-header">
               <div class="panel-title"><i class="fa fa-pie-chart text-primary"></i> Profile Completion</div>
+              <span class="badge badge-primary">76% Avg</span>
             </div>
-            <div class="chart-container" style="height: 200px;">
+            <div class="chart-container" style="height: 220px; position:relative">
               <canvas id="profileChart"></canvas>
             </div>
           </div>
@@ -271,10 +301,21 @@
             <div class="panel-header" style="justify-content:center">
               <div class="panel-title">Job Ready Status</div>
             </div>
-            <div style="display:inline-block;padding:12px 24px;border-radius:30px;background:var(--success-light);color:var(--success);font-weight:700;font-size:1.1rem;margin-bottom:16px">
-              <i class="fa fa-check-circle"></i> On Track
+            <div class="job-ready-badge">
+              <span class="pulse-dot"></span>
+              <span>Job Ready: On Track</span>
             </div>
-            <p style="font-size:0.9rem;color:var(--text-muted)">Keep practicing your technical skills to improve your score to >90%.</p>
+            <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.5;margin-bottom:18px">
+              Your overall profile readiness is in the <strong>Top 15%</strong> of campus drives. Keep practicing technical interviews to cross 90%.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <a href="resume-builder.html" class="btn btn-primary btn-sm" style="display:flex;align-items:center;justify-content:center;gap:8px">
+                <i class="fa fa-magic"></i> AI Resume Optimization
+              </a>
+              <a href="quiz.html" class="btn btn-outline btn-sm" style="display:flex;align-items:center;justify-content:center;gap:8px">
+                <i class="fa fa-bolt"></i> Practice Technical Quizzes
+              </a>
+            </div>
           </div>
         </div>
       </div>
