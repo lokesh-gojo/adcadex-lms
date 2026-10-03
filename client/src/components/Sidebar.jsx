@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Sidebar() {
-  const { user, logout, switchRole } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -99,20 +99,6 @@ export default function Sidebar() {
   const currentRole = user?.role || 'student';
   const roleNavItems = roleMenus[currentRole] || roleMenus['student'];
 
-  const handleRoleChange = (newRole) => {
-    switchRole(newRole);
-    const roleRedirects = {
-      student: '/student',
-      trainer: '/faculty',
-      faculty: '/faculty',
-      hr_admin: '/hr',
-      placement_officer: '/placements',
-      super_admin: '/admin',
-      mentor: '/mentor'
-    };
-    navigate(roleRedirects[newRole] || '/student');
-  };
-
   const roleBadgeColors = {
     student: { bg: 'rgba(6,182,212,0.15)', text: '#06B6D4', label: 'Student Portal' },
     trainer: { bg: 'rgba(99,102,241,0.15)', text: '#818CF8', label: 'Faculty / Trainer Portal' },
@@ -159,7 +145,7 @@ export default function Sidebar() {
           </svg>
         </div>
         <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF' }}>
-          PRIME <span style={{ color: '#06B6D4' }}>VECTOR</span>
+          ACADEX <span style={{ color: '#06B6D4' }}>LMS</span>
         </span>
       </div>
 
@@ -218,31 +204,19 @@ export default function Sidebar() {
             </div>
           </Link>
 
-          <div style={{ fontSize: '0.66rem', color: '#9CA3AF', marginBottom: '4px', fontWeight: 600, textTransform: 'uppercase' }}>
-            Switch Login View (RBAC):
+          <div style={{ 
+            fontSize: '0.72rem', 
+            color: 'rgba(255,255,255,0.7)', 
+            padding: '6px 8px', 
+            borderRadius: '6px', 
+            background: 'rgba(255,255,255,0.03)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <span style={{ fontSize: '0.66rem', color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase' }}>Session</span>
+            <span style={{ color: '#10B981', fontSize: '0.68rem', fontWeight: 700 }}>● Authenticated</span>
           </div>
-          <select
-            value={currentRole}
-            onChange={(e) => handleRoleChange(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '6px 8px',
-              borderRadius: '6px',
-              background: '#111827',
-              border: '1px solid rgba(255,255,255,0.15)',
-              color: '#FFF',
-              fontSize: '0.76rem',
-              fontWeight: 600,
-              cursor: 'pointer'
-            }}
-          >
-            <option value="student">👨‍🎓 Student Login</option>
-            <option value="trainer">👩‍🏫 Faculty / Trainer Login</option>
-            <option value="hr_admin">💼 HR / Recruiter Login</option>
-            <option value="placement_officer">🎯 Placement Officer Login</option>
-            <option value="super_admin">⚙️ Admin Login</option>
-            <option value="mentor">🤝 Mentor Login</option>
-          </select>
         </div>
       )}
 

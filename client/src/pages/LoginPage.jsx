@@ -157,7 +157,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFF' }}>
-              PRIME <span style={{ color: '#06B6D4' }}>VECTOR</span>
+              ACADEX <span style={{ color: '#06B6D4' }}>LMS</span>
             </span>
           </Link>
 

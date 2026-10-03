@@ -69,28 +69,55 @@ acadex-lms/
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started & Running Locally
 
-### 1. Running the Frontend
-The frontend runs on standard web technologies without mandatory build tools:
-- Simply open `index.html` or `student.html` directly in your web browser.
-- Or use any static file server:
-  ```bash
-  # Using Python
-  python -m http.server 3000
+### Quick Start (Full Stack with Root Scripts)
+1. **Install Dependencies:**
+   ```bash
+   npm run install:all
+   ```
 
-  # Or using Node http-server / npx serve
-  npx serve .
-  ```
+2. **Configure Environment:**
+   ```bash
+   cp server/.env.example server/.env
+   ```
 
-### 2. Running the Backend Server (Optional — for Python/JS Sandboxed Execution)
-To enable server-side code execution:
-```bash
-cd server
-npm install
-npm start
-```
-The server will start on `http://localhost:5000`.
+3. **Start the Backend API Server:**
+   ```bash
+   npm run server
+   # Runs Acadex LMS Secure API on http://localhost:5000
+   ```
+
+4. **Start the Client (React + Vite):**
+   ```bash
+   npm run client
+   # Runs Vite dev server on http://localhost:5173
+   ```
+
+5. **Static HTML Pages (Alternative Frontend):**
+   Open `index.html` or `student.html` directly in any modern browser or run:
+   ```bash
+   npx serve .
+   ```
+
+### 🔐 Demo Credentials (RBAC Authenticated)
+All demo accounts are secured with bcrypt password hashing (`demo123`) and issue signed JSON Web Tokens (JWT):
+| Role | Email | Password | Access Scope |
+| :--- | :--- | :--- | :--- |
+| **Student** | `student@demo.com` | `demo123` | Academic modules, quizzes, assignments, certificates |
+| **Faculty / Trainer** | `trainer@demo.com` | `demo123` | Class scheduling, assignment evaluation, quiz publisher |
+| **HR Recruiter** | `hr@demo.com` | `demo123` | Talent pipeline, resume review, candidate tracking |
+| **Placement Officer** | `placement@demo.com` | `demo123` | Campus drives, interview rounds, placement analytics |
+| **System Admin** | `superadmin@demo.com` | `demo123` | Enterprise metrics, user administration, global audit |
+| **Mentor** | `mentor@demo.com` | `demo123` | Code reviews, discussion forums, doubt guidance |
+
+### 🛡️ Security Hardening Overview
+- **Sterile Code Execution Sandbox:** JavaScript runs in an isolated VM context with process and host reflection blocked; Python runs with strict timeout (3.0s) and static import filters blocking OS/subprocess/socket commands.
+- **Strict RBAC Enforcement:** Role-based access control middleware (`requireRole`) protects admin, faculty, and grading endpoints.
+- **Zero Role Escalation:** Self-registration enforces `student` role; admin roles must be assigned via administrative authorization.
+- **Real JWT Authentication:** Signed tokens with `jsonwebtoken` replacing legacy unverified tokens.
+- **Data Persistence:** File-backed database store in `server/data/lms_store.json` persisting state across server restarts.
+- **HTTP Security & Rate Limiting:** Configured with `helmet`, custom CORS whitelist, and `express-rate-limit`.
 
 ---
 

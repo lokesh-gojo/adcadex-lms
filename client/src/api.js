@@ -7,10 +7,21 @@ export const API_BASE_URL = import.meta.env.VITE_API_URL || (isLocalhost ? 'http
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 5000,
+  timeout: 8000,
   headers: {
     'Content-Type': 'application/json'
   }
 });
+
+// Request interceptor to attach JWT auth token
+api.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('acadex_token') || localStorage.getItem('PrimeVector_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+}, (error) => Promise.reject(error));
 
 export default api;

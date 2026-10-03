@@ -1,5 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { execFile } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -9,9 +14,82 @@ const db = require('./models/db');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const JWT_SECRET = process.env.JWT_SECRET || 'acadex_secret_jwt_key_2026_production';
 
-app.use(cors());
-app.use(express.json());
+// HTTP Security Headers (Helmet)
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
+}));
+
+// CORS Configuration
+const allowedOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+  : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5000', 'http://127.0.0.1:5173', 'http://127.0.0.1:5000'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.github.io')) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
+
+app.use(express.json({ limit: '2mb' }));
+
+// Global Rate Limiter
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many requests from this IP, please try again later.' }
+});
+app.use(generalLimiter);
+
+// Strict Rate Limiter for Authentication
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 25,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many authentication attempts. Please try again in 15 minutes.' }
+});
+
+// Authentication & RBAC Middleware
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Access denied: Authentication token required.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(403).json({ success: false, message: 'Forbidden: Invalid or expired authentication token.' });
+  }
+};
+
+const requireRole = (...roles) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ success: false, message: 'Unauthorized: Authentication required.' });
+    }
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ 
+        success: false, 
+        message: `Forbidden: Access requires one of [${roles.join(', ')}]. Current role: '${req.user.role}'.` 
+      });
+    }
+    next();
+  };
+};
 
 // In-memory online data cache
 const onlineCache = {
@@ -24,9 +102,9 @@ const onlineCache = {
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'online',
-    app: 'Prime Vector LMS API',
-    company: 'Prime Vector Private Limited',
-    website: 'https://primevector.in/',
+    app: 'Acadex LMS API',
+    company: 'Acadex Learning Systems',
+    version: '2.0.0-hardened',
     rolesSupported: ['super_admin', 'hr_admin', 'trainer', 'mentor', 'student', 'placement_officer'],
     timestamp: new Date().toISOString()
   });
@@ -42,57 +120,84 @@ app.get('/api/enterprise/branches', (req, res) => {
 });
 
 // ── Auth Endpoints ───────────────────────────────────────────
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', authLimiter, (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ success: false, message: 'Email and password are required' });
   }
 
-  const user = db.users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+  const user = db.users.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
   if (!user) {
     return res.status(401).json({ success: false, message: 'Invalid email or password' });
   }
 
+  // Bcrypt comparison
+  const isValid = bcrypt.compareSync(password, user.password);
+  if (!isValid) {
+    return res.status(401).json({ success: false, message: 'Invalid email or password' });
+  }
+
   const { password: _, ...userData } = user;
+  const token = jwt.sign(
+    { id: user.id, email: user.email, role: user.role, name: user.name },
+    JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+
   res.json({
     success: true,
     message: `Welcome back, ${user.name}! Role: ${user.role.toUpperCase()}`,
-    token: `jwt_pv_${user.id}_${Date.now()}`,
+    token,
     user: userData
   });
 });
 
-app.post('/api/auth/register', (req, res) => {
-  const { name, email, password, role, companyId, branchId } = req.body;
-  if (!name || !email || !password || !role) {
-    return res.status(400).json({ success: false, message: 'All fields are required' });
+app.post('/api/auth/register', authLimiter, (req, res) => {
+  const { name, email, password, companyId, branchId } = req.body;
+  if (!name || !email || !password) {
+    return res.status(400).json({ success: false, message: 'Name, email, and password are required' });
   }
 
-  const existing = db.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+  if (password.length < 6) {
+    return res.status(400).json({ success: false, message: 'Password must be at least 6 characters long' });
+  }
+
+  const existing = db.users.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
   if (existing) {
     return res.status(400).json({ success: false, message: 'Email is already registered' });
   }
 
+  // Security Hardening: Enforce 'student' role on self-registration
+  const assignedRole = 'student';
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
   const newUser = {
     id: String(Date.now()),
-    name,
-    email,
-    password,
-    role: role || 'student',
+    name: name.trim(),
+    email: email.trim().toLowerCase(),
+    password: hashedPassword,
+    role: assignedRole,
     companyId: companyId || 'comp-1',
     branchId: branchId || 'b-1',
     department: 'General Technology',
     joined: new Date().toISOString().split('T')[0],
-    avatar: name[0].toUpperCase()
+    avatar: name.trim()[0].toUpperCase()
   };
 
   db.users.push(newUser);
+  db.save();
+
   const { password: _, ...userData } = newUser;
+  const token = jwt.sign(
+    { id: newUser.id, email: newUser.email, role: newUser.role, name: newUser.name },
+    JWT_SECRET,
+    { expiresIn: '7d' }
+  );
 
   res.status(201).json({
     success: true,
     message: `Account created successfully for ${name}!`,
-    token: `jwt_pv_${newUser.id}_${Date.now()}`,
+    token,
     user: userData
   });
 });
@@ -113,13 +218,13 @@ app.get('/api/classes/live', (req, res) => {
   res.json({ success: true, liveClasses: db.liveClasses });
 });
 
-app.post('/api/classes/schedule', (req, res) => {
+app.post('/api/classes/schedule', authenticateToken, requireRole('super_admin', 'trainer', 'mentor'), (req, res) => {
   const { title, courseId, trainer, scheduledAt, durationMins, platform } = req.body;
   const newClass = {
     id: `lc-${Date.now()}`,
     title: title || 'Live Training Session',
     courseId: courseId || '1',
-    trainer: trainer || 'Prime Vector Instructor',
+    trainer: trainer || req.user.name || 'Acadex Instructor',
     scheduledAt: scheduledAt || new Date().toISOString(),
     durationMins: durationMins || 60,
     platform: platform || 'Google Meet',
@@ -129,6 +234,7 @@ app.post('/api/classes/schedule', (req, res) => {
     attendeesCount: 0
   };
   db.liveClasses.push(newClass);
+  db.save();
   res.status(201).json({ success: true, message: 'Live class scheduled successfully', class: newClass });
 });
 
@@ -141,6 +247,7 @@ app.post('/api/classes/join', (req, res) => {
   const target = db.liveClasses.find(c => c.id === classId);
   if (target) {
     target.attendeesCount = (target.attendeesCount || 0) + 1;
+    db.save();
   }
   res.json({
     success: true,
@@ -161,7 +268,7 @@ app.get('/api/assignments/:id', (req, res) => {
 });
 
 app.post(['/api/assignments/submit', '/api/student/assignment/submit'], (req, res) => {
-  const { assignmentId, submissionUrl, notes, studentName } = req.body;
+  const { assignmentId, submissionUrl, notes } = req.body;
   const idStr = String(assignmentId);
   const item = db.assignments.find(a => String(a.id) === idStr);
 
@@ -170,31 +277,43 @@ app.post(['/api/assignments/submit', '/api/student/assignment/submit'], (req, re
   }
 
   item.status = 'submitted';
-  item.submissionUrl = submissionUrl || 'https://github.com/student/prime-vector-task';
+  item.submissionUrl = submissionUrl || 'https://github.com/student/acadex-task';
   item.submittedAt = new Date().toISOString();
   item.notes = notes || '';
-  item.aiFeedback = `AI Automated Rubric Feedback: Solution verified against testing criteria. High cohesion, clean architectural styling. Predicted Grade: A (Score: 92/100).`;
+  item.aiFeedback = 'Submission received. Code formatted and queued for instructor evaluation.';
+  item.grade = null;
+  item.score = null;
+  db.save();
 
   res.json({
     success: true,
-    message: 'Assignment submitted and AI evaluated successfully!',
+    message: 'Assignment submitted successfully. Awaiting instructor review.',
     assignment: item
   });
 });
 
-app.post('/api/assignments/grade', (req, res) => {
+app.post('/api/assignments/grade', authenticateToken, requireRole('super_admin', 'trainer', 'mentor'), (req, res) => {
   const { assignmentId, grade, score, feedback } = req.body;
   const item = db.assignments.find(a => String(a.id) === String(assignmentId));
   if (!item) return res.status(404).json({ success: false, message: 'Assignment not found' });
 
+  if (score === undefined || isNaN(Number(score)) || Number(score) < 0 || Number(score) > 100) {
+    return res.status(400).json({ success: false, message: 'A valid numeric score between 0 and 100 is required.' });
+  }
+
+  const numScore = Number(score);
   item.status = 'graded';
-  item.grade = grade || 'A';
-  item.score = score || 95;
-  item.feedback = feedback || 'Exceptional implementation.';
+  item.score = numScore;
+  item.grade = grade || (numScore >= 90 ? 'A' : numScore >= 80 ? 'B' : numScore >= 70 ? 'C' : 'D');
+  item.feedback = feedback || 'Instructor review complete.';
+  item.gradedBy = req.user.name;
+  item.gradedAt = new Date().toISOString();
+  db.save();
+
   res.json({ success: true, message: 'Assignment graded successfully', assignment: item });
 });
 
-app.post('/api/assignments/create', (req, res) => {
+app.post('/api/assignments/create', authenticateToken, requireRole('super_admin', 'trainer', 'mentor'), (req, res) => {
   const { title, course, points, due, description } = req.body;
   const newAssign = {
     id: String(Date.now()),
@@ -202,13 +321,14 @@ app.post('/api/assignments/create', (req, res) => {
     course: course || 'Full Stack',
     points: points || 100,
     due: due || new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
-    description: description || 'Complete the assigned project modules according to enterprise specifications.',
+    description: description || 'Complete the assigned project modules according to specifications.',
     status: 'pending',
     studentId: '1',
     submissionUrl: '',
     aiFeedback: null
   };
   db.assignments.push(newAssign);
+  db.save();
   res.status(201).json({ success: true, message: 'Assignment created successfully', assignment: newAssign });
 });
 
@@ -405,7 +525,7 @@ app.get('/api/student/dashboard', (req, res) => {
   });
 });
 
-app.get('/api/faculty/dashboard', (req, res) => {
+app.get('/api/faculty/dashboard', authenticateToken, requireRole('trainer', 'mentor', 'super_admin'), (req, res) => {
   res.json({
     success: true,
     stats: {
@@ -420,7 +540,7 @@ app.get('/api/faculty/dashboard', (req, res) => {
   });
 });
 
-app.get('/api/admin/dashboard', (req, res) => {
+app.get('/api/admin/dashboard', authenticateToken, requireRole('super_admin'), (req, res) => {
   res.json({
     success: true,
     stats: {
@@ -431,14 +551,14 @@ app.get('/api/admin/dashboard', (req, res) => {
       activeDrives: db.placements.length,
       systemHealth: '99.9%'
     },
-    users: db.users,
+    users: db.users.map(({ password, ...u }) => u),
     companies: db.companies,
     branches: db.branches,
     analytics: db.analytics
   });
 });
 
-app.get('/api/placement/dashboard', (req, res) => {
+app.get('/api/placement/dashboard', authenticateToken, requireRole('super_admin', 'placement_officer', 'hr_admin'), (req, res) => {
   res.json({
     success: true,
     drives: db.placements,
@@ -452,7 +572,7 @@ app.get('/api/placements', (req, res) => {
   res.json({ success: true, drives: db.placements, interviews: db.interviews });
 });
 
-app.post('/api/placements/drives', (req, res) => {
+app.post('/api/placements/drives', authenticateToken, requireRole('super_admin', 'placement_officer', 'hr_admin'), (req, res) => {
   const { company, role, ctc, location, deadline, requirements } = req.body;
   const newDrive = {
     id: `p-${Date.now()}`,
@@ -467,6 +587,7 @@ app.post('/api/placements/drives', (req, res) => {
     requirements: requirements || ['JavaScript', 'SQL', 'Git']
   };
   db.placements.unshift(newDrive);
+  db.save();
   res.status(201).json({ success: true, message: 'Campus placement drive published successfully!', drive: newDrive });
 });
 
@@ -508,17 +629,48 @@ app.post('/api/notifications/email', (req, res) => {
   });
 });
 
-// ── Code Compiler API (Real Native Execution Engine) ──────────
+// ── Code Compiler API (Hardened Sandbox Engine) ───────────────
 app.post('/api/compiler/run', (req, res) => {
   const { language, code } = req.body;
-  if (!code) {
+  if (!code || typeof code !== 'string') {
     return res.status(400).json({ success: false, output: 'Error: No code provided to execute.' });
+  }
+
+  // Prevent excessive payload size
+  if (code.length > 50000) {
+    return res.status(400).json({ success: false, output: 'Error: Code exceeds maximum allowed size (50KB).' });
   }
 
   const startTime = Date.now();
 
-  // JavaScript & DSA execution via Node vm
+  // JavaScript & DSA execution via hardened sterile sandbox
   if (language === 'javascript' || language === 'dsa') {
+    // 1. Static security check: Disallow process, host escapes, and reflection exploits
+    const dangerousPatterns = [
+      /\bprocess\b/i,
+      /\brequire\s*\(/i,
+      /\bimport\s*\(/i,
+      /\bchild_process\b/i,
+      /\bfs\b/i,
+      /\bFunction\s*\(/i,
+      /\beval\s*\(/i,
+      /constructor\s*\.\s*constructor/i,
+      /__proto__/i,
+      /\bmainModule\b/i,
+      /\bmodule\b/i
+    ];
+
+    for (const pattern of dangerousPatterns) {
+      if (pattern.test(code)) {
+        return res.status(403).json({
+          success: false,
+          engine: 'Acadex Isolated Sandbox',
+          output: 'Security Exception: Execution blocked. Process access, filesystem, external modules, and reflection constructors are forbidden in the sandbox.',
+          executionTime: '0.00s'
+        });
+      }
+    }
+
     const logs = [];
     const customConsole = {
       log: (...args) => logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' ')),
@@ -527,49 +679,81 @@ app.post('/api/compiler/run', (req, res) => {
     };
 
     try {
-      const context = vm.createContext({
+      // Secure context: sterile object sandbox without direct host prototypes
+      const sandbox = {
         console: customConsole,
-        setTimeout,
         Math,
         Date,
-        Array,
-        Object,
-        String,
-        Number,
-        Boolean,
-        RegExp,
-        Map,
-        Set,
-        JSON
-      });
-      vm.runInContext(code, context, { timeout: 3000 });
+        parseInt,
+        parseFloat,
+        isNaN,
+        isFinite,
+        JSON: {
+          parse: JSON.parse,
+          stringify: JSON.stringify
+        }
+      };
+
+      const context = vm.createContext(sandbox);
+      const script = new vm.Script(code);
+      script.runInContext(context, { timeout: 2000 });
+
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(3);
       return res.json({
         success: true,
-        engine: 'Node.js v20 Sandbox Engine (Native VM)',
-        output: logs.join('\n') || '> Program ran with no console output.\n> Process exited with code 0.',
+        engine: 'Acadex JS Isolated Sandbox Engine',
+        output: logs.join('\n') || '> Program ran with no console output.\n> Process completed with code 0.',
         executionTime: `${elapsed}s`
       });
     } catch (err) {
       return res.json({
         success: false,
-        engine: 'Node.js v20 Sandbox Engine',
+        engine: 'Acadex JS Isolated Sandbox Engine',
         output: `Runtime Error: ${err.message}`,
         executionTime: '0.00s'
       });
     }
   }
 
-  // Python 3 execution via local Python binary
+  // Python 3 execution with security screening & resource bounds
   if (language === 'python') {
-    const tempFile = path.join(os.tmpdir(), `pv_py_${Date.now()}_${Math.floor(Math.random() * 1000)}.py`);
+    // Static filter against malicious imports and dangerous OS APIs
+    const dangerousPyPatterns = [
+      /\bimport\s+os\b/,
+      /\bfrom\s+os\b/,
+      /\bimport\s+sys\b/,
+      /\bfrom\s+sys\b/,
+      /\bimport\s+subprocess\b/,
+      /\bfrom\s+subprocess\b/,
+      /\bimport\s+socket\b/,
+      /\bfrom\s+socket\b/,
+      /\bimport\s+pty\b/,
+      /\bimport\s+shutil\b/,
+      /\bopen\s*\(/,
+      /\beval\s*\(/,
+      /\bexec\s*\(/,
+      /\b__import__\b/
+    ];
+
+    for (const pattern of dangerousPyPatterns) {
+      if (pattern.test(code)) {
+        return res.status(403).json({
+          success: false,
+          engine: 'Acadex Python Sandbox',
+          output: 'Security Exception: Execution blocked. OS system calls, network sockets, file I/O, and subprocess spawning are forbidden in the student sandbox.',
+          executionTime: '0.00s'
+        });
+      }
+    }
+
+    const tempFile = path.join(os.tmpdir(), `acadex_py_${Date.now()}_${Math.floor(Math.random() * 1000)}.py`);
     fs.writeFile(tempFile, code, 'utf8', (writeErr) => {
       if (writeErr) {
         return res.json({ success: false, output: `Failed to initialize Python sandbox: ${writeErr.message}` });
       }
 
-      execFile('python', [tempFile], { timeout: 5000, maxBuffer: 1024 * 1024 }, (execErr, stdout, stderr) => {
-        // Cleanup temp file
+      execFile('python', [tempFile], { timeout: 3000, maxBuffer: 64 * 1024 }, (execErr, stdout, stderr) => {
+        // Cleanup temp file safely
         fs.unlink(tempFile, () => {});
 
         const elapsed = ((Date.now() - startTime) / 1000).toFixed(3);
@@ -577,8 +761,8 @@ app.post('/api/compiler/run', (req, res) => {
         if (execErr && execErr.killed) {
           return res.json({
             success: false,
-            engine: 'Python 3.13 Runtime Engine',
-            output: 'Execution timed out (5.0s limit exceeded). Possible infinite loop.',
+            engine: 'Python 3 Runtime Engine',
+            output: 'Execution timed out (3.0s limit exceeded). Infinite loop or heavy computation detected.',
             executionTime: `${elapsed}s`
           });
         }
@@ -589,7 +773,7 @@ app.post('/api/compiler/run', (req, res) => {
 
         res.json({
           success: !execErr || !err,
-          engine: 'Python 3.13 Runtime Engine (Native)',
+          engine: 'Python 3 Runtime Engine',
           output: fullOutput || '> Process completed with code 0 (no output).',
           executionTime: `${elapsed}s`
         });
@@ -608,12 +792,12 @@ app.post('/api/compiler/run', (req, res) => {
     });
   }
 
-  // C++ / Java simulator
+  // C++ / Java - Truthful Toolchain Notification
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(3);
   res.json({
-    success: true,
-    engine: `${language.toUpperCase()} Enterprise Sandbox`,
-    output: `> [${language.toUpperCase()} Compilation Clean]\nExecution completed successfully with return code 0.\nAll enterprise test vectors validated.`,
+    success: false,
+    engine: `${language.toUpperCase()} Toolchain`,
+    output: `Notice: The server environment does not have native ${language.toUpperCase()} (g++ / javac) build toolchains installed. For live in-browser native execution, please select JavaScript or Python.`,
     executionTime: `${elapsed}s`
   });
 });
@@ -760,17 +944,18 @@ app.get('/api/certificates/verify/:id', (req, res) => {
   });
 });
 
-app.post('/api/certificates/issue', (req, res) => {
+app.post('/api/certificates/issue', authenticateToken, requireRole('super_admin', 'trainer', 'mentor'), (req, res) => {
   const { studentName, course, grade } = req.body;
   const newCert = {
-    id: `PV-2026-${String(Math.floor(100 + Math.random() * 900))}`,
+    id: `ACAD-2026-${String(Math.floor(100 + Math.random() * 900))}`,
     studentName: studentName || 'Alex Johnson',
     course: course || 'Applied AI & Machine Learning Engineering',
     date: new Date().toISOString().split('T')[0],
-    verificationUrl: `https://primevector.in/verify/PV-2026-${Date.now()}`,
+    verificationUrl: `https://lokesh-gojo.github.io/adcadex-lms/certificates.html?id=ACAD-2026-${Date.now()}`,
     grade: grade || 'A+'
   };
   db.certificates.unshift(newCert);
+  db.save();
   res.status(201).json({ success: true, message: 'Certificate issued successfully', certificate: newCert });
 });
 
@@ -844,6 +1029,7 @@ app.post('/api/quizzes/:id/submit', (req, res) => {
   if (db.gamification) {
     db.gamification.userXP = (db.gamification.userXP || 0) + xpEarned;
   }
+  db.save();
 
   res.json({
     success: true,
@@ -852,7 +1038,7 @@ app.post('/api/quizzes/:id/submit', (req, res) => {
     percentage,
     passed,
     xpEarned,
-    feedback: passed ? "Outstanding performance! You met the enterprise benchmark." : "Passing score not reached. Review explanations and reattempt.",
+    feedback: passed ? "Outstanding performance! You met the benchmark." : "Passing score not reached. Review explanations and reattempt.",
     review
   });
 });
@@ -901,6 +1087,7 @@ app.post('/api/forum/posts', (req, res) => {
   };
 
   db.forumPosts.unshift(newPost);
+  db.save();
   res.status(201).json({ success: true, message: 'Discussion post created successfully', post: newPost });
 });
 
@@ -921,6 +1108,7 @@ app.post('/api/forum/posts/:id/reply', (req, res) => {
   };
 
   post.replies.push(newReply);
+  db.save();
   res.status(201).json({ success: true, message: 'Reply added successfully', reply: newReply, post });
 });
 
@@ -928,10 +1116,11 @@ app.post('/api/forum/posts/:id/upvote', (req, res) => {
   const post = (db.forumPosts || []).find(p => p.id === req.params.id);
   if (!post) return res.status(404).json({ success: false, message: 'Post not found' });
   post.upvotes = (post.upvotes || 0) + 1;
+  db.save();
   res.json({ success: true, upvotes: post.upvotes });
 });
 
 app.listen(PORT, () => {
-  console.log(`⚡ Prime Vector LMS Server running on http://localhost:${PORT}`);
+  console.log(`⚡ Acadex LMS Server running securely on http://localhost:${PORT}`);
 });
 

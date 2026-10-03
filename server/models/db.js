@@ -1,4 +1,11 @@
-// In-Memory & Database Store for Prime Vector LMS (Learning & Training Management System)
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcryptjs');
+
+const DATA_DIR = path.join(__dirname, '..', 'data');
+const STORE_FILE = path.join(DATA_DIR, 'lms_store.json');
+
+// Database Store for Acadex LMS (Learning & Training Management System)
 const db = {
   companies: [
     { id: "comp-1", name: "Prime Vector Enterprise Solutions", code: "PV-ENT", branches: ["Hosur Main Campus", "Bangalore Tech Hub", "Chennai Innovation Center"] },
@@ -489,5 +496,44 @@ const db = {
   ]
 };
 
-module.exports = db;
+// Ensure data storage directory exists
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+// Load persisted state if exists
+let activeDb = db;
+if (fs.existsSync(STORE_FILE)) {
+  try {
+    const raw = fs.readFileSync(STORE_FILE, 'utf8');
+    const parsed = JSON.parse(raw);
+    activeDb = { ...db, ...parsed };
+  } catch (e) {
+    console.error('Error loading lms_store.json, using defaults:', e.message);
+  }
+}
+
+// Ensure all passwords in activeDb.users are hashed with bcrypt
+if (Array.isArray(activeDb.users)) {
+  activeDb.users.forEach(u => {
+    if (u.password && !u.password.startsWith('$2a$') && !u.password.startsWith('$2b$')) {
+      u.password = bcrypt.hashSync(u.password, 10);
+    }
+  });
+}
+
+// Method to persist state to disk
+activeDb.save = function() {
+  try {
+    const { save, ...toPersist } = activeDb;
+    fs.writeFileSync(STORE_FILE, JSON.stringify(toPersist, null, 2), 'utf8');
+  } catch (err) {
+    console.error('Failed to persist LMS store:', err.message);
+  }
+};
+
+// Initial save to establish store
+activeDb.save();
+
+module.exports = activeDb;
 
