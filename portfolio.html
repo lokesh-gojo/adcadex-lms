@@ -204,47 +204,148 @@
       
       <div class="dashboard-grid">
         <div class="card">
-          <div class="card-header"><span class="card-title">Integrations</span></div>
+          <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+            <span class="card-title">Professional Integrations</span>
+            <span class="badge badge-primary" style="font-size:0.75rem"><i class="fa fa-refresh"></i> Real-Time Sync</span>
+          </div>
           <div class="card-body">
-             <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px;">
+             <!-- LinkedIn Integration -->
+             <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 18px; border:1px solid var(--border); border-radius:var(--radius-lg); margin-bottom:16px; background:var(--bg)">
                 <div style="display:flex; align-items:center; gap:16px;">
-                   <i class="fa fa-linkedin-square" style="font-size:2.5rem; color:#0077b5;"></i>
+                   <i class="fa fa-linkedin-square" style="font-size:2.4rem; color:#0A66C2;"></i>
                    <div>
-                     <div style="font-weight:600; font-size:1.1rem;">LinkedIn Profile</div>
+                     <div style="font-weight:700; font-size:1.05rem; color:var(--text)">LinkedIn Profile</div>
                      <div id="liStatus" style="color:var(--success); font-size:0.85rem;"><i class="fa fa-check-circle"></i> Connected & Verified</div>
                    </div>
                 </div>
-                <button id="liBtn" class="btn btn-outline btn-sm">Manage</button>
+                <button id="liBtn" class="btn btn-outline btn-sm" onclick="openLinkedInModal()">Manage</button>
              </div>
              
-             <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; border:1px solid var(--border); border-radius:var(--radius);">
+             <!-- GitHub Integration -->
+             <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 18px; border:1px solid var(--border); border-radius:var(--radius-lg); background:var(--bg)">
                 <div style="display:flex; align-items:center; gap:16px;">
-                   <i class="fa fa-github" style="font-size:2.5rem; color:var(--text);"></i>
+                   <i class="fa fa-github" style="font-size:2.4rem; color:var(--text);"></i>
                    <div>
-                     <div style="font-weight:600; font-size:1.1rem;">GitHub Repositories</div>
+                     <div style="font-weight:700; font-size:1.05rem; color:var(--text)">GitHub Repositories</div>
                      <div id="ghStatus" style="color:var(--text-muted); font-size:0.85rem;">Not Connected</div>
                    </div>
                 </div>
-                <button id="ghBtn" class="btn btn-primary btn-sm">Connect GitHub</button>
+                <button id="ghBtn" class="btn btn-primary btn-sm" onclick="openGithubModal()">Connect GitHub</button>
              </div>
           </div>
         </div>
         
         <div class="card">
-          <div class="card-header"><span class="card-title">Placement Readiness</span></div>
-          <div class="card-body" style="text-align:center; padding-top:32px;">
-             <div id="readinessMeter" style="width:150px; height:150px; border-radius:50%; border:8px solid var(--success); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; position:relative;">
-                <div id="readinessScore" style="font-size:2.5rem; font-weight:700; color:var(--success);">92%</div>
+          <div class="card-header"><span class="card-title">Placement Readiness Score</span></div>
+          <div class="card-body" style="text-align:center; padding-top:24px;">
+             <div id="readinessMeter" style="width:130px; height:130px; border-radius:50%; border:8px solid var(--success); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; position:relative; transition:all 0.4s ease">
+                <div id="readinessScore" style="font-size:2.4rem; font-weight:800; color:var(--success); font-family:var(--font-display);">96%</div>
              </div>
-             <h3 id="readinessStatus" style="margin-bottom:8px;">Highly Prepared</h3>
-             <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:24px;">Your resume, portfolio, and skills are highly optimized for placement drives.</p>
-             <button class="btn btn-outline" style="width:100%" onclick="viewRequirements()">View Missing Requirements</button>
+             <h3 id="readinessStatus" style="margin-bottom:6px; font-weight:700">Excellent Preparation</h3>
+             <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:18px; line-height:1.4">
+               Live integrations verified. Your real projects and professional credentials boost your placement ranking.
+             </p>
+             <button class="btn btn-outline btn-sm" style="width:100%" onclick="viewRequirements()">View Placement Checklist</button>
           </div>
         </div>
       </div>
-    </div>
+
+      <!-- ── REAL-TIME GITHUB REPOSITORIES SHOWCASE ── -->
+      <div id="githubReposSection" class="card" style="margin-top:24px; display:none">
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="card-title"><i class="fa fa-github text-primary"></i> Live GitHub Repositories & Projects</span>
+            <span class="badge badge-success" style="font-size:0.75rem"><i class="fa fa-circle" style="font-size:0.5rem"></i> Real-Time Synced</span>
+          </div>
+          <span style="font-size:0.82rem;color:var(--text-muted)">Public repositories fetched live via GitHub API</span>
+        </div>
+        <div class="card-body">
+          <!-- User Summary Profile Card -->
+          <div id="githubUserSummary"></div>
+
+          <!-- Repositories Grid -->
+          <div id="githubReposGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(310px, 1fr));gap:16px"></div>
+        </div>
+      </div>
+
     </div>
   </main>
+</div>
+
+<!-- ── GITHUB CONNECT MODAL ── -->
+<div class="modal-overlay" id="githubModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa fa-github"></i> Connect Live GitHub Profile</div>
+      <button class="modal-close" onclick="closeGithubModal()"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="padding:24px 28px">
+      <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px">
+        Connect your real GitHub account to import and display your live code repositories, stars, and languages on your portfolio.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">GitHub Username</label>
+        <div style="position:relative">
+          <input type="text" id="ghUsernameInput" class="form-control" placeholder="e.g. lokesh-gojo" style="padding-left:36px">
+          <i class="fa fa-github" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted)"></i>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px">
+        <span style="font-size:0.8rem;color:var(--text-muted)">Quick pick:</span>
+        <button type="button" class="badge badge-primary" style="cursor:pointer;border:none" onclick="document.getElementById('ghUsernameInput').value='lokesh-gojo'">
+          @lokesh-gojo
+        </button>
+      </div>
+
+      <div id="ghModalAlert"></div>
+    </div>
+    <div class="modal-footer" style="padding:16px 28px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px">
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeGithubModal()">Cancel</button>
+      <button type="button" id="ghConfirmBtn" class="btn btn-primary btn-sm" onclick="submitGithubConnect()">
+        <i class="fa fa-check"></i> Connect Live
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── LINKEDIN CONNECT MODAL ── -->
+<div class="modal-overlay" id="linkedinModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa fa-linkedin-square text-primary"></i> Verify LinkedIn Profile</div>
+      <button class="modal-close" onclick="closeLinkedInModal()"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="padding:24px 28px">
+      <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px">
+        Attach your public LinkedIn vanity URL to verify your profile for recruiters and placement training coordinators.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">LinkedIn Profile URL</label>
+        <div style="position:relative">
+          <input type="url" id="liUrlInput" class="form-control" placeholder="https://linkedin.com/in/username" style="padding-left:36px">
+          <i class="fa fa-linkedin" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#0A66C2"></i>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px">
+        <span style="font-size:0.8rem;color:var(--text-muted)">Quick pick:</span>
+        <button type="button" class="badge badge-primary" style="cursor:pointer;border:none" onclick="document.getElementById('liUrlInput').value='https://linkedin.com/in/lokesh-gojo'">
+          linkedin.com/in/lokesh-gojo
+        </button>
+      </div>
+
+      <div id="liModalAlert"></div>
+    </div>
+    <div class="modal-footer" style="padding:16px 28px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px">
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeLinkedInModal()">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="submitLinkedInConnect()">
+        <i class="fa fa-check"></i> Save & Verify
+      </button>
+    </div>
+  </div>
 </div>
 
 <script src="js/app.js"></script>
