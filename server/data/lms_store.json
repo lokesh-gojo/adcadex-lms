@@ -120,6 +120,21 @@
       "weeklyStreak": 1,
       "attendanceRate": 100,
       "xp": 250
+    },
+    {
+      "id": "1791047412004",
+      "name": "New Tester",
+      "email": "student_1791047411907@acadex.edu",
+      "password": "$2b$10$zEr/GN7lQC6iotBgQcjjNOR6BFLIipOJOcMCHKpu5Ld2vivTqRnyO",
+      "role": "student",
+      "companyId": "comp-1",
+      "branchId": "b-1",
+      "department": "General Technology",
+      "joined": "2026-10-03",
+      "avatar": "N",
+      "weeklyStreak": 1,
+      "attendanceRate": 100,
+      "xp": 250
     }
   ],
   "courses": [
@@ -189,17 +204,17 @@
       "due": "2026-07-28",
       "status": "graded",
       "points": 100,
-      "studentId": "1791046900038",
+      "studentId": "1791047412004",
       "submissionUrl": "https://github.com/student/peft-lora-solution",
       "aiFeedback": "Submission received and verified. Pending faculty evaluation.",
       "studentName": "New Tester",
-      "submittedAt": "2026-10-03T17:01:40.411Z",
+      "submittedAt": "2026-10-03T17:10:12.294Z",
       "notes": "Implemented rank 16 LoRA with cross-entropy evaluation metrics.",
       "grade": "A",
       "score": 94,
       "feedback": "Superb architecture. Clean gradient checkpointing.",
       "gradedBy": "Dr. Sarah Chen",
-      "gradedAt": "2026-10-03T17:01:40.422Z"
+      "gradedAt": "2026-10-03T17:10:12.309Z"
     },
     {
       "id": "2",
@@ -225,6 +240,22 @@
     }
   ],
   "submissions": [
+    {
+      "id": "sub-1791047412294",
+      "assignmentId": "1",
+      "assignmentTitle": "Build a MERN REST API with JWT Auth",
+      "studentId": "1791047412004",
+      "studentName": "New Tester",
+      "submissionUrl": "https://github.com/student/peft-lora-solution",
+      "notes": "Implemented rank 16 LoRA with cross-entropy evaluation metrics.",
+      "status": "graded",
+      "submittedAt": "2026-10-03T17:10:12.294Z",
+      "score": 94,
+      "grade": "A",
+      "feedback": "Superb architecture. Clean gradient checkpointing.",
+      "gradedBy": "Dr. Sarah Chen",
+      "gradedAt": "2026-10-03T17:10:12.309Z"
+    },
     {
       "id": "sub-1791046900411",
       "assignmentId": "1",
@@ -477,9 +508,36 @@
       "xpEarned": 150,
       "attemptNumber": 1,
       "submittedAt": "2026-10-03T17:01:40.439Z"
+    },
+    {
+      "id": "qa-1791047412327",
+      "quizId": "quiz-1",
+      "quizTitle": "JavaScript & Modern ES6+ Architecture",
+      "studentId": "1791047412004",
+      "studentName": "New Tester",
+      "score": 4,
+      "total": 5,
+      "percentage": 80,
+      "passed": true,
+      "xpEarned": 150,
+      "attemptNumber": 1,
+      "submittedAt": "2026-10-03T17:10:12.327Z"
     }
   ],
   "attendanceSessions": [
+    {
+      "id": "att-sess-1791047412336",
+      "courseId": "1",
+      "courseTitle": "Applied AI & ML",
+      "trainerId": "2",
+      "trainerName": "Dr. Sarah Chen",
+      "sessionTitle": "Neural Network Optimizers",
+      "sessionCode": "AC4868",
+      "qrToken": "qr_acad_1791047412335_fb488d3d",
+      "expiresAt": "2026-10-03T17:55:12.336Z",
+      "status": "active",
+      "createdAt": "2026-10-03T17:10:12.336Z"
+    },
     {
       "id": "att-sess-1791046900449",
       "courseId": "1",
@@ -533,6 +591,16 @@
   ],
   "attendanceRecords": [
     {
+      "id": "ar-1791047412342",
+      "sessionId": "att-sess-1791047412336",
+      "sessionTitle": "Neural Network Optimizers",
+      "studentId": "1791047412004",
+      "studentName": "New Tester",
+      "status": "Present",
+      "method": "Session Code",
+      "timestamp": "2026-10-03T17:10:12.342Z"
+    },
+    {
       "id": "ar-1791046900458",
       "sessionId": "att-sess-1791046900449",
       "sessionTitle": "Neural Network Optimizers",
@@ -573,6 +641,18 @@
     }
   ],
   "certificates": [
+    {
+      "id": "ACX-2026-141848",
+      "studentId": "1",
+      "studentName": "Alex Johnson",
+      "course": "Advanced Transformer Engineering",
+      "grade": "A+",
+      "issuedDate": "2026-10-03",
+      "verificationUrl": "https://lokesh-gojo.github.io/adcadex-lms/certificates.html?id=ACX-2026-141848",
+      "blockchainProof": "0xf31aadcc12546a9f14e437aaa02a371b",
+      "issuedBy": "Dr. Sarah Chen",
+      "createdAt": "2026-10-03T17:10:12.354Z"
+    },
     {
       "id": "ACX-2026-299948",
       "studentId": "1",
@@ -839,6 +919,33 @@
       "channel": "Certificate",
       "read": false,
       "createdAt": "2026-10-03T17:01:40.476Z"
+    },
+    {
+      "id": "notif-1791047412294",
+      "userId": "1791047412004",
+      "title": "Assignment Submitted",
+      "message": "Your solution for \"Build a MERN REST API with JWT Auth\" was submitted successfully.",
+      "channel": "Assignment",
+      "read": false,
+      "createdAt": "2026-10-03T17:10:12.294Z"
+    },
+    {
+      "id": "notif-1791047412309",
+      "userId": "1791047412004",
+      "title": "Assignment Graded",
+      "message": "\"Build a MERN REST API with JWT Auth\" has been graded: A (94/100).",
+      "channel": "Gradebook",
+      "read": false,
+      "createdAt": "2026-10-03T17:10:12.309Z"
+    },
+    {
+      "id": "notif-1791047412354",
+      "userId": "1",
+      "title": "Certificate Issued!",
+      "message": "Your certificate for \"Advanced Transformer Engineering\" has been awarded (ID: ACX-2026-141848).",
+      "channel": "Certificate",
+      "read": false,
+      "createdAt": "2026-10-03T17:10:12.354Z"
     }
   ],
   "companies": [
