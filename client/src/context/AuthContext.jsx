@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 
 const AuthContext = createContext();
 
@@ -24,11 +25,13 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-      if (res.data.success) {
-        setUser(res.data.user);
-        localStorage.setItem('PrimeVector_user', JSON.stringify(res.data.user));
-        return { success: true, message: res.data.message };
+      if (API_BASE_URL) {
+        const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
+        if (res.data.success) {
+          setUser(res.data.user);
+          localStorage.setItem('PrimeVector_user', JSON.stringify(res.data.user));
+          return { success: true, message: res.data.message };
+        }
       }
     } catch (err) {
       // Fallback demo accounts for all 6 roles
@@ -69,11 +72,13 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password, role, companyId, branchId) => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { name, email, password, role, companyId, branchId });
-      if (res.data.success) {
-        setUser(res.data.user);
-        localStorage.setItem('PrimeVector_user', JSON.stringify(res.data.user));
-        return { success: true, message: res.data.message };
+      if (API_BASE_URL) {
+        const res = await axios.post(`${API_BASE_URL}/api/auth/register`, { name, email, password, role, companyId, branchId });
+        if (res.data.success) {
+          setUser(res.data.user);
+          localStorage.setItem('PrimeVector_user', JSON.stringify(res.data.user));
+          return { success: true, message: res.data.message };
+        }
       }
     } catch (err) {
       const newUser = { name, email, role: role || 'student', department: 'General Tech', branch: 'Hosur Main Campus' };

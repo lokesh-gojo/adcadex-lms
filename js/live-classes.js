@@ -64,13 +64,24 @@ function renderRecordedClasses() {
 
 function joinLiveSession(title) {
   Toast.success('Joining Class', `Connecting to session: ${title}`);
+  
+  // Award XP and track attendance in cloud/localStorage
   try {
-    fetch('http://localhost:5000/api/classes/join', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ classId: title, studentName: 'Alex Johnson' })
-    }).catch(() => {});
+    const user = Store.get('user', { xp: 320 });
+    user.xp = (user.xp || 320) + 50;
+    Store.set('user', user);
+    Toast.info('Attendance Recorded', '+50 Learning XP awarded!');
   } catch(e) {}
+
+  if (window.OnlineData && window.OnlineData.SERVER_URL) {
+    try {
+      fetch(`${window.OnlineData.SERVER_URL}/api/classes/join`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ classId: title, studentName: 'Alex Johnson' })
+      }).catch(() => {});
+    } catch(e) {}
+  }
 }
 
 function openVideoModal(title) {
@@ -83,46 +94,55 @@ window.joinLiveSession = joinLiveSession;
 window.openVideoModal = openVideoModal;
 
 async function syncWithBackend() {
-  try {
-    const liveRes = await fetch('http://localhost:5000/api/classes/live');
-    const liveData = await liveRes.json();
-    if (liveData.success && liveData.liveClasses?.length) {
-      liveData.liveClasses.forEach(item => {
-        if (!liveSessions.some(s => s.title === item.title)) {
-          liveSessions.unshift({
-            id: item.id,
-            title: item.title,
-            instructor: item.trainer,
-            time: item.scheduledAt ? new Date(item.scheduledAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Upcoming',
-            duration: `${item.durationMins || 60} Mins`,
-            category: 'Live Track',
-            status: item.status || 'Upcoming'
-          });
-        }
-      });
-      renderUpcomingClasses();
+  // Sync with OnlineData curated HD Masterclasses
+  if (window.OnlineData && typeof window.OnlineData.getCuratedVideoLectures === 'function') {
+    try {
+      const cloudVideos = window.OnlineData.getCuratedVideoLectures();
+      if (cloudVideos && cloudVideos.length) {
+        cloudVideos.forEach(item => {
+          if (!recordedSessions.some(r => r.title === item.title)) {
+            recordedSessions.push({
+              id: item.id,
+              title: item.title,
+              instructor: item.instructor,
+              date: item.date || 'Recent Masterclass',
+              duration: item.duration || '1h 30m',
+              views: Math.floor(Math.random() * 300) + 150
+            });
+          }
+        });
+        renderRecordedClasses();
+      }
+    } catch(e) {
+      console.warn('[Classes] Cloud lectures sync:', e.message);
     }
-  } catch(e) {}
+  }
 
-  try {
-    const recRes = await fetch('http://localhost:5000/api/classes/recorded');
-    const recData = await recRes.json();
-    if (recData.success && recData.recordedClasses?.length) {
-      recData.recordedClasses.forEach(item => {
-        if (!recordedSessions.some(r => r.title === item.title)) {
-          recordedSessions.unshift({
-            id: item.id,
-            title: item.title,
-            instructor: item.instructor,
-            date: item.date,
-            duration: item.duration,
-            views: item.views
+  // Only poll backend if a dedicated active server is present
+  if (window.OnlineData && window.OnlineData.SERVER_URL) {
+    try {
+      const liveRes = await fetch(`${window.OnlineData.SERVER_URL}/api/classes/live`);
+      if (liveRes.ok) {
+        const liveData = await liveRes.json();
+        if (liveData.success && liveData.liveClasses?.length) {
+          liveData.liveClasses.forEach(item => {
+            if (!liveSessions.some(s => s.title === item.title)) {
+              liveSessions.unshift({
+                id: item.id,
+                title: item.title,
+                instructor: item.trainer,
+                time: item.scheduledAt ? new Date(item.scheduledAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Upcoming',
+                duration: `${item.durationMins || 60} Mins`,
+                category: 'Live Track',
+                status: item.status || 'Upcoming'
+              });
+            }
           });
+          renderUpcomingClasses();
         }
-      });
-      renderRecordedClasses();
-    }
-  } catch(e) {}
+      }
+    } catch(e) {}
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 
 export default function AttendancePage() {
@@ -12,14 +13,17 @@ export default function AttendancePage() {
   const [faceStatus, setFaceStatus] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/attendance')
-      .then(res => { if (res.data.success) setRecords(res.data.records); })
-      .catch(() => {});
+    if (API_BASE_URL) {
+      axios.get(`${API_BASE_URL}/api/attendance`)
+        .then(res => { if (res.data.success) setRecords(res.data.records); })
+        .catch(() => {});
+    }
   }, []);
 
   const handleGenerateQR = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/attendance/qr-generate');
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.get(`${API_BASE_URL}/api/attendance/qr-generate`);
       setQrCodeData(res.data);
     } catch (err) {
       setQrCodeData({
@@ -34,7 +38,8 @@ export default function AttendancePage() {
     setFaceStatus('Scanning biometric facial features...');
     setTimeout(async () => {
       try {
-        const res = await axios.post('http://localhost:5000/api/attendance/face-verify', { studentId: "1" });
+        if (!API_BASE_URL) throw new Error('Cloud offline mode');
+        const res = await axios.post(`${API_BASE_URL}/api/attendance/face-verify`, { studentId: "1" });
         setFaceStatus(`✓ ${res.data.message} (Confidence: ${res.data.confidence})`);
         // Add new record
         const newRecord = {

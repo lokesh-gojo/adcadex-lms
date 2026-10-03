@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 import { useAuth } from '../context/AuthContext';
 
@@ -23,7 +24,8 @@ export default function ForumPage() {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/forum/posts');
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.get(`${API_BASE_URL}/api/forum/posts`);
       if (res.data.success) {
         setPosts(res.data.posts);
       }
@@ -34,7 +36,8 @@ export default function ForumPage() {
 
   const handleUpvote = async (postId) => {
     try {
-      const res = await axios.post(`http://localhost:5000/api/forum/posts/${postId}/upvote`);
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/forum/posts/${postId}/upvote`);
       if (res.data.success) {
         setPosts(posts.map(p => p.id === postId ? { ...p, upvotes: res.data.upvotes } : p));
       }
@@ -49,7 +52,8 @@ export default function ForumPage() {
     if (!text || !text.trim()) return;
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/forum/posts/${postId}/reply`, {
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/forum/posts/${postId}/reply`, {
         content: text.trim(),
         author: user?.name || 'Alex Johnson',
         authorRole: user?.role || 'student',
@@ -69,8 +73,9 @@ export default function ForumPage() {
     if (!newTitle.trim() || !newContent.trim()) return;
 
     try {
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
       const tagsArray = newTags.split(',').map(t => t.trim()).filter(Boolean);
-      const res = await axios.post('http://localhost:5000/api/forum/posts', {
+      const res = await axios.post(`${API_BASE_URL}/api/forum/posts`, {
         title: newTitle,
         content: newContent,
         category: newCategory,

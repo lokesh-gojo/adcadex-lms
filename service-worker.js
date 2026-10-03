@@ -4,6 +4,7 @@
 
 const CACHE_NAME = 'primevector-lms-v1';
 const ASSETS_TO_CACHE = [
+  './',
   'index.html',
   'login.html',
   'register.html',
@@ -11,9 +12,13 @@ const ASSETS_TO_CACHE = [
   'course.html',
   'placement.html',
   'resume-builder.html',
+  'portfolio.html',
+  'assignment.html',
+  'notes.html',
+  'classes.html',
   'compiler.html',
   'quiz.html',
-  'classes.html',
+  'attendance.html',
   'css/style.css',
   'css/navbar.css',
   'css/sidebar.css',
@@ -23,15 +28,20 @@ const ASSETS_TO_CACHE = [
   'js/login.js',
   'js/student.js',
   'js/online-data.js',
-  'js/resume-builder.js'
+  'js/resume-builder.js',
+  'js/assignment.js',
+  'js/notes.js',
+  'js/classes.js'
 ];
 
 // Install Event
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
+    caches.open(CACHE_NAME).then(async cache => {
       console.log('[PWA SW] Pre-caching static assets for offline capability');
-      return cache.addAll(ASSETS_TO_CACHE);
+      await Promise.allSettled(
+        ASSETS_TO_CACHE.map(url => cache.add(url).catch(err => console.warn('[PWA SW] Cache skipped:', url, err.message)))
+      );
     })
   );
   self.skipWaiting();

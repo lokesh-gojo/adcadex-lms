@@ -1,0 +1,16 @@
+import axios from 'axios';
+
+// Dynamically determine backend base URL
+const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+export const API_BASE_URL = import.meta.env.VITE_API_URL || (isLocalhost ? 'http://localhost:5000' : '');
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+export default api;

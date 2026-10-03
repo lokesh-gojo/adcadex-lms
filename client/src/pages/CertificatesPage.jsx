@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 import { useAuth } from '../context/AuthContext';
 
@@ -22,7 +23,8 @@ export default function CertificatesPage() {
 
   const fetchCertificates = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/certificates');
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.get(`${API_BASE_URL}/api/certificates`);
       if (res.data.success) {
         setCertificates(res.data.certificates);
       }
@@ -42,7 +44,8 @@ export default function CertificatesPage() {
     setVerifyResult(null);
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/certificates/verify/${encodeURIComponent(verifyId.trim())}`);
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.get(`${API_BASE_URL}/api/certificates/verify/${encodeURIComponent(verifyId.trim())}`);
       setVerifyResult(res.data);
     } catch (err) {
       setVerifyResult({
@@ -57,7 +60,8 @@ export default function CertificatesPage() {
   const handleIssue = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/certificates/issue', {
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/certificates/issue`, {
         studentName: newStudent || 'Alex Johnson',
         course: newCourse,
         grade: newGrade

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 
 export default function PlacementPage() {
@@ -22,14 +23,16 @@ export default function PlacementPage() {
   const [newCtc, setNewCtc] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/placements')
-      .then(res => {
-        if (res.data.success) {
-          if (res.data.drives) setDrives(res.data.drives);
-          if (res.data.interviews) setInterviews(res.data.interviews);
-        }
-      })
-      .catch(() => {});
+    if (API_BASE_URL) {
+      axios.get(`${API_BASE_URL}/api/placements`)
+        .then(res => {
+          if (res.data.success) {
+            if (res.data.drives) setDrives(res.data.drives);
+            if (res.data.interviews) setInterviews(res.data.interviews);
+          }
+        })
+        .catch(() => {});
+    }
   }, []);
 
   const handleApply = (company) => {
@@ -39,7 +42,8 @@ export default function PlacementPage() {
 
   const handleSendWhatsAppNotification = async (studentName, time) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/notifications/whatsapp', {
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/notifications/whatsapp`, {
         message: `Hello ${studentName}, your interview is scheduled at ${time}. Good luck!`
       });
       setWaMsg(`✓ WhatsApp Interview Reminder Sent (${res.data.recipient})!`);
@@ -54,7 +58,8 @@ export default function PlacementPage() {
     e.preventDefault();
     if (!newCompany || !newRole || !newCtc) return;
     try {
-      const res = await axios.post('http://localhost:5000/api/placements/drives', {
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/placements/drives`, {
         company: newCompany,
         role: newRole,
         ctc: newCtc,

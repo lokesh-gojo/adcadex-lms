@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 import { useAuth } from '../context/AuthContext';
 
@@ -30,7 +31,8 @@ export default function GamificationPage() {
 
   const fetchStats = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/gamification/stats');
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.get(`${API_BASE_URL}/api/gamification/stats`);
       if (res.data.success && res.data.gamification) {
         setGamification(res.data.gamification);
       }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 
 export default function AnalyticsPage() {
@@ -22,19 +23,25 @@ export default function AnalyticsPage() {
   const [exportMsg, setExportMsg] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/admin/dashboard')
-      .then(res => { if (res.data.success) setData(res.data); })
-      .catch(() => {});
+    if (API_BASE_URL) {
+      axios.get(`${API_BASE_URL}/api/admin/dashboard`)
+        .then(res => { if (res.data.success) setData(res.data); })
+        .catch(() => {});
+    }
   }, []);
 
   const handleExportExcel = () => {
-    window.open('http://localhost:5000/api/analytics/export/excel', '_blank');
+    if (API_BASE_URL) {
+      window.open(`${API_BASE_URL}/api/analytics/export/excel`, '_blank');
+    }
     setExportMsg('✓ Excel Report Exported Successfully (.xlsx)');
     setTimeout(() => setExportMsg(null), 3000);
   };
 
   const handleExportPDF = () => {
-    window.open('http://localhost:5000/api/analytics/export/pdf', '_blank');
+    if (API_BASE_URL) {
+      window.open(`${API_BASE_URL}/api/analytics/export/pdf`, '_blank');
+    }
     setExportMsg('✓ PDF Summary Report Exported Successfully (.pdf)');
     setTimeout(() => setExportMsg(null), 3000);
   };

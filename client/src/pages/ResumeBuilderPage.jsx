@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 
 export default function ResumeBuilderPage() {
@@ -30,7 +31,8 @@ export default function ResumeBuilderPage() {
 
   const handleTrackLinkedin = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/placements/linkedin-track', { linkedinUrl });
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/placements/linkedin-track`, { linkedinUrl });
       setLinkedinData(res.data.profile);
     } catch (err) {
       setLinkedinData({

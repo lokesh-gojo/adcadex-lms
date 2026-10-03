@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 import Sidebar from '../components/Sidebar';
 
 export default function AiAssistantPage() {
@@ -28,7 +29,8 @@ export default function AiAssistantPage() {
     if (!query) return;
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/doubt-assistant', { query, topic: 'Computer Science' });
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/ai/doubt-assistant`, { query, topic: 'Computer Science' });
       setDoubtResponse(res.data.response);
     } catch (err) {
       setDoubtResponse(`Prime Vector AI Answer: To resolve "${query}", apply standard modular separation of concerns. In Node.js / Express, register route handlers in clean controller functions and validate input payloads with JWT authentication.`);
@@ -40,7 +42,8 @@ export default function AiAssistantPage() {
   const handleQuizGenerate = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/quiz-generator', { topic: quizTopic });
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/ai/quiz-generator`, { topic: quizTopic });
       setQuizData(res.data.questions);
     } catch (err) {
       setQuizData([
@@ -55,7 +58,8 @@ export default function AiAssistantPage() {
   const handleResumeReview = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/resume-review', { resumeText });
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/ai/resume-review`, { resumeText });
       setResumeFeedback(res.data);
     } catch (err) {
       setResumeFeedback({
@@ -72,7 +76,8 @@ export default function AiAssistantPage() {
   const handleInterviewPrep = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/interview-prep', { targetRole });
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/ai/interview-prep`, { targetRole });
       setInterviewPrep(res.data.questions);
     } catch (err) {
       setInterviewPrep([
@@ -87,7 +92,8 @@ export default function AiAssistantPage() {
   const handleCareerGuidance = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/career-guidance', {});
+      if (!API_BASE_URL) throw new Error('Cloud offline mode');
+      const res = await axios.post(`${API_BASE_URL}/api/ai/career-guidance`, {});
       setCareerGuidance(res.data);
     } catch (err) {
       setCareerGuidance({
