@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attendance — Acadex</title>
+  <title>Attendance — Prime Vector LMS</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
@@ -15,22 +15,102 @@
 </head>
 <body id="attendancePage">
 <div class="dashboard-layout">
-  <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
       <span class="sidebar-brand">ACAD<span>EX</span></span>
     </div>
-    <nav class="sidebar-nav" style="padding-top:20px">
-      <a href="student.html" class="sidebar-link" data-tooltip="Dashboard"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
-      <a href="course.html" class="sidebar-link" data-tooltip="Courses"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">My Courses</span></a>
-      <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
-      <a href="quiz.html?id=1" class="sidebar-link" data-tooltip="Quiz"><span class="sidebar-icon"><i class="fa fa-question-circle"></i></span><span class="sidebar-label">Quiz</span></a>
-      <a href="attendance.html" class="sidebar-link active" data-tooltip="Attendance"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
-      <a href="certificate.html" class="sidebar-link" data-tooltip="Certificates"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
-      <a href="profile.html" class="sidebar-link" data-tooltip="Profile"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link " data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link active" data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link " data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link " data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link " data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link " data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
     </nav>
+
     <div class="sidebar-footer">
-      <button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button>
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
     </div>
   </aside>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -55,6 +135,14 @@
           <p class="page-subtitle">Monitor your attendance month by month.</p>
         </div>
         <span id="attBadge" class="badge badge-success" style="font-size:0.875rem;padding:8px 16px">Excellent</span>
+      </div>
+
+      <div style="background:var(--danger-light); border-left:4px solid var(--danger); padding:16px; border-radius:4px; margin-bottom:24px; color:var(--text); display:flex; align-items:center; gap:12px;">
+        <i class="fa fa-exclamation-triangle" style="color:var(--danger); font-size:1.5rem;"></i>
+        <div>
+            <strong>Mandatory Attendance Rule Active:</strong> You must maintain at least <strong>75% attendance</strong> to be eligible for certificate generation and placement training. <br>
+            <small style="color:var(--text-muted)">Live Class Criteria: &gt;90% duration = Present | 75-89% = Late | &lt;75% = Absent</small>
+        </div>
       </div>
 
       <!-- Stats Row -->
@@ -173,3 +261,4 @@
 <script src="js/attendance.js"></script>
 </body>
 </html>
+

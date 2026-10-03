@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital ID Card — Prime Vector LMS</title>
+  <meta name="description" content="Your digital student identity card for Prime Vector LMS.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .id-card {
+      background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 50%, #312E81 100%);
+      border-radius: 24px;
+      padding: 0;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 32px 80px rgba(30,58,138,0.5);
+      overflow: hidden;
+      position: relative;
+    }
+    .id-card-header {
+      padding: 24px 28px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    .id-card-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 50%, rgba(96,165,250,0.15), transparent);
+      pointer-events: none;
+    }
+    .id-card-logo { display:flex;align-items:center;gap:8px; }
+    .id-card-logo-icon { width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff; }
+    .id-card-logo-name { font-family:var(--font-display);font-size:1rem;font-weight:900;color:#fff;letter-spacing:1px; }
+    .id-card-logo-name span { color:#93C5FD; }
+    .id-card-type { font-size:0.7rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;border:1px solid rgba(255,255,255,0.2);padding:3px 10px;border-radius:var(--radius-full); }
+    .id-card-body { padding:28px; }
+    .id-avatar-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #60A5FA, #14B8A6);
+      padding: 3px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .id-avatar-inner {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563EB, #8B5CF6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: var(--font-display);
+    }
+    .id-name { font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:#fff;text-align:center;margin-bottom:4px; }
+    .id-role { font-size:0.8rem;color:#93C5FD;text-align:center;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px; }
+    .id-fields { display:flex;flex-direction:column;gap:10px;margin-bottom:24px; }
+    .id-field { display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.07);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.1); }
+    .id-field-icon { width:28px;height:28px;background:rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.78rem;color:#93C5FD; }
+    .id-field-label { font-size:0.68rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.5px; }
+    .id-field-value { font-size:0.9rem;font-weight:700;color:#fff; }
+    .id-card-footer {
+      margin: 0 28px 28px;
+      padding: 16px;
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .id-qr-box { width:64px;height:64px;background:rgba(255,255,255,0.9);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2rem; }
+    .id-card-num { font-family:monospace;font-size:1rem;font-weight:800;color:#fff;letter-spacing:2px; }
+    .id-valid { font-size:0.72rem;color:rgba(255,255,255,0.5); }
+    .id-chip { position:absolute;top:140px;right:28px;width:48px;height:36px;background:linear-gradient(135deg,#D97706,#F59E0B);border-radius:6px;opacity:0.7;overflow:hidden; }
+    .id-chip::before { content:'';position:absolute;inset:4px;border:1px solid rgba(0,0,0,0.2);border-radius:4px; }
+  </style>
+</head>
+<body id="studentIdPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Student</div><div class="sidebar-user-role">student</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+        <a href="course.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">My Courses</span></a>
+        <a href="attendance.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
+        <a href="forum.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-comments"></i></span><span class="sidebar-label">Forum</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Career</div>
+        <a href="internship.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Internship</span></a>
+        <a href="project.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-code-fork"></i></span><span class="sidebar-label">Project</span></a>
+        <a href="placement.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placement</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Achievements</div>
+        <a href="gamification.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-trophy"></i></span><span class="sidebar-label">Achievements</span></a>
+        <a href="certificate.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+        <a href="student-id.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-id-card-o"></i></span><span class="sidebar-label">Digital ID Card</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+        <a href="settings.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="student.html">Dashboard</a><span class="breadcrumb-sep">/</span><span>Digital ID Card</span></div>
+      </div>
+      <div class="inner-navbar-right"><button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button></div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h2 class="page-title">Digital ID Card</h2>
+        <p class="page-subtitle">Your official Prime Vector student identity card — valid for all campus activities</p>
+      </div>
+
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+        <!-- The Card -->
+        <div style="flex:1;min-width:280px;max-width:460px">
+          <div class="id-card" id="studentIdCard">
+            <!-- Decorative blobs -->
+            <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(96,165,250,0.07);top:-60px;right:-60px;pointer-events:none"></div>
+            <div style="position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(20,184,166,0.07);bottom:60px;left:-40px;pointer-events:none"></div>
+
+            <div class="id-card-header">
+              <div class="id-card-logo">
+                <div class="id-card-logo-icon"><i class="fa fa-graduation-cap"></i></div>
+                <div class="id-card-logo-name">PRIME <span>VECTOR</span></div>
+              </div>
+              <div class="id-card-type">Student ID</div>
+            </div>
+
+            <div class="id-card-body" style="position:relative">
+              <div class="id-chip"></div>
+              <div class="id-avatar-ring">
+                <div class="id-avatar-inner" id="cardAvatar">AM</div>
+              </div>
+              <div class="id-name" id="cardName">Student Name</div>
+              <div class="id-role" id="cardRole">Computer Science · B.Tech</div>
+
+              <div class="id-fields">
+                <div class="id-field">
+                  <div class="id-field-icon"><i class="fa fa-id-badge"></i></div>
+                  <div>
+                    <div class="id-field-label">Student ID</div>
+                    <div class="id-field-value" id="cardId">AX-2025-CS-001</div>
+                  </div>
+                </div>
+                <div class="id-field">
+                  <div class="id-field-icon"><i class="fa fa-university"></i></div>
+                  <div>
+                    <div class="id-field-label">Department</div>
+                    <div class="id-field-value" id="cardDept">Computer Science</div>
+                  </div>
+                </div>
+                <div class="id-field">
+                  <div class="id-field-icon"><i class="fa fa-envelope"></i></div>
+                  <div>
+                    <div class="id-field-label">Email</div>
+                    <div class="id-field-value" id="cardEmail">student@primevector.edu</div>
+                  </div>
+                </div>
+                <div class="id-field">
+                  <div class="id-field-icon"><i class="fa fa-calendar"></i></div>
+                  <div>
+                    <div class="id-field-label">Valid Until</div>
+                    <div class="id-field-value">May 2026</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="id-card-footer">
+              <div>
+                <div class="id-card-num" id="cardNum">AX 2025 0001</div>
+                <div class="id-valid">Valid Academic Year 2025-26</div>
+              </div>
+              <div class="id-qr-box" title="QR Code">📱</div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div style="display:flex;gap:10px;margin-top:20px;justify-content:center">
+            <button class="btn btn-primary" onclick="downloadCard()"><i class="fa fa-download"></i> Download PDF</button>
+            <button class="btn btn-ghost" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
+            <button class="btn btn-ghost" onclick="shareCard()"><i class="fa fa-share-alt"></i> Share</button>
+          </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:20px">
+          <!-- Student Info Summary -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-user-circle"></i> Academic Profile</div></div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;padding:10px;background:var(--bg);border-radius:var(--radius-md)">
+                <span style="color:var(--text-muted)">Current Semester</span>
+                <strong>4th Semester</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;padding:10px;background:var(--bg);border-radius:var(--radius-md)">
+                <span style="color:var(--text-muted)">CGPA</span>
+                <strong style="color:var(--success)">8.42</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;padding:10px;background:var(--bg);border-radius:var(--radius-md)">
+                <span style="color:var(--text-muted)">Attendance</span>
+                <strong style="color:var(--success)">88%</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;padding:10px;background:var(--bg);border-radius:var(--radius-md)">
+                <span style="color:var(--text-muted)">Batch</span>
+                <strong>2023-2027</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;padding:10px;background:var(--bg);border-radius:var(--radius-md)">
+                <span style="color:var(--text-muted)">Roll Number</span>
+                <strong>CS23B042</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- ID Status -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-shield"></i> ID Status</div></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-md)">
+              <div style="width:40px;height:40px;border-radius:50%;background:var(--success);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-shrink:0"><i class="fa fa-check"></i></div>
+              <div>
+                <div style="font-weight:700;color:var(--success)">ID Card Active</div>
+                <div style="font-size:0.78rem;color:var(--text-muted)">Valid through May 2026 · QR verified</div>
+              </div>
+            </div>
+            <div style="margin-top:12px;font-size:0.82rem;color:var(--text-muted)">
+              <i class="fa fa-info-circle" style="margin-right:4px;color:var(--primary)"></i>
+              This digital ID is legally valid for campus access, library, and all official purposes. The QR code contains your verified student data.
+            </div>
+          </div>
+
+          <!-- Access Privileges -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-key"></i> Access Privileges</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem"><i class="fa fa-check-circle" style="color:var(--success)"></i> Campus Library</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem"><i class="fa fa-check-circle" style="color:var(--success)"></i> Laboratories & Computer Centers</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem"><i class="fa fa-check-circle" style="color:var(--success)"></i> Sports & Recreation</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem"><i class="fa fa-check-circle" style="color:var(--success)"></i> Placement Drives</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem"><i class="fa fa-check-circle" style="color:var(--success)"></i> Examinations</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem;color:var(--text-muted)"><i class="fa fa-times-circle" style="color:var(--danger)"></i> Hostel (Not Enrolled)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    const user = Auth.getUser();
+    const name = user.name || 'Arjun Mehta';
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+
+    document.getElementById('cardAvatar').textContent = initials;
+    document.getElementById('cardName').textContent = name;
+    document.getElementById('cardRole').textContent = (user.role === 'student') ? 'Computer Science · B.Tech' : user.role.charAt(0).toUpperCase() + user.role.slice(1);
+    document.getElementById('cardEmail').textContent = user.email || 'student@primevector.edu';
+    document.getElementById('cardId').textContent = 'AX-2025-CS-' + String(Math.floor(Math.random()*900)+100).padStart(3,'0');
+    document.getElementById('cardNum').textContent = 'AX 2025 ' + String(Math.floor(Math.random()*9000)+1000);
+    document.getElementById('cardDept').textContent = 'Computer Science';
+    App.init();
+  });
+
+  function downloadCard() { Toast.success('Downloading', 'Your ID card PDF is being generated...'); }
+  function shareCard() { Toast.info('Share', 'Share link copied to clipboard!'); }
+
+  window.downloadCard = downloadCard;
+  window.shareCard = shareCard;
+</script>
+</body>
+</html>
+

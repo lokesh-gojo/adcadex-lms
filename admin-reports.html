@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports & Analytics — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="adminDashboard">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Admin</div>
+        <div class="sidebar-user-role">admin</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Overview</div>
+        <a href="admin.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Management</div>
+        <a href="admin-reports.html" class="sidebar-link active" data-tooltip="Reports">
+          <span class="sidebar-icon"><i class="fa fa-file-excel-o"></i></span>
+          <span class="sidebar-label">Reports</span>
+        </a>
+
+        <a href="#users" class="sidebar-link" data-tooltip="Students" onclick="showAdminSection('users')">
+          <span class="sidebar-icon"><i class="fa fa-users"></i></span>
+          <span class="sidebar-label">Students</span>
+        </a>
+        <a href="#faculty" class="sidebar-link" data-tooltip="Faculty" onclick="showAdminSection('users')">
+          <span class="sidebar-icon"><i class="fa fa-chalkboard-teacher"></i></span>
+          <span class="sidebar-label">Faculty</span>
+        </a>
+        <a href="#departments" class="sidebar-link" data-tooltip="Departments" onclick="showAdminSection('departments')">
+          <span class="sidebar-icon"><i class="fa fa-building"></i></span>
+          <span class="sidebar-label">Departments</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">Courses</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Analytics</div>
+        <a href="#analytics" class="sidebar-link" data-tooltip="Reports" onclick="showAdminSection('analytics')">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Reports</span>
+        </a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Admin Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <button class="notif-btn" title="Notifications"><i class="fa fa-bell"></i><span class="notif-badge">5</span></button>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Admin</span>
+              <span class="user-role">admin</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+        <div class="page-content">
+      <div class="page-header flex-between">
+        <div>
+          <h1 class="page-title">Reports & Analytics</h1>
+          <p class="page-subtitle">Generate, filter, and export detailed system reports.</p>
+        </div>
+        <button class="btn btn-primary" onclick="exportToExcel()"><i class="fa fa-download"></i> Export to Excel</button>
+      </div>
+      
+      <!-- Filters -->
+      <div class="card" style="margin-bottom: 24px; padding: 16px;">
+        <div style="display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap;">
+            <div class="form-group" style="flex:1; min-width:150px; margin-bottom:0;">
+                <label class="form-label" style="font-size:0.8rem">Report Type</label>
+                <select class="form-control" id="reportTypeSelect" onchange="updateReportView()">
+                    <option value="attendance">Attendance Report</option>
+                    <option value="progress">Progress Report</option>
+                    <option value="daily">Daily Activity Report</option>
+                    <option value="faculty">Faculty Report</option>
+                    <option value="admin">Admin Report</option>
+                </select>
+            </div>
+            <div class="form-group" style="flex:1; min-width:150px; margin-bottom:0;">
+                <label class="form-label" style="font-size:0.8rem">Course</label>
+                <select class="form-control">
+                    <option>All Courses</option>
+                    <option>Full Stack Web Development</option>
+                    <option>Data Science & AI</option>
+                </select>
+            </div>
+            <div class="form-group" style="flex:1; min-width:150px; margin-bottom:0;">
+                <label class="form-label" style="font-size:0.8rem">Date Range</label>
+                <input type="date" class="form-control" value="2024-10-01">
+            </div>
+            <div class="form-group" style="flex:1; min-width:150px; margin-bottom:0;">
+                <label class="form-label" style="font-size:0.8rem">Search</label>
+                <input type="text" class="form-control" placeholder="Student Name/ID">
+            </div>
+            <button class="btn btn-outline" style="height:42px;"><i class="fa fa-filter"></i> Apply Filters</button>
+        </div>
+      </div>
+
+      <!-- Report Table -->
+      <div class="card">
+        <div class="table-container">
+          <table class="table" id="reportTable">
+            <thead id="reportTableHead">
+              <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Course</th>
+                <th>Date</th>
+                <th>Join Time</th>
+                <th>Exit Time</th>
+                <th>Duration</th>
+                <th>Attendance %</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody">
+              <tr>
+                <td>ACDX-001</td>
+                <td>Jane Doe</td>
+                <td>Full Stack</td>
+                <td>2024-10-15</td>
+                <td>09:00 AM</td>
+                <td>10:00 AM</td>
+                <td>60 mins</td>
+                <td>100%</td>
+                <td><span class="badge badge-success">Present</span></td>
+              </tr>
+              <tr>
+                <td>ACDX-002</td>
+                <td>John Smith</td>
+                <td>Data Science</td>
+                <td>2024-10-15</td>
+                <td>09:15 AM</td>
+                <td>10:00 AM</td>
+                <td>45 mins</td>
+                <td>75%</td>
+                <td><span class="badge badge-warning">Late</span></td>
+              </tr>
+              <tr>
+                <td>ACDX-003</td>
+                <td>Alice Brown</td>
+                <td>Full Stack</td>
+                <td>2024-10-15</td>
+                <td>09:30 AM</td>
+                <td>10:00 AM</td>
+                <td>30 mins</td>
+                <td>50%</td>
+                <td><span class="badge badge-danger">Absent</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/reports.js"></script>
+<script src="js/app.js"></script>
+<script src="js/admin.js"></script>
+<script>
+function showAdminSection(e, section) {
+  if (e && e.preventDefault) e.preventDefault();
+  const target = document.getElementById(section + 'Section') || document.getElementById('usersSection');
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
+

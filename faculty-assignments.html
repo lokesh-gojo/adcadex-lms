@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty — Manage Assignments</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="facultyAssignPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" style="background:var(--gradient-accent)" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Faculty</div><div class="sidebar-user-role">faculty</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Main</div>
+        <a href="faculty.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+        <a href="course.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-upload"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="faculty-classes.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-video-camera"></i></span><span class="sidebar-label">Live Classes</span></a>
+        <a href="faculty-assignments.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
+        <a href="faculty-quiz.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-question-circle"></i></span><span class="sidebar-label">Quizzes</span></a>
+        <a href="faculty-students.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Student Analytics</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Reports</div>
+        <a href="attendance.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="faculty.html">Faculty</a><span class="breadcrumb-sep">/</span><span>Assignments</span></div>
+      </div>
+      <div class="inner-navbar-right"><button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button></div>
+    </header>
+
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+        <div><h2 class="page-title">Manage Assignments</h2><p class="page-subtitle">Create, grade, and track student assignment submissions</p></div>
+        <button class="btn btn-primary" onclick="Modal.open('createAssignModal')"><i class="fa fa-plus"></i> Create Assignment</button>
+      </div>
+
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-tasks"></i></div><div class="stat-card-body"><div class="stat-card-value">24</div><div class="stat-card-label">Total Assignments</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-clock-o"></i></div><div class="stat-card-body"><div class="stat-card-value">84</div><div class="stat-card-label">Pending Grading</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-check"></i></div><div class="stat-card-body"><div class="stat-card-value">91%</div><div class="stat-card-label">Submission Rate</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-star"></i></div><div class="stat-card-body"><div class="stat-card-value">78.4</div><div class="stat-card-label">Avg Score</div></div></div>
+      </div>
+
+      <div class="tabs" data-tabs style="margin-bottom:24px">
+        <button class="tab-btn active" data-tab="assignList" data-group="fa">Assignments</button>
+        <button class="tab-btn" data-tab="grading" data-group="fa">Pending Grading</button>
+      </div>
+
+      <div data-pane="assignList" data-group="fa" class="active">
+        <div class="section-card">
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Title</th><th>Course</th><th>Due Date</th><th>Submitted</th><th>Graded</th><th>Max Marks</th><th>Avg</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="assignListBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div data-pane="grading" data-group="fa" style="display:none">
+        <div class="section-card">
+          <div class="section-header"><div class="section-title"><i class="fa fa-pencil"></i> Pending Submissions</div></div>
+          <div id="gradingList" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="createAssignModal">
+  <div class="modal" style="max-width:540px">
+    <div class="modal-header"><div class="modal-title">Create Assignment</div><button class="modal-close" onclick="Modal.close('createAssignModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="form-group" style="grid-column:1/-1"><label class="form-label">Assignment Title</label><input type="text" class="form-input" placeholder="e.g. Build a REST API with Node.js"></div>
+        <div class="form-group"><label class="form-label">Course</label><select class="form-input"><option>Web Development</option><option>Machine Learning</option><option>UI/UX Design</option></select></div>
+        <div class="form-group"><label class="form-label">Type</label><select class="form-input"><option>Individual</option><option>Group (2-3)</option><option>Group (4-5)</option></select></div>
+        <div class="form-group"><label class="form-label">Due Date</label><input type="datetime-local" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Max Marks</label><input type="number" class="form-input" value="100"></div>
+        <div class="form-group" style="grid-column:1/-1"><label class="form-label">Instructions</label><textarea class="form-input" rows="4" placeholder="Detailed instructions..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('createAssignModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="Modal.close('createAssignModal');Toast.success('Published!','Students notified')"><i class="fa fa-check"></i> Publish</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const ASSIGNMENTS = [
+    { title:'Build REST API',      course:'Web Dev', due:'2025-07-15', submitted:298, graded:240, max:100, avg:78, status:'active' },
+    { title:'React Portfolio App', course:'Web Dev', due:'2025-07-20', submitted:152, graded:80, max:100, avg:82, status:'active' },
+    { title:'CNN Implementation',  course:'ML',      due:'2025-07-18', submitted:264, graded:200, max:100, avg:74, status:'active' },
+    { title:'Figma Wireframes',    course:'UI/UX',   due:'2025-07-10', submitted:168, graded:168, max:50, avg:41, status:'completed' },
+    { title:'Binary Search Tree',  course:'DSA',     due:'2025-07-08', submitted:304, graded:304, max:100, avg:68, status:'completed' },
+  ];
+  const GRADING = [
+    { student:'Arjun Mehta',  assignment:'Build REST API',      course:'Web Dev', submitted:'2025-07-14 22:30', avatar:'AM', color:'#2563EB' },
+    { student:'Priya Sharma', assignment:'Build REST API',      course:'Web Dev', submitted:'2025-07-14 20:15', avatar:'PS', color:'#10B981' },
+    { student:'Rohit Kumar',  assignment:'CNN Implementation',  course:'ML',      submitted:'2025-07-15 09:00', avatar:'RK', color:'#8B5CF6' },
+    { student:'Sneha Nair',   assignment:'CNN Implementation',  course:'ML',      submitted:'2025-07-15 11:30', avatar:'SN', color:'#F59E0B' },
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    document.getElementById('assignListBody').innerHTML = ASSIGNMENTS.map(a => `
+      <tr>
+        <td><strong>${a.title}</strong></td>
+        <td>${a.course}</td>
+        <td>${a.due}</td>
+        <td>${a.submitted}</td>
+        <td>${a.graded}</td>
+        <td>${a.max}</td>
+        <td>${a.avg > 0 ? a.avg + '/' + a.max : '—'}</td>
+        <td><span class="badge ${a.status==='active'?'badge-success':'badge-ghost'}">${a.status}</span></td>
+        <td>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('View','Submissions')"><i class="fa fa-eye"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('Grade','Opening grader')"><i class="fa fa-pencil"></i></button>
+        </td>
+      </tr>
+    `).join('');
+    document.getElementById('gradingList').innerHTML = GRADING.map(g => `
+      <div style="background:var(--bg);border-radius:var(--radius-md);padding:16px;display:flex;align-items:center;gap:14px;border:1px solid var(--border)">
+        <div style="width:44px;height:44px;border-radius:50%;background:${g.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;flex-shrink:0">${g.avatar}</div>
+        <div style="flex:1">
+          <div style="font-weight:700">${g.student}</div>
+          <div style="font-size:0.82rem;color:var(--text-muted)">${g.assignment} · ${g.course}</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)">Submitted: ${g.submitted}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+          <div style="display:flex;align-items:center;gap:6px">
+            <input type="number" class="form-input" placeholder="Score" min="0" max="100" style="width:80px;padding:6px 10px;font-size:0.85rem">
+            <span style="color:var(--text-muted)">/100</span>
+          </div>
+          <button class="btn btn-primary" style="padding:6px 14px;font-size:0.82rem" onclick="this.closest('div[style]').remove();Toast.success('Graded!','Score submitted')"><i class="fa fa-check"></i> Grade</button>
+        </div>
+      </div>
+    `).join('');
+    App.init();
+    initTabs();
+  });
+</script>
+</body>
+</html>
+

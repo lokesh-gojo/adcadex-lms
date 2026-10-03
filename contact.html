@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us — Acadex</title>
+  <title>Contact Us — Prime Vector Private Limited</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/hero.css">
@@ -15,13 +15,20 @@
 <nav class="navbar" id="mainNavbar">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-brand">
-      <div class="logo-icon"><i class="fa fa-graduation-cap"></i></div>
-      <span class="logo-text">ACAD<span>EX</span></span>
+      <div class="logo-icon" style="background:var(--gradient-primary);width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="logo-text">PRIME <span style="color:var(--primary)">VECTOR</span></span>
     </a>
     <ul class="navbar-nav">
-      <li><a href="index.html"  class="nav-link">Home</a></li>
-      <li><a href="course.html" class="nav-link">Courses</a></li>
-      <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      <li><a href="index.html"     class="nav-link">Home</a></li>
+      <li><a href="course.html"    class="nav-link">Bootcamps</a></li>
+      <li><a href="placement.html" class="nav-link">Placements</a></li>
+      <li><a href="contact.html"   class="nav-link active">Contact</a></li>
     </ul>
     <div class="navbar-actions">
       <button class="theme-toggle"><i class="fa fa-moon"></i></button>
@@ -31,68 +38,80 @@
   </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
-  <a href="index.html"   class="nav-link">Home</a>
-  <a href="course.html"  class="nav-link">Courses</a>
-  <a href="contact.html" class="nav-link">Contact</a>
+  <a href="index.html"     class="nav-link">Home</a>
+  <a href="course.html"    class="nav-link">Bootcamps</a>
+  <a href="placement.html" class="nav-link">Placements</a>
+  <a href="contact.html"   class="nav-link">Contact</a>
 </div>
 
 <!-- Hero -->
 <div style="padding:120px 0 60px;background:var(--gradient-hero);text-align:center;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.06) 1px,transparent 1px);background-size:50px 50px"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(79,70,229,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(79,70,229,0.08) 1px,transparent 1px);background-size:50px 50px"></div>
   <div class="container" style="position:relative;z-index:1">
-    <div class="section-tag" style="background:rgba(37,99,235,0.2);color:#93C5FD;margin-bottom:16px"><i class="fa fa-envelope"></i> Get in Touch</div>
-    <h1 style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;color:#fff;margin-bottom:12px">Contact Acadex</h1>
-    <p style="color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto">Have a question or feedback? We'd love to hear from you. Our team responds within 24 hours.</p>
+    <div class="section-tag" style="background:rgba(79,70,229,0.25);color:#A5B4FC;margin-bottom:16px"><i class="fa fa-envelope"></i> Get in Touch</div>
+    <h1 style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;color:#fff;margin-bottom:12px">Contact Prime Vector</h1>
+    <p style="color:rgba(255,255,255,0.7);max-width:550px;margin:0 auto">Have questions regarding our skill development bootcamps, campus placement drives, or corporate training? Reach out to Prime Vector Private Limited.</p>
   </div>
 </div>
 
 <!-- Contact Section -->
-<div class="container" style="padding:60px 24px">
-  <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:48px;max-width:1000px;margin:0 auto">
+<div class="container" style="padding:60px 24px" id="address">
+  <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:48px;max-width:1050px;margin:0 auto">
     <!-- Info -->
     <div>
-      <h2 style="font-family:var(--font-display);margin-bottom:8px">Let's Talk</h2>
-      <p style="color:var(--text-muted);margin-bottom:32px;line-height:1.7">Whether you have a question about features, pricing, need a demo, or anything else — our team is ready to answer all your questions.</p>
+      <h2 style="font-family:var(--font-display);margin-bottom:8px">Corporate Headquarters</h2>
+      <p style="color:var(--text-muted);margin-bottom:32px;line-height:1.7">Visit our innovation center in Hosur or contact our education advisors for institutional partnerships and student admissions.</p>
 
       <div style="display:flex;flex-direction:column;gap:24px">
         <div style="display:flex;align-items:flex-start;gap:16px">
-          <div style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0"><i class="fa fa-map-marker"></i></div>
+          <div style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0"><i class="fa fa-map-marker"></i></div>
           <div>
-            <div class="font-semi" style="margin-bottom:4px">Visit Us</div>
-            <p style="font-size:0.875rem;color:var(--text-muted)">123 Education Lane, Tech Park,<br>Bangalore, KA 560001, India</p>
+            <div class="font-semi" style="margin-bottom:4px;font-weight:700">Campus Address</div>
+            <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.6">
+              <strong>Prime Vector Private Limited</strong><br>
+              No. 74/22f11, 3rd Floor, HV Arcade,<br>
+              Bagalur Road, Hosur, Krishnagiri,<br>
+              Tamil Nadu - 635109, India
+            </p>
           </div>
         </div>
+
         <div style="display:flex;align-items:flex-start;gap:16px">
-          <div style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0"><i class="fa fa-envelope"></i></div>
+          <div style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0"><i class="fa fa-envelope"></i></div>
           <div>
-            <div class="font-semi" style="margin-bottom:4px">Email Us</div>
-            <a href="mailto:hello@Acadex.edu" style="color:var(--primary);font-size:0.875rem">hello@Acadex.edu</a><br>
-            <a href="mailto:support@Acadex.edu" style="color:var(--text-muted);font-size:0.875rem">support@Acadex.edu</a>
+            <div class="font-semi" style="margin-bottom:4px;font-weight:700">Official Email</div>
+            <a href="mailto:primevectorprivatelimited@gmail.com" style="color:var(--primary);font-size:0.875rem;font-weight:600">primevectorprivatelimited@gmail.com</a><br>
+            <a href="https://primevector.in/" target="_blank" style="color:var(--accent);font-size:0.875rem">https://primevector.in/</a>
           </div>
         </div>
+
         <div style="display:flex;align-items:flex-start;gap:16px">
-          <div style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--success-light);color:var(--success);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0"><i class="fa fa-phone"></i></div>
+          <div style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--success-light);color:var(--success);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0"><i class="fa fa-phone"></i></div>
           <div>
-            <div class="font-semi" style="margin-bottom:4px">Call Us</div>
-            <p style="font-size:0.875rem;color:var(--text-muted)">+91 98765 43210<br>Mon–Fri, 9am–6pm IST</p>
+            <div class="font-semi" style="margin-bottom:4px;font-weight:700">Phone & Hours</div>
+            <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.5">
+              <strong>+91 8220082896</strong><br>
+              Tue–Fri: 1:30 PM – 9:30 PM<br>
+              Sat–Sun: 11:30 AM – 8:30 PM
+            </p>
           </div>
         </div>
       </div>
 
       <div style="margin-top:32px">
-        <div class="font-semi" style="margin-bottom:12px">Follow Us</div>
+        <div class="font-semi" style="margin-bottom:12px;font-weight:700">Connect with Prime Vector</div>
         <div style="display:flex;gap:10px">
-          <a href="#" class="social-btn" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;transition:var(--transition)"><i class="fa fa-twitter"></i></a>
-          <a href="#" class="social-btn" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;transition:var(--transition)"><i class="fa fa-linkedin"></i></a>
-          <a href="#" class="social-btn" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;transition:var(--transition)"><i class="fa fa-youtube-play"></i></a>
-          <a href="#" class="social-btn" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;transition:var(--transition)"><i class="fa fa-github"></i></a>
+          <a href="https://primevector.in/" target="_blank" class="social-btn" style="background:var(--bg);color:var(--primary);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;" title="Official Website"><i class="fa fa-globe"></i></a>
+          <a href="#" class="social-btn" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;"><i class="fa fa-linkedin"></i></a>
+          <a href="#" class="social-btn" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;"><i class="fa fa-youtube-play"></i></a>
+          <a href="#" class="social-btn" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;"><i class="fa fa-instagram"></i></a>
         </div>
       </div>
     </div>
 
     <!-- Form -->
     <div class="card">
-      <div class="card-header"><span class="card-title">Send Us a Message</span></div>
+      <div class="card-header"><span class="card-title">Send Us a Direct Inquiry</span></div>
       <div class="card-body">
         <form id="contactForm" novalidate>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
@@ -109,31 +128,30 @@
             <label class="form-label">Email <span style="color:var(--danger)">*</span></label>
             <div class="input-group">
               <i class="fa fa-envelope input-icon"></i>
-              <input type="email" class="form-control" placeholder="your@email.com" required>
+              <input type="email" class="form-control" placeholder="yourname@domain.com" required>
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Subject</label>
+            <label class="form-label">Subject / Purpose</label>
             <select class="form-control">
-              <option value="">Select a topic</option>
-              <option>General Inquiry</option>
-              <option>Technical Support</option>
-              <option>Billing & Pricing</option>
-              <option>Course Request</option>
-              <option>Partnership</option>
-              <option>Bug Report</option>
+              <option value="">Select Purpose</option>
+              <option>Student Bootcamp Enrollment</option>
+              <option>Campus Placement Drive Inquiry</option>
+              <option>Corporate Skill Training</option>
+              <option>University Partnership</option>
+              <option>LMS Technical Support</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label">Message <span style="color:var(--danger)">*</span></label>
-            <textarea class="form-control" rows="5" placeholder="Tell us how we can help..." required></textarea>
+            <textarea class="form-control" rows="5" placeholder="Write your inquiry or details..." required></textarea>
           </div>
           <div class="form-check" style="margin-bottom:20px">
             <input type="checkbox" id="privacyCheck">
-            <label for="privacyCheck" style="font-size:0.82rem;color:var(--text-muted)">I agree to the <a href="#" style="color:var(--primary)">Privacy Policy</a></label>
+            <label for="privacyCheck" style="font-size:0.82rem;color:var(--text-muted)">I agree to Prime Vector Private Limited privacy terms.</label>
           </div>
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">
-            <i class="fa fa-paper-plane"></i> Send Message
+            <i class="fa fa-paper-plane"></i> Send Inquiry to Prime Vector
           </button>
         </form>
       </div>
@@ -145,10 +163,11 @@
 <footer class="footer" style="margin-top:60px">
   <div class="container">
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 Acadex. All Rights Reserved.</p>
+      <p class="footer-copy">© 2026 Prime Vector Private Limited (<a href="https://primevector.in/" target="_blank" style="color:var(--text-light)">primevector.in</a>). All Rights Reserved.</p>
       <div class="footer-bottom-links">
         <a href="index.html" class="footer-bottom-link">Home</a>
-        <a href="course.html" class="footer-bottom-link">Courses</a>
+        <a href="course.html" class="footer-bottom-link">Bootcamps</a>
+        <a href="placement.html" class="footer-bottom-link">Placements</a>
       </div>
     </div>
   </div>
@@ -158,9 +177,10 @@
 <script>
 document.getElementById('contactForm').addEventListener('submit', e => {
   e.preventDefault();
-  Toast.success('Message Sent!', 'We\'ll get back to you within 24 hours');
+  Toast.success('Inquiry Sent!', 'Thank you! Prime Vector team will contact you shortly.');
   e.target.reset();
 });
 </script>
 </body>
 </html>
+

@@ -1,14 +1,16 @@
 /* ============================================================
-   Acadex LMS — login.js  (Auth Logic)
+   Prime Vector LMS — login.js  (Auth Logic)
    ============================================================ */
 
 // Seed demo users into localStorage on first load
 function seedUsers() {
-  if (Store.get('users')) return;
   Store.set('users', [
-    { id: 1, name: 'Alex Johnson',   email: 'student@demo.com', password: 'demo123', role: 'student', joined: '2024-09-01', department: 'Computer Science', avatar: '' },
-    { id: 2, name: 'Dr. Sarah Chen', email: 'faculty@demo.com', password: 'demo123', role: 'faculty', joined: '2023-01-15', department: 'Computer Science', avatar: '' },
-    { id: 3, name: 'Admin User',     email: 'admin@demo.com',   password: 'demo123', role: 'admin',   joined: '2022-06-01', department: 'Administration', avatar: '' }
+    { id: 1, name: 'Alex Johnson', email: 'student@demo.com', password: 'demo123', role: 'student', joined: '2024-09-01', department: 'Computer Science & AI', avatar: '' },
+    { id: 2, name: 'Dr. Sarah Chen', email: 'faculty@demo.com', password: 'demo123', role: 'faculty', joined: '2023-01-15', department: 'Full Stack & Cloud', avatar: '' },
+    { id: 3, name: 'Executive Admin', email: 'admin@demo.com', password: 'demo123', role: 'admin', joined: '2022-06-01', department: 'Executive Governance', avatar: '' },
+    { id: 4, name: 'Jane Recruiter', email: 'hr@demo.com', password: 'demo123', role: 'hr', joined: '2025-01-10', department: 'Talent Acquisition', avatar: '' },
+    { id: 5, name: 'Priya Sharma', email: 'placement@demo.com', password: 'demo123', role: 'placement', joined: '2023-08-11', department: 'Corporate Relations', avatar: '' },
+    { id: 6, name: 'Marcus Vance', email: 'mentor@demo.com', password: 'demo123', role: 'mentor', joined: '2024-03-20', department: 'Full Stack Engineering', avatar: '' }
   ]);
 }
 
@@ -44,7 +46,7 @@ function initLoginPage() {
     if (!valid) return;
 
     const users = Store.get('users', []);
-    const user  = users.find(u => u.email === email && u.password === password);
+    const user  = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
 
     if (!user) {
       Toast.error('Login Failed', 'Invalid email or password');
@@ -59,27 +61,47 @@ function initLoginPage() {
 
     setTimeout(() => {
       Auth.login(user);
-      Toast.success('Welcome back!', `Hello, ${user.name}`);
+      Toast.success('Welcome back!', `Logged in as ${user.role.toUpperCase()} (${user.name})`);
       setTimeout(() => {
-        window.location.href = 'dashboard.html';
-      }, 600);
-    }, 900);
+        const destMap = {
+          admin: 'admin.html',
+          super_admin: 'admin.html',
+          faculty: 'faculty.html',
+          trainer: 'faculty.html',
+          student: 'student.html',
+          hr: 'hr.html',
+          hr_admin: 'hr.html',
+          placement: 'placement.html',
+          placement_officer: 'placement.html',
+          mentor: 'faculty.html'
+        };
+        const dest = destMap[user.role] || 'student.html';
+        window.location.href = dest;
+      }, 500);
+    }, 600);
   });
 
-  // Demo login buttons
+  // Demo login buttons (All 6 roles supported)
   document.querySelectorAll('[data-demo-login]').forEach(btn => {
     btn.addEventListener('click', () => {
       const role = btn.dataset.demoLogin;
       const demos = {
-        student: { email: 'student@demo.com', password: 'demo123' },
-        faculty: { email: 'faculty@demo.com', password: 'demo123' },
-        admin:   { email: 'admin@demo.com',   password: 'demo123' }
+        student:   { email: 'student@demo.com',   password: 'demo123' },
+        faculty:   { email: 'faculty@demo.com',   password: 'demo123' },
+        trainer:   { email: 'faculty@demo.com',   password: 'demo123' },
+        admin:     { email: 'admin@demo.com',     password: 'demo123' },
+        hr:        { email: 'hr@demo.com',        password: 'demo123' },
+        placement: { email: 'placement@demo.com', password: 'demo123' },
+        mentor:    { email: 'mentor@demo.com',    password: 'demo123' }
       };
       const d = demos[role];
       if (d) {
         document.getElementById('email').value    = d.email;
         document.getElementById('password').value = d.password;
-        Toast.info('Demo Credentials Filled', `Click Sign In to continue`);
+        Toast.info('Logging in as ' + role.toUpperCase(), 'Authenticating demo credentials...');
+        setTimeout(() => {
+          loginForm.dispatchEvent(new Event('submit'));
+        }, 300);
       }
     });
   });
@@ -169,7 +191,7 @@ function initRegisterPage() {
 
     setTimeout(() => {
       Auth.login(newUser);
-      Toast.success('Account Created!', `Welcome to Acadex, ${newUser.name}!`);
+      Toast.success('Account Created!', `Welcome to Prime Vector LMS, ${newUser.name}!`);
       setTimeout(() => {
         window.location.href = 'dashboard.html';
       }, 600);
@@ -253,7 +275,10 @@ function initDashboardRedirect() {
   const routes = {
     student: 'student.html',
     faculty: 'faculty.html',
-    admin:   'admin.html'
+    admin:   'admin.html',
+    parent:  'parent.html',
+    hr:      'hr.html',
+    alumni:  'alumni.html'
   };
 
   setTimeout(() => {

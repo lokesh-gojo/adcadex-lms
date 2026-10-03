@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Placements — Prime Vector LMS Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="adminPlacementsPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Admin</div><div class="sidebar-user-role">admin</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Overview</div><a href="admin.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a></div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Management</div>
+        <a href="admin-enrollment.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Students</span></a>
+        <a href="admin-departments.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Departments</span></a>
+        <a href="admin-courses.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="admin-training.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-rocket"></i></span><span class="sidebar-label">Training</span></a>
+        <a href="admin-placements.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placements</span></a>
+        <a href="admin-certificates.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Analytics & System</div>
+        <a href="admin-analytics.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span><span class="sidebar-label">Analytics</span></a>
+        <a href="admin-system.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-server"></i></span><span class="sidebar-label">System</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="admin.html">Admin</a><span class="breadcrumb-sep">/</span><span>Placements</span></div>
+      </div>
+      <div class="inner-navbar-right"><button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button></div>
+    </header>
+
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+        <div><h2 class="page-title">Placement Management</h2><p class="page-subtitle">Companies, drives, eligibility, and offer letters</p></div>
+        <button class="btn btn-primary" onclick="Modal.open('companyModal')"><i class="fa fa-plus"></i> Register Company</button>
+      </div>
+
+      <!-- KPI -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-building"></i></div><div class="stat-card-body"><div class="stat-card-value">42</div><div class="stat-card-label">Companies Registered</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-briefcase"></i></div><div class="stat-card-body"><div class="stat-card-value">178</div><div class="stat-card-label">Offers Made</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-money"></i></div><div class="stat-card-body"><div class="stat-card-value">₹8.4L</div><div class="stat-card-label">Avg CTC</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-trophy"></i></div><div class="stat-card-body"><div class="stat-card-value">₹32L</div><div class="stat-card-label">Highest Package</div></div></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs" data-tabs style="margin-bottom:24px">
+        <button class="tab-btn active" data-tab="drives" data-group="plac">Placement Drives</button>
+        <button class="tab-btn" data-tab="companies" data-group="plac">Companies</button>
+        <button class="tab-btn" data-tab="offers" data-group="plac">Offer Letters</button>
+      </div>
+
+      <!-- Drives -->
+      <div data-pane="drives" data-group="plac" class="active">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-calendar"></i> Active Placement Drives</div>
+            <button class="btn btn-primary" style="padding:8px 14px;font-size:0.85rem" onclick="Modal.open('driveModal')"><i class="fa fa-plus"></i> Schedule Drive</button>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Company</th><th>Role</th><th>Dept</th><th>CTC</th><th>Date</th><th>Eligible</th><th>Applied</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="drivesTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Companies -->
+      <div data-pane="companies" data-group="plac" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px" id="companiesGrid"></div>
+      </div>
+
+      <!-- Offers -->
+      <div data-pane="offers" data-group="plac" style="display:none">
+        <div class="section-card">
+          <div class="section-header"><div class="section-title"><i class="fa fa-file-text"></i> Offer Letters Issued</div><button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem"><i class="fa fa-download"></i> Export</button></div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Company</th><th>Role</th><th>CTC</th><th>Date</th><th>Status</th></tr></thead>
+              <tbody id="offersTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Company Modal -->
+<div class="modal-overlay" id="companyModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header"><div class="modal-title">Register Company</div><button class="modal-close" onclick="Modal.close('companyModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Company Name</label><input type="text" class="form-input" placeholder="e.g. TechCorp Solutions"></div>
+      <div class="form-group"><label class="form-label">Industry</label><select class="form-input"><option>IT / Software</option><option>Banking</option><option>Consulting</option><option>E-Commerce</option><option>Core Engineering</option></select></div>
+      <div class="form-group"><label class="form-label">HR Contact Email</label><input type="email" class="form-input" placeholder="hr@company.com"></div>
+      <div class="form-group"><label class="form-label">Package Range</label><input type="text" class="form-input" placeholder="e.g. 6-12 LPA"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('companyModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="Modal.close('companyModal');Toast.success('Registered!','Company added to database')">Register</button>
+    </div>
+  </div>
+</div>
+<!-- Drive Modal -->
+<div class="modal-overlay" id="driveModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header"><div class="modal-title">Schedule Placement Drive</div><button class="modal-close" onclick="Modal.close('driveModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Company</label><select class="form-input"><option>TechCorp Solutions</option><option>InfoSys</option><option>Wipro</option><option>Accenture</option></select></div>
+      <div class="form-group"><label class="form-label">Role</label><input type="text" class="form-input" placeholder="Software Engineer"></div>
+      <div class="form-group"><label class="form-label">Eligible Departments</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><input type="checkbox" checked> CS</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><input type="checkbox" checked> IT</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><input type="checkbox"> ECE</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><input type="checkbox"> ME</label>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Min CGPA</label><input type="number" class="form-input" value="7.0" step="0.1" min="5" max="10"></div>
+      <div class="form-group"><label class="form-label">Drive Date</label><input type="date" class="form-input"></div>
+      <div class="form-group"><label class="form-label">CTC</label><input type="text" class="form-input" placeholder="e.g. 8 LPA"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('driveModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="Modal.close('driveModal');Toast.success('Scheduled!','Drive notifications sent to eligible students')">Schedule</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const DRIVES = [
+    { company:'TechCorp Solutions', role:'SDE-1', dept:'CS, IT', ctc:'12 LPA', date:'2025-07-20', eligible:312, applied:248, status:'active' },
+    { company:'InfoSys',            role:'Systems Engineer', dept:'CS, ECE, IT', ctc:'6.5 LPA', date:'2025-07-22', eligible:580, applied:412, status:'active' },
+    { company:'Accenture',          role:'ASE', dept:'All', ctc:'8 LPA', date:'2025-07-25', eligible:1100, applied:689, status:'upcoming' },
+    { company:'Google',             role:'SWE Intern', dept:'CS', ctc:'50K/month', date:'2025-07-18', eligible:120, applied:89, status:'ongoing' },
+    { company:'Wipro',              role:'Project Engineer', dept:'CS, IT, ECE', ctc:'6 LPA', date:'2025-07-15', eligible:720, applied:543, status:'completed' },
+  ];
+  const COMPANIES = [
+    { name:'TechCorp Solutions', sector:'IT', offers:28, maxCTC:'18 LPA', logo:'TC', color:'#2563EB' },
+    { name:'Google',             sector:'Tech Giant', offers:4, maxCTC:'50+ LPA', logo:'G', color:'#10B981' },
+    { name:'InfoSys',            sector:'IT Services', offers:45, maxCTC:'8 LPA', logo:'IN', color:'#6366F1' },
+    { name:'Accenture',          sector:'Consulting', offers:32, maxCTC:'10 LPA', logo:'AC', color:'#F59E0B' },
+    { name:'Wipro',              sector:'IT Services', offers:38, maxCTC:'8 LPA', logo:'WP', color:'#EF4444' },
+    { name:'Amazon',             sector:'E-Commerce', offers:6, maxCTC:'32 LPA', logo:'AM', color:'#F97316' },
+  ];
+  const OFFERS = [
+    { student:'Arjun Mehta',   company:'Google',   role:'SWE',      ctc:'42 LPA', date:'2025-07-10', status:'accepted' },
+    { student:'Priya Sharma',  company:'TechCorp', role:'SDE-1',    ctc:'12 LPA', date:'2025-07-11', status:'accepted' },
+    { student:'Rohit Kumar',   company:'TechCorp', role:'SDE-1',    ctc:'12 LPA', date:'2025-07-11', status:'pending' },
+    { student:'Sneha Nair',    company:'Accenture',role:'ASE',      ctc:'8 LPA',  date:'2025-07-09', status:'accepted' },
+    { student:'Kiran Patel',   company:'InfoSys',  role:'Sys Eng',  ctc:'6.5 LPA',date:'2025-07-08', status:'accepted' },
+    { student:'Deepa Reddy',   company:'Wipro',    role:'Proj Eng', ctc:'6 LPA',  date:'2025-07-07', status:'rejected' },
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    const statusCls = { active:'badge-success', upcoming:'badge-primary', ongoing:'badge-warning', completed:'badge-ghost' };
+    document.getElementById('drivesTable').innerHTML = DRIVES.map(d => `
+      <tr>
+        <td><strong>${d.company}</strong></td>
+        <td>${d.role}</td>
+        <td><span style="font-size:0.8rem">${d.dept}</span></td>
+        <td><strong style="color:var(--success)">${d.ctc}</strong></td>
+        <td>${d.date}</td>
+        <td>${d.eligible.toLocaleString()}</td>
+        <td>${d.applied.toLocaleString()}</td>
+        <td><span class="badge ${statusCls[d.status]}">${d.status}</span></td>
+        <td>
+          <button class="btn btn-ghost" style="padding:5px 9px;font-size:0.78rem" onclick="Toast.info('View','Opening drive details')"><i class="fa fa-eye"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 9px;font-size:0.78rem" onclick="Toast.info('Edit','Opening edit form')"><i class="fa fa-edit"></i></button>
+        </td>
+      </tr>
+    `).join('');
+
+    document.getElementById('companiesGrid').innerHTML = COMPANIES.map(c => `
+      <div class="section-card" style="text-align:center">
+        <div style="width:60px;height:60px;border-radius:var(--radius-md);background:${c.color}20;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;color:${c.color};margin:0 auto 12px">${c.logo}</div>
+        <div style="font-weight:800;font-size:1rem;margin-bottom:4px">${c.name}</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:16px">${c.sector}</div>
+        <div style="display:flex;justify-content:space-around">
+          <div><div style="font-weight:800;font-size:1.1rem;color:var(--primary)">${c.offers}</div><div style="font-size:0.7rem;color:var(--text-muted)">Offers</div></div>
+          <div><div style="font-weight:800;font-size:1.1rem;color:var(--success)">${c.maxCTC}</div><div style="font-size:0.7rem;color:var(--text-muted)">Max CTC</div></div>
+        </div>
+        <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:12px" onclick="Toast.info('Company','Opening details')"><i class="fa fa-eye"></i> View</button>
+      </div>
+    `).join('');
+
+    const offerStatus = { accepted:'badge-success', pending:'badge-warning', rejected:'badge-danger' };
+    document.getElementById('offersTable').innerHTML = OFFERS.map(o => `
+      <tr>
+        <td><strong>${o.student}</strong></td>
+        <td>${o.company}</td>
+        <td>${o.role}</td>
+        <td><strong style="color:var(--success)">${o.ctc}</strong></td>
+        <td>${o.date}</td>
+        <td><span class="badge ${offerStatus[o.status]}">${o.status}</span></td>
+      </tr>
+    `).join('');
+
+    App.init();
+    initTabs();
+  });
+</script>
+</body>
+</html>
+

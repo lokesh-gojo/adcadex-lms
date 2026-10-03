@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Quiz — Prime Vector LMS Faculty</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="facultyQuizPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" style="background:var(--gradient-accent)" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Faculty</div><div class="sidebar-user-role">faculty</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Main</div>
+        <a href="faculty.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+        <a href="course.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-upload"></i></span><span class="sidebar-label">Upload Course</span></a>
+        <a href="faculty-notes.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-file-text"></i></span><span class="sidebar-label">Review Notes</span></a>
+        <a href="faculty-classes.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-video-camera"></i></span><span class="sidebar-label">Live Classes</span></a>
+        <a href="faculty-assignments.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
+        <a href="faculty-quiz.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-question-circle"></i></span><span class="sidebar-label">Quizzes</span></a>
+        <a href="faculty-students.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Student Analytics</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Reports</div>
+        <a href="attendance.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+        <a href="settings.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="faculty.html">Faculty</a><span class="breadcrumb-sep">/</span><span>Quizzes</span></div>
+      </div>
+      <div class="inner-navbar-right"><button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button></div>
+    </header>
+
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+        <div><h2 class="page-title">Quiz Management</h2><p class="page-subtitle">Create, manage, and analyze student quiz performance</p></div>
+        <button class="btn btn-primary" onclick="Modal.open('createQuizModal')"><i class="fa fa-plus"></i> Create Quiz</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-list-alt"></i></div><div class="stat-card-body"><div class="stat-card-value">18</div><div class="stat-card-label">Total Quizzes</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-check-circle"></i></div><div class="stat-card-body"><div class="stat-card-value">12</div><div class="stat-card-label">Active</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-bar-chart"></i></div><div class="stat-card-body"><div class="stat-card-value">76.4%</div><div class="stat-card-label">Avg Score</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-users"></i></div><div class="stat-card-body"><div class="stat-card-value">1,842</div><div class="stat-card-label">Attempts</div></div></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs" data-tabs style="margin-bottom:24px">
+        <button class="tab-btn active" data-tab="quizList" data-group="fq">Quiz List</button>
+        <button class="tab-btn" data-tab="analytics" data-group="fq">Results Analytics</button>
+      </div>
+
+      <!-- Quiz List -->
+      <div data-pane="quizList" data-group="fq" class="active">
+        <div class="section-card">
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Quiz Title</th><th>Course</th><th>Type</th><th>Questions</th><th>Duration</th><th>Attempts</th><th>Avg Score</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="quizListBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics -->
+      <div data-pane="analytics" data-group="fq" style="display:none">
+        <div class="dashboard-grid" style="margin-bottom:24px">
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-line-chart"></i> Score Distribution</div></div>
+            <div style="height:250px"><canvas id="scoreDistChart"></canvas></div>
+          </div>
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-trophy"></i> Quiz Leaderboard</div></div>
+            <div id="quizLeaderboard" style="display:flex;flex-direction:column;gap:6px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Create Quiz Modal -->
+<div class="modal-overlay" id="createQuizModal">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-header"><div class="modal-title">Create New Quiz</div><button class="modal-close" onclick="Modal.close('createQuizModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="form-group" style="grid-column:1/-1"><label class="form-label">Quiz Title</label><input type="text" class="form-input" placeholder="e.g. JavaScript Fundamentals Quiz"></div>
+        <div class="form-group"><label class="form-label">Course</label><select class="form-input"><option>Web Development</option><option>Machine Learning</option><option>UI/UX Design</option><option>DSA</option></select></div>
+        <div class="form-group"><label class="form-label">Quiz Type</label><select class="form-input"><option>MCQ</option><option>True/False</option><option>Coding Test</option><option>Mixed</option><option>Subjective</option></select></div>
+        <div class="form-group"><label class="form-label">Duration (minutes)</label><input type="number" class="form-input" value="45"></div>
+        <div class="form-group"><label class="form-label">Total Marks</label><input type="number" class="form-input" value="100"></div>
+        <div class="form-group"><label class="form-label">Passing Score %</label><input type="number" class="form-input" value="60"></div>
+        <div class="form-group"><label class="form-label">Attempts Allowed</label><input type="number" class="form-input" value="1"></div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label class="form-label">Options</label>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px">
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.875rem;cursor:pointer"><input type="checkbox" checked> Auto-Evaluate</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.875rem;cursor:pointer"><input type="checkbox" checked> Shuffle Questions</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.875rem;cursor:pointer"><input type="checkbox"> Show Answers After</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.875rem;cursor:pointer"><input type="checkbox" checked> Show on Leaderboard</label>
+          </div>
+        </div>
+      </div>
+      <hr style="border:none;border-top:1px solid var(--border);margin:12px 0">
+      <div style="font-weight:700;margin-bottom:12px">Question Bank <span style="font-size:0.8rem;color:var(--text-muted);font-weight:400">— Add questions below</span></div>
+      <div id="questionsList" style="display:flex;flex-direction:column;gap:10px"></div>
+      <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:10px" onclick="addQuestion()"><i class="fa fa-plus"></i> Add Question</button>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('createQuizModal')">Cancel</button>
+      <button class="btn btn-ghost" onclick="Modal.close('createQuizModal');Toast.info('Saved','Quiz saved as draft')">Save Draft</button>
+      <button class="btn btn-primary" onclick="publishQuiz()"><i class="fa fa-check"></i> Publish Quiz</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const QUIZZES = [
+    { title:'JavaScript Fundamentals', course:'Web Dev', type:'MCQ', questions:20, duration:45, attempts:240, avg:76.4, status:'active' },
+    { title:'React Hooks Deep Dive', course:'Web Dev', type:'MCQ', questions:15, duration:30, attempts:198, avg:68.2, status:'active' },
+    { title:'Python Basics Assessment', course:'ML', type:'Mixed', questions:25, duration:60, attempts:280, avg:81.5, status:'active' },
+    { title:'NumPy & Pandas Quiz', course:'ML', type:'MCQ', questions:20, duration:40, attempts:220, avg:72.8, status:'active' },
+    { title:'Color Theory Test', course:'UI/UX', type:'MCQ', questions:15, duration:30, attempts:168, avg:84.6, status:'active' },
+    { title:'Binary Trees Lab', course:'DSA', type:'Coding', questions:5, duration:90, attempts:312, avg:58.3, status:'active' },
+    { title:'Graph Algorithms Quiz', course:'DSA', type:'MCQ', questions:20, duration:45, attempts:0, avg:0, status:'draft' },
+  ];
+
+  let qCount = 0;
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    const user = Auth.getUser();
+    if (!['faculty','admin'].includes(user.role)) { window.location.href = user.role + '.html'; return; }
+
+    const typeBadge = { MCQ:'badge-primary', Mixed:'badge-warning', Coding:'badge-success', 'True/False':'badge-ghost' };
+    document.getElementById('quizListBody').innerHTML = QUIZZES.map(q => `
+      <tr>
+        <td><strong>${q.title}</strong></td>
+        <td>${q.course}</td>
+        <td><span class="badge ${typeBadge[q.type] || 'badge-ghost'}">${q.type}</span></td>
+        <td>${q.questions}</td>
+        <td>${q.duration} min</td>
+        <td>${q.attempts.toLocaleString()}</td>
+        <td>${q.avg ? q.avg + '%' : '—'}</td>
+        <td><span class="badge ${q.status==='active'?'badge-success':'badge-warning'}">${q.status}</span></td>
+        <td>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('Edit','Opening quiz editor')"><i class="fa fa-edit"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('Results','Viewing results')"><i class="fa fa-bar-chart"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem;color:var(--danger)" onclick="Toast.warning('Delete','Confirm deletion')"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    `).join('');
+
+    // Score chart
+    const isDark = Theme.isDark();
+    const textColor = isDark ? '#94A3B8' : '#64748B';
+    new Chart(document.getElementById('scoreDistChart'), {
+      type: 'bar',
+      data: {
+        labels: ['0-20','21-40','41-60','61-70','71-80','81-90','91-100'],
+        datasets: [{ label:'Students', data:[5,12,38,52,124,186,68], backgroundColor:'rgba(37,99,235,0.8)', borderRadius:6 }]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ y:{ ticks:{ color:textColor } }, x:{ ticks:{ color:textColor } } } }
+    });
+
+    const leaders = [
+      { name:'Arjun Mehta', score:98, avatar:'AM', color:'#2563EB' },
+      { name:'Priya Sharma', score:95, avatar:'PS', color:'#10B981' },
+      { name:'Rohit Kumar', score:92, avatar:'RK', color:'#8B5CF6' },
+      { name:'Sneha Nair', score:90, avatar:'SN', color:'#F59E0B' },
+      { name:'Kiran Patel', score:88, avatar:'KP', color:'#EF4444' },
+    ];
+    const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+    document.getElementById('quizLeaderboard').innerHTML = leaders.map((l,i) => `
+      <div style="display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg);border-radius:var(--radius-md)">
+        <div style="font-size:1.3rem">${medals[i]}</div>
+        <div style="width:36px;height:36px;border-radius:50%;background:${l.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;flex-shrink:0">${l.avatar}</div>
+        <div style="flex:1"><div style="font-weight:600;font-size:0.875rem">${l.name}</div></div>
+        <div style="font-weight:800;color:var(--primary)">${l.score}%</div>
+      </div>
+    `).join('');
+
+    App.init();
+    initTabs();
+  });
+
+  function addQuestion() {
+    qCount++;
+    const el = document.createElement('div');
+    el.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px';
+    el.innerHTML = `
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <strong style="font-size:0.85rem">Q${qCount}</strong>
+        <button onclick="this.closest('div').parentElement.remove();qCount--" style="background:none;border:none;color:var(--danger);cursor:pointer"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="form-group" style="margin-bottom:10px"><input type="text" class="form-input" placeholder="Enter question text..."></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <input type="text" class="form-input" placeholder="Option A" style="font-size:0.82rem;padding:8px 12px">
+        <input type="text" class="form-input" placeholder="Option B" style="font-size:0.82rem;padding:8px 12px">
+        <input type="text" class="form-input" placeholder="Option C" style="font-size:0.82rem;padding:8px 12px">
+        <input type="text" class="form-input" placeholder="Option D" style="font-size:0.82rem;padding:8px 12px">
+      </div>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-size:0.82rem">
+        <span style="color:var(--text-muted)">Correct:</span>
+        <select class="form-input" style="width:auto;padding:5px 10px;font-size:0.82rem"><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span style="color:var(--text-muted);margin-left:8px">Marks:</span>
+        <input type="number" value="5" class="form-input" style="width:60px;padding:5px 10px;font-size:0.82rem">
+      </div>
+    `;
+    document.getElementById('questionsList').appendChild(el);
+  }
+
+  function publishQuiz() {
+    Modal.close('createQuizModal');
+    Toast.success('Quiz Published!', 'Students will be notified immediately');
+  }
+</script>
+</body>
+</html>
+

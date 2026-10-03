@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship — Prime Vector LMS</title>
+  <meta name="description" content="Track your internship progress, daily logbook, tasks, and weekly reports on Prime Vector LMS.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="internshipPage">
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">ACAD<span>EX</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link " data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link " data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link " data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link " data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link " data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link " data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="student.html">Dashboard</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Internship</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <!-- Hero Banner -->
+      <div class="internship-hero">
+        <div class="internship-hero-content">
+          <div class="internship-company" id="heroCompany">Loading...</div>
+          <div class="internship-title" id="heroTitle">Loading...</div>
+          <div class="internship-meta" id="heroMeta"></div>
+          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="openLogbookModal()"><i class="fa fa-plus"></i> Add Log Entry</button>
+            <a href="certificate.html" class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3)"><i class="fa fa-certificate"></i> View Certificate</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:28px">
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-calendar"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statDaysLeft">—</div>
+            <div class="stat-card-label">Days Remaining</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-check-circle"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statProgress">—</div>
+            <div class="stat-card-label">Tasks Completed</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-clock-o"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statTotalDays">—</div>
+            <div class="stat-card-label">Total Duration (days)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-book"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statLogs">—</div>
+            <div class="stat-card-label">Logbook Entries</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="section-card" style="margin-bottom:24px">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-bar-chart"></i> Overall Internship Progress</div>
+          <span class="badge badge-primary" id="progressPercent">—</span>
+        </div>
+        <div class="progress" style="height:14px;border-radius:var(--radius-full);background:var(--border)">
+          <div class="progress-bar" id="mainProgressBar" style="width:0%;border-radius:var(--radius-full);background:var(--gradient-primary);height:100%;transition:width 1s ease"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.78rem;color:var(--text-muted)">
+          <span id="internStart">Start</span>
+          <span id="internEnd">End</span>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- Company Details -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-building"></i> Company Details</div>
+          </div>
+          <div id="companyDetails" style="display:flex;flex-direction:column;gap:12px"></div>
+          <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+          <div class="section-title" style="margin-bottom:12px"><i class="fa fa-user"></i> Mentor</div>
+          <div id="mentorDetails"></div>
+        </div>
+
+        <!-- Task Board -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-tasks"></i> Task Board</div>
+            <span style="font-size:0.78rem;color:var(--text-muted)">Click card to advance status</span>
+          </div>
+          <div id="taskBoard"></div>
+        </div>
+      </div>
+
+      <!-- Daily Logbook -->
+      <div class="section-card" style="margin-bottom:24px">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-book"></i> Daily Logbook</div>
+          <button class="btn btn-primary" style="padding:8px 18px;font-size:0.85rem" onclick="openLogbookModal()"><i class="fa fa-plus"></i> Add Entry</button>
+        </div>
+        <div id="logbookTable" style="overflow-x:auto"></div>
+      </div>
+
+      <!-- Weekly Reports -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-file-text"></i> Weekly Reports</div>
+        </div>
+        <div id="weeklyReports" style="display:flex;flex-direction:column;gap:16px"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Add Log Modal -->
+<div class="modal-overlay" id="logModal">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-header">
+      <div class="modal-title">Add Daily Log Entry</div>
+      <button class="modal-close" onclick="Modal.close('logModal')"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Hours Worked</label>
+        <input type="number" class="form-input" id="logHours" min="1" max="12" value="8" placeholder="8">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tasks Completed Today</label>
+        <textarea class="form-input" id="logTasks" rows="3" placeholder="Describe what you worked on..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Today's Highlight</label>
+        <input type="text" class="form-input" id="logHighlight" placeholder="Best achievement today...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mood</label>
+        <select class="form-input" id="logMood">
+          <option value="😊">😊 Happy</option>
+          <option value="🚀">🚀 Productive</option>
+          <option value="💪">💪 Motivated</option>
+          <option value="📖">📖 Learning</option>
+          <option value="😐">😐 Okay</option>
+          <option value="😓">😓 Tired</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('logModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitLog()"><i class="fa fa-save"></i> Save Entry</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/internship.js"></script>
+<script src="js/gamification.js"></script>
+<script>
+  Theme.init();
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    const user = Auth.getUser();
+    if (!['student','admin'].includes(user.role)) { window.location.href = user.role + '.html'; return; }
+
+    const data = InternshipModule.getData();
+
+    // Hero
+    document.getElementById('heroCompany').textContent = data.company;
+    document.getElementById('heroTitle').textContent = data.role;
+    document.getElementById('heroMeta').innerHTML = `
+      <span><i class="fa fa-map-marker"></i> ${data.location}</span>
+      <span><i class="fa fa-calendar"></i> ${data.startDate} → ${data.endDate}</span>
+      <span><i class="fa fa-laptop"></i> ${data.mode}</span>
+      <span><i class="fa fa-money"></i> ${data.stipend}</span>
+    `;
+
+    // Stats
+    const daysLeft = InternshipModule.calcDaysRemaining(data.endDate);
+    const totalDays = InternshipModule.calcTotalDays(data.startDate, data.endDate);
+    const progress = InternshipModule.calcProgress(data);
+
+    document.getElementById('statDaysLeft').textContent = daysLeft;
+    document.getElementById('statProgress').textContent = data.tasks.filter(t=>t.status==='done').length + '/' + data.tasks.length;
+    document.getElementById('statTotalDays').textContent = totalDays;
+    document.getElementById('statLogs').textContent = data.logbook.length;
+
+    // Progress bar
+    document.getElementById('progressPercent').textContent = progress + '%';
+    document.getElementById('mainProgressBar').style.width = progress + '%';
+    document.getElementById('internStart').textContent = data.startDate;
+    document.getElementById('internEnd').textContent = data.endDate;
+
+    // Company details
+    const dets = [
+      { icon:'fa-building', label:'Company', value: data.company },
+      { icon:'fa-map-marker', label:'Location', value: data.location },
+      { icon:'fa-laptop', label:'Mode', value: data.mode },
+      { icon:'fa-money', label:'Stipend', value: data.stipend },
+    ];
+    document.getElementById('companyDetails').innerHTML = dets.map(d => `
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;background:var(--primary-light);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:0.85rem;flex-shrink:0">
+          <i class="fa ${d.icon}"></i>
+        </div>
+        <div>
+          <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">${d.label}</div>
+          <div style="font-weight:600;font-size:0.9rem">${d.value}</div>
+        </div>
+      </div>
+    `).join('');
+
+    document.getElementById('mentorDetails').innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg);border-radius:var(--radius-md)">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--gradient-accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem">
+          ${data.mentor.split(' ').map(w=>w[0]).join('')}
+        </div>
+        <div>
+          <div style="font-weight:700">${data.mentor}</div>
+          <div style="font-size:0.8rem;color:var(--primary)">${data.mentorEmail}</div>
+        </div>
+        <a href="mailto:${data.mentorEmail}" class="btn btn-ghost" style="margin-left:auto;padding:8px 12px"><i class="fa fa-envelope"></i></a>
+      </div>
+    `;
+
+    // Task Board
+    InternshipModule.renderTaskBoard('taskBoard');
+
+    // Logbook
+    InternshipModule.renderLogbook('logbookTable');
+
+    // Weekly Reports
+    const reportsEl = document.getElementById('weeklyReports');
+    reportsEl.innerHTML = data.weeklyReports.map(r => `
+      <div style="background:var(--bg);border-radius:var(--radius-lg);padding:20px;border:1px solid var(--border)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div>
+            <span style="font-weight:800;font-size:0.95rem">Week ${r.week}</span>
+            <span style="font-size:0.8rem;color:var(--text-muted);margin-left:10px">${r.startDate} — ${r.endDate}</span>
+          </div>
+          <div style="display:flex;gap:2px">${'⭐'.repeat(r.rating)}</div>
+        </div>
+        <p style="font-size:0.875rem;margin-bottom:10px">${r.summary}</p>
+        ${r.mentorFeedback ? `
+          <div style="display:flex;gap:10px;align-items:flex-start;padding:12px;background:var(--success-light);border-radius:var(--radius);border-left:3px solid var(--success)">
+            <i class="fa fa-comment" style="color:var(--success);margin-top:2px"></i>
+            <div>
+              <div style="font-size:0.72rem;font-weight:700;color:var(--success);text-transform:uppercase;margin-bottom:3px">Mentor Feedback</div>
+              <div style="font-size:0.85rem;color:var(--text)">${r.mentorFeedback}</div>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `).join('');
+
+    App.init();
+  });
+
+  function openLogbookModal() { Modal.open('logModal'); }
+
+  function submitLog() {
+    const hours = parseFloat(document.getElementById('logHours').value);
+    const tasks = document.getElementById('logTasks').value.trim();
+    const highlight = document.getElementById('logHighlight').value.trim();
+    const mood = document.getElementById('logMood').value;
+    if (!tasks) { Toast.error('Required', 'Please describe your tasks'); return; }
+    InternshipModule.addLogEntry({ hours, tasks, highlight: highlight || 'N/A', mood });
+    InternshipModule.renderLogbook('logbookTable');
+    Modal.close('logModal');
+    Toast.success('Log Added!', 'Your daily entry has been saved');
+    document.getElementById('statLogs').textContent = InternshipModule.getData().logbook.length;
+  }
+</script>
+</body>
+</html>
+

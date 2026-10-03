@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Classes — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="faculty-classesPage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:var(--gradient-accent)" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Faculty</div>
+        <div class="sidebar-user-role">faculty</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+            <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="faculty.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="Upload Course">
+          <span class="sidebar-icon"><i class="fa fa-upload"></i></span>
+          <span class="sidebar-label">Upload Course</span>
+        </a>
+        <a href="faculty-notes.html" class="sidebar-link" data-tooltip="Review Notes">
+          <span class="sidebar-icon"><i class="fa fa-file-text"></i></span>
+          <span class="sidebar-label">Review Notes</span>
+        </a>
+        <a href="faculty-classes.html" class="sidebar-link active" data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="faculty-assignments.html" class="sidebar-link" data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge" id="pendingGradesBadge">2</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link" data-tooltip="Create Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Create Quiz</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Reports</div>
+        <a href="attendance.html" class="sidebar-link" data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tooltip="Results">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Results</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Faculty Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <button class="notif-btn" title="Notifications"><i class="fa fa-bell"></i><span class="notif-badge">2</span></button>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Faculty</span>
+              <span class="user-role">faculty</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+        <div class="page-content">
+      <div class="page-header flex-between">
+        <div>
+          <h1 class="page-title">Live Class Management</h1>
+          <p class="page-subtitle">Schedule sessions, manage recordings, and track attendance.</p>
+        </div>
+        <button class="btn btn-primary" onclick="document.getElementById('scheduleClassForm').style.display='block'"><i class="fa fa-calendar-plus-o"></i> Schedule Class</button>
+      </div>
+
+      <!-- Schedule Form (Hidden by default) -->
+      <div class="card" id="scheduleClassForm" style="display:none; margin-bottom:24px; border-left:4px solid var(--primary);">
+        <div class="card-header flex-between">
+          <span class="card-title">Schedule New Live Class</span>
+          <button class="btn btn-ghost btn-sm" onclick="this.closest('.card').style.display='none'"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="card-body">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+            <div class="form-group">
+              <label class="form-label">Topic</label>
+              <input type="text" class="form-control" placeholder="e.g., Introduction to React">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Course</label>
+              <select class="form-control">
+                <option>Web Development</option>
+                <option>Data Structures</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date & Time</label>
+              <input type="datetime-local" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Meeting Link</label>
+              <input type="url" class="form-control" placeholder="https://zoom.us/j/...">
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="alert('Class Scheduled Successfully!'); this.closest('.card').style.display='none';"><i class="fa fa-paper-plane"></i> Schedule</button>
+        </div>
+      </div>
+
+      <!-- Upcoming Classes -->
+      <h3 style="margin-bottom:16px;">Upcoming Sessions</h3>
+      <div class="dashboard-grid" style="margin-bottom:32px;">
+        <div class="card" id="upcomingClassCard">
+          <div class="card-body" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="color:var(--primary); font-weight:600; margin-bottom:4px;" id="currentClassTopic">Advanced CSS Layouts</div>
+              <div style="font-size:0.85rem; color:var(--text-muted);"><i class="fa fa-clock-o"></i> Today, 2:00 PM • Web Development</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-success btn-sm" onclick="startLiveClassSim('Advanced CSS Layouts')"><i class="fa fa-play"></i> Start Class</button>
+              <button class="btn btn-outline btn-sm"><i class="fa fa-upload"></i> Materials</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="color:var(--primary); font-weight:600; margin-bottom:4px;">Graph Traversal</div>
+              <div style="font-size:0.85rem; color:var(--text-muted);"><i class="fa fa-clock-o"></i> Tomorrow, 10:00 AM • Data Structures</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-primary btn-sm" onclick="startLiveClassSim('Graph Traversal')"><i class="fa fa-play"></i> Start Class</button>
+              <button class="btn btn-outline btn-sm"><i class="fa fa-upload"></i> Materials</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Recordings -->
+      <h3 style="margin-bottom:16px;">Recent Recordings (Auto-Synced)</h3>
+      <div class="card">
+        <table class="table" style="width:100%; text-align:left;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="padding:16px;">Topic</th>
+              <th style="padding:16px;">Date</th>
+              <th style="padding:16px;">Attendance</th>
+              <th style="padding:16px;">Recording Status</th>
+            </tr>
+          </thead>
+          <tbody id="recordingsTableBody">
+            <tr>
+              <td style="padding:16px; font-weight:600;">Introduction to HTML</td>
+              <td style="padding:16px;">Oct 10, 2024</td>
+              <td style="padding:16px;">42 / 45 (93%)</td>
+              <td style="padding:16px;"><span class="badge badge-success"><i class="fa fa-cloud-upload"></i> Uploaded & Shared</span></td>
+            </tr>
+            <tr>
+              <td style="padding:16px; font-weight:600;">Linked Lists</td>
+              <td style="padding:16px;">Oct 9, 2024</td>
+              <td style="padding:16px;">38 / 40 (95%)</td>
+              <td style="padding:16px;"><span class="badge badge-success"><i class="fa fa-cloud-upload"></i> Uploaded & Shared</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Active Live Classroom Simulator Modal -->
+<div class="modal-overlay" id="activeClassModal" style="background:rgba(0,0,0,0.85)">
+  <div class="modal" style="max-width:960px; width:95%; height:90vh; display:flex; flex-direction:column; padding:0; overflow:hidden; border-radius:12px;">
+    <!-- Modal Header -->
+    <div style="background:#1E293B; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #334155; color:white;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="display:inline-block; width:10px; height:10px; background:#EF4444; border-radius:50%; animation:ai-pulse 1.5s infinite"></span>
+        <strong id="activeClassNameLabel" style="font-size:1.05rem;">Live Room: Advanced CSS Layouts</strong>
+        <span style="font-size:0.75rem; background:rgba(255,255,255,0.1); padding:2px 8px; border-radius:4px;">Rec: 00:04:12</span>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="triggerEndClass()" style="background:#EF4444"><i class="fa fa-stop-circle"></i> END CLASS</button>
+    </div>
+
+    <!-- Modal Content Grid -->
+    <div style="flex:1; display:grid; grid-template-columns:1fr 280px; background:#0F172A; overflow:hidden;">
+      
+      <!-- Left: Stage (Webcam / Screen Share / Whiteboard Canvas) -->
+      <div style="display:flex; flex-direction:column; border-right:1px solid #334155; position:relative; overflow:hidden;">
+        
+        <!-- Tabs for Stage -->
+        <div style="display:flex; background:#1E293B; padding:6px 12px; gap:8px; border-bottom:1px solid #334155;">
+          <button class="btn btn-sm active" id="btnShowWhiteboard" onclick="switchStageView('whiteboard')" style="font-size:0.75rem; background:var(--primary); color:white">✏️ Whiteboard</button>
+          <button class="btn btn-sm" id="btnShowScreen" onclick="switchStageView('screen')" style="font-size:0.75rem; color:#ccc">🖥️ Screen Share</button>
+          <button class="btn btn-sm" id="btnShowCamera" onclick="switchStageView('camera')" style="font-size:0.75rem; color:#ccc">📹 Faculty Camera</button>
+        </div>
+
+        <!-- Whiteboard stage -->
+        <div id="stageWhiteboard" style="flex:1; display:flex; flex-direction:column; position:relative; background:#f1f5f9;">
+          <div style="background:#e2e8f0; padding:6px 12px; display:flex; gap:12px; font-size:0.8rem; align-items:center;">
+            <span>Whiteboard Tools:</span>
+            <button onclick="clearWhiteboard()" class="btn btn-sm" style="background:#cbd5e1; padding:2px 8px; font-size:0.7rem">🧹 Clear</button>
+            <input type="color" id="whiteboardColor" value="#2563EB" style="width:24px; height:24px; border:none; cursor:pointer">
+          </div>
+          <canvas id="whiteboardCanvas" style="flex:1; cursor:crosshair; width:100%; height:100%;"></canvas>
+        </div>
+
+        <!-- Screen share stage -->
+        <div id="stageScreen" style="flex:1; display:none; align-items:center; justify-content:center; background:#111; color:white;">
+          <div style="text-align:center;">
+            <i class="fa fa-desktop" style="font-size:5rem; color:var(--primary); margin-bottom:14px;"></i>
+            <h3>Simulated Screen Sharing Active</h3>
+            <p style="color:#64748B; font-size:0.85rem; margin-top:4px">Sharing Screen 1: Desktop IDE / Browser</p>
+          </div>
+        </div>
+
+        <!-- Camera stage -->
+        <div id="stageCamera" style="flex:1; display:none; align-items:center; justify-content:center; background:#111; color:white;">
+          <div style="text-align:center; border:2px dashed #334155; border-radius:12px; padding:40px; background:#1E293B">
+            <i class="fa fa-user-circle" style="font-size:5rem; color:#94A3B8; margin-bottom:14px;"></i>
+            <h3>Faculty Camera Feed</h3>
+            <span style="font-size:0.8rem; color:#10B981"><i class="fa fa-circle"></i> Broadcasting High-Def 1080p Stream</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Chat & Participants -->
+      <div style="display:flex; flex-direction:column; background:#1E293B; height:100%;">
+        <div style="background:#0F172A; padding:8px 12px; font-size:0.8rem; font-weight:700; color:white; border-bottom:1px solid #334155;">
+          💬 Class Live Chat
+        </div>
+        <div style="flex:1; padding:12px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; font-size:0.8rem; color:#e2e8f0;" id="liveClassChatBox">
+          <div><strong style="color:#60A5FA">System:</strong> Stream connected. 44 students joined.</div>
+          <div><strong style="color:#10B981">Alex Johnson:</strong> Yes, slides are visible, Doctor.</div>
+          <div><strong style="color:#F59E0B">Emily Davis:</strong> Can you explain CSS Grid gap vs margin?</div>
+        </div>
+        <div style="padding:10px; border-top:1px solid #334155; display:flex; gap:6px;">
+          <input type="text" id="liveChatInput" placeholder="Send chat to room..." style="flex:1; background:#0F172A; border:1px solid #334155; color:white; padding:6px 10px; border-radius:4px; font-size:0.75rem;">
+          <button class="btn btn-primary btn-sm" onclick="sendLiveClassChat()"><i class="fa fa-paper-plane"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Automated Recording System Upload Progress Modal -->
+<div class="modal-overlay" id="endClassProgressModal" style="z-index:10005;">
+  <div class="modal" style="max-width:440px; padding:24px; text-align:center;">
+    <div style="font-size:2.5rem; margin-bottom:16px;" id="pipelineProgressIcon">
+      <i class="fa fa-spinner fa-spin" style="color:var(--primary)"></i>
+    </div>
+    <h3 style="margin-bottom:8px;" id="pipelineProgressTitle">Running Cloud Sync Pipeline</h3>
+    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;" id="pipelineProgressMsg">
+      Executing automatic recording save & data sync...
+    </p>
+
+    <!-- Steps -->
+    <div style="display:flex; flex-direction:column; gap:10px; text-align:left; font-size:0.8rem; padding:12px; background:var(--bg); border-radius:8px; border:1px solid var(--border); margin-bottom:20px;">
+      <div id="pstep-1" class="text-muted"><i class="fa fa-circle-o"></i> Stop active stream recording</div>
+      <div id="pstep-2" class="text-muted"><i class="fa fa-circle-o"></i> Compress video payload (H.264 High)</div>
+      <div id="pstep-3" class="text-muted"><i class="fa fa-circle-o"></i> Auto-generate lecture thumbnail</div>
+      <div id="pstep-4" class="text-muted"><i class="fa fa-circle-o"></i> Upload to secure cloud S3 storage</div>
+      <div id="pstep-5" class="text-muted"><i class="fa fa-circle-o"></i> Update student dashboards & notify</div>
+      <div id="pstep-6" class="text-muted"><i class="fa fa-circle-o"></i> Auto-recalculate attendance rates</div>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/faculty.js"></script>
+<script>
+  let activeClassTopic = '';
+  let canvas, ctx, isDrawing = false;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Canvas Initialization
+    canvas = document.getElementById('whiteboardCanvas');
+    if (canvas) {
+      ctx = canvas.getContext('2d');
+      // Resize handler
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseout', stopDrawing);
+    }
+  });
+
+  function resizeCanvas() {
+    if (!canvas) return;
+    // Set internal size matching client bounds
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight - 40;
+    clearWhiteboard();
+  }
+
+  // Drawing functions
+  function startDrawing(e) {
+    isDrawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  }
+
+  function draw(e) {
+    if (!isDrawing) return;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = document.getElementById('whiteboardColor').value || '#2563EB';
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+  }
+
+  function stopDrawing() {
+    isDrawing = false;
+  }
+
+  function clearWhiteboard() {
+    if (!ctx) return;
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function switchStageView(view) {
+    const views = ['whiteboard', 'screen', 'camera'];
+    views.forEach(v => {
+      document.getElementById(`stage${v.charAt(0).toUpperCase() + v.slice(1)}`).style.display = (v === view) ? (v === 'whiteboard' ? 'flex' : 'flex') : 'none';
+      if (v !== view) document.getElementById(`stage${v.charAt(0).toUpperCase() + v.slice(1)}`).style.display = 'none';
+    });
+    
+    // Toggle active tab classes
+    document.getElementById('btnShowWhiteboard').className = (view === 'whiteboard') ? 'btn btn-sm active' : 'btn btn-sm';
+    document.getElementById('btnShowWhiteboard').style.background = (view === 'whiteboard') ? 'var(--primary)' : 'none';
+    document.getElementById('btnShowWhiteboard').style.color = (view === 'whiteboard') ? 'white' : '#ccc';
+    
+    document.getElementById('btnShowScreen').className = (view === 'screen') ? 'btn btn-sm active' : 'btn btn-sm';
+    document.getElementById('btnShowScreen').style.background = (view === 'screen') ? 'var(--primary)' : 'none';
+    document.getElementById('btnShowScreen').style.color = (view === 'screen') ? 'white' : '#ccc';
+    
+    document.getElementById('btnShowCamera').className = (view === 'camera') ? 'btn btn-sm active' : 'btn btn-sm';
+    document.getElementById('btnShowCamera').style.background = (view === 'camera') ? 'var(--primary)' : 'none';
+    document.getElementById('btnShowCamera').style.color = (view === 'camera') ? 'white' : '#ccc';
+  }
+
+  function sendLiveClassChat() {
+    const input = document.getElementById('liveChatInput');
+    const txt = input.value.trim();
+    if (!txt) return;
+
+    const box = document.getElementById('liveClassChatBox');
+    const msg = document.createElement('div');
+    msg.innerHTML = `<strong>Me (Faculty):</strong> ${txt}`;
+    box.appendChild(msg);
+    box.scrollTop = box.scrollHeight;
+    input.value = '';
+
+    // Mock student answer reply
+    setTimeout(() => {
+      const answers = ['Got it!', 'Understood.', 'Excellent example.', 'Thanks!'];
+      const reply = document.createElement('div');
+      reply.innerHTML = `<strong style="color:#10B981">Marcus Lee:</strong> ${answers[Math.floor(Math.random() * answers.length)]}`;
+      box.appendChild(reply);
+      box.scrollTop = box.scrollHeight;
+    }, 800);
+  }
+
+  function startLiveClassSim(topic) {
+    activeClassTopic = topic;
+    document.getElementById('activeClassNameLabel').textContent = `Live Room: ${topic}`;
+    Modal.open('activeClassModal');
+    // Clear canvas & reset size
+    setTimeout(resizeCanvas, 100);
+  }
+
+  function triggerEndClass() {
+    Modal.close('activeClassModal');
+    Modal.open('endClassProgressModal');
+    runPipelineSimulation();
+  }
+
+  function runPipelineSimulation() {
+    const steps = [
+      { id: 'pstep-1', msg: '🎥 Recording stream halted successfully.' },
+      { id: 'pstep-2', msg: '⚙️ Encoding payload: compressed by 68%.' },
+      { id: 'pstep-3', msg: '🖼️ Thumbnail captured (SHA-256 registered).' },
+      { id: 'pstep-4', msg: '☁️ S3 cloud sync upload completed.' },
+      { id: 'pstep-5', msg: '📩 Shared signed secure URL & notified students.' },
+      { id: 'pstep-6', msg: '📈 Recalculated class attendance rates.' }
+    ];
+
+    let currentStep = 0;
+    const interval = setInterval(() => {
+      if (currentStep < steps.length) {
+        const step = steps[currentStep];
+        const el = document.getElementById(step.id);
+        if (el) {
+          el.className = 'text-success font-semi';
+          el.innerHTML = `<i class="fa fa-check-circle"></i> ${step.msg}`;
+        }
+        currentStep++;
+      } else {
+        clearInterval(interval);
+        
+        // Finalize modal success state
+        document.getElementById('pipelineProgressIcon').innerHTML = '<i class="fa fa-check-circle" style="color:var(--success)"></i>';
+        document.getElementById('pipelineProgressTitle').textContent = 'Pipeline Completed!';
+        document.getElementById('pipelineProgressMsg').textContent = 'Cloud sync fully executed. Check recordings below.';
+
+        setTimeout(() => {
+          Modal.close('endClassProgressModal');
+          
+          // Insert row into recent recordings table
+          const tbody = document.getElementById('recordingsTableBody');
+          const tr = document.createElement('tr');
+          const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          tr.innerHTML = `
+            <td style="padding:16px; font-weight:600;">${activeClassTopic}</td>
+            <td style="padding:16px;">${today}</td>
+            <td style="padding:16px;">44 / 45 (97%)</td>
+            <td style="padding:16px;"><span class="badge badge-success"><i class="fa fa-cloud-upload"></i> Uploaded & Shared</span></td>
+          `;
+          tbody.insertBefore(tr, tbody.firstChild);
+
+          // Hide the started card or mark it as done
+          const cards = document.querySelectorAll('#upcomingClassCard');
+          cards.forEach(c => {
+            if (c.innerText.includes(activeClassTopic)) {
+              c.remove();
+            }
+          });
+
+          Toast.success('Automatic Recording Active', `Recorded stream of ${activeClassTopic} is now available on student portals.`);
+        }, 1200);
+      }
+    }, 600);
+  }
+</script>
+</body>
+</html>
+

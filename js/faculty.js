@@ -1,5 +1,5 @@
 /* ============================================================
-   Acadex LMS — faculty.js
+   Prime Vector LMS — faculty.js
    ============================================================ */
 
 const FACULTY_DATA = {
@@ -240,8 +240,16 @@ function initFacultyDashboard() {
   if (!Auth.requireAuth()) return;
 
   const user = Auth.getUser();
-  if (user.role !== 'faculty') {
-    window.location.href = `${user.role}.html`;
+  const allowedRoles = ['faculty', 'trainer', 'mentor'];
+  if (!allowedRoles.includes(user.role)) {
+    const roleMap = {
+      super_admin: 'admin.html',
+      admin: 'admin.html',
+      student: 'student.html',
+      hr_admin: 'hr.html',
+      placement_officer: 'placement.html'
+    };
+    window.location.href = roleMap[user.role] || 'student.html';
     return;
   }
 

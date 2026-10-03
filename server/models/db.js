@@ -1,0 +1,493 @@
+// In-Memory & Database Store for Prime Vector LMS (Learning & Training Management System)
+const db = {
+  companies: [
+    { id: "comp-1", name: "Prime Vector Enterprise Solutions", code: "PV-ENT", branches: ["Hosur Main Campus", "Bangalore Tech Hub", "Chennai Innovation Center"] },
+    { id: "comp-2", name: "Apex Tech Upskilling Corp", code: "APEX-UPS", branches: ["Hyderabad Hub", "Pune Center"] }
+  ],
+
+  branches: [
+    { id: "b-1", companyId: "comp-1", name: "Hosur Main Campus", code: "PV-HOS", region: "Tamil Nadu", studentCount: 450 },
+    { id: "b-2", companyId: "comp-1", name: "Bangalore Tech Hub", code: "PV-BLR", region: "Karnataka", studentCount: 680 },
+    { id: "b-3", companyId: "comp-1", name: "Chennai Innovation Center", code: "PV-MAA", region: "Tamil Nadu", studentCount: 320 }
+  ],
+
+  users: [
+    { id: "1", name: 'Alex Johnson', email: 'student@demo.com', password: 'demo123', role: 'student', companyId: 'comp-1', branchId: 'b-1', department: 'Computer Science', joined: '2024-09-01', avatar: 'A', linkedin: 'https://linkedin.com/in/alexjohnson-pv', weeklyStreak: 5, attendanceRate: 94 },
+    { id: "2", name: 'Dr. Sarah Chen', email: 'trainer@demo.com', password: 'demo123', role: 'trainer', companyId: 'comp-1', branchId: 'b-1', department: 'AI & Data Science', joined: '2023-01-15', avatar: 'S', specialization: 'Neural Networks & LLMs' },
+    { id: "3", name: 'Executive Chief Admin', email: 'superadmin@demo.com', password: 'demo123', role: 'super_admin', companyId: 'comp-1', branchId: 'b-1', department: 'Executive Management', joined: '2022-06-01', avatar: 'E' },
+    { id: "4", name: 'Jane Recruiter', email: 'hr@demo.com', password: 'demo123', role: 'hr_admin', companyId: 'comp-1', branchId: 'b-2', department: 'Talent Acquisition', joined: '2025-01-10', avatar: 'J' },
+    { id: "5", name: 'Marcus Vance', email: 'mentor@demo.com', password: 'demo123', role: 'mentor', companyId: 'comp-1', branchId: 'b-1', department: 'Full Stack Engineering', joined: '2024-03-20', avatar: 'M' },
+    { id: "6", name: 'Priya Sharma', email: 'placement@demo.com', password: 'demo123', role: 'placement_officer', companyId: 'comp-1', branchId: 'b-1', department: 'Corporate Relations & Placements', joined: '2023-08-11', avatar: 'P' }
+  ],
+
+  courses: [
+    { 
+      id: "1", 
+      title: 'Applied AI & Machine Learning Engineering', 
+      instructor: 'Dr. Sarah Chen', 
+      category: 'AI & ML', 
+      price: 2499, 
+      progress: 78, 
+      lessons: 60, 
+      duration: '60h', 
+      rating: 4.9, 
+      thumb: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=500&q=80',
+      description: 'Master supervised learning, neural networks, computer vision, and LLM agent integration with real-world enterprise projects.',
+      modules: ['Foundations of AI', 'Deep Learning & PyTorch', 'NLP & Transformer Models', 'AI Agent Deployment']
+    },
+    { 
+      id: "2", 
+      title: 'Full-Stack Web Development & Microservices', 
+      instructor: 'Marcus Vance', 
+      category: 'Full Stack', 
+      price: 1999, 
+      progress: 88, 
+      lessons: 75, 
+      duration: '75h', 
+      rating: 4.8, 
+      thumb: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80',
+      description: 'Build enterprise MERN applications, GraphQL APIs, Docker containers, and CI/CD pipelines with high performance.',
+      modules: ['React & Vite Fundamentals', 'Node.js & Express Architecture', 'PostgreSQL & ORM', 'Cloud Deployment & Docker']
+    },
+    { 
+      id: "3", 
+      title: 'Data Science, Analytics & Big Data', 
+      instructor: 'Prime Vector Data Lab', 
+      category: 'Data Science', 
+      price: 1899, 
+      progress: 45, 
+      lessons: 50, 
+      duration: '50h', 
+      rating: 4.9, 
+      thumb: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80',
+      description: 'Exploratory data analysis, Pandas, SQL data warehousing, Tableau visualization, and predictive modeling.',
+      modules: ['Data Wrangling with Pandas', 'SQL Analytics Engine', 'PowerBI & Tableau Dashboards', 'Predictive ML Pipelines']
+    }
+  ],
+
+  liveClasses: [
+    {
+      id: "lc-101",
+      title: "Advanced Transformer Architectures & RAG",
+      courseId: "1",
+      trainer: "Dr. Sarah Chen",
+      scheduledAt: "2026-07-28T10:00:00Z",
+      durationMins: 90,
+      platform: "Google Meet",
+      joinUrl: "https://meet.google.com/pv-lms-aiml",
+      recordingUrl: "https://drive.google.com/file/d/pv-rec-101/view",
+      status: "Upcoming",
+      attendeesCount: 48
+    },
+    {
+      id: "lc-102",
+      title: "Microservices Architecture & Event Loops in Node.js",
+      courseId: "2",
+      trainer: "Marcus Vance",
+      scheduledAt: "2026-07-29T14:30:00Z",
+      durationMins: 120,
+      platform: "Zoom",
+      joinUrl: "https://zoom.us/j/9876543210?pwd=pv-lms-fullstack",
+      recordingUrl: "https://zoom.us/rec/play/pv-rec-102",
+      status: "Scheduled",
+      attendeesCount: 65
+    }
+  ],
+
+  attendance: [
+    { id: "att-1", studentId: "1", studentName: "Alex Johnson", date: "2026-07-27", status: "Present", method: "QR Code", timestamp: "09:02 AM", branch: "Hosur Main Campus" },
+    { id: "att-2", studentId: "1", studentName: "Alex Johnson", date: "2026-07-26", status: "Present", method: "Face Verification", timestamp: "08:58 AM", branch: "Hosur Main Campus" },
+    { id: "att-3", studentId: "1", studentName: "Alex Johnson", date: "2026-07-25", status: "Present", method: "Manual", timestamp: "09:10 AM", branch: "Hosur Main Campus" }
+  ],
+
+  assignments: [
+    { id: "1", title: 'Build a MERN REST API with JWT Auth', course: 'Full Stack', due: '2026-07-28', status: 'pending', points: 100, studentId: "1", submissionUrl: "", aiFeedback: null },
+    { id: "2", title: 'Neural Network Model Fine-Tuning', course: 'AI & ML', due: '2026-07-30', status: 'pending', points: 90, studentId: "1", submissionUrl: "", aiFeedback: null },
+    { id: "3", title: 'Data Cleaning & Viz Lab using Pandas', course: 'Data Science', due: '2026-07-22', status: 'submitted', points: 85, studentId: "1", submissionUrl: "https://github.com/alex-pv/data-viz-lab", aiFeedback: "Excellent data cleanup. Visualizations in Seaborn adhere to clean graph aesthetics. Score: 92/100." }
+  ],
+
+  placements: [
+    { 
+      id: "p-1", 
+      company: 'Prime Tech Solutions', 
+      role: 'Full Stack Trainee Engineer', 
+      ctc: '8.5 LPA', 
+      location: 'Hosur / Remote', 
+      status: 'Active Drives', 
+      applicants: 42, 
+      deadline: '2026-08-05',
+      rounds: ['Aptitude Test', 'Technical Coding Round', 'HR Interview'],
+      requirements: ['React', 'Node.js', 'PostgreSQL', 'Problem Solving']
+    },
+    { 
+      id: "p-2", 
+      company: 'Vector AI Systems', 
+      role: 'Junior ML Engineer', 
+      ctc: '12.0 LPA', 
+      location: 'Hosur Campus', 
+      status: 'Active Drives', 
+      applicants: 28, 
+      deadline: '2026-08-10',
+      rounds: ['Python & Data Structure Test', 'AI/ML Technical Round', 'Director Discussion'],
+      requirements: ['Python', 'PyTorch', 'REST APIs', 'FastAPI']
+    },
+    { 
+      id: "p-3", 
+      company: 'Global Cloud Corp', 
+      role: 'Cloud DevOps Associate', 
+      ctc: '9.0 LPA', 
+      location: 'Bangalore / Hosur', 
+      status: 'Interview Round', 
+      applicants: 19, 
+      deadline: '2026-08-01',
+      rounds: ['Cloud Assessment', 'System Design', 'HR'],
+      requirements: ['Docker', 'AWS', 'Linux Shell', 'CI/CD']
+    }
+  ],
+
+  interviews: [
+    { id: "int-1", studentId: "1", studentName: "Alex Johnson", company: "Prime Tech Solutions", role: "Full Stack Trainee", date: "2026-07-30", time: "11:00 AM", round: "Technical Coding Round", status: "Confirmed", interviewer: "Sarah Senior Architect" },
+    { id: "int-2", studentId: "1", studentName: "Alex Johnson", company: "Vector AI Systems", role: "Junior ML Engineer", date: "2026-08-02", time: "02:30 PM", round: "AI/ML Technical Round", status: "Scheduled", interviewer: "Dr. Chen Head of AI" }
+  ],
+
+  certificates: [
+    { id: "PV-2026-001", studentName: 'Alex Johnson', course: 'Applied AI & Machine Learning Engineering', date: '2025-10-15', verificationUrl: 'https://primevector.in/verify/PV-2026-001', grade: 'A+' },
+    { id: "PV-2026-042", studentName: 'Alex Johnson', course: 'Full Stack Web Engineering', date: '2025-11-02', verificationUrl: 'https://primevector.in/verify/PV-2026-042', grade: 'Distinction' }
+  ],
+
+  aiLogs: [
+    { id: "ai-1", type: "doubt", query: "What is the difference between supervised and unsupervised learning?", response: "Supervised learning uses labeled training data to map inputs to target outputs (e.g., classification or regression). Unsupervised learning finds inherent patterns, clusters, or structures in unlabeled data (e.g., K-Means clustering, PCA).", timestamp: "2026-07-27 10:15" }
+  ],
+
+  analytics: {
+    monthlyRevenue: [
+      { month: 'Jan', revenue: 24000, enrollments: 120 },
+      { month: 'Feb', revenue: 31000, enrollments: 155 },
+      { month: 'Mar', revenue: 28000, enrollments: 140 },
+      { month: 'Apr', revenue: 39000, enrollments: 195 },
+      { month: 'May', revenue: 45000, enrollments: 220 },
+      { month: 'Jun', revenue: 52000, enrollments: 260 }
+    ],
+    placementStats: {
+      totalRegistered: 340,
+      totalPlaced: 285,
+      placementRate: "83.8%",
+      avgPackage: "8.4 LPA",
+      highestPackage: "18.5 LPA"
+    }
+  },
+
+  recordedClasses: [
+    { id: "rec-101", title: 'React 18 Concurrent Rendering & Server Components', instructor: 'Dr. Sarah Chen', date: '2026-07-20', duration: '1h 45m', views: 320, category: 'Web Dev', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    { id: "rec-102", title: 'Node.js Performance Tuning & Memory Profiling', instructor: 'Marcus Vance', date: '2026-07-18', duration: '2h 10m', views: 415, category: 'Backend', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    { id: "rec-103", title: 'LLM Fine-Tuning with LoRA & Hugging Face', instructor: 'Dr. Sarah Chen', date: '2026-07-15', duration: '1h 50m', views: 580, category: 'AI & ML', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    { id: "rec-104", title: 'PostgreSQL Indexing & Partitioning Strategies', instructor: 'Marcus Vance', date: '2026-07-10', duration: '1h 30m', views: 290, category: 'Database', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
+  ],
+
+  training: {
+    streak: 12,
+    overallProgress: 68,
+    duration: { total: 140, completed: 95, remaining: 45, estDate: 'Nov 15, 2026' },
+    weeklyHours: [4, 6, 5, 8, 3, 7, 5],
+    categories: [
+      { name: 'Aptitude Training', progress: 85 },
+      { name: 'Technical System Design', progress: 92 },
+      { name: 'DSA & Coding Practice', progress: 88 },
+      { name: 'Verbal & Soft Skills', progress: 75 },
+      { name: 'Mock Technical Interview', progress: 80 }
+    ],
+    programs: [
+      {
+        id: "tr-1",
+        title: 'Full-Stack Enterprise MERN Bootcamp',
+        instructor: 'Marcus Vance',
+        category: 'Full Stack',
+        status: 'In Progress',
+        progress: 74,
+        duration: '60 hours',
+        schedule: 'Mon, Wed, Fri',
+        modulesCount: 12,
+        completedModules: 9
+      },
+      {
+        id: "tr-2",
+        title: 'Applied Generative AI & Agent Architectures',
+        instructor: 'Dr. Sarah Chen',
+        category: 'AI & ML',
+        status: 'In Progress',
+        progress: 62,
+        duration: '45 hours',
+        schedule: 'Tue, Thu, Sat',
+        modulesCount: 10,
+        completedModules: 6
+      },
+      {
+        id: "tr-3",
+        title: 'Competitive DSA & Algorithms Mastery',
+        instructor: 'Prof. Tim Chen',
+        category: 'CS Core',
+        status: 'Upcoming',
+        progress: 15,
+        duration: '50 hours',
+        schedule: 'Sunday Intensive',
+        modulesCount: 14,
+        completedModules: 2
+      }
+    ]
+  },
+
+  candidates: [
+    { id: "cand-1", name: "Alex Johnson", email: "student@demo.com", role: "Full Stack Trainee", driveId: "p-1", company: "Prime Tech Solutions", atsScore: 92, status: "Shortlisted", phone: "+91 9876543210", appliedDate: "2026-07-21" },
+    { id: "cand-2", name: "Pooja Reddy", email: "pooja.r@demo.com", role: "Junior ML Engineer", driveId: "p-2", company: "Vector AI Systems", atsScore: 89, status: "Interview", phone: "+91 9876543211", appliedDate: "2026-07-22" },
+    { id: "cand-3", name: "Rohan Verma", email: "rohan.v@demo.com", role: "Cloud DevOps Associate", driveId: "p-3", company: "Global Cloud Corp", atsScore: 95, status: "Offered", phone: "+91 9876543212", appliedDate: "2026-07-19" },
+    { id: "cand-4", name: "Sneha Nair", email: "sneha.n@demo.com", role: "Full Stack Trainee", driveId: "p-1", company: "Prime Tech Solutions", atsScore: 78, status: "Applied", phone: "+91 9876543213", appliedDate: "2026-07-24" }
+  ],
+
+  quizzes: [
+    {
+      id: "quiz-1",
+      title: "JavaScript & Modern ES6+ Architecture",
+      course: "Full Stack Engineering",
+      category: "Frontend",
+      durationMins: 10,
+      passingScore: 70,
+      totalQuestions: 5,
+      questions: [
+        {
+          id: 1,
+          question: "Which of the following creates a block-scoped variable in modern JavaScript?",
+          options: ["var", "let & const", "define", "global"],
+          correctIndex: 1,
+          explanation: "'let' and 'const' provide lexical block scoping introduced in ES6, unlike 'var' which is function-scoped."
+        },
+        {
+          id: 2,
+          question: "What does the strict equality operator (===) compare?",
+          options: ["Values with implicit type coercion", "Both value and data type without coercion", "Memory addresses only", "Variable string lengths"],
+          correctIndex: 1,
+          explanation: "'===' enforces type safety by verifying both the underlying type and exact primitive/reference value."
+        },
+        {
+          id: 3,
+          question: "What is returned by Array.prototype.map()?",
+          options: ["The original array modified in-place", "A newly transformed array of identical length", "A filtered subset of elements", "A boolean flag indicating array mutation"],
+          correctIndex: 1,
+          explanation: "'map()' creates a brand new array containing results of calling the provided function on every element."
+        },
+        {
+          id: 4,
+          question: "Which keyword in JavaScript handles async Promise rejections cleanly within async functions?",
+          options: ["try / catch", "onError / resume", "dispatch / await", "panic / recover"],
+          correctIndex: 0,
+          explanation: "Standard 'try/catch' blocks capture rejected promises when awaited inside async function blocks."
+        },
+        {
+          id: 5,
+          question: "What is the primary role of the JavaScript Event Loop?",
+          options: ["Execute synchronous CPU tasks across 16 threads", "Continuously coordinate between Call Stack, Web APIs, and Task/Microtask Queues", "Compile byte code directly into machine assembly", "Garbage collect memory synchronously"],
+          correctIndex: 1,
+          explanation: "The event loop continuously monitors the Call Stack and moves tasks from Microtask and Callback Queues when stack is clear."
+        }
+      ]
+    },
+    {
+      id: "quiz-2",
+      title: "Generative AI, Transformers & LLM Prompting",
+      course: "Applied AI & Machine Learning Engineering",
+      category: "AI & ML",
+      durationMins: 15,
+      passingScore: 75,
+      totalQuestions: 4,
+      questions: [
+        {
+          id: 1,
+          question: "What key mechanism allows Transformer models to process all tokens in a sequence concurrently?",
+          options: ["Recurrent hidden state propagation", "Multi-Head Self-Attention", "Convolutional Max-Pooling", "Stochastic Gradient Descent"],
+          correctIndex: 1,
+          explanation: "Multi-Head Self-Attention calculates pairwise token affinities simultaneously across the entire context window."
+        },
+        {
+          id: 2,
+          question: "What does LoRA (Low-Rank Adaptation) accomplish during LLM fine-tuning?",
+          options: ["Freezes all parameters and only modifies prompts", "Decomposes weight update matrices into smaller low-rank pairs to drastically reduce GPU memory", "Compresses models by discarding 80% of vocabulary", "Replaces transformers with CNNs"],
+          correctIndex: 1,
+          explanation: "LoRA freezes pre-trained weights and injects trainable rank decomposition matrices, reducing trainable parameters up to 99%."
+        },
+        {
+          id: 3,
+          question: "In RAG (Retrieval-Augmented Generation), what is vector embedding used for?",
+          options: ["Encrypting user credentials", "Semantic similarity search over external knowledge documents", "Generating random seed weights", "Compiling Python scripts into C++"],
+          correctIndex: 1,
+          explanation: "Embeddings map text to high-dimensional vectors so query meaning can be matched with relevant document chunks."
+        },
+        {
+          id: 4,
+          question: "What is the purpose of temperature in LLM sampling?",
+          options: ["Monitors CPU heat during training", "Controls the randomness/creativity of token probability distribution", "Sets maximum output token count", "Determines context window size in gigabytes"],
+          correctIndex: 1,
+          explanation: "Higher temperature flattens probability distribution yielding more creative outputs, while 0.0 is deterministic and focused."
+        }
+      ]
+    },
+    {
+      id: "quiz-3",
+      title: "Data Structures & Algorithmic Complexity",
+      course: "Competitive DSA & Algorithms Mastery",
+      category: "Algorithms",
+      durationMins: 12,
+      passingScore: 70,
+      totalQuestions: 4,
+      questions: [
+        {
+          id: 1,
+          question: "What is the worst-case time complexity of QuickSort when a poorly chosen pivot is used?",
+          options: ["O(log N)", "O(N log N)", "O(N^2)", "O(1)"],
+          correctIndex: 2,
+          explanation: "In worst case (already sorted array with first/last pivot), QuickSort partitions into 1 and N-1 elements, resulting in O(N^2)."
+        },
+        {
+          id: 2,
+          question: "Which data structure implements FIFO (First-In, First-Out) semantics?",
+          options: ["Stack", "Queue", "Max Heap", "Binary Search Tree"],
+          correctIndex: 1,
+          explanation: "A Queue processes elements in the exact order they arrive: first-in, first-out."
+        },
+        {
+          id: 3,
+          question: "What is the lookup time complexity in an optimal Hash Map with balanced hashing?",
+          options: ["O(1) average", "O(N log N)", "O(N^2)", "O(log N)"],
+          correctIndex: 0,
+          explanation: "With low collision probability, hash lookup resolves in O(1) constant time."
+        },
+        {
+          id: 4,
+          question: "Which traversal of a Binary Search Tree (BST) yields keys in strictly ascending sorted order?",
+          options: ["Pre-order", "In-order", "Post-order", "Level-order"],
+          correctIndex: 1,
+          explanation: "In-order traversal visits (Left Subtree -> Root -> Right Subtree), which outputs keys in ascending sorted order for BSTs."
+        }
+      ]
+    }
+  ],
+
+  gamification: {
+    userXP: 3850,
+    level: "Expert",
+    levelNumber: 6,
+    nextLevel: "Master",
+    nextLevelXP: 5500,
+    currentLevelMinXP: 3500,
+    streakDays: 14,
+    ranking: 4,
+    totalBadgesEarned: 8,
+    badges: [
+      { id: "b1", name: "First Step", category: "Onboarding", icon: "🚀", description: "Successfully created account and logged into Prime Vector LMS", unlocked: true, unlockedAt: "2026-01-10", xpValue: 50 },
+      { id: "b2", name: "14-Day Streak Warrior", category: "Consistency", icon: "🔥", description: "Maintained active study streak for 14 consecutive days", unlocked: true, unlockedAt: "2026-09-30", xpValue: 300 },
+      { id: "b3", name: "Code Ninja", category: "Development", icon: "💻", description: "Successfully executed 25+ algorithmic solutions in the Code Playground", unlocked: true, unlockedAt: "2026-08-15", xpValue: 200 },
+      { id: "b4", name: "AI Practitioner", category: "AI & ML", icon: "🤖", description: "Passed Deep Learning & Neural Networks milestone with 90%+ score", unlocked: true, unlockedAt: "2026-09-12", xpValue: 250 },
+      { id: "b5", name: "Quiz Ace", category: "Assessments", icon: "🏆", description: "Scored 100% on any enterprise technical assessment", unlocked: true, unlockedAt: "2026-07-28", xpValue: 150 },
+      { id: "b6", name: "Certified Engineer", category: "Credentials", icon: "🥇", description: "Earned official Prime Vector course completion certificate", unlocked: true, unlockedAt: "2025-10-15", xpValue: 500 },
+      { id: "b7", name: "Interview Ready", category: "Placements", icon: "💼", description: "Completed ATS resume review with 90+ score and mock technical panel", unlocked: true, unlockedAt: "2026-09-22", xpValue: 400 },
+      { id: "b8", name: "Community Mentor", category: "Social", icon: "💬", description: "Contributed 10+ verified answers in the Discussion Forum", unlocked: true, unlockedAt: "2026-09-18", xpValue: 200 },
+      { id: "b9", name: "Grandmaster", category: "Elite", icon: "👑", description: "Reach 15,000 XP and achieve top 3 ranking in campus leaderboard", unlocked: false, xpValue: 1000 },
+      { id: "b10", name: "Bug Hunter", category: "Development", icon: "🐞", description: "Submitted and solved 5 real-world GitHub open-source issues", unlocked: false, xpValue: 350 }
+    ],
+    leaderboard: [
+      { rank: 1, name: "Arjun Mehta", dept: "Computer Science", campus: "Hosur Main", xp: 8420, level: "Master", avatar: "AM", badge: "🥇" },
+      { rank: 2, name: "Priya Sharma", dept: "AI & Data Science", campus: "Bangalore Tech Hub", xp: 7850, level: "Expert", avatar: "PS", badge: "🥈" },
+      { rank: 3, name: "Rohit Kumar", dept: "Information Tech", campus: "Hosur Main", xp: 6920, level: "Expert", avatar: "RK", badge: "🥉" },
+      { rank: 4, name: "Alex Johnson (You)", dept: "Computer Science", campus: "Hosur Main", xp: 3850, level: "Expert", avatar: "AJ", badge: "⭐" },
+      { rank: 5, name: "Sneha Nair", dept: "Electronics & Comm", campus: "Chennai Center", xp: 3640, level: "Expert", avatar: "SN", badge: "✨" },
+      { rank: 6, name: "Kiran Patel", dept: "Mechanical Engg", campus: "Bangalore Tech Hub", xp: 2890, level: "Achiever", avatar: "KP", badge: "✨" },
+      { rank: 7, name: "Deepa Reddy", dept: "Computer Science", campus: "Hosur Main", xp: 2400, level: "Achiever", avatar: "DR", badge: "✨" }
+    ]
+  },
+
+  forumPosts: [
+    {
+      id: "fp-1",
+      author: "Alex Johnson",
+      authorRole: "student",
+      authorAvatar: "A",
+      title: "Best practices for state management in React 18: Context vs Zustand?",
+      content: "We're refactoring our capstone LMS dashboard. For high-frequency state updates like live code compilation and timer ticks, should we stick with lightweight React Context or adopt Zustand/Jotai for granular selector rendering?",
+      category: "Full Stack",
+      tags: ["React", "JavaScript", "Architecture"],
+      upvotes: 18,
+      createdAt: "2026-09-28T14:30:00Z",
+      replies: [
+        {
+          id: "fr-101",
+          author: "Marcus Vance",
+          authorRole: "mentor",
+          authorAvatar: "M",
+          content: "Great inquiry, Alex! For high-frequency data (like compiler output streams or sub-second timers), standard Context triggers re-renders across all consumers unless aggressively memoized. Zustand provides atomic state slicing with selector hooks (e.g. `useStore(state => state.output)`), which prevents unnecessary tree re-renders.",
+          isVerifiedInstructor: true,
+          upvotes: 14,
+          createdAt: "2026-09-28T15:15:00Z"
+        },
+        {
+          id: "fr-102",
+          author: "Pooja Reddy",
+          authorRole: "student",
+          authorAvatar: "P",
+          content: "We switched to Zustand for our placement tracker widget last week — boilerplate dropped significantly and memory usage improved noticeably.",
+          isVerifiedInstructor: false,
+          upvotes: 5,
+          createdAt: "2026-09-28T16:00:00Z"
+        }
+      ]
+    },
+    {
+      id: "fp-2",
+      author: "Sneha Nair",
+      authorRole: "student",
+      authorAvatar: "S",
+      title: "How to properly optimize LoRA rank and alpha when fine-tuning Llama-3?",
+      content: "When training on enterprise domain data (like technical curriculum specs), what rank 'r' (8, 16, 32) and alpha scaling factors do you recommend to avoid catastrophic forgetting while maintaining quick convergence?",
+      category: "AI & ML",
+      tags: ["Generative AI", "LoRA", "PyTorch"],
+      upvotes: 24,
+      createdAt: "2026-09-29T10:00:00Z",
+      replies: [
+        {
+          id: "fr-201",
+          author: "Dr. Sarah Chen",
+          authorRole: "trainer",
+          authorAvatar: "S",
+          content: "A standard rule of thumb in industry is setting alpha = 2 * r. For domain adaptation on structured text, r=16 and alpha=32 provides optimal capacity without overparameterization. Also ensure you target both Q, K, V attention projections and MLP layers for comprehensive transfer.",
+          isVerifiedInstructor: true,
+          upvotes: 22,
+          createdAt: "2026-09-29T11:45:00Z"
+        }
+      ]
+    },
+    {
+      id: "fp-3",
+      author: "Rohan Verma",
+      authorRole: "student",
+      authorAvatar: "R",
+      title: "Tips for Prime Tech Solutions Technical Coding Round next week",
+      content: "To everyone attending the Prime Tech campus drive on August 5th: what algorithm topics were highlighted during the preparatory webinar yesterday?",
+      category: "Placements",
+      tags: ["Placements", "Interview", "DSA"],
+      upvotes: 31,
+      createdAt: "2026-09-30T09:20:00Z",
+      replies: [
+        {
+          id: "fr-301",
+          author: "Priya Sharma",
+          authorRole: "placement_officer",
+          authorAvatar: "P",
+          content: "Focus heavily on Graph traversals (BFS/DFS cycle detection), Dynamic Programming (Knapsack & Subsequence patterns), and SQL indexing queries. We have scheduled mock interview slots this Friday in the LMS!",
+          isVerifiedInstructor: true,
+          upvotes: 27,
+          createdAt: "2026-09-30T10:10:00Z"
+        }
+      ]
+    }
+  ]
+};
+
+module.exports = db;
+

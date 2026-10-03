@@ -1,5 +1,5 @@
 /* ============================================================
-   Acadex LMS — quiz.js  (Quiz Engine)
+   Prime Vector LMS — quiz.js  (Quiz Engine)
    ============================================================ */
 
 const QUIZZES = {
@@ -363,8 +363,83 @@ function retryQuiz() {
   const quizResults = document.getElementById('quizResults');
   if (quizBody)    quizBody.style.display = 'block';
   if (quizResults) quizResults.style.display = 'none';
-  loadQuiz(quizState.quiz.id);
+
+  if (activeQuizMode === 'online') {
+    generateNewOnlineQuiz();
+  } else {
+    loadQuiz(quizState.quiz.id);
+  }
 }
+
+// ── Online Quiz Bank Mode Switcher & Generator ────────────────
+let activeQuizMode = 'online';
+
+function switchQuizMode(mode) {
+  activeQuizMode = mode;
+  const courseBtn = document.getElementById('bankCourseBtn');
+  const onlineBtn = document.getElementById('bankOnlineBtn');
+  const controls  = document.getElementById('onlineQuizControls');
+  const badge     = document.getElementById('quizSourceBadge');
+
+  if (mode === 'online') {
+    if (onlineBtn) onlineBtn.className = 'btn btn-sm btn-primary';
+    if (courseBtn) courseBtn.className = 'btn btn-sm btn-ghost';
+    if (controls)  controls.style.display = 'flex';
+    if (badge)     badge.textContent = '🌐 Source: Open Trivia DB Live API';
+    generateNewOnlineQuiz();
+  } else {
+    if (courseBtn) courseBtn.className = 'btn btn-sm btn-primary';
+    if (onlineBtn) onlineBtn.className = 'btn btn-sm btn-ghost';
+    if (controls)  controls.style.display = 'none';
+    if (badge)     badge.textContent = '⚡ Source: Prime Vector Module Assessment';
+    loadQuiz(1);
+  }
+}
+
+async function generateNewOnlineQuiz() {
+  const icon = document.getElementById('genQuizIcon');
+  if (icon) icon.className = 'fa fa-refresh fa-spin';
+  
+  const diffSelect = document.getElementById('onlineDifficultySelect');
+  const difficulty = diffSelect ? diffSelect.value : 'medium';
+
+  const badge = document.getElementById('quizSourceBadge');
+  if (badge) badge.textContent = `🌐 Fetching ${difficulty.toUpperCase()} questions from Open Trivia DB...`;
+
+  try {
+    if (window.OnlineData) {
+      const dynamicQuiz = await OnlineData.fetchDynamicQuiz({ amount: 10, difficulty });
+      
+      const quizBody    = document.getElementById('quizBody');
+      const quizResults = document.getElementById('quizResults');
+      if (quizBody)    quizBody.style.display = 'block';
+      if (quizResults) quizResults.style.display = 'none';
+
+      quizState.quiz = dynamicQuiz;
+      quizState.answers = new Array(dynamicQuiz.questions.length).fill(null);
+      quizState.currentQ = 0;
+      quizState.timeLeft = dynamicQuiz.timeLimit;
+      quizState.finished = false;
+      quizState.startTime = Date.now();
+
+      renderQuestion();
+      startTimer();
+      renderQuestionNav();
+
+      if (badge) badge.textContent = `🌐 Source: Open Trivia DB Live API (${difficulty.toUpperCase()})`;
+      Toast.success('Online Quiz Loaded', `Fetched 10 live questions in Computer Science (${difficulty.toUpperCase()}). Good luck!`);
+    }
+  } catch (err) {
+    console.error('Quiz generate failed:', err);
+    Toast.error('Load Error', 'Falling back to offline assessment bank');
+    loadQuiz(1);
+  } finally {
+    if (icon) icon.className = 'fa fa-refresh';
+  }
+}
+
+window.switchQuizMode = switchQuizMode;
+window.generateNewOnlineQuiz = generateNewOnlineQuiz;
 
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -372,8 +447,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!Auth.requireAuth()) return;
 
   const params = new URLSearchParams(window.location.search);
-  const qId = parseInt(params.get('id')) || 1;
-  loadQuiz(qId);
+  const qId = params.get('id');
+
+  if (qId && qId !== 'online') {
+    switchQuizMode('course');
+  } else {
+    // Default to Live Online Question Bank for rich online experience
+    switchQuizMode('online');
+  }
 
   document.getElementById('nextBtn')?.addEventListener('click', nextQuestion);
   document.getElementById('prevBtn')?.addEventListener('click', prevQuestion);

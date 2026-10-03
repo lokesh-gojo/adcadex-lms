@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discussion Forum — Prime Vector LMS</title>
+  <meta name="description" content="Engage with peers and faculty in the Prime Vector discussion forum. Ask questions, share knowledge.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="forumPage">
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link" data-tooltip="Dashboard"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+        <a href="course.html" class="sidebar-link" data-tooltip="Courses"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">My Courses</span></a>
+        <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
+        <a href="attendance.html" class="sidebar-link" data-tooltip="Attendance"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
+        <a href="classes.html" class="sidebar-link" data-tooltip="Live Classes"><span class="sidebar-icon"><i class="fa fa-video-camera"></i></span><span class="sidebar-label">Live Classes</span></a>
+        <a href="notes.html" class="sidebar-link" data-tooltip="Notes"><span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span><span class="sidebar-label">Notes</span></a>
+        <a href="forum.html" class="sidebar-link active" data-tooltip="Forum"><span class="sidebar-icon"><i class="fa fa-comments"></i></span><span class="sidebar-label">Discussion Forum</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Career</div>
+        <a href="internship.html" class="sidebar-link" data-tooltip="Internship"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Internship</span></a>
+        <a href="project.html" class="sidebar-link" data-tooltip="Project"><span class="sidebar-icon"><i class="fa fa-code-fork"></i></span><span class="sidebar-label">Project</span></a>
+        <a href="placement.html" class="sidebar-link" data-tooltip="Placement"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placement</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="gamification.html" class="sidebar-link" data-tooltip="Achievements"><span class="sidebar-icon"><i class="fa fa-trophy"></i></span><span class="sidebar-label">Achievements</span></a>
+        <a href="certificate.html" class="sidebar-link" data-tooltip="Certificates"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="student.html">Dashboard</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Discussion Forum</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <!-- Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <div>
+          <h2 class="page-title"><i class="fa fa-comments" style="color:var(--primary)"></i> Discussion Forum</h2>
+          <p class="page-subtitle">Ask questions, share knowledge, and collaborate with peers and faculty</p>
+        </div>
+        <button class="btn btn-primary" onclick="Modal.open('newPostModal')"><i class="fa fa-plus"></i> New Post</button>
+      </div>
+
+      <!-- Search -->
+      <div style="position:relative;margin-bottom:24px">
+        <i class="fa fa-search" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text-muted)"></i>
+        <input type="text" placeholder="Search discussions..." id="forumSearch" class="form-input" style="padding-left:44px;font-size:0.9rem" oninput="filterThreads(this.value)">
+      </div>
+
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start">
+        <!-- Categories Sidebar -->
+        <div class="section-card">
+          <div style="font-weight:800;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:12px">Categories</div>
+          <div class="forum-categories" id="categoryList"></div>
+          <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+          <div style="font-weight:800;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:12px">Stats</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+              <span style="color:var(--text-muted)">Total Threads</span>
+              <strong>248</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+              <span style="color:var(--text-muted)">Your Posts</span>
+              <strong>12</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+              <span style="color:var(--text-muted)">Solved</span>
+              <strong>184</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Threads -->
+        <div>
+          <!-- Sort bar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+            <div class="tabs" data-tabs style="margin:0">
+              <button class="tab-btn active" data-tab="all" data-group="forum" onclick="filterByTab('all')">All</button>
+              <button class="tab-btn" data-tab="pinned" data-group="forum" onclick="filterByTab('pinned')">📌 Pinned</button>
+              <button class="tab-btn" data-tab="mine" data-group="forum" onclick="filterByTab('mine')">My Posts</button>
+              <button class="tab-btn" data-tab="unanswered" data-group="forum" onclick="filterByTab('unanswered')">Unanswered</button>
+            </div>
+            <select class="form-input" style="width:auto;padding:7px 12px;font-size:0.85rem" onchange="sortThreads(this.value)">
+              <option value="latest">Latest</option>
+              <option value="popular">Most Popular</option>
+              <option value="unanswered">Unanswered</option>
+            </select>
+          </div>
+          <div id="threadList" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- New Post Modal -->
+<div class="modal-overlay" id="newPostModal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa fa-pencil"></i> Create New Post</div>
+      <button class="modal-close" onclick="Modal.close('newPostModal')"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select class="form-input" id="postCategory">
+          <option>Web Development</option>
+          <option>Machine Learning</option>
+          <option>Data Structures</option>
+          <option>Placement Prep</option>
+          <option>General</option>
+          <option>Announcements</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-input" id="postTitle" placeholder="Ask a clear, specific question...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Content</label>
+        <textarea class="form-input" id="postContent" rows="5" placeholder="Provide context, code snippets, or details..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tags (comma separated)</label>
+        <input type="text" class="form-input" id="postTags" placeholder="e.g. react, hooks, javascript">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('newPostModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="createPost()"><i class="fa fa-paper-plane"></i> Post</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+
+  const CATEGORIES = [
+    { id:'all', name:'All Topics', count:248 },
+    { id:'webdev', name:'Web Development', count:64 },
+    { id:'ml', name:'Machine Learning', count:42 },
+    { id:'dsa', name:'Data Structures', count:38 },
+    { id:'placement', name:'Placement Prep', count:55 },
+    { id:'general', name:'General', count:31 },
+    { id:'announcements', name:'Announcements', count:18 },
+  ];
+
+  const THREADS = [
+    { id:1, title:'How to use React Hooks effectively for state management?', category:'Web Development', author:'Arjun M.', avatar:'AM', color:'#2563EB', time:'2 hours ago', replies:12, views:145, votes:24, pinned:true, tags:['react','hooks','state'], excerpt:'I\'m trying to understand when to use useState vs useReducer vs useContext. Can someone explain the use cases?', mine:false, answered:true },
+    { id:2, title:'Best resources for learning PyTorch for deep learning?', category:'Machine Learning', author:'Priya S.', avatar:'PS', color:'#10B981', time:'4 hours ago', replies:8, views:89, votes:18, pinned:false, tags:['pytorch','deep-learning'], excerpt:'Looking for structured resources to learn PyTorch from scratch for our ML project. What worked for you?', mine:false, answered:false },
+    { id:3, title:'Interview experience at TechCorp — tips and tricks', category:'Placement Prep', author:'Rohit K.', avatar:'RK', color:'#8B5CF6', time:'Yesterday', replies:22, views:312, votes:45, pinned:true, tags:['interview','placement','tips'], excerpt:'Just cleared the TechCorp SDE-1 interview! Sharing my experience and what to focus on.', mine:true, answered:true },
+    { id:4, title:'Time complexity of AVL tree operations explained', category:'Data Structures', author:'Sneha N.', avatar:'SN', color:'#F59E0B', time:'Yesterday', replies:5, views:67, votes:9, pinned:false, tags:['avl-tree','complexity','dsa'], excerpt:'Can someone explain why rotations in AVL trees are O(1) but the overall insertion is O(log n)?', mine:false, answered:false },
+    { id:5, title:'Campus recruitment schedule for next semester', category:'Announcements', author:'Faculty', avatar:'FA', color:'#EF4444', time:'2 days ago', replies:3, views:528, votes:12, pinned:true, tags:['placement','campus','2025'], excerpt:'The campus recruitment schedule for the upcoming semester has been published. Companies include TechCorp, InfoSys, Wipro...', mine:false, answered:false },
+    { id:6, title:'Difference between REST and GraphQL APIs', category:'Web Development', author:'You', avatar:'ME', color:'#14B8A6', time:'3 days ago', replies:7, views:92, votes:14, pinned:false, tags:['rest','graphql','api'], excerpt:'When should I prefer GraphQL over REST? I\'ve been using REST for all my projects but the project requires GraphQL.', mine:true, answered:true },
+    { id:7, title:'How to optimize SQL queries for large datasets?', category:'General', author:'Kiran P.', avatar:'KP', color:'#F97316', time:'4 days ago', replies:0, views:34, votes:6, pinned:false, tags:['sql','optimization','database'], excerpt:'Working on a database with 1M+ records and queries are slow. Any tips on indexing and optimization strategies?', mine:false, answered:false },
+  ];
+
+  let currentFilter = 'all';
+  let currentCategory = 'all';
+  let searchQuery = '';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    renderCategories();
+    renderThreads();
+    App.init();
+    initTabs();
+  });
+
+  function renderCategories() {
+    document.getElementById('categoryList').innerHTML = CATEGORIES.map(c => `
+      <button class="forum-cat-btn ${c.id === currentCategory ? 'active' : ''}" onclick="setCategory('${c.id}')">
+        <span>${c.name}</span>
+        <span class="forum-cat-count">${c.count}</span>
+      </button>
+    `).join('');
+  }
+
+  function setCategory(id) {
+    currentCategory = id;
+    renderCategories();
+    renderThreads();
+  }
+
+  function filterByTab(tab) {
+    currentFilter = tab;
+    renderThreads();
+  }
+
+  function filterThreads(q) {
+    searchQuery = q.toLowerCase();
+    renderThreads();
+  }
+
+  function sortThreads(by) {
+    renderThreads(by);
+  }
+
+  function renderThreads(sortBy) {
+    let threads = [...THREADS];
+    if (currentCategory !== 'all') {
+      const cat = CATEGORIES.find(c => c.id === currentCategory);
+      if (cat) threads = threads.filter(t => t.category === cat.name);
+    }
+    if (currentFilter === 'pinned') threads = threads.filter(t => t.pinned);
+    if (currentFilter === 'mine') threads = threads.filter(t => t.mine);
+    if (currentFilter === 'unanswered') threads = threads.filter(t => !t.answered);
+    if (searchQuery) threads = threads.filter(t => t.title.toLowerCase().includes(searchQuery) || t.excerpt.toLowerCase().includes(searchQuery));
+    if (sortBy === 'popular') threads.sort((a,b) => b.votes - a.votes);
+
+    const el = document.getElementById('threadList');
+    if (!threads.length) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fa fa-comments"></i></div><div class="empty-state-title">No threads found</div><div class="empty-state-desc">Be the first to start a discussion!</div><button class="btn btn-primary" onclick="Modal.open('newPostModal')" style="margin-top:12px">Create Post</button></div>`;
+      return;
+    }
+
+    el.innerHTML = threads.map(t => `
+      <div class="forum-thread ${t.pinned ? 'pinned' : ''}" onclick="Toast.info('Opening Thread', '${t.title.slice(0,30)}...')">
+        <div class="forum-thread-header">
+          <div class="forum-thread-avatar" style="background:${t.color}">${t.avatar}</div>
+          <div class="forum-thread-meta">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <div class="forum-thread-title">${t.title}</div>
+              ${t.pinned ? '<span class="forum-pin-badge"><i class="fa fa-thumb-tack"></i> Pinned</span>' : ''}
+              ${t.answered ? '<span style="background:rgba(16,185,129,0.1);color:#10B981;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:999px">✓ Answered</span>' : ''}
+            </div>
+            <div class="forum-thread-by">${t.author} · ${t.category} · ${t.time}</div>
+          </div>
+        </div>
+        <p class="forum-thread-excerpt">${t.excerpt}</p>
+        <div class="forum-thread-footer">
+          <div class="forum-tags">${t.tags.map(tag => `<span class="forum-tag">${tag}</span>`).join('')}</div>
+          <div style="display:flex;gap:12px;margin-left:auto">
+            <button class="forum-vote-btn" onclick="event.stopPropagation();this.classList.toggle('voted')"><i class="fa fa-thumbs-up"></i> ${t.votes}</button>
+            <div class="forum-thread-stat"><i class="fa fa-comment"></i> ${t.replies}</div>
+            <div class="forum-thread-stat"><i class="fa fa-eye"></i> ${t.views}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function createPost() {
+    const title = document.getElementById('postTitle').value.trim();
+    if (!title) { Toast.error('Required', 'Please enter a title for your post'); return; }
+    Modal.close('newPostModal');
+    Toast.success('Posted!', 'Your discussion thread has been created');
+  }
+</script>
+</body>
+</html>
+

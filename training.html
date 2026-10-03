@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Programs — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/training.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="trainingPage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <!-- Same sidebar content as student.html, handled dynamically or assumed included.
+         For this static demo, we'll keep the core structure but add the new links. -->
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Training & Placement</div>
+        <a href="training.html" class="sidebar-link active" data-tooltip="Training Programs">
+          <span class="sidebar-icon"><i class="fa fa-rocket"></i></span>
+          <span class="sidebar-label">Training Programs</span>
+        </a>
+        <a href="live-classes.html" class="sidebar-link" data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link" data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-file-text"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Tasks</span>
+        </a>
+        <a href="placement.html" class="sidebar-link" data-tooltip="Placement">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link" data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-pdf-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link" data-tooltip="Portfolio">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+                <a href="placement-tracker.html" class="sidebar-link" data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link" data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+<a href="placement-tracker.html" class="sidebar-link" data-tooltip="Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link" data-tooltip="Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="student.html">Dashboard</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Training Programs</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h1 class="page-title">Training Programs</h1>
+        <p class="page-subtitle">Track your learning journey and view active training modules.</p>
+      </div>
+
+      <!-- Streak & Quick Stats -->
+      <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 24px;">
+        <div class="streak-widget">
+          <div class="streak-info">
+            <h3><span id="streakDays">12</span> Day Streak!</h3>
+            <p>You're on fire! Keep learning every day to build your streak.</p>
+          </div>
+          <div class="streak-icon"><i class="fa fa-fire"></i></div>
+        </div>
+        
+        <div class="card">
+          <div class="card-body" style="display:flex; align-items:center; justify-content:space-between; height: 100%;">
+            <div>
+              <div class="stat-label">Overall Progress</div>
+              <div class="stat-value" id="overallProgressText" style="font-size: 2rem;">65%</div>
+            </div>
+            <div class="circular-progress warning" id="overallProgressRing">
+              <svg><circle class="bg-circle" cx="50" cy="50" r="40"></circle><circle class="progress-circle" cx="50" cy="50" r="40"></circle></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duration Stats -->
+      <h3 style="margin: 24px 0 16px;">Training Duration</h3>
+      <div class="duration-grid" style="margin-bottom: 24px;">
+        <div class="duration-card">
+          <div class="duration-icon"><i class="fa fa-clock-o"></i></div>
+          <div class="duration-value" id="totalDuration">120h</div>
+          <div class="duration-label">Total Duration</div>
+        </div>
+        <div class="duration-card">
+          <div class="duration-icon" style="color:var(--success)"><i class="fa fa-check-circle"></i></div>
+          <div class="duration-value" id="completedDuration">78h</div>
+          <div class="duration-label">Completed Hours</div>
+        </div>
+        <div class="duration-card">
+          <div class="duration-icon" style="color:var(--warning)"><i class="fa fa-hourglass-half"></i></div>
+          <div class="duration-value" id="remainingDuration">42h</div>
+          <div class="duration-label">Remaining Hours</div>
+        </div>
+        <div class="duration-card">
+          <div class="duration-icon" style="color:var(--info)"><i class="fa fa-calendar"></i></div>
+          <div class="duration-value" id="estCompletion" style="font-size: 1.25rem; line-height: 1.4;">Oct 15<br>2026</div>
+          <div class="duration-label">Estimated Completion</div>
+        </div>
+      </div>
+
+      <!-- Active Training Programs -->
+      <h3 style="margin: 24px 0 16px;">Active Programs</h3>
+      <div class="dashboard-grid-3" id="trainingList">
+        <!-- Rendered via JS -->
+      </div>
+      
+      <!-- Detailed Progress Breakdown -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title"><i class="fa fa-bar-chart"></i> Detailed Learning Progress</span>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrapper">
+             <canvas id="weeklyHoursChart"></canvas>
+          </div>
+          
+          <div class="progress-breakdown" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div>
+               <div class="course-progress-label"><span>Modules Completed</span><span>12/18</span></div>
+               <div class="progress"><div class="progress-bar success" style="width: 66%"></div></div>
+               
+               <div class="course-progress-label" style="margin-top: 12px;"><span>Lessons Completed</span><span>45/80</span></div>
+               <div class="progress"><div class="progress-bar info" style="width: 56%"></div></div>
+               
+               <div class="course-progress-label" style="margin-top: 12px;"><span>Videos Watched</span><span>32/50</span></div>
+               <div class="progress"><div class="progress-bar warning" style="width: 64%"></div></div>
+            </div>
+            <div>
+               <div class="course-progress-label"><span>Assignments Submitted</span><span>8/10</span></div>
+               <div class="progress"><div class="progress-bar" style="width: 80%"></div></div>
+               
+               <div class="course-progress-label" style="margin-top: 12px;"><span>Quizzes Passed</span><span>4/5</span></div>
+               <div class="progress"><div class="progress-bar success" style="width: 80%"></div></div>
+               
+               <div class="course-progress-label" style="margin-top: 12px;"><span>Attendance</span><span>92%</span></div>
+               <div class="progress"><div class="progress-bar success" style="width: 92%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/training.js"></script>
+</body>
+</html>
+

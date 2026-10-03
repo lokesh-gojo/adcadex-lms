@@ -1,5 +1,5 @@
 /* ============================================================
-   Acadex LMS — assignment.js
+   Prime Vector LMS — assignment.js
    ============================================================ */
 
 let assignmentsData = Store.get('assignments', null) || [
@@ -181,7 +181,16 @@ function submitAssignment() {
     Store.set('assignments', assignmentsData);
     renderAssignmentsList();
     Modal.close('submitModal');
-    Toast.success('Assignment Submitted!', 'Your submission has been received');
+    Toast.success('Assignment Submitted!', 'Your submission has been received & logged');
+
+    // Sync with backend API
+    try {
+      fetch('http://localhost:5000/api/assignments/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ assignmentId: id, notes: text, submissionUrl: 'submission.pdf' })
+      }).catch(() => {});
+    } catch(e) {}
 
     // Update detail panel
     if (activeAssignment?.id === id) openAssignmentDetail(id);

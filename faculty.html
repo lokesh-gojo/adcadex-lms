@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faculty Dashboard — Acadex</title>
+  <title>Trainer & Faculty Dashboard — Prime Vector LMS</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
@@ -18,8 +18,14 @@
   <!-- ── SIDEBAR ── -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
-      <span class="sidebar-brand">ACAD<span>EX</span></span>
+      <div class="sidebar-logo" style="background:var(--gradient-primary);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
     </div>
 
     <a href="profile.html" class="sidebar-user">
@@ -31,7 +37,7 @@
     </a>
 
     <nav class="sidebar-nav">
-      <div class="sidebar-group">
+            <div class="sidebar-group">
         <div class="sidebar-group-label">Main</div>
         <a href="faculty.html" class="sidebar-link active" data-tooltip="Dashboard">
           <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
@@ -41,18 +47,22 @@
           <span class="sidebar-icon"><i class="fa fa-upload"></i></span>
           <span class="sidebar-label">Upload Course</span>
         </a>
-        <a href="course.html" class="sidebar-link" data-tooltip="Upload Notes">
+        <a href="faculty-notes.html" class="sidebar-link" data-tooltip="Review Notes">
           <span class="sidebar-icon"><i class="fa fa-file-text"></i></span>
-          <span class="sidebar-label">Upload Notes</span>
+          <span class="sidebar-label">Review Notes</span>
+        </a>
+        <a href="faculty-classes.html" class="sidebar-link" data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="faculty-assignments.html" class="sidebar-link" data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge" id="pendingGradesBadge">2</span>
         </a>
         <a href="quiz.html?id=1" class="sidebar-link" data-tooltip="Create Quiz">
           <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
           <span class="sidebar-label">Create Quiz</span>
-        </a>
-        <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments">
-          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
-          <span class="sidebar-label">Assignments</span>
-          <span class="sidebar-badge" id="pendingGradesBadge">2</span>
         </a>
       </div>
       <div class="sidebar-group">
@@ -216,6 +226,62 @@
         </div>
       </div>
 
+      <!-- Student Roster -->
+      <div class="card" style="margin-bottom:24px">
+        <div class="card-header">
+          <span class="card-title"><i class="fa fa-users" style="color:var(--info)"></i> Student Roster & Lifecycle</span>
+          <div class="search-bar" style="max-width:240px;padding:8px 14px">
+            <i class="fa fa-search" style="color:var(--text-muted)"></i>
+            <input type="text" placeholder="Search students..." style="font-size:0.85rem">
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="font-semi">Jane Doe</div>
+                  <div class="text-xs text-muted">ACDX-2024-0891</div>
+                </td>
+                <td>Full Stack Web Development</td>
+                <td>
+                  <div class="progress" style="height:6px;width:100px;margin-bottom:4px"><div class="progress-bar" style="width:100%"></div></div>
+                  <span class="text-xs">100%</span>
+                </td>
+                <td><span class="badge badge-accent">Completed</span></td>
+                <td>
+                  <button class="btn btn-outline btn-sm" onclick="alert('Recommendation sent to Administrator.')"><i class="fa fa-archive"></i> Recommend Archive</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="font-semi">John Smith</div>
+                  <div class="text-xs text-muted">ACDX-2024-0902</div>
+                </td>
+                <td>Data Science & AI</td>
+                <td>
+                  <div class="progress" style="height:6px;width:100px;margin-bottom:4px"><div class="progress-bar" style="width:45%"></div></div>
+                  <span class="text-xs">45%</span>
+                </td>
+                <td><span class="badge badge-primary">In Progress</span></td>
+                <td>
+                  <button class="btn btn-outline btn-sm" disabled><i class="fa fa-archive"></i> Recommend Archive</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- Recent Submissions -->
       <div class="card">
         <div class="card-header">
@@ -318,3 +384,4 @@
 </script>
 </body>
 </html>
+

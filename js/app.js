@@ -1,11 +1,16 @@
 /* ============================================================
-   Acadex LMS — app.js  (Global Utilities & Auth Guard)
+   Prime Vector LMS — app.js  (Global Utilities & Auth Guard)
    ============================================================ */
 
 // ── Constants ────────────────────────────────────────────────
-const APP_NAME   = 'Acadex LMS';
-const STORAGE_KEY = 'Acadex_user';
-const THEME_KEY   = 'Acadex_theme';
+const APP_NAME        = 'Prime Vector LMS';
+const COMPANY_NAME    = 'Prime Vector Private Limited';
+const COMPANY_WEBSITE = 'https://primevector.in/';
+const CONTACT_EMAIL   = 'primevectorprivatelimited@gmail.com';
+const CONTACT_PHONE   = '+91 8220082896';
+const ADDRESS_HOSUR   = 'No. 74/22f11, 3rd Floor, HV Arcade, Bagalur Road, Hosur, Krishnagiri, Tamil Nadu - 635109';
+const STORAGE_KEY     = 'PrimeVector_user';
+const THEME_KEY       = 'PrimeVector_theme';
 
 // ── Auth Helpers ─────────────────────────────────────────────
 const Auth = {
@@ -38,6 +43,25 @@ const Auth = {
   requireAuth() {
     if (!this.isLoggedIn()) {
       window.location.href = 'login.html';
+      return false;
+    }
+    return true;
+  },
+
+  /** Guard: Require specific role(s) to access current page */
+  requireRole(allowedRoles) {
+    if (!this.requireAuth()) return false;
+    const user = this.getUser();
+    const roles = Array.isArray(allowedRoles) ? allowedRoles : [allowedRoles];
+    if (!user || !user.role || !roles.includes(user.role)) {
+      Toast.error('Access Denied', `This area requires ${roles.join(' or ').toUpperCase()} privileges.`);
+      setTimeout(() => {
+        if (user && user.role) {
+          window.location.href = user.role + '.html';
+        } else {
+          window.location.href = 'login.html';
+        }
+      }, 1000);
       return false;
     }
     return true;
@@ -276,20 +300,10 @@ function closeAllDropdowns() {
 // ── Animation on Scroll ───────────────────────────────────────
 function initScrollAnimations() {
   const els = document.querySelectorAll('[data-animate]');
-  if (!els.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const anim = el.dataset.animate || 'animate-fade-up';
-        el.classList.add(anim);
-        observer.unobserve(el);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  els.forEach(el => observer.observe(el));
+  els.forEach(el => {
+    el.style.opacity = '1';
+    el.style.visibility = 'visible';
+  });
 }
 
 // ── Progress Bar Animations ──────────────────────────────────
@@ -395,15 +409,15 @@ const Format = {
 const Store = {
   get(key, fallback = null) {
     try {
-      const val = localStorage.getItem(`Acadex_${key}`);
+      const val = localStorage.getItem(`Prime Vector_${key}`);
       return val ? JSON.parse(val) : fallback;
     } catch { return fallback; }
   },
   set(key, val) {
-    localStorage.setItem(`Acadex_${key}`, JSON.stringify(val));
+    localStorage.setItem(`Prime Vector_${key}`, JSON.stringify(val));
   },
   remove(key) {
-    localStorage.removeItem(`Acadex_${key}`);
+    localStorage.removeItem(`Prime Vector_${key}`);
   }
 };
 
@@ -450,17 +464,563 @@ function initTabs() {
   });
 }
 
-// ── Dashboard Redirect ────────────────────────────────────────
+// ── Dashboard Redirect & RBAC Guards ─────────────────────────
 function initDashboardRedirect() {
   if (window.location.pathname.endsWith('dashboard.html')) {
     const user = Auth.getUser();
-    if (user) {
+    if (user && user.role) {
       window.location.href = user.role + '.html';
     } else {
       window.location.href = 'login.html';
     }
   }
 }
+
+function initRoleRouteGuard() {
+  const path = window.location.pathname;
+
+  // Admin routes: require 'admin' role
+  const adminPages = ['admin.html', 'admin-enrollment.html', 'admin-reports.html', 'admin-courses.html', 'admin-training.html', 'admin-placements.html', 'admin-certificates.html', 'admin-analytics.html', 'admin-departments.html', 'admin-system.html'];
+  if (adminPages.some(page => path.endsWith(page))) {
+    Auth.requireRole(['admin']);
+    return;
+  }
+
+  // Faculty routes: require 'faculty' or 'admin' role
+  const facultyPages = ['faculty.html', 'faculty-notes.html', 'faculty-classes.html', 'faculty-assignments.html', 'faculty-quiz.html', 'faculty-students.html'];
+  if (facultyPages.some(page => path.endsWith(page))) {
+    Auth.requireRole(['faculty', 'admin']);
+    return;
+  }
+
+  // Student dashboard & features: require authenticated session
+  const protectedStudentPages = ['student.html', 'assignment.html', 'attendance.html', 'classes.html', 'notes.html', 'placement.html', 'resume-builder.html', 'portfolio.html', 'placement-tracker.html', 'class-reports.html', 'certificate.html', 'project.html', 'internship.html', 'gamification.html'];
+  if (protectedStudentPages.some(page => path.endsWith(page))) {
+    Auth.requireAuth();
+    return;
+  }
+}
+
+// ── Export Helpers ────────────────────────────────────────────
+const Export = {
+  toCSV(tableId, filename = 'export.csv') {
+    const table = document.getElementById(tableId);
+    if (!table) {
+      Toast.error('Export Failed', `Table #${tableId} not found`);
+      return;
+    }
+    let csv = [];
+    const rows = table.querySelectorAll('tr');
+    for (let i = 0; i < rows.length; i++) {
+      const row = [], cols = rows[i].querySelectorAll('td, th');
+      for (let j = 0; j < cols.length; j++) {
+        // Clean text and wrap in quotes
+        let text = cols[j].innerText.trim().replace(/"/g, '""');
+        row.push('"' + text + '"');
+      }
+      csv.push(row.join(','));
+    }
+    const csvContent = "data:text/csv;charset=utf-8," + csv.join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    Toast.success('Export Successful', `Downloaded ${filename}`);
+  },
+  toPDF() {
+    window.print();
+  }
+};
+
+// ── PWA Offline Simulation ────────────────────────────────────
+const PWAOffline = {
+  isOffline: false,
+  
+  init() {
+    this.isOffline = localStorage.getItem('Prime Vector_offline') === 'true';
+    this.injectBadge();
+    this.applyState();
+  },
+
+  injectBadge() {
+    const user = Auth.getUser();
+    if (!user) return;
+    
+    // Inject in top right of inner-navbar-right or main-navbar actions
+    const navbarRight = document.querySelector('.inner-navbar-right, .navbar-actions');
+    if (!navbarRight) return;
+
+    if (document.getElementById('pwa-offline-badge')) return;
+
+    const badge = document.createElement('button');
+    badge.id = 'pwa-offline-badge';
+    badge.className = 'offline-badge-btn';
+    badge.title = 'Toggle PWA Offline Simulator';
+    badge.innerHTML = this.isOffline 
+      ? '<i class="fa fa-plug" style="color:var(--danger)"></i> <span class="hide-md" style="color:var(--danger);font-size:0.8rem;margin-left:4px">Offline Mode</span>' 
+      : '<i class="fa fa-wifi" style="color:var(--success)"></i> <span class="hide-md" style="color:var(--success);font-size:0.8rem;margin-left:4px">Online</span>';
+    
+    badge.addEventListener('click', () => this.toggle());
+    navbarRight.insertBefore(badge, navbarRight.firstChild);
+  },
+
+  toggle() {
+    this.isOffline = !this.isOffline;
+    localStorage.setItem('Prime Vector_offline', this.isOffline);
+    this.applyState();
+    Toast.info(
+      this.isOffline ? 'PWA Offline Mode Activated' : 'System Connected Online',
+      this.isOffline 
+        ? 'Offline page cache enabled. Note reading & bookmarks accessible.' 
+        : 'All real-time sync databases connected.'
+    );
+  },
+
+  applyState() {
+    const badge = document.getElementById('pwa-offline-badge');
+    if (badge) {
+      badge.innerHTML = this.isOffline 
+        ? '<i class="fa fa-plug" style="color:var(--danger)"></i> <span class="hide-md" style="color:var(--danger);font-size:0.8rem;margin-left:4px">Offline Mode</span>' 
+        : '<i class="fa fa-wifi" style="color:var(--success)"></i> <span class="hide-md" style="color:var(--success);font-size:0.8rem;margin-left:4px">Online</span>';
+    }
+
+    let banner = document.getElementById('offline-sync-banner');
+    if (this.isOffline) {
+      if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'offline-sync-banner';
+        banner.innerHTML = `
+          <div style="background:var(--danger);color:#fff;text-align:center;padding:8px;font-size:0.85rem;font-weight:600;z-index:99999;position:relative;box-shadow:var(--shadow-sm)">
+            🔌 Offline Mode Active (PWA Simulation). You can view cached courses, read bookmarks & submit logs offline. Changes sync automatically on reconnection.
+          </div>
+        `;
+        document.body.insertBefore(banner, document.body.firstChild);
+      }
+    } else {
+      if (banner) banner.remove();
+    }
+  }
+};
+
+// ── Global AI Assistant Chatbot Panel ─────────────────────────
+const AIAssistant = {
+  chatHistory: [],
+  isOpen: false,
+
+  init() {
+    const user = Auth.getUser();
+    if (!user) return; // Only load for authenticated users
+    this.injectStyles();
+    this.injectWidget();
+    this.loadWelcomeMessage();
+  },
+
+  injectStyles() {
+    if (document.getElementById('ai-assistant-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'ai-assistant-styles';
+    style.textContent = `
+      .offline-badge-btn {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-right: 8px;
+      }
+      .offline-badge-btn:hover {
+        background: var(--border);
+      }
+      .ai-widget-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+        color: white;
+        box-shadow: 0 8px 30px rgba(37,99,235,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10000;
+        transition: var(--transition);
+      }
+      .ai-widget-btn:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 12px 35px rgba(37,99,235,0.5);
+      }
+      .ai-widget-btn.pulse::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: inherit;
+        top: 0; left: 0;
+        opacity: 0.4;
+        animation: ai-pulse 2s infinite;
+        z-index: -1;
+      }
+      @keyframes ai-pulse {
+        0% { transform: scale(1); opacity: 0.4; }
+        100% { transform: scale(1.5); opacity: 0; }
+      }
+      .ai-chat-panel {
+        position: fixed;
+        bottom: 96px;
+        right: 24px;
+        width: 380px;
+        height: 520px;
+        max-height: calc(100vh - 120px);
+        border-radius: var(--radius-md);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: translateY(20px) scale(0.95);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .ai-chat-panel.active {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        pointer-events: all;
+      }
+      .ai-chat-header {
+        background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+        color: white;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .ai-chat-header-info { display: flex; align-items: center; gap: 10px; }
+      .ai-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+      .ai-chat-title { font-weight: 700; font-size: 0.95rem; font-family: var(--font-display); }
+      .ai-chat-status { font-size: 0.72rem; color: #93C5FD; display: flex; align-items: center; gap: 4px; }
+      .ai-chat-status::before { content:''; width: 6px; height: 6px; background:#10B981; border-radius: 50%; display:inline-block; }
+      .ai-chat-close { background: none; color: rgba(255,255,255,0.7); font-size: 1.25rem; transition: var(--transition); }
+      .ai-chat-close:hover { color: white; }
+      .ai-chat-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background: var(--bg);
+      }
+      .ai-msg { display: flex; flex-direction: column; max-width: 80%; padding: 12px 16px; border-radius: var(--radius); font-size: 0.85rem; line-height: 1.5; }
+      .ai-msg.ai { background: var(--surface); color: var(--text); border-top-left-radius: 2px; border: 1px solid var(--border); }
+      .ai-msg.user { background: var(--primary); color: white; border-top-right-radius: 2px; align-self: flex-end; }
+      .ai-msg-time { font-size: 0.65rem; color: var(--text-light); margin-top: 4px; align-self: flex-end; }
+      .ai-msg.user .ai-msg-time { color: rgba(255,255,255,0.7); }
+      .ai-quick-actions {
+        padding: 10px 16px;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+      }
+      .ai-quick-actions::-webkit-scrollbar { display: none; }
+      .ai-quick-btn {
+        padding: 6px 12px;
+        border-radius: var(--radius-full);
+        background: var(--primary-light);
+        color: var(--primary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        border: 1px solid transparent;
+      }
+      .ai-quick-btn:hover {
+        background: var(--primary);
+        color: white;
+      }
+      .ai-chat-footer {
+        padding: 12px 16px;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 8px;
+      }
+      .ai-chat-input {
+        flex: 1;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        background: var(--bg);
+        color: var(--text);
+        transition: var(--transition);
+      }
+      .ai-chat-input:focus {
+        border-color: var(--primary);
+        background: var(--surface);
+      }
+      .ai-send-btn {
+        width: 36px; height: 36px; border-radius: var(--radius);
+        background: var(--primary); color: white;
+        display: flex; align-items: center; justify-content: center;
+        transition: var(--transition);
+      }
+      .ai-send-btn:hover { background: var(--primary-hover); transform: scale(1.05); }
+    `;
+    document.head.appendChild(style);
+  },
+
+  injectWidget() {
+    if (document.getElementById('ai-assistant-widget-btn')) return;
+
+    // Toggle button
+    const btn = document.createElement('div');
+    btn.id = 'ai-assistant-widget-btn';
+    btn.className = 'ai-widget-btn pulse';
+    btn.innerHTML = '<i class="fa fa-android"></i>';
+    btn.addEventListener('click', () => this.toggle());
+    document.body.appendChild(btn);
+
+    // Chat Panel
+    const panel = document.createElement('div');
+    panel.id = 'ai-assistant-chat-panel';
+    panel.className = 'ai-chat-panel';
+    panel.innerHTML = `
+      <div class="ai-chat-header">
+        <div class="ai-chat-header-info">
+          <div class="ai-avatar"><i class="fa fa-android" style="color:#60A5FA"></i></div>
+          <div>
+            <div class="ai-chat-title">Prime Vector AI Tutor & Advisor</div>
+            <div class="ai-chat-status">Always active</div>
+          </div>
+        </div>
+        <button class="ai-chat-close" id="ai-chat-close-btn">&times;</button>
+      </div>
+      <div class="ai-chat-messages" id="ai-chat-messages-container"></div>
+      <div class="ai-quick-actions">
+        <button class="ai-quick-btn" data-ai-act="path">🛣️ Learning Path</button>
+        <button class="ai-quick-btn" data-ai-act="score">📊 Placement Score</button>
+        <button class="ai-quick-btn" data-ai-act="summary">📝 Summarize Notes</button>
+        <button class="ai-quick-btn" data-ai-act="interview">🎤 Mock Interview</button>
+        <button class="ai-quick-btn" data-ai-act="verify">🔍 Verify Cert</button>
+      </div>
+      <div class="ai-chat-footer">
+        <input type="text" class="ai-chat-input" id="ai-chat-input-field" placeholder="Ask Prime Vector AI anything...">
+        <button class="ai-send-btn" id="ai-chat-send-btn"><i class="fa fa-paper-plane"></i></button>
+      </div>
+    `;
+    document.body.appendChild(panel);
+
+    document.getElementById('ai-chat-close-btn').addEventListener('click', () => this.toggle());
+    document.getElementById('ai-chat-send-btn').addEventListener('click', () => this.handleSend());
+    document.getElementById('ai-chat-input-field').addEventListener('keypress', e => {
+      if (e.key === 'Enter') this.handleSend();
+    });
+
+    // Quick action hooks
+    panel.querySelectorAll('.ai-quick-btn').forEach(qb => {
+      qb.addEventListener('click', () => this.triggerAction(qb.dataset.aiAct));
+    });
+  },
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+    const panel = document.getElementById('ai-assistant-chat-panel');
+    const btn = document.getElementById('ai-assistant-widget-btn');
+    if (this.isOpen) {
+      panel.classList.add('active');
+      btn.classList.remove('pulse');
+      btn.innerHTML = '<i class="fa fa-times"></i>';
+      // scroll to bottom
+      setTimeout(() => {
+        const c = document.getElementById('ai-chat-messages-container');
+        c.scrollTop = c.scrollHeight;
+      }, 100);
+    } else {
+      panel.classList.remove('active');
+      btn.classList.add('pulse');
+      btn.innerHTML = '<i class="fa fa-android"></i>';
+    }
+  },
+
+  addMessage(text, isUser = false) {
+    const container = document.getElementById('ai-chat-messages-container');
+    if (!container) return;
+
+    const msg = document.createElement('div');
+    msg.className = `ai-msg ${isUser ? 'user' : 'ai'}`;
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    msg.innerHTML = `
+      <div>${text}</div>
+      <div class="ai-msg-time">${time}</div>
+    `;
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+  },
+
+  loadWelcomeMessage() {
+    const user = Auth.getUser() || { name: 'User', role: 'student' };
+    const greeting = `Hello ${user.name}! I am your **Prime Vector AI Assistant**. I can help guide your learning path, analyze your resume, predictions, or run an AI Mock Interview with you. How can I help you today?`;
+    this.addMessage(greeting);
+  },
+
+  handleSend() {
+    const input = document.getElementById('ai-chat-input-field');
+    const text = input.value.trim();
+    if (!text) return;
+
+    this.addMessage(text, true);
+    input.value = '';
+
+    // Show simulated typing status
+    const container = document.getElementById('ai-chat-messages-container');
+    const typing = document.createElement('div');
+    typing.className = 'ai-msg ai typing-indicator-msg';
+    typing.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Prime Vector AI is thinking...`;
+    container.appendChild(typing);
+    container.scrollTop = container.scrollHeight;
+
+    setTimeout(() => {
+      typing.remove();
+      const reply = this.generateResponse(text);
+      this.addMessage(reply);
+    }, 1000);
+  },
+
+  generateResponse(query) {
+    const q = query.toLowerCase();
+    const user = Auth.getUser() || { name: 'Alex Johnson', role: 'student' };
+
+    if (q.includes('help') || q.includes('menu')) {
+      return `Here is what I can do for you:
+1. **🛣️ Learning Path**: Type "path" to view personalized syllabus recommendations.
+2. **📊 Placement Score**: Type "readiness" to get placement score analytics.
+3. **📝 Summarize Notes**: Type "summarize" to generate lecture highlights.
+4. **🎤 Mock Interview**: Type "interview" to start simulator.
+5. **🔍 Verify Certificate**: Type "verify [cert-id]" to run verification.`;
+    }
+
+    if (q.includes('path') || q.includes('roadmap') || q.includes('learning')) {
+      return this.simulateAction('path');
+    }
+
+    if (q.includes('readiness') || q.includes('placement') || q.includes('score')) {
+      return this.simulateAction('score');
+    }
+
+    if (q.includes('summarize') || q.includes('summary') || q.includes('notes')) {
+      return this.simulateAction('summary');
+    }
+
+    if (q.includes('interview') || q.includes('mock')) {
+      return this.simulateAction('interview');
+    }
+
+    if (q.includes('verify')) {
+      return this.simulateAction('verify');
+    }
+
+    if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) {
+      return `Hello ${user.name}! Feel free to ask me questions about your curriculum, assignments, career paths, or try out my mock interview simulator.`;
+    }
+
+    // Default conversational AI tutor replies
+    return `Based on Prime Vector Knowledge Base for ${user.department || 'Computer Science'}:
+I recommend focusing on **Advanced SQL Optimization** and **REST API Security Protocols** this week.
+*Tip: Completing the current "Project Module" increases your simulated Placement Readiness Score by 12%!*`;
+  },
+
+  triggerAction(act) {
+    this.addMessage(`Triggering AI ${act.toUpperCase()} Feature...`, true);
+    setTimeout(() => {
+      const resp = this.simulateAction(act);
+      this.addMessage(resp);
+    }, 600);
+  },
+
+  simulateAction(act) {
+    const user = Auth.getUser() || { name: 'Alex Johnson', role: 'student' };
+    if (act === 'path') {
+      return `🎯 **AI Personalized Learning Path Recommendation**
+Role Goal: **Full Stack Engineer**
+- **Complete**: Web Dev Basics (100% completed)
+- **Current Weak Spot**: JavaScript Async / Promises (Score: 68%)
+- **Recommended Actions**:
+  1. Complete Module 4 (Advanced JS)
+  2. Take "Async Code Quiz"
+  3. Spend 2.5 hours on code compiler.`;
+    }
+
+    if (act === 'score') {
+      const gpa = 8.8;
+      const attendance = 92;
+      const projects = 2;
+      const mockScore = Math.round(75 + (gpa * 2) + (attendance / 10) + (projects * 2));
+      
+      let assessment = '🟢 Excellent Readiness';
+      if (mockScore < 70) assessment = '🔴 At-Risk (Needs immediate practice)';
+      else if (mockScore < 85) assessment = '🟡 Moderate (Prepare resume + portfolios)';
+
+      return `📊 **AI Placement Readiness Assessment**
+Student: **${user.name}**
+- **Calculated Readiness Score**: **${mockScore}/100**
+- **Status**: ${assessment}
+- **Factors Analyzed**:
+  - GPA: 8.8/10
+  - Attendance: ${attendance}%
+  - Verified Certificates: 2
+  - Core Skill Gap: Cloud Services Integration.`;
+    }
+
+    if (act === 'summary') {
+      return `📝 **AI Notes Summarizer**
+Generated summary from last live recorded class (*Advanced Backend Development*):
+- **Core Topic**: REST API architectures and microservice patterns.
+- **Key Takeaways**:
+  1. Stateless communication is preferred for horizontal scaling.
+  2. Use JSON Web Tokens (JWT) for secure authentication.
+  3. Implementation of rate-limiting filters prevents DDoS threats.
+- **Auto-generated Quiz Question**: What does JWT stand for? (*Answer: JSON Web Token*)`;
+    }
+
+    if (act === 'interview') {
+      return `🎤 **AI Mock Interview Coach**
+Let's begin! Answer this question in the chat box:
+**"Explain the difference between synchronous and asynchronous code in JavaScript, and when would you use async?"**
+*(Reply directly, I will evaluate and score your answer)*`;
+    }
+
+    if (act === 'verify') {
+      const demoId = 'ACAD-' + Math.floor(Math.random() * 900000 + 100000);
+      return `🔍 **AI Certificate Verification Portal**
+- **Format**: Certificate ID must follow "ACAD-XXXXXX"
+- **Demo verification**:
+  - Code \`${demoId}\` status: **🟢 VERIFIED**
+  - Issuer: Prime Vector LMS Smart Contract
+  - Recipient: **${user.name}**
+  - Signee: Dr. Sarah Chen (Digital Signature SHA-256 Verified).`;
+    }
+
+    return `Feature requested: ${act}`;
+  }
+};
 
 // ── Initialize ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -477,9 +1037,38 @@ document.addEventListener('DOMContentLoaded', () => {
   populateSidebarUser();
   initLogout();
   initDashboardRedirect();
+  initRoleRouteGuard();
+
+  // Initialize PWA Offline Simulator & AI Widget
+  PWAOffline.init();
+  AIAssistant.init();
+
+  // Hook export attributes dynamically if buttons exist
+  document.querySelectorAll('[data-export="csv"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.exportTarget;
+      const filename = btn.dataset.exportFile || 'report.csv';
+      if (target) Export.toCSV(target.replace('#', ''), filename);
+    });
+  });
+  document.querySelectorAll('[data-export="pdf"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      Export.toPDF();
+    });
+  });
 
   // Theme toggle buttons
   document.querySelectorAll('.theme-toggle').forEach(btn => {
     btn.addEventListener('click', () => Theme.toggle());
   });
+
+  // Register PWA Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('[PWA SW] Service worker registered:', reg.scope))
+        .catch(err => console.error('[PWA SW] Registration failed:', err));
+    });
+  }
 });
+

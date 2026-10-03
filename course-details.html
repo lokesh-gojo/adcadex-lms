@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Details — Acadex</title>
+  <title>Course Details — Prime Vector LMS</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/course.css">
@@ -16,7 +16,7 @@
   <div class="navbar-inner">
     <a href="index.html" class="navbar-brand">
       <div class="logo-icon"><i class="fa fa-graduation-cap"></i></div>
-      <span class="logo-text">ACAD<span>EX</span></span>
+      <span class="logo-text">PRIME <span>VECTOR</span></span>
     </a>
     <ul class="navbar-nav">
       <li><a href="index.html" class="nav-link">Home</a></li>
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const id = parseInt(params.get('id')) || 1;
   const course = COURSES_DB[id] || COURSES_DB[1];
 
-  document.title = course.title + ' — Acadex';
+  document.title = course.title + ' — Prime Vector LMS';
   document.getElementById('courseTitle').textContent     = course.title;
   document.getElementById('courseDesc').textContent      = course.desc;
   document.getElementById('courseInstructor').textContent = course.instructor;
@@ -281,3 +281,4 @@ function enrollCourse() {
 </script>
 </body>
 </html>
+

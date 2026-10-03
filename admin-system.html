@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Health — Prime Vector LMS Admin</title>
+  <meta name="description" content="System health dashboard, audit logs, cloud storage monitoring, and backup management.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="adminSystemPage">
+<div class="dashboard-layout">
+
+  <!-- ADMIN SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Admin</div>
+        <div class="sidebar-user-role">admin</div>
+      </div>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Overview</div>
+        <a href="admin.html" class="sidebar-link" data-tooltip="Dashboard"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Management</div>
+        <a href="admin-enrollment.html" class="sidebar-link" data-tooltip="Students"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Students</span></a>
+        <a href="admin-departments.html" class="sidebar-link" data-tooltip="Departments"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Departments</span></a>
+        <a href="admin-courses.html" class="sidebar-link" data-tooltip="Courses"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="admin-placements.html" class="sidebar-link" data-tooltip="Placements"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placements</span></a>
+        <a href="admin-certificates.html" class="sidebar-link" data-tooltip="Certificates"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Analytics & System</div>
+        <a href="admin-analytics.html" class="sidebar-link" data-tooltip="Analytics"><span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span><span class="sidebar-label">Analytics</span></a>
+        <a href="admin-reports.html" class="sidebar-link" data-tooltip="Reports"><span class="sidebar-icon"><i class="fa fa-file-excel-o"></i></span><span class="sidebar-label">Reports</span></a>
+        <a href="admin-system.html" class="sidebar-link active" data-tooltip="System"><span class="sidebar-icon"><i class="fa fa-server"></i></span><span class="sidebar-label">System</span></a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="admin.html">Admin</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>System Health</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+        <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-full)">
+          <div class="system-status-dot online"></div>
+          <span style="font-size:0.8rem;color:var(--success);font-weight:600">All Systems Online</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h2 class="page-title">System Health Dashboard</h2>
+        <p class="page-subtitle">Monitor server status, cloud storage, audit logs, and backup management</p>
+      </div>
+
+      <!-- System Status -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="system-stat-card">
+          <div class="system-stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa fa-server"></i></div>
+          <div class="system-stat-content">
+            <div class="system-stat-label">Web Server</div>
+            <div class="system-stat-value">Online</div>
+            <div class="system-stat-sub">Uptime: 99.98% · 42 days</div>
+          </div>
+          <div class="system-status-dot online"></div>
+        </div>
+        <div class="system-stat-card">
+          <div class="system-stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa fa-database"></i></div>
+          <div class="system-stat-content">
+            <div class="system-stat-label">Database</div>
+            <div class="system-stat-value">Online</div>
+            <div class="system-stat-sub">PostgreSQL · 12ms avg</div>
+          </div>
+          <div class="system-status-dot online"></div>
+        </div>
+        <div class="system-stat-card">
+          <div class="system-stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa fa-cloud"></i></div>
+          <div class="system-stat-content">
+            <div class="system-stat-label">Storage Service</div>
+            <div class="system-stat-value">Warning</div>
+            <div class="system-stat-sub">78% capacity used</div>
+          </div>
+          <div class="system-status-dot warning"></div>
+        </div>
+        <div class="system-stat-card">
+          <div class="system-stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa fa-envelope"></i></div>
+          <div class="system-stat-content">
+            <div class="system-stat-label">Email Service</div>
+            <div class="system-stat-value">Online</div>
+            <div class="system-stat-sub">1,284 sent today</div>
+          </div>
+          <div class="system-status-dot online"></div>
+        </div>
+        <div class="system-stat-card">
+          <div class="system-stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa fa-video-camera"></i></div>
+          <div class="system-stat-content">
+            <div class="system-stat-label">Live Class Server</div>
+            <div class="system-stat-value">Online</div>
+            <div class="system-stat-sub">8 active sessions</div>
+          </div>
+          <div class="system-status-dot online"></div>
+        </div>
+        <div class="system-stat-card">
+          <div class="system-stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa fa-lock"></i></div>
+          <div class="system-stat-content">
+            <div class="system-stat-label">Auth Service</div>
+            <div class="system-stat-value">Online</div>
+            <div class="system-stat-sub">0 failed logins today</div>
+          </div>
+          <div class="system-status-dot online"></div>
+        </div>
+      </div>
+
+      <!-- Cloud Storage + CPU/Memory -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- Storage -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-cloud"></i> Cloud Storage Usage</div>
+            <span class="badge badge-warning">78% Used</span>
+          </div>
+          <div style="margin-bottom:20px">
+            <div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--text-muted);margin-bottom:6px">
+              <span>78.4 GB used of 100 GB</span>
+              <span>21.6 GB free</span>
+            </div>
+            <div class="storage-bar-wrap">
+              <div class="storage-bar-fill" style="width:78.4%;background:linear-gradient(90deg,#2563EB,#F59E0B)"></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:10px;height:10px;border-radius:50%;background:#2563EB;flex-shrink:0"></div>
+              <div style="flex:1">
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:3px">
+                  <span>📹 Video Recordings</span><span>34.2 GB</span>
+                </div>
+                <div class="storage-bar-wrap" style="height:6px"><div class="storage-bar-fill" style="width:43.6%;background:#2563EB"></div></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:10px;height:10px;border-radius:50%;background:#10B981;flex-shrink:0"></div>
+              <div style="flex:1">
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:3px">
+                  <span>📄 Documents & Notes</span><span>18.6 GB</span>
+                </div>
+                <div class="storage-bar-wrap" style="height:6px"><div class="storage-bar-fill" style="width:23.7%;background:#10B981"></div></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;flex-shrink:0"></div>
+              <div style="flex:1">
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:3px">
+                  <span>🎓 Student Data</span><span>14.8 GB</span>
+                </div>
+                <div class="storage-bar-wrap" style="height:6px"><div class="storage-bar-fill" style="width:18.9%;background:#F59E0B"></div></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:10px;height:10px;border-radius:50%;background:#8B5CF6;flex-shrink:0"></div>
+              <div style="flex:1">
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:3px">
+                  <span>🏆 Certificates</span><span>10.8 GB</span>
+                </div>
+                <div class="storage-bar-wrap" style="height:6px"><div class="storage-bar-fill" style="width:13.8%;background:#8B5CF6"></div></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:16px;padding:10px"><i class="fa fa-trash"></i> Clean Up Storage</button>
+        </div>
+
+        <!-- Performance Chart -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-area-chart"></i> Server Performance</div>
+            <span class="badge badge-success">Healthy</span>
+          </div>
+          <div style="height:200px;margin-bottom:20px"><canvas id="perfChart"></canvas></div>
+          <div class="dashboard-grid-3" style="margin-bottom:0">
+            <div style="text-align:center;padding:14px;background:var(--bg);border-radius:var(--radius-md)">
+              <div style="font-size:1.3rem;font-weight:900;color:var(--primary);font-family:var(--font-display)">24%</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">CPU</div>
+            </div>
+            <div style="text-align:center;padding:14px;background:var(--bg);border-radius:var(--radius-md)">
+              <div style="font-size:1.3rem;font-weight:900;color:var(--warning);font-family:var(--font-display)">67%</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Memory</div>
+            </div>
+            <div style="text-align:center;padding:14px;background:var(--bg);border-radius:var(--radius-md)">
+              <div style="font-size:1.3rem;font-weight:900;color:var(--success);font-family:var(--font-display)">12ms</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Latency</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backup Management -->
+      <div class="section-card" style="margin-bottom:24px">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-history"></i> Backup Management</div>
+          <div style="display:flex;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(--success-light);border:1px solid rgba(16,185,129,0.3);border-radius:var(--radius-full)">
+              <i class="fa fa-check-circle" style="color:var(--success)"></i>
+              <span style="font-size:0.82rem;font-weight:600;color:var(--success)">Auto-Backup ON</span>
+            </div>
+            <button class="btn btn-primary" style="padding:8px 16px;font-size:0.85rem" onclick="triggerBackup()"><i class="fa fa-upload"></i> Backup Now</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr><th>Backup Name</th><th>Type</th><th>Size</th><th>Status</th><th>Created</th><th>Action</th></tr>
+            </thead>
+            <tbody id="backupTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Audit Logs -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-list-alt"></i> Audit Logs</div>
+          <div style="display:flex;gap:8px">
+            <select class="form-input" style="width:auto;padding:7px 12px;font-size:0.85rem">
+              <option>All Events</option>
+              <option>Login Events</option>
+              <option>Admin Actions</option>
+              <option>Critical</option>
+            </select>
+            <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem"><i class="fa fa-download"></i></button>
+          </div>
+        </div>
+        <div id="auditLog"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const BACKUPS = [
+    { name:'primevector_full_20250711', type:'Full', size:'8.4 GB', status:'success', created:'2025-07-11 03:00' },
+    { name:'primevector_incr_20250710', type:'Incremental', size:'1.2 GB', status:'success', created:'2025-07-10 03:00' },
+    { name:'primevector_incr_20250709', type:'Incremental', size:'0.9 GB', status:'success', created:'2025-07-09 03:00' },
+    { name:'primevector_full_20250704', type:'Full', size:'8.1 GB', status:'success', created:'2025-07-04 03:00' },
+    { name:'primevector_incr_20250708', type:'Incremental', size:'1.1 GB', status:'failed', created:'2025-07-08 03:00' },
+  ];
+
+  const AUDIT = [
+    { icon:'fa-sign-in', iconBg:'rgba(37,99,235,0.1)', iconColor:'var(--primary)', action:'Admin Login', user:'admin@primevector.edu', severity:'info', time:'2 min ago' },
+    { icon:'fa-certificate', iconBg:'rgba(16,185,129,0.1)', iconColor:'var(--success)', action:'Bulk certificates generated (248)', user:'admin@primevector.edu', severity:'info', time:'18 min ago' },
+    { icon:'fa-user-plus', iconBg:'rgba(245,158,11,0.1)', iconColor:'var(--warning)', action:'New faculty account created', user:'admin@primevector.edu', severity:'info', time:'1 hour ago' },
+    { icon:'fa-trash', iconBg:'rgba(239,68,68,0.1)', iconColor:'var(--danger)', action:'Course deleted: Python Basics (2022)', user:'admin@primevector.edu', severity:'warn', time:'3 hours ago' },
+    { icon:'fa-upload', iconBg:'rgba(16,185,129,0.1)', iconColor:'var(--success)', action:'System backup completed successfully', user:'system', severity:'info', time:'6 hours ago' },
+    { icon:'fa-sign-in', iconBg:'rgba(239,68,68,0.1)', iconColor:'var(--danger)', action:'Failed login attempts (5) from IP 192.168.1.45', user:'unknown', severity:'critical', time:'8 hours ago' },
+    { icon:'fa-cog', iconBg:'rgba(37,99,235,0.1)', iconColor:'var(--primary)', action:'System settings updated: SMTP configuration', user:'admin@primevector.edu', severity:'info', time:'1 day ago' },
+    { icon:'fa-users', iconBg:'rgba(16,185,129,0.1)', iconColor:'var(--success)', action:'128 new students enrolled (batch import)', user:'admin@primevector.edu', severity:'info', time:'2 days ago' },
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    const user = Auth.getUser();
+    if (user.role !== 'admin') { window.location.href = user.role + '.html'; return; }
+
+    // Backup table
+    document.getElementById('backupTable').innerHTML = BACKUPS.map(b => `
+      <tr>
+        <td><code style="font-size:0.8rem">${b.name}</code></td>
+        <td><span class="badge badge-ghost">${b.type}</span></td>
+        <td>${b.size}</td>
+        <td><span class="badge ${b.status==='success'?'badge-success':'badge-danger'}">${b.status==='success'?'✓ Success':'✗ Failed'}</span></td>
+        <td><span style="font-size:0.82rem">${b.created}</span></td>
+        <td>
+          <button class="btn btn-ghost" style="padding:6px 10px;font-size:0.8rem" onclick="Toast.info('Download','Downloading backup...')"><i class="fa fa-download"></i></button>
+          <button class="btn btn-ghost" style="padding:6px 10px;font-size:0.8rem" onclick="Toast.warning('Restore','Restoring from backup...')"><i class="fa fa-undo"></i></button>
+        </td>
+      </tr>
+    `).join('');
+
+    // Audit log
+    document.getElementById('auditLog').innerHTML = AUDIT.map(a => `
+      <div class="audit-row">
+        <div class="audit-icon" style="background:${a.iconBg};color:${a.iconColor}"><i class="fa ${a.icon}"></i></div>
+        <div class="audit-content">
+          <div class="audit-action">${a.action}</div>
+          <div class="audit-user"><i class="fa fa-user-o" style="margin-right:4px"></i>${a.user}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div><span class="audit-severity ${a.severity}">${a.severity}</span></div>
+          <div class="audit-time" style="margin-top:4px">${a.time}</div>
+        </div>
+      </div>
+    `).join('');
+
+    // Performance chart
+    const isDark = Theme.isDark();
+    const textColor = isDark ? '#94A3B8' : '#64748B';
+    const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+    const labels = Array.from({length:24},(_,i) => i%6===0 ? i+':00' : '');
+    new Chart(document.getElementById('perfChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label:'CPU %', data:[18,22,20,24,19,28,32,26,24,20,18,22,20,24,19,28,32,26,24,20,18,22,20,24], borderColor:'#2563EB', backgroundColor:'rgba(37,99,235,0.1)', tension:0.4, fill:true, pointRadius:0, borderWidth:2 },
+          { label:'Memory %', data:[58,60,62,65,63,67,70,68,66,64,62,64,63,66,64,68,72,70,68,66,64,65,63,67], borderColor:'#F59E0B', backgroundColor:'rgba(245,158,11,0.1)', tension:0.4, fill:true, pointRadius:0, borderWidth:2 }
+        ]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'top', labels:{ color:textColor, boxWidth:12, font:{ size:11 } } } }, scales:{ y:{ min:0, max:100, grid:{ color:gridColor }, ticks:{ color:textColor } }, x:{ grid:{ display:false }, ticks:{ color:textColor } } } }
+    });
+
+    App.init();
+  });
+
+  function triggerBackup() {
+    Toast.info('Backup Started', 'Manual backup initiated. This may take a few minutes.');
+    setTimeout(() => Toast.success('Backup Complete', 'System backup saved successfully'), 3000);
+  }
+</script>
+</body>
+</html>
+

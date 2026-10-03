@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Classes — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/training.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="liveClassesPage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Training & Placement</div>
+        <a href="training.html" class="sidebar-link" data-tooltip="Training Programs">
+          <span class="sidebar-icon"><i class="fa fa-rocket"></i></span>
+          <span class="sidebar-label">Training Programs</span>
+        </a>
+        <a href="live-classes.html" class="sidebar-link active" data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link" data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-file-text"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Tasks</span>
+        </a>
+        <a href="placement.html" class="sidebar-link" data-tooltip="Placement">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link" data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-pdf-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link" data-tooltip="Portfolio">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link" data-tooltip="Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link" data-tooltip="Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="student.html">Dashboard</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Live Classes</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h1 class="page-title">Live Classes & Recordings</h1>
+        <p class="page-subtitle">Join upcoming sessions and review recorded lectures.</p>
+      </div>
+
+      <!-- Upcoming Classes -->
+      <div class="card" style="margin-bottom: 32px;">
+        <div class="card-header">
+          <span class="card-title"><i class="fa fa-video-camera text-primary"></i> Upcoming Sessions</span>
+        </div>
+        <div class="card-body" style="display: flex; flex-direction: column; gap: 16px;" id="upcomingList">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- Recorded Classes -->
+      <h3 style="margin-bottom: 20px;">Recorded Classes</h3>
+      <div class="recording-grid" id="recordingList">
+        <!-- Rendered via JS -->
+      </div>
+      
+    </div>
+  </main>
+</div>
+
+<!-- Video Player Modal -->
+<div class="modal-overlay" id="videoModal">
+  <div class="modal" style="max-width: 800px; width: 90%; background: #000; border-radius: 8px; overflow: hidden; padding: 0;">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: #111; color: white;">
+      <h3 id="modalVideoTitle" style="margin: 0; font-size: 1rem;">Session Recording</h3>
+      <button onclick="Modal.close('videoModal')" style="background:none; border:none; color:white; cursor:pointer; font-size: 1.5rem;">&times;</button>
+    </div>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+      <!-- Simulation of a video player -->
+      <div style="position: absolute; top:0; left:0; width:100%; height:100%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">
+         <div style="text-align: center;">
+            <i class="fa fa-play-circle-o" style="font-size: 4rem; margin-bottom: 12px;"></i>
+            <p>Video Player Integration</p>
+         </div>
+      </div>
+    </div>
+    <div style="padding: 12px 20px; background: #111; color: #ccc; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; gap: 12px;">
+        <button class="btn btn-ghost btn-sm" style="color: white;"><i class="fa fa-bookmark-o"></i> Bookmark</button>
+        <button class="btn btn-ghost btn-sm" style="color: white;"><i class="fa fa-check"></i> Mark Complete</button>
+      </div>
+      <div>
+        <select style="background: #333; color: white; border: none; padding: 4px 8px; border-radius: 4px;">
+          <option>1.0x</option>
+          <option>1.25x</option>
+          <option>1.5x</option>
+          <option>2.0x</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/live-classes.js"></script>
+</body>
+</html>
+

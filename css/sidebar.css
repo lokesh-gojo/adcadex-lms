@@ -1,5 +1,5 @@
 /* ============================================================
-   Acadex LMS — Sidebar Styles
+   Prime Vector LMS — Sidebar Styles
    ============================================================ */
 
 .sidebar {
@@ -166,9 +166,11 @@
 }
 
 .sidebar-link.active {
-  background: rgba(37,99,235,0.2);
+  background: linear-gradient(135deg, rgba(79,70,229,0.35) 0%, rgba(6,182,212,0.2) 100%);
+  border: 1px solid rgba(79,70,229,0.4);
   color: #fff;
   font-weight: 600;
+  box-shadow: 0 4px 15px rgba(79,70,229,0.25);
 }
 
 .sidebar-link.active::before {
@@ -177,9 +179,9 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 3px;
-  height: 70%;
-  background: var(--primary);
+  width: 4px;
+  height: 60%;
+  background: var(--accent);
   border-radius: 0 var(--radius-full) var(--radius-full) 0;
 }
 
@@ -326,7 +328,7 @@
 /* Stats Grid */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   margin-bottom: 28px;
 }

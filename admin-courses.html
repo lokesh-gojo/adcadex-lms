@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Courses — Prime Vector LMS Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="adminCoursesPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Admin</div><div class="sidebar-user-role">admin</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Overview</div><a href="admin.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a></div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Management</div>
+        <a href="admin-enrollment.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Students</span></a>
+        <a href="admin-departments.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Departments</span></a>
+        <a href="admin-courses.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="admin-training.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-rocket"></i></span><span class="sidebar-label">Training</span></a>
+        <a href="admin-placements.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placements</span></a>
+        <a href="admin-certificates.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Analytics</div>
+        <a href="admin-analytics.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span><span class="sidebar-label">Analytics</span></a>
+        <a href="admin-system.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-server"></i></span><span class="sidebar-label">System</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="admin.html">Admin</a><span class="breadcrumb-sep">/</span><span>Courses</span></div>
+      </div>
+      <div class="inner-navbar-right"><button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button></div>
+    </header>
+
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+        <div><h2 class="page-title">Course Management</h2><p class="page-subtitle">Create, assign, and manage all courses across departments</p></div>
+        <button class="btn btn-primary" onclick="Modal.open('courseModal')"><i class="fa fa-plus"></i> Create Course</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-book"></i></div><div class="stat-card-body"><div class="stat-card-value">156</div><div class="stat-card-label">Total Courses</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-check-circle"></i></div><div class="stat-card-body"><div class="stat-card-value">134</div><div class="stat-card-label">Active</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-clock-o"></i></div><div class="stat-card-body"><div class="stat-card-value">18</div><div class="stat-card-label">Draft</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-users"></i></div><div class="stat-card-body"><div class="stat-card-value">4,280</div><div class="stat-card-label">Enrollments</div></div></div>
+      </div>
+
+      <!-- Filter & Search -->
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <div style="position:relative;flex:1;min-width:200px">
+          <i class="fa fa-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted)"></i>
+          <input type="text" class="form-input" placeholder="Search courses..." style="padding-left:40px" oninput="filterCourses(this.value)">
+        </div>
+        <select class="form-input" style="width:auto;padding:10px 14px" onchange="filterByStatus(this.value)">
+          <option value="all">All Status</option>
+          <option value="active">Active</option>
+          <option value="draft">Draft</option>
+          <option value="archived">Archived</option>
+        </select>
+        <select class="form-input" style="width:auto;padding:10px 14px">
+          <option>All Departments</option>
+          <option>CS</option><option>ECE</option><option>IT</option><option>ME</option>
+        </select>
+      </div>
+
+      <!-- Courses Table -->
+      <div class="section-card">
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th><input type="checkbox" id="selectAll" onchange="toggleAll(this)"></th><th>Course</th><th>Faculty</th><th>Dept</th><th>Students</th><th>Duration</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="coursesBody"></tbody>
+          </table>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0 0;flex-wrap:wrap;gap:8px">
+          <div style="font-size:0.82rem;color:var(--text-muted)">Showing 1-10 of 156 courses</div>
+          <div style="display:flex;gap:4px">
+            <button class="btn btn-ghost" style="padding:7px 12px;font-size:0.82rem"><i class="fa fa-chevron-left"></i></button>
+            <button class="btn btn-primary" style="padding:7px 12px;font-size:0.82rem">1</button>
+            <button class="btn btn-ghost" style="padding:7px 12px;font-size:0.82rem">2</button>
+            <button class="btn btn-ghost" style="padding:7px 12px;font-size:0.82rem">3</button>
+            <button class="btn btn-ghost" style="padding:7px 12px;font-size:0.82rem"><i class="fa fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Create Course Modal -->
+<div class="modal-overlay" id="courseModal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header"><div class="modal-title">Create New Course</div><button class="modal-close" onclick="Modal.close('courseModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="form-group" style="grid-column:1/-1"><label class="form-label">Course Title</label><input type="text" class="form-input" placeholder="e.g. Advanced Web Development"></div>
+        <div class="form-group"><label class="form-label">Department</label><select class="form-input"><option>CS</option><option>ECE</option><option>IT</option><option>ME</option></select></div>
+        <div class="form-group"><label class="form-label">Category</label><select class="form-input"><option>Web Dev</option><option>AI/ML</option><option>Design</option><option>Database</option></select></div>
+        <div class="form-group"><label class="form-label">Assign Faculty</label><select class="form-input"><option>Dr. Priya Ramesh</option><option>Prof. Ravi Shankar</option><option>Dr. Anita Verma</option></select></div>
+        <div class="form-group"><label class="form-label">Duration (hours)</label><input type="number" class="form-input" value="40"></div>
+        <div class="form-group" style="grid-column:1/-1"><label class="form-label">Description</label><textarea class="form-input" rows="3" placeholder="Brief course description..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('courseModal')">Cancel</button>
+      <button class="btn btn-ghost" onclick="Modal.close('courseModal');Toast.info('Saved','Course saved as draft')">Save Draft</button>
+      <button class="btn btn-primary" onclick="Modal.close('courseModal');Toast.success('Published!','Course is now live')">Publish</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const COURSES = [
+    { title:'Complete Web Development Bootcamp', faculty:'Dr. Angela Yu', dept:'CS', students:320, duration:'24h', status:'active' },
+    { title:'Machine Learning A-Z', faculty:'Prof. Hadelin', dept:'CS', students:280, duration:'18h', status:'active' },
+    { title:'UI/UX Design Fundamentals', faculty:'Dr. Sarah Kim', dept:'IT', students:180, duration:'12h', status:'active' },
+    { title:'Data Structures & Algorithms', faculty:'Prof. Tim Chen', dept:'CS', students:420, duration:'30h', status:'active' },
+    { title:'Database Management Systems', faculty:'Dr. Anita Verma', dept:'IT', students:260, duration:'16h', status:'active' },
+    { title:'Computer Networks', faculty:'Dr. Ravi Shankar', dept:'ECE', students:190, duration:'20h', status:'active' },
+    { title:'Operating Systems', faculty:'Prof. Mohan Rao', dept:'CS', students:310, duration:'22h', status:'active' },
+    { title:'Advanced Python Programming', faculty:'Dr. Kavitha Nair', dept:'CS', students:240, duration:'14h', status:'draft' },
+    { title:'Cloud Computing with AWS', faculty:'Dr. Rajesh Iyer', dept:'IT', students:0, duration:'18h', status:'draft' },
+    { title:'Microprocessors & Embedded', faculty:'Dr. Ravi Shankar', dept:'ECE', students:120, duration:'20h', status:'archived' },
+  ];
+
+  let filteredCourses = [...COURSES];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    renderTable(filteredCourses);
+    App.init();
+  });
+
+  function renderTable(courses) {
+    const statusCls = { active:'badge-success', draft:'badge-warning', archived:'badge-ghost' };
+    document.getElementById('coursesBody').innerHTML = courses.map(c => `
+      <tr>
+        <td><input type="checkbox"></td>
+        <td>
+          <div style="font-weight:600">${c.title}</div>
+        </td>
+        <td><span style="font-size:0.82rem">${c.faculty}</span></td>
+        <td><span class="badge badge-ghost">${c.dept}</span></td>
+        <td>${c.students.toLocaleString()}</td>
+        <td>${c.duration}</td>
+        <td><span class="badge ${statusCls[c.status]}">${c.status}</span></td>
+        <td>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('Edit','Opening course editor')"><i class="fa fa-edit"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('View','Viewing course')"><i class="fa fa-eye"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem;color:var(--danger)" onclick="Toast.warning('Delete','Confirm deletion')"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterCourses(q) {
+    q = q.toLowerCase();
+    filteredCourses = COURSES.filter(c => c.title.toLowerCase().includes(q) || c.faculty.toLowerCase().includes(q));
+    renderTable(filteredCourses);
+  }
+
+  function filterByStatus(status) {
+    filteredCourses = status === 'all' ? [...COURSES] : COURSES.filter(c => c.status === status);
+    renderTable(filteredCourses);
+  }
+
+  function toggleAll(cb) {
+    document.querySelectorAll('#coursesBody input[type=checkbox]').forEach(x => x.checked = cb.checked);
+  }
+</script>
+</body>
+</html>
+

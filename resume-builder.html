@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Builder — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/placement.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="studentDashboard">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">ACAD<span>EX</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link " data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link " data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link " data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link " data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link active" data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link " data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Inner Navbar -->
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <button class="notif-btn" data-dropdown-toggle title="Notifications">
+            <i class="fa fa-bell"></i>
+            <span class="notif-badge">3</span>
+          </button>
+          <div class="dropdown-menu notif-dropdown" style="min-width:320px">
+            <div class="notif-dropdown-header">
+              <span class="notif-dropdown-title">Notifications</span>
+              <span class="notif-mark-all">Mark all read</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--primary-light);color:var(--primary)"><i class="fa fa-book"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">New lesson added to Web Development</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--danger-light);color:var(--danger)"><i class="fa fa-clock-o"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Assignment due in 2 days: Build REST API</div>
+                <div class="notif-time">4 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-avatar" style="background:var(--success-light);color:var(--success)"><i class="fa fa-check"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Quiz graded: JavaScript Fundamentals — 88%</div>
+                <div class="notif-time">1 day ago</div>
+              </div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--danger-light);color:var(--danger)"><i class="fa fa-exclamation-triangle"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Performance Alert: Your attendance dropped below 75%.</div>
+                <div class="notif-time">Just now</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Student</span>
+              <span class="user-role">student</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <!-- ── HEADER & TOOLBAR ── -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:28px;box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <h1 class="page-title" style="margin:0 0 4px;font-size:1.6rem;font-family:var(--font-display);display:flex;align-items:center;gap:10px">
+            <i class="fa fa-file-text-o text-primary"></i> ATS Resume Architect
+          </h1>
+          <p class="page-subtitle" style="margin:0;font-size:0.875rem">
+            Build recruiter-ready, ATS-verified resumes with real-time scoring, live templates, and instant print/PDF export.
+          </p>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <!-- Template Selector -->
+          <div style="display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);padding:4px 10px;border-radius:var(--radius)">
+            <i class="fa fa-paint-brush text-primary" style="font-size:0.85rem"></i>
+            <span style="font-size:0.8rem;font-weight:700;color:var(--text-muted)">Style:</span>
+            <select id="templateSelector" class="form-control" style="border:none;background:transparent;padding:2px 4px;font-size:0.85rem;font-weight:600;width:auto;cursor:pointer" onchange="changeTemplate(this.value)">
+              <option value="modern" selected>Modern Professional</option>
+              <option value="ivy">Ivy League Classical</option>
+              <option value="minimal">Tech Minimalist</option>
+            </select>
+          </div>
+
+          <!-- Color Accent Dots -->
+          <div style="display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);padding:6px 10px;border-radius:var(--radius)">
+            <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);margin-right:2px">Color:</span>
+            <span class="accent-dot" data-color="#2563EB" onclick="setAccentColor('#2563EB')" style="width:16px;height:16px;border-radius:50%;background:#2563EB;cursor:pointer;display:inline-block;transition:transform 0.2s" title="Prime Blue"></span>
+            <span class="accent-dot" data-color="#10B981" onclick="setAccentColor('#10B981')" style="width:16px;height:16px;border-radius:50%;background:#10B981;cursor:pointer;display:inline-block;transition:transform 0.2s" title="Emerald Tech"></span>
+            <span class="accent-dot" data-color="#6366F1" onclick="setAccentColor('#6366F1')" style="width:16px;height:16px;border-radius:50%;background:#6366F1;cursor:pointer;display:inline-block;transition:transform 0.2s" title="Royal Indigo"></span>
+            <span class="accent-dot" data-color="#0F172A" onclick="setAccentColor('#0F172A')" style="width:16px;height:16px;border-radius:50%;background:#0F172A;cursor:pointer;display:inline-block;transition:transform 0.2s" title="Dark Slate"></span>
+            <span class="accent-dot" data-color="#DC2626" onclick="setAccentColor('#DC2626')" style="width:16px;height:16px;border-radius:50%;background:#DC2626;cursor:pointer;display:inline-block;transition:transform 0.2s" title="Crimson"></span>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <button class="btn btn-outline btn-sm" onclick="loadFullStackSample()" title="Fill sample engineering profile">
+            <i class="fa fa-magic"></i> Load Sample Profile
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="downloadPDF()">
+            <i class="fa fa-print"></i> Export ATS PDF
+          </button>
+        </div>
+      </div>
+      
+      <!-- ── TWO COLUMN RESPONSIVE RESUME BUILDER ── -->
+      <div class="resume-builder-grid">
+        <!-- ── LEFT: EDITOR SECTIONS ── -->
+        <div class="resume-editor">
+
+          <!-- 1. ATS Score Dashboard Card -->
+          <div class="card" style="border-top:4px solid var(--primary)">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:36px;height:36px;border-radius:50%;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1rem">
+                    <i class="fa fa-shield"></i>
+                  </div>
+                  <div>
+                    <div style="font-weight:700;font-size:1rem;color:var(--text)">ATS Optimization Score</div>
+                    <div style="font-size:0.75rem;color:var(--text-muted)">Recruiter algorithm pass rate predictor</div>
+                  </div>
+                </div>
+                <div id="atsScoreText" style="font-size:1.6rem;font-weight:800;color:var(--primary);font-family:var(--font-display)">95%</div>
+              </div>
+
+              <div class="progress" style="height:10px;margin-bottom:14px;background:var(--border)">
+                <div class="progress-bar" id="atsScoreBar" style="width:95%;background:var(--success)"></div>
+              </div>
+
+              <div id="atsBadgesList" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px"></div>
+
+              <div style="background:var(--bg);border-radius:var(--radius-sm);padding:10px 14px;border:1px solid var(--border)">
+                <div style="font-size:0.8rem;font-weight:700;color:var(--text);margin-bottom:6px">Optimization Tips:</div>
+                <ul id="atsSuggestions" style="padding-left:18px;margin:0;line-height:1.5"></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Personal & Contact Information -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-user text-primary"></i> 1. Personal & Contact Information</span>
+            </div>
+            <div class="card-body" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px">
+              <div class="form-group"><label class="form-label">Full Name</label><input type="text" id="resName" class="form-control" placeholder="Alex Johnson"></div>
+              <div class="form-group"><label class="form-label">Professional Target Title</label><input type="text" id="resTitle" class="form-control" placeholder="Full Stack Software Engineer"></div>
+              <div class="form-group"><label class="form-label">Email Address</label><input type="email" id="resEmail" class="form-control" placeholder="alex@primevector.in"></div>
+              <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" id="resPhone" class="form-control" placeholder="+91 98765 43210"></div>
+              <div class="form-group"><label class="form-label">Location (City, Country)</label><input type="text" id="resLocation" class="form-control" placeholder="Bangalore / Hosur, India"></div>
+              <div class="form-group"><label class="form-label">LinkedIn Profile URL</label><input type="text" id="resLinkedin" class="form-control" placeholder="linkedin.com/in/alexjohnson"></div>
+              <div class="form-group" style="grid-column:1/-1"><label class="form-label">GitHub / Portfolio URL</label><input type="text" id="resGithub" class="form-control" placeholder="github.com/alexjohnson"></div>
+            </div>
+          </div>
+
+          <!-- 3. Professional Summary / Career Objective -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-bullseye text-warning"></i> 2. Professional Summary & Career Objective</span>
+              <button class="btn btn-ghost btn-sm" onclick="optimizeBulletsWithAI()" style="font-size:0.75rem">
+                <i class="fa fa-magic text-warning"></i> AI Polish
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:0">
+                <textarea id="resObjective" class="form-control" rows="3" placeholder="Highlight your years of experience, core technical stack, and tangible achievements..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Core Technical Skills -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-wrench text-success"></i> 3. Core Technical Skills</span>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label">Skills & Frameworks (Comma separated)</label>
+                <textarea id="resSkills" class="form-control" rows="2" placeholder="JavaScript, TypeScript, React.js, Node.js, Python, PostgreSQL, Docker, AWS, Git"></textarea>
+                <small style="color:var(--text-muted);font-size:0.75rem;margin-top:4px;display:block">
+                  Tip: Include both languages and frameworks to pass automated ATS parser keyword filters.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Professional Experience & Internships -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-briefcase text-primary"></i> 4. Professional Experience & Internships</span>
+              <button class="btn btn-ghost btn-sm" onclick="optimizeBulletsWithAI()" style="font-size:0.75rem">
+                <i class="fa fa-bolt text-primary"></i> Enhance Action Verbs
+              </button>
+            </div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <div class="form-group"><label class="form-label">Job Title / Role</label><input type="text" id="resExpTitle" class="form-control" placeholder="Software Engineering Intern"></div>
+              <div class="form-group"><label class="form-label">Company / Organization</label><input type="text" id="resExpCompany" class="form-control" placeholder="CloudScale Enterprise Labs"></div>
+              <div class="form-group" style="grid-column:1/-1"><label class="form-label">Duration</label><input type="text" id="resExpDuration" class="form-control" placeholder="Jan 2025 - Present"></div>
+              <div class="form-group" style="grid-column:1/-1;margin-bottom:0">
+                <label class="form-label">Key Responsibilities & Quantifiable Achievements (Prefix lines with -)</label>
+                <textarea id="resExpDetails" class="form-control" rows="4" placeholder="- Spearheaded microservice API development, cutting response latency by 35%&#10;- Engineered real-time WebSocket dashboard handling 50k+ daily events&#10;- Collaborated with QA team to achieve 98% automated test coverage"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Education & Academic Training -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-graduation-cap text-accent"></i> 5. Education & Academic Credentials</span>
+            </div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <div class="form-group"><label class="form-label">Degree / Course</label><input type="text" id="resDegree" class="form-control" placeholder="B.Tech in Computer Science & Engineering"></div>
+              <div class="form-group"><label class="form-label">University / College / Institution</label><input type="text" id="resSchool" class="form-control" placeholder="Prime Vector Innovation Campus"></div>
+              <div class="form-group"><label class="form-label">Graduation Year / Dates</label><input type="text" id="resEduYear" class="form-control" placeholder="2022 - 2026"></div>
+              <div class="form-group"><label class="form-label">CGPA / GPA (Optional)</label><input type="text" id="resGPA" class="form-control" placeholder="8.8 / 10.0 CGPA"></div>
+            </div>
+          </div>
+
+          <!-- 7. Featured Capstone Projects -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-code text-primary"></i> 6. Featured Capstone Projects</span>
+            </div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <div class="form-group"><label class="form-label">Project Name</label><input type="text" id="resProjTitle" class="form-control" placeholder="NeuroLMS — AI Autonomous Learning Gateway"></div>
+              <div class="form-group"><label class="form-label">Technologies Used</label><input type="text" id="resProjTech" class="form-control" placeholder="React, Node.js, PostgreSQL, Docker"></div>
+              <div class="form-group" style="grid-column:1/-1;margin-bottom:0">
+                <label class="form-label">Project Description & Architecture Highlights</label>
+                <textarea id="resProjDesc" class="form-control" rows="3" placeholder="Architected an enterprise learning management system featuring real-time code execution, AI-driven placement scoring, and dynamic quiz generation. Deployed via Docker with zero downtime CI/CD."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Certifications & Credentials -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-certificate text-success"></i> 7. Certifications & Credentials</span>
+            </div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <div class="form-group"><label class="form-label">Certification Title</label><input type="text" id="resCertName" class="form-control" placeholder="Applied AI & Cloud Microservices Specialist"></div>
+              <div class="form-group"><label class="form-label">Issuing Authority</label><input type="text" id="resCertOrg" class="form-control" placeholder="Prime Vector Private Limited (ISO 9001:2015)"></div>
+              <div class="form-group" style="grid-column:1/-1;margin-bottom:0">
+                <label class="form-label">Date Earned & Verification ID</label>
+                <input type="text" id="resCertDate" class="form-control" placeholder="March 2026 · Credential ID: PV-2026-894">
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Reset Button -->
+          <div style="display:flex;justify-content:flex-end;margin-top:8px">
+            <button class="btn btn-ghost btn-sm" onclick="resetResumeForm()" style="color:var(--danger)">
+              <i class="fa fa-trash-o"></i> Reset All Fields
+            </button>
+          </div>
+
+        </div>
+
+        <!-- ── RIGHT: STICKY LIVE A4 RESUME PREVIEW ── -->
+        <div class="resume-preview-sticky">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:8px">
+              <h4 style="margin:0;font-weight:700;font-size:1rem;color:var(--text);display:flex;align-items:center;gap:8px">
+                <i class="fa fa-eye text-primary"></i> Live A4 Sheet Preview
+              </h4>
+              <span class="badge badge-primary" id="templateBadge" style="font-size:0.7rem">MODERN</span>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="downloadPDF()">
+              <i class="fa fa-download"></i> Save as PDF
+            </button>
+          </div>
+
+          <!-- Printable Document Paper Container -->
+          <div class="resume-paper-container" id="resumePaperContainer">
+            <div class="resume-sheet template-modern" id="resumeSheet">
+              
+              <!-- Header -->
+              <div style="margin-bottom:12px">
+                <div class="resume-name" id="prevName">Alex Johnson</div>
+                <div class="resume-role" id="prevTitle">Full Stack Engineer & AI Specialist</div>
+                <div class="resume-contact-bar" id="prevContact">
+                  <span>alex.johnson@primevector.in</span> • 
+                  <span>+91 98765 43210</span> • 
+                  <span>Bangalore, India</span>
+                </div>
+              </div>
+
+              <!-- Objective / Summary -->
+              <div>
+                <div class="resume-sec-title">Professional Summary</div>
+                <div id="prevObjective" style="line-height:1.5;color:#334155;font-size:12.5px;text-align:justify">
+                  Results-driven Full Stack Engineer with expertise in modern React architectures and scalable microservices.
+                </div>
+              </div>
+
+              <!-- Technical Skills -->
+              <div>
+                <div class="resume-sec-title">Technical Competencies</div>
+                <div id="prevSkills" style="padding-top:2px"></div>
+              </div>
+
+              <!-- Experience -->
+              <div>
+                <div class="resume-sec-title">Professional Experience</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;color:#0f172a">
+                  <span id="prevExpTitle">Software Engineering Intern at CloudScale Labs</span>
+                  <span id="prevExpDuration" style="font-size:12px;color:#64748b">Jan 2025 - Present</span>
+                </div>
+                <div id="prevExpDetails" style="margin-top:6px;color:#334155;font-size:12px"></div>
+              </div>
+
+              <!-- Education -->
+              <div>
+                <div class="resume-sec-title">Education & Academic Training</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;color:#0f172a">
+                  <span id="prevEduTitle">B.Tech in Computer Science — Prime Vector Campus</span>
+                  <span id="prevEduYear" style="font-size:12px;color:#64748b">2022 - 2026</span>
+                </div>
+                <div id="prevGPA" style="font-size:12px;color:#64748b;margin-top:2px">8.8 / 10.0 CGPA</div>
+              </div>
+
+              <!-- Key Projects -->
+              <div>
+                <div class="resume-sec-title">Featured Engineering Project</div>
+                <div id="prevProjTitle" style="font-weight:700;font-size:13px;color:#0f172a">NeuroLMS Gateway (React, Node, Docker)</div>
+                <div id="prevProjDesc" style="margin-top:4px;color:#334155;font-size:12px;line-height:1.5">
+                  Architected an enterprise learning management platform featuring real-time code sandboxing, AI-driven placement scoring, and dynamic quiz generation.
+                </div>
+              </div>
+
+              <!-- Certifications -->
+              <div>
+                <div class="resume-sec-title">Certifications & Honors</div>
+                <div style="display:flex;justify-content:space-between;font-size:12.5px;color:#0f172a">
+                  <span id="prevCertTitle" style="font-weight:700">Applied AI & Cloud Microservices Specialist — Prime Vector</span>
+                  <span id="prevCertDate" style="font-size:12px;color:#64748b">March 2026</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/resume-builder.js"></script>
+</body>
+</html>
+

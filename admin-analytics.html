@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Analytics — Prime Vector LMS</title>
+  <meta name="description" content="Advanced analytics dashboard for Prime Vector LMS administrators.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="adminAnalytics">
+<div class="dashboard-layout">
+
+  <!-- ADMIN SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Admin</div>
+        <div class="sidebar-user-role">admin</div>
+      </div>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Overview</div>
+        <a href="admin.html" class="sidebar-link" data-tooltip="Dashboard"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Management</div>
+        <a href="admin-enrollment.html" class="sidebar-link" data-tooltip="Students"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Students</span></a>
+        <a href="admin-enrollment.html" class="sidebar-link" data-tooltip="Faculty"><span class="sidebar-icon"><i class="fa fa-user-tie"></i></span><span class="sidebar-label">Faculty</span></a>
+        <a href="admin-departments.html" class="sidebar-link" data-tooltip="Departments"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Departments</span></a>
+        <a href="admin-courses.html" class="sidebar-link" data-tooltip="Courses"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="admin-training.html" class="sidebar-link" data-tooltip="Training"><span class="sidebar-icon"><i class="fa fa-rocket"></i></span><span class="sidebar-label">Training</span></a>
+        <a href="admin-placements.html" class="sidebar-link" data-tooltip="Placements"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placements</span></a>
+        <a href="admin-certificates.html" class="sidebar-link" data-tooltip="Certificates"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Analytics & System</div>
+        <a href="admin-analytics.html" class="sidebar-link active" data-tooltip="Analytics"><span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span><span class="sidebar-label">Analytics</span></a>
+        <a href="admin-reports.html" class="sidebar-link" data-tooltip="Reports"><span class="sidebar-icon"><i class="fa fa-file-excel-o"></i></span><span class="sidebar-label">Reports</span></a>
+        <a href="admin-system.html" class="sidebar-link" data-tooltip="System"><span class="sidebar-icon"><i class="fa fa-server"></i></span><span class="sidebar-label">System</span></a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="admin.html">Admin</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Analytics</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+        <select class="form-input" style="width:auto;padding:7px 14px;font-size:0.85rem;margin-right:8px" id="periodSelect" onchange="refreshCharts()">
+          <option>This Month</option>
+          <option>Last 3 Months</option>
+          <option>This Year</option>
+        </select>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h2 class="page-title">System Analytics</h2>
+        <p class="page-subtitle">Comprehensive data insights across all modules</p>
+      </div>
+
+      <!-- KPI Stats -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-users"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value">1,248</div>
+            <div class="stat-card-label">Total Students</div>
+            <div style="font-size:0.75rem;color:var(--success);margin-top:2px"><i class="fa fa-arrow-up"></i> +12% this month</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-graduation-cap"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value">86.4%</div>
+            <div class="stat-card-label">Avg Attendance</div>
+            <div style="font-size:0.75rem;color:var(--success);margin-top:2px"><i class="fa fa-arrow-up"></i> +2.1% vs last month</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-briefcase"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value">78.2%</div>
+            <div class="stat-card-label">Placement Rate</div>
+            <div style="font-size:0.75rem;color:var(--success);margin-top:2px"><i class="fa fa-arrow-up"></i> +5.3% vs last year</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-certificate"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value">2,841</div>
+            <div class="stat-card-label">Certificates Issued</div>
+            <div style="font-size:0.75rem;color:var(--success);margin-top:2px"><i class="fa fa-arrow-up"></i> +8% this quarter</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 1: Attendance + Course Progress -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-calendar-check-o"></i> Attendance Trend</div>
+          </div>
+          <div style="height:250px"><canvas id="attendanceTrendChart"></canvas></div>
+        </div>
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-pie-chart"></i> Course Progress Distribution</div>
+          </div>
+          <canvas id="courseProgressChart" height="220"></canvas>
+        </div>
+      </div>
+
+      <!-- Row 2: Quiz + Placement Readiness -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-question-circle"></i> Quiz Score Distribution</div>
+          </div>
+          <div style="height:250px"><canvas id="quizScoreChart"></canvas></div>
+        </div>
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-briefcase"></i> Placement Readiness Funnel</div>
+          </div>
+          <div style="height:250px"><canvas id="placementFunnelChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Row 3: Department Performance + Assignment -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-building"></i> Department-wise Performance</div>
+          </div>
+          <div style="height:260px"><canvas id="deptPerformanceChart"></canvas></div>
+        </div>
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-tasks"></i> Assignment Completion</div>
+          </div>
+          <div style="height:260px"><canvas id="assignmentChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Top Performers Table -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-trophy"></i> Top Performing Students</div>
+          <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem"><i class="fa fa-download"></i> Export</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Rank</th><th>Student</th><th>Department</th><th>Attendance</th><th>Avg Score</th><th>Placement</th><th>Overall</th>
+              </tr>
+            </thead>
+            <tbody id="topStudentsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    const user = Auth.getUser();
+    if (user.role !== 'admin') { window.location.href = user.role + '.html'; return; }
+    renderCharts();
+    renderTopStudents();
+    App.init();
+  });
+
+  function getChartColors(isDark) {
+    return {
+      text: isDark ? '#94A3B8' : '#64748B',
+      grid: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'
+    };
+  }
+
+  let charts = {};
+  function renderCharts() {
+    const isDark = Theme.isDark();
+    const { text, grid } = getChartColors(isDark);
+
+    // Attendance Trend
+    charts.att = new Chart(document.getElementById('attendanceTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [
+          { label:'CS', data:[82,85,79,88,84,86,90,88,87,91,89,92], borderColor:'#2563EB', backgroundColor:'rgba(37,99,235,0.1)', tension:0.4, fill:true, pointRadius:4 },
+          { label:'ECE', data:[78,80,76,82,80,83,85,82,84,87,86,89], borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.1)', tension:0.4, fill:true, pointRadius:4 },
+          { label:'IT', data:[80,83,77,85,82,85,88,86,85,89,88,90], borderColor:'#F59E0B', backgroundColor:'rgba(245,158,11,0.1)', tension:0.4, fill:true, pointRadius:4 }
+        ]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'top', labels:{ color:text } } }, scales:{ y:{ min:70, max:100, grid:{ color:grid }, ticks:{ color:text } }, x:{ grid:{ display:false }, ticks:{ color:text } } } }
+    });
+
+    // Course Progress
+    charts.prog = new Chart(document.getElementById('courseProgressChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['> 75%','50-75%','25-50%','< 25%'],
+        datasets: [{ data:[45,28,18,9], backgroundColor:['#10B981','#2563EB','#F59E0B','#EF4444'], borderWidth:0, hoverOffset:6 }]
+      },
+      options: { responsive:true, cutout:'65%', plugins:{ legend:{ position:'right', labels:{ color:text } } } }
+    });
+
+    // Quiz Scores
+    charts.quiz = new Chart(document.getElementById('quizScoreChart'), {
+      type: 'bar',
+      data: {
+        labels: ['0-20','21-40','41-60','61-70','71-80','81-90','91-100'],
+        datasets: [{ label:'Students', data:[8,15,42,68,145,218,92], backgroundColor:'rgba(37,99,235,0.8)', borderRadius:6 }]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ y:{ grid:{ color:grid }, ticks:{ color:text } }, x:{ grid:{ display:false }, ticks:{ color:text } } } }
+    });
+
+    // Placement Funnel
+    charts.place = new Chart(document.getElementById('placementFunnelChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Eligible','Applied','Shortlisted','Interviewed','Offered'],
+        datasets: [{ label:'Students', data:[1248,892,546,312,178], backgroundColor:['#2563EB','#3B82F6','#6366F1','#8B5CF6','#10B981'], borderRadius:6 }]
+      },
+      options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ x:{ grid:{ color:grid }, ticks:{ color:text } }, y:{ grid:{ display:false }, ticks:{ color:text } } } }
+    });
+
+    // Department Performance
+    charts.dept = new Chart(document.getElementById('deptPerformanceChart'), {
+      type: 'radar',
+      data: {
+        labels: ['Attendance','Quiz Avg','Assignments','Placement','Internship'],
+        datasets: [
+          { label:'CS',  data:[88,82,90,85,78], borderColor:'#2563EB', backgroundColor:'rgba(37,99,235,0.15)', pointRadius:5 },
+          { label:'ECE', data:[85,79,86,72,70], borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.15)', pointRadius:5 },
+          { label:'IT',  data:[87,81,88,80,75], borderColor:'#F59E0B', backgroundColor:'rgba(245,158,11,0.15)', pointRadius:5 }
+        ]
+      },
+      options: { responsive:true, maintainAspectRatio:false, scales:{ r:{ min:60, max:100, ticks:{ color:text, backdropColor:'transparent' }, grid:{ color:grid }, pointLabels:{ color:text } } }, plugins:{ legend:{ labels:{ color:text } } } }
+    });
+
+    // Assignment Completion
+    charts.assign = new Chart(document.getElementById('assignmentChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Web Dev','ML','UI/UX','DSA','Database','OS'],
+        datasets: [
+          { label:'Submitted', data:[94,86,91,78,88,82], backgroundColor:'rgba(16,185,129,0.8)', borderRadius:4 },
+          { label:'Late',      data:[3,8,4,12,7,10], backgroundColor:'rgba(245,158,11,0.8)', borderRadius:4 },
+          { label:'Missing',   data:[3,6,5,10,5,8], backgroundColor:'rgba(239,68,68,0.8)', borderRadius:4 }
+        ]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'top', labels:{ color:text } } }, scales:{ x:{ stacked:true, grid:{ display:false }, ticks:{ color:text } }, y:{ stacked:true, grid:{ color:grid }, ticks:{ color:text } } } }
+    });
+  }
+
+  function renderTopStudents() {
+    const students = [
+      { rank:1, name:'Arjun Mehta',   dept:'CS',  att:'96%', score:'92', place:'Ready', overall:94, color:'#2563EB' },
+      { rank:2, name:'Priya Sharma',  dept:'ECE', att:'94%', score:'89', place:'Ready', overall:91, color:'#10B981' },
+      { rank:3, name:'Rohit Kumar',   dept:'CS',  att:'92%', score:'87', place:'Ready', overall:89, color:'#8B5CF6' },
+      { rank:4, name:'Sneha Nair',    dept:'IT',  att:'90%', score:'85', place:'Partial', overall:87, color:'#F59E0B' },
+      { rank:5, name:'Kiran Patel',   dept:'ME',  att:'89%', score:'83', place:'Partial', overall:85, color:'#EF4444' },
+    ];
+
+    const ranks = ['🥇','🥈','🥉','4','5'];
+    document.getElementById('topStudentsTable').innerHTML = students.map((s,i) => `
+      <tr>
+        <td><span style="font-size:1.2rem">${ranks[i]}</span></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:36px;height:36px;border-radius:50%;background:${s.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;flex-shrink:0">${s.name.split(' ').map(w=>w[0]).join('')}</div>
+            <strong>${s.name}</strong>
+          </div>
+        </td>
+        <td><span class="badge badge-ghost">${s.dept}</span></td>
+        <td><span class="badge badge-success">${s.att}</span></td>
+        <td><strong>${s.score}%</strong></td>
+        <td><span class="badge ${s.place==='Ready'?'badge-success':'badge-warning'}">${s.place}</span></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="flex:1;height:6px;background:var(--border);border-radius:var(--radius-full);overflow:hidden">
+              <div style="height:100%;width:${s.overall}%;background:var(--gradient-primary);border-radius:var(--radius-full)"></div>
+            </div>
+            <span style="font-weight:700;font-size:0.875rem">${s.overall}%</span>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function refreshCharts() {
+    Object.values(charts).forEach(c => c.destroy());
+    renderCharts();
+    Toast.info('Refreshed', 'Charts updated for selected period');
+  }
+</script>
+</body>
+</html>
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications — Prime Vector LMS</title>
+  <meta name="description" content="View all your Prime Vector notifications — classes, assignments, grades, placements, and announcements.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="notificationsPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Student</div><div class="sidebar-user-role">student</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+        <a href="course.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">My Courses</span></a>
+        <a href="assignment.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
+        <a href="attendance.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
+        <a href="calendar.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-calendar"></i></span><span class="sidebar-label">Calendar</span></a>
+        <a href="forum.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-comments"></i></span><span class="sidebar-label">Forum</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Career</div>
+        <a href="internship.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Internship</span></a>
+        <a href="placement.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placement</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Achievements</div>
+        <a href="gamification.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-trophy"></i></span><span class="sidebar-label">Achievements</span></a>
+        <a href="student-id.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-id-card-o"></i></span><span class="sidebar-label">Digital ID Card</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+        <a href="settings.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="student.html">Dashboard</a><span class="breadcrumb-sep">/</span><span>Notifications</span></div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+        <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem" onclick="markAllRead()"><i class="fa fa-check-double"></i> Mark all read</button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <div>
+          <h2 class="page-title">Notifications</h2>
+          <p class="page-subtitle"><span id="unreadCount" class="badge badge-primary">0</span> unread notifications</p>
+        </div>
+        <select class="form-input" style="width:auto;padding:9px 14px;font-size:0.85rem" id="filterSelect" onchange="filterNotifs(this.value)">
+          <option value="all">All Notifications</option>
+          <option value="class">Classes</option>
+          <option value="assignment">Assignments</option>
+          <option value="grade">Grades</option>
+          <option value="placement">Placement</option>
+          <option value="announcement">Announcements</option>
+          <option value="achievement">Achievements</option>
+        </select>
+      </div>
+
+      <div id="notifsList" style="display:flex;flex-direction:column;gap:8px"></div>
+
+      <div style="text-align:center;padding:20px;display:none" id="notifEmpty">
+        <div style="font-size:3rem">🎉</div>
+        <div style="font-weight:700;margin-top:8px">All caught up!</div>
+        <div style="color:var(--text-muted);font-size:0.875rem">No notifications to show</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const NOTIFS = [
+    { id:1, type:'class',        icon:'fa-video-camera', color:'var(--primary)',  bg:'rgba(37,99,235,0.1)',  title:'Live class starting in 30 minutes', desc:'React Hooks Deep Dive — Web Development · Room: Zoom Link', time:'28 min ago',  unread:true,  link:'classes.html' },
+    { id:2, type:'grade',        icon:'fa-star',         color:'var(--success)',  bg:'rgba(16,185,129,0.1)', title:'Quiz graded: JavaScript Fundamentals', desc:'You scored 88/100 — Great job! View detailed results.', time:'2 hours ago', unread:true,  link:'quiz.html' },
+    { id:3, type:'assignment',   icon:'fa-tasks',        color:'var(--warning)',  bg:'rgba(245,158,11,0.1)', title:'Assignment due in 24 hours', desc:'Build REST API — Web Development · Don\'t forget to submit!', time:'3 hours ago', unread:true,  link:'assignment.html' },
+    { id:4, type:'placement',    icon:'fa-briefcase',    color:'var(--accent)',   bg:'rgba(20,184,166,0.1)', title:'New placement drive: TechCorp Solutions', desc:'Role: SDE-1 · Package: 12 LPA · Eligibility: CS, IT · Date: July 20', time:'5 hours ago', unread:true,  link:'placement.html' },
+    { id:5, type:'achievement',  icon:'fa-trophy',       color:'#F59E0B',         bg:'rgba(245,158,11,0.15)', title:'🎉 Badge Unlocked: Quiz Master!', desc:'You\'ve completed 10 quizzes with >80% score. +100 XP earned!', time:'Yesterday',  unread:false, link:'gamification.html' },
+    { id:6, type:'announcement', icon:'fa-bullhorn',     color:'#EC4899',         bg:'rgba(236,72,153,0.1)', title:'Exam schedule published — Semester 4', desc:'Mid-semester exams start July 28. Check the exam timetable on the portal.', time:'Yesterday',  unread:false, link:'calendar.html' },
+    { id:7, type:'class',        icon:'fa-video-camera', color:'var(--primary)',  bg:'rgba(37,99,235,0.1)',  title:'Recording available: ML — Supervised Learning', desc:'Session recorded and uploaded. Watch anytime.', time:'2 days ago',  unread:false, link:'classes.html' },
+    { id:8, type:'grade',        icon:'fa-star',         color:'var(--success)',  bg:'rgba(16,185,129,0.1)', title:'Assignment graded: UI Wireframes', desc:'Score: 46/50 — Excellent work! Feedback added.', time:'2 days ago',  unread:false, link:'assignment.html' },
+    { id:9, type:'assignment',   icon:'fa-tasks',        color:'var(--warning)',  bg:'rgba(245,158,11,0.1)', title:'New assignment posted: CNN Implementation', desc:'Machine Learning · Due: July 18, 2025 · 100 marks', time:'3 days ago',  unread:false, link:'assignment.html' },
+    { id:10, type:'announcement', icon:'fa-bullhorn',    color:'#EC4899',         bg:'rgba(236,72,153,0.1)', title:'Holiday: Campus closed July 15', desc:'Office and labs will be closed. Online classes continue as scheduled.', time:'4 days ago',  unread:false, link:'#' },
+  ];
+
+  let VISIBLE_NOTIFS = [...NOTIFS];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    renderNotifs();
+    App.init();
+  });
+
+  function renderNotifs() {
+    const unreadCount = VISIBLE_NOTIFS.filter(n => n.unread).length;
+    document.getElementById('unreadCount').textContent = unreadCount;
+
+    const el = document.getElementById('notifsList');
+    if (!VISIBLE_NOTIFS.length) {
+      el.innerHTML = '';
+      document.getElementById('notifEmpty').style.display = 'block';
+      return;
+    }
+    document.getElementById('notifEmpty').style.display = 'none';
+
+    el.innerHTML = VISIBLE_NOTIFS.map(n => `
+      <div class="notif-item ${n.unread ? 'unread' : ''}" id="notif-${n.id}" onclick="readNotif(${n.id},'${n.link}')">
+        <div class="notif-icon" style="background:${n.bg};color:${n.color}"><i class="fa ${n.icon}"></i></div>
+        <div class="notif-content" style="flex:1">
+          <div class="notif-title">${n.title}</div>
+          <div class="notif-desc">${n.desc}</div>
+          <div class="notif-time"><i class="fa fa-clock-o" style="margin-right:4px"></i>${n.time}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+          ${n.unread ? '<div style="width:8px;height:8px;border-radius:50%;background:var(--primary);margin-top:4px"></div>' : ''}
+          <button onclick="event.stopPropagation();dismissNotif(${n.id})" style="background:none;border:none;color:var(--text-muted);cursor:pointer;padding:4px" title="Dismiss">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function readNotif(id, link) {
+    const n = NOTIFS.find(x => x.id === id);
+    if (n) n.unread = false;
+    const v = VISIBLE_NOTIFS.find(x => x.id === id);
+    if (v) v.unread = false;
+    renderNotifs();
+    if (link && link !== '#') window.location.href = link;
+  }
+
+  function dismissNotif(id) {
+    VISIBLE_NOTIFS = VISIBLE_NOTIFS.filter(n => n.id !== id);
+    renderNotifs();
+    Toast.info('Dismissed', 'Notification removed');
+  }
+
+  function markAllRead() {
+    VISIBLE_NOTIFS.forEach(n => n.unread = false);
+    NOTIFS.forEach(n => n.unread = false);
+    renderNotifs();
+    Toast.success('Done!', 'All notifications marked as read');
+  }
+
+  function filterNotifs(type) {
+    VISIBLE_NOTIFS = type === 'all' ? [...NOTIFS] : NOTIFS.filter(n => n.type === type);
+    renderNotifs();
+  }
+</script>
+</body>
+</html>
+

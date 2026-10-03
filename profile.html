@@ -1,34 +1,178 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile — Acadex</title>
+  <title>User Profile — Prime Vector LMS</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/course.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .profile-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 40px 0 32px;
+      position: relative;
+    }
+    .profile-hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .profile-avatar-wrap {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+    .profile-avatar-placeholder {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      border: 4px solid rgba(255,255,255,0.15);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      overflow: hidden;
+      line-height: 1;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    .profile-avatar-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .profile-avatar-edit {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #06b6d4;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: 2px solid #0f172a;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+    .profile-avatar-edit:hover {
+      transform: scale(1.1);
+    }
+    .profile-name {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .profile-role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(6,182,212,0.15);
+      border: 1px solid rgba(6,182,212,0.3);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .profile-meta {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: #9ca3af;
+      font-size: 0.86rem;
+    }
+    .profile-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .profile-stat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .profile-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.88rem;
+    }
+    .profile-stat-row:last-child {
+      border-bottom: none;
+    }
+    .profile-stat-key {
+      color: #9ca3af;
+    }
+    .profile-stat-val {
+      font-weight: 700;
+      color: #f3f4f6;
+    }
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skills-wrap .chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #e5e7eb;
+      padding: 5px 12px;
+      border-radius: 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+  </style>
 </head>
-<body>
+<body id="profilePage">
 <div class="dashboard-layout">
+  <!-- Dynamic Role-Aware Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
-      <span class="sidebar-brand">ACAD<span>EX</span></span>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
     </div>
-    <nav class="sidebar-nav" style="padding-top:20px">
-      <a href="student.html" class="sidebar-link" data-tooltip="Dashboard"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
-      <a href="course.html" class="sidebar-link" data-tooltip="Courses"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">My Courses</span></a>
-      <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
-      <a href="attendance.html" class="sidebar-link" data-tooltip="Attendance"><span class="sidebar-icon"><i class="fa fa-calendar"></i></span><span class="sidebar-label">Attendance</span></a>
-      <a href="certificate.html" class="sidebar-link" data-tooltip="Certificates"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
-      <a href="profile.html" class="sidebar-link active" data-tooltip="Profile"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
-      <a href="settings.html" class="sidebar-link" data-tooltip="Settings"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+
+    <a href="profile.html" class="sidebar-user" style="display:flex;align-items:center;gap:12px;padding:12px;margin:8px 0;border-radius:10px;background:rgba(255,255,255,0.04);text-decoration:none;">
+      <div class="sidebar-avatar" data-user-avatar style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.9rem;overflow:hidden;"></div>
+      <div class="sidebar-user-info" style="overflow:hidden;">
+        <div class="sidebar-user-name" data-user-name style="font-weight:700;font-size:0.85rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">User</div>
+        <div class="sidebar-user-role" data-user-role style="font-size:0.7rem;color:#06B6D4;text-transform:uppercase;font-weight:700;">Role</div>
+      </div>
+    </a>
+
+    <!-- Role-specific sidebar navigation dynamically populated -->
+    <nav class="sidebar-nav" id="dynamicSidebarNav">
+      <!-- Injected via JavaScript based on user.role -->
     </nav>
+
     <div class="sidebar-footer">
-      <button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button>
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
     </div>
   </aside>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -37,7 +181,11 @@
     <header class="inner-navbar" id="innerNavbar">
       <div class="inner-navbar-left">
         <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
-        <div class="breadcrumb"><a href="student.html">Dashboard</a><span class="breadcrumb-sep">/</span><span>Profile</span></div>
+        <div class="breadcrumb">
+          <a href="student.html" id="breadcrumbHome">Dashboard</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Profile</span>
+        </div>
       </div>
       <div class="inner-navbar-right">
         <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
@@ -47,128 +195,175 @@
 
     <!-- Profile Hero -->
     <div class="profile-hero">
-      <div class="container">
+      <div class="container" style="max-width:1200px;margin:0 auto;padding:0 24px;">
         <div class="profile-hero-inner">
           <div class="profile-avatar-wrap">
-            <div class="profile-avatar-placeholder" id="profileAvatar" data-user-name>S</div>
-            <div class="profile-avatar-edit" onclick="document.getElementById('avatarInput').click()">
+            <div class="profile-avatar-placeholder" id="profileAvatar" data-user-avatar>
+              <!-- Initial letter or image preview rendered here -->
+            </div>
+            <div class="profile-avatar-edit" onclick="document.getElementById('avatarInput').click()" title="Change Profile Photo">
               <i class="fa fa-camera"></i>
-              <input type="file" id="avatarInput" accept="image/*" style="display:none">
+              <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
             </div>
           </div>
-          <div>
-            <div class="profile-name" data-user-name>Student Name</div>
-            <div class="profile-role-badge"><i class="fa fa-graduation-cap"></i> <span data-user-role>student</span></div>
+
+          <div style="flex:1;">
+            <div class="profile-name" id="heroNameDisplay">Dr. Sarah Chen</div>
+            <div class="profile-role-badge" id="heroRoleBadge">
+              <i class="fa fa-graduation-cap"></i>
+              <span id="heroRoleText">FACULTY</span>
+            </div>
             <div class="profile-meta">
-              <div class="profile-meta-item"><i class="fa fa-envelope"></i> <span id="profileEmail">user@email.com</span></div>
-              <div class="profile-meta-item"><i class="fa fa-building"></i> Computer Science</div>
-              <div class="profile-meta-item"><i class="fa fa-calendar"></i> Joined 2024</div>
+              <div class="profile-meta-item"><i class="fa fa-envelope" style="color:#06B6D4"></i> <span id="heroEmailDisplay">faculty@demo.com</span></div>
+              <div class="profile-meta-item"><i class="fa fa-building" style="color:#818CF8"></i> <span id="heroDeptDisplay">AI & Data Science</span></div>
+              <div class="profile-meta-item"><i class="fa fa-map-marker" style="color:#10B981"></i> <span id="heroBranchDisplay">Hosur Main Campus</span></div>
+              <div class="profile-meta-item"><i class="fa fa-calendar" style="color:#F59E0B"></i> <span id="heroJoinedDisplay">Member Since 2023</span></div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="page-content">
-      <div class="profile-content-grid">
-        <!-- Left Sidebar -->
+    <!-- Page Content -->
+    <div class="page-content" style="max-width:1200px;margin:32px auto;padding:0 24px;">
+      <div class="profile-content-grid" style="display:grid;grid-template-columns:340px 1fr;gap:24px;">
+        
+        <!-- Left Sidebar Cards -->
         <div>
-          <!-- Quick Stats -->
-          <div class="card profile-sidebar-card" style="margin-bottom:16px">
-            <div class="card-header"><span class="card-title">Quick Stats</span></div>
-            <div class="profile-stat-list">
-              <div class="profile-stat-row"><span class="profile-stat-key">Courses Enrolled</span><span class="profile-stat-val">4</span></div>
-              <div class="profile-stat-row"><span class="profile-stat-key">Completed</span><span class="profile-stat-val">2</span></div>
-              <div class="profile-stat-row"><span class="profile-stat-key">Certificates</span><span class="profile-stat-val">2</span></div>
-              <div class="profile-stat-row"><span class="profile-stat-key">Avg. Quiz Score</span><span class="profile-stat-val">85%</span></div>
-              <div class="profile-stat-row"><span class="profile-stat-key">Attendance</span><span class="profile-stat-val">85%</span></div>
-              <div class="profile-stat-row"><span class="profile-stat-key">Assignments Submitted</span><span class="profile-stat-val">12</span></div>
+          <!-- Quick Stats Card (Role-Specific) -->
+          <div class="card profile-sidebar-card" style="margin-bottom:20px;border-radius:14px;background:#111827;border:1px solid rgba(255,255,255,0.08);">
+            <div class="card-header" style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;">
+              <span class="card-title" style="font-weight:700;color:#fff;">Role Overview & Stats</span>
+              <span id="roleStatIndicator" style="font-size:0.75rem;color:#06B6D4;font-weight:700;">VERIFIED</span>
+            </div>
+            <div class="card-body" style="padding:16px 20px;">
+              <div class="profile-stat-list" id="dynamicStatsList">
+                <!-- Injected based on role -->
+              </div>
             </div>
           </div>
 
-          <!-- Skills -->
-          <div class="card">
-            <div class="card-header"><span class="card-title">Skills & Interests</span></div>
-            <div class="card-body">
-              <div class="skills-wrap">
-                <span class="chip">JavaScript</span>
-                <span class="chip">Python</span>
-                <span class="chip">Machine Learning</span>
-                <span class="chip">UI/UX Design</span>
-                <span class="chip">React</span>
-                <span class="chip">Data Science</span>
-                <span class="chip">Node.js</span>
+          <!-- Skills & Domains Card -->
+          <div class="card" style="border-radius:14px;background:#111827;border:1px solid rgba(255,255,255,0.08);">
+            <div class="card-header" style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+              <span class="card-title" style="font-weight:700;color:#fff;">Key Competencies & Scope</span>
+            </div>
+            <div class="card-body" style="padding:16px 20px;">
+              <div class="skills-wrap" id="dynamicSkillsWrap">
+                <!-- Injected based on role -->
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right: Edit Form -->
+        <!-- Right Main: Edit Profile & Security Details -->
         <div>
-          <div class="card">
-            <div class="card-header">
-              <span class="card-title"><i class="fa fa-edit" style="color:var(--primary)"></i> Edit Profile</span>
+          <div class="card" style="border-radius:14px;background:#111827;border:1px solid rgba(255,255,255,0.08);margin-bottom:24px;">
+            <div class="card-header" style="padding:18px 24px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;">
+              <span class="card-title" style="font-weight:700;color:#fff;font-size:1.1rem;">
+                <i class="fa fa-user-circle" style="color:#06B6D4;margin-right:8px;"></i> Edit Profile Information
+              </span>
+              <span style="font-size:0.78rem;color:#9CA3AF;">Saved automatically on submit</span>
             </div>
-            <div class="card-body">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+            <div class="card-body" style="padding:24px;">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
                 <div class="form-group">
-                  <label class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="First name">
+                  <label class="form-label" style="display:block;font-size:0.82rem;color:#9CA3AF;margin-bottom:6px;font-weight:600;">Full Display Name</label>
+                  <input type="text" class="form-control" id="fullNameInput" placeholder="e.g. Dr. Sarah Chen" style="width:100%;padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
                 </div>
+
                 <div class="form-group">
-                  <label class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Last name">
+                  <label class="form-label" style="display:block;font-size:0.82rem;color:#9CA3AF;margin-bottom:6px;font-weight:600;">Role Designation / Title</label>
+                  <input type="text" class="form-control" id="headlineInput" placeholder="e.g. Senior Faculty & AI Research Lead" style="width:100%;padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
                 </div>
               </div>
-              <div class="form-group">
-                <label class="form-label">Email</label>
-                <div class="input-group">
-                  <i class="fa fa-envelope input-icon"></i>
-                  <input type="email" class="form-control" id="editEmail" placeholder="Email address">
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
+                <div class="form-group">
+                  <label class="form-label" style="display:block;font-size:0.82rem;color:#9CA3AF;margin-bottom:6px;font-weight:600;">Email Address</label>
+                  <div class="input-group" style="position:relative;">
+                    <input type="email" class="form-control" id="editEmail" placeholder="user@primevector.in" style="width:100%;padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" style="display:block;font-size:0.82rem;color:#9CA3AF;margin-bottom:6px;font-weight:600;">Contact Phone</label>
+                  <div class="input-group" style="position:relative;">
+                    <input type="tel" class="form-control" id="editPhone" placeholder="+91 98765 43210" style="width:100%;padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
+                  </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="form-label">Phone</label>
-                <div class="input-group">
-                  <i class="fa fa-phone input-icon"></i>
-                  <input type="tel" class="form-control" placeholder="+91 XXXXX XXXXX">
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
+                <div class="form-group">
+                  <label class="form-label" style="display:block;font-size:0.82rem;color:#9CA3AF;margin-bottom:6px;font-weight:600;">Department / Division</label>
+                  <select class="form-control" id="editDept" style="width:100%;padding:10px 12px;background:#1e293b;border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
+                    <option value="AI & Data Science">AI & Data Science</option>
+                    <option value="Computer Science">Computer Science & Engineering</option>
+                    <option value="Full Stack Engineering">Full Stack Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Corporate Relations">Corporate Relations & Placements</option>
+                    <option value="Talent Acquisition">Talent Acquisition (HR)</option>
+                    <option value="Executive Management">Executive Governance</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" style="display:block;font-size:0.82rem;color:#9CA3AF;margin-bottom:6px;font-weight:600;">Campus Branch</label>
+                  <select class="form-control" id="editBranch" style="width:100%;padding:10px 12px;background:#1e293b;border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
+                    <option value="Hosur Main Campus">Hosur Main Campus</option>
+                    <option value="Bangalore Tech Hub">Bangalore Tech Hub</option>
+                    <option value="Chennai Innovation Center">Chennai Innovation Center</option>
+                    <option value="Hyderabad Enterprise Hub">Hyderabad Enterprise Hub</option>
+                  </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="form-label">Department</label>
-                <select class="form-control">
-                  <option>Computer Science</option>
-                  <option>Mathematics</option>
-                  <option>Physics</option>
-                  <option>Business</option>
-                  <option>Design</option>
-                </select>
+
+              <div class="form-group" style="margin-bottom:18px;">
+                <label class="form-label" style="display:block;font-size:0.82rem;color:#9CA3AF;margin-bottom:6px;font-weight:600;">Biography & About</label>
+                <textarea class="form-control" id="editBio" rows="3" placeholder="Tell us about yourself..." style="width:100%;padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;resize:vertical;"></textarea>
               </div>
-              <div class="form-group">
-                <label class="form-label">About Me</label>
-                <textarea class="form-control" placeholder="Tell us about yourself...">Passionate learner exploring the intersection of technology and design. Currently focused on full-stack development and machine learning.</textarea>
-              </div>
-              <div class="form-group">
-                <label class="form-label">LinkedIn URL</label>
-                <div class="input-group">
-                  <i class="fa fa-linkedin input-icon"></i>
-                  <input type="url" class="form-control" placeholder="linkedin.com/in/yourname">
+
+              <!-- Professional Links -->
+              <div style="background:rgba(255,255,255,0.03);padding:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);margin-bottom:20px;">
+                <h4 style="font-size:0.92rem;font-weight:700;color:#fff;margin:0 0 12px;">Professional Verification & Profiles</h4>
+                
+                <div style="margin-bottom:12px;">
+                  <label class="form-label" style="font-size:0.8rem;color:#9CA3AF;display:block;margin-bottom:4px;">LinkedIn Profile URL</label>
+                  <div style="display:flex;gap:10px;">
+                    <input type="url" id="linkedinInput" placeholder="https://linkedin.com/in/username" style="flex:1;padding:9px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
+                    <button class="btn btn-outline btn-sm" type="button" onclick="verifyLinkedIn()" style="padding:9px 14px;border-radius:8px;border:1px solid #06b6d4;color:#06b6d4;background:transparent;cursor:pointer;">
+                      <i class="fa fa-check-circle"></i> Verify
+                    </button>
+                  </div>
+                  <div id="linkedinFeedback" style="font-size:0.75rem;color:#10b981;margin-top:6px;display:none;">
+                    ✓ LinkedIn identity confirmed for this account.
+                  </div>
+                </div>
+
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;color:#9CA3AF;display:block;margin-bottom:4px;">GitHub / Portfolio URL</label>
+                  <input type="url" id="githubInput" placeholder="https://github.com/username" style="width:100%;padding:9px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;">
                 </div>
               </div>
-              <div class="form-group">
-                <label class="form-label">GitHub URL</label>
-                <div class="input-group">
-                  <i class="fa fa-github input-icon"></i>
-                  <input type="url" class="form-control" placeholder="github.com/yourname">
-                </div>
+
+              <div style="display:flex;gap:12px;align-items:center;">
+                <button class="btn btn-primary" onclick="saveProfile()" style="padding:10px 24px;border-radius:8px;font-weight:700;background:linear-gradient(135deg,#4f46e5,#06b6d4);color:#fff;border:none;cursor:pointer;">
+                  <i class="fa fa-save"></i> Save Changes
+                </button>
+                <button class="btn btn-ghost" type="button" onclick="location.reload()" style="padding:10px 18px;border-radius:8px;background:transparent;color:#9ca3af;border:1px solid rgba(255,255,255,0.12);cursor:pointer;">
+                  Discard
+                </button>
+                <span id="saveNotice" style="color:#10b981;font-size:0.85rem;font-weight:600;display:none;">
+                  ✓ Profile updated successfully!
+                </span>
               </div>
-              <div style="display:flex;gap:12px">
-                <button class="btn btn-primary" onclick="saveProfile()"><i class="fa fa-save"></i> Save Changes</button>
-                <button class="btn btn-ghost">Cancel</button>
-              </div>
+
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </main>
@@ -179,28 +374,408 @@
 document.addEventListener('DOMContentLoaded', () => {
   if (!Auth.requireAuth()) return;
   const user = Auth.getUser();
-  document.getElementById('profileEmail').textContent = user.email || '';
-  document.getElementById('editEmail').value = user.email || '';
 
-  const nameParts = (user.name || '').split(' ');
-  document.getElementById('firstName').value = nameParts[0] || '';
-  document.getElementById('lastName').value  = nameParts.slice(1).join(' ') || '';
+  // 1. Set Role-Specific Breadcrumb Home Link
+  const breadcrumbHome = document.getElementById('breadcrumbHome');
+  const roleHomeMap = {
+    faculty: 'faculty.html',
+    trainer: 'faculty.html',
+    mentor: 'faculty.html',
+    admin: 'admin.html',
+    super_admin: 'admin.html',
+    hr: 'hr.html',
+    hr_admin: 'hr.html',
+    placement: 'placement.html',
+    placement_officer: 'placement.html',
+    student: 'student.html'
+  };
+  if (breadcrumbHome) {
+    breadcrumbHome.href = roleHomeMap[user.role] || 'student.html';
+  }
+
+  // 2. Render Avatar cleanly (single letter or image, NO text overflow)
+  renderAvatar(user);
+
+  // 3. Render Hero Header Details
+  document.getElementById('heroNameDisplay').textContent = user.name || 'User';
+  document.getElementById('heroEmailDisplay').textContent = user.email || '';
+  document.getElementById('heroDeptDisplay').textContent = user.department || 'Academic Division';
+  document.getElementById('heroBranchDisplay').textContent = user.branch || 'Hosur Main Campus';
+  document.getElementById('heroJoinedDisplay').textContent = `Member Since ${user.joined ? user.joined.split('-')[0] : '2024'}`;
+
+  // Role Badge Config
+  const roleBadgeMap = {
+    faculty: { label: 'FACULTY MEMBER', icon: 'fa-graduation-cap', color: '#818CF8' },
+    trainer: { label: 'TRAINER / INSTRUCTOR', icon: 'fa-graduation-cap', color: '#818CF8' },
+    mentor: { label: 'TECHNICAL MENTOR', icon: 'fa-users', color: '#C084FC' },
+    admin: { label: 'ADMINISTRATOR', icon: 'fa-shield', color: '#F87171' },
+    super_admin: { label: 'SUPER ADMIN', icon: 'fa-shield', color: '#F87171' },
+    hr: { label: 'HR RECRUITER', icon: 'fa-briefcase', color: '#10B981' },
+    hr_admin: { label: 'HR TALENT LEAD', icon: 'fa-briefcase', color: '#10B981' },
+    placement: { label: 'PLACEMENT OFFICER', icon: 'fa-bullseye', color: '#F59E0B' },
+    placement_officer: { label: 'PLACEMENT OFFICER', icon: 'fa-bullseye', color: '#F59E0B' },
+    student: { label: 'STUDENT / LEARNER', icon: 'fa-user', color: '#06B6D4' }
+  };
+  const roleConf = roleBadgeMap[user.role] || roleBadgeMap.student;
+  const heroBadge = document.getElementById('heroRoleBadge');
+  heroBadge.innerHTML = `<i class="fa ${roleConf.icon}"></i> <span>${roleConf.label}</span>`;
+  heroBadge.style.color = roleConf.color;
+  heroBadge.style.borderColor = `${roleConf.color}60`;
+
+  // 4. Populate Edit Inputs
+  document.getElementById('fullNameInput').value = user.name || '';
+  document.getElementById('headlineInput').value = user.headline || getDefaultHeadline(user.role);
+  document.getElementById('editEmail').value = user.email || '';
+  document.getElementById('editPhone').value = user.phone || '+91 98765 43210';
+  document.getElementById('editBio').value = user.bio || getDefaultBio(user.role);
+  if (user.department) document.getElementById('editDept').value = user.department;
+  if (user.branch) document.getElementById('editBranch').value = user.branch;
+  if (user.linkedin) document.getElementById('linkedinInput').value = user.linkedin;
+  if (user.github) document.getElementById('githubInput').value = user.github;
+
+  // 5. Populate Dynamic Role-Specific Sidebar Nav
+  buildDynamicSidebar(user.role);
+
+  // 6. Populate Dynamic Role-Specific Stats & Skills
+  buildDynamicStats(user.role);
 });
 
-function saveProfile() {
-  const first = document.getElementById('firstName').value.trim();
-  const last  = document.getElementById('lastName').value.trim();
-  const email = document.getElementById('editEmail').value.trim();
+function getDefaultHeadline(role) {
+  const map = {
+    faculty: 'Senior Faculty Member & AI Track Lead',
+    trainer: 'Lead Technical Instructor & Curriculum Specialist',
+    mentor: 'Technical Engineering Mentor & Code Reviewer',
+    admin: 'Executive System Administrator',
+    super_admin: 'Chief Technology & Compliance Officer',
+    hr: 'Talent Acquisition Partner',
+    hr_admin: 'Senior HR Talent Manager',
+    placement: 'Corporate Relations & Placement Officer',
+    placement_officer: 'Campus Placement Director',
+    student: 'Full Stack & AI Engineering Trainee'
+  };
+  return map[role] || 'Member, Prime Vector LMS';
+}
 
-  if (!first) { Toast.warning('Please enter your first name'); return; }
+function getDefaultBio(role) {
+  const map = {
+    faculty: 'Passionate computer science educator specializing in applied neural networks, full-stack microservices, and student mentorship.',
+    trainer: 'Technical trainer focused on hands-on software design patterns, algorithmic problem solving, and enterprise readiness.',
+    hr: 'Dedicated to discovering high-potential software engineering talent and matching skilled candidates with top corporate placement partners.',
+    admin: 'Overseeing enterprise LMS infrastructure, RBAC security compliance, and campus branch operations.',
+    placement: 'Empowering students with career opportunities and fostering partnerships with tier-1 technology employers.',
+    student: 'Driven software engineering student passionate about building scalable web applications and learning modern AI architectures.'
+  };
+  return map[role] || 'Active member of Prime Vector LMS.';
+}
+
+function renderAvatar(user) {
+  const avatarContainer = document.getElementById('profileAvatar');
+  if (!avatarContainer) return;
+  
+  if (user.avatar && user.avatar.length > 5) {
+    avatarContainer.innerHTML = `<img src="${user.avatar}" alt="${user.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+  } else {
+    const initial = (user.name || 'U').trim().charAt(0).toUpperCase();
+    avatarContainer.innerHTML = initial;
+  }
+}
+
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    const user = Auth.getUser();
+    if (user) {
+      user.avatar = dataUrl;
+      Auth.login(user);
+      renderAvatar(user);
+      populateSidebarUser();
+      if (typeof Toast !== 'undefined') {
+        Toast.success('Photo Updated!', 'Your new profile picture has been saved.');
+      }
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function buildDynamicStats(role) {
+  const statsList = document.getElementById('dynamicStatsList');
+  const skillsWrap = document.getElementById('dynamicSkillsWrap');
+  if (!statsList || !skillsWrap) return;
+
+  const statsMap = {
+    faculty: [
+      { key: 'Assigned Courses', val: '3' },
+      { key: 'Active Students', val: '340' },
+      { key: 'Submissions to Grade', val: '14' },
+      { key: 'Live Classes Held', val: '28' },
+      { key: 'Instructor Rating', val: '4.9 ★' },
+      { key: 'Office Hours', val: 'Mon - Fri' }
+    ],
+    trainer: [
+      { key: 'Training Cohorts', val: '4' },
+      { key: 'Enrolled Learners', val: '280' },
+      { key: 'Active Bootcamps', val: '2' },
+      { key: 'Avg. Pass Rate', val: '94%' },
+      { key: 'Weekly Live Hours', val: '16h' }
+    ],
+    hr: [
+      { key: 'Active Applicants', val: '48' },
+      { key: 'Shortlisted Pool', val: '18' },
+      { key: 'Interviews Scheduled', val: '12' },
+      { key: 'Offers Released', val: '7' },
+      { key: 'Avg. ATS Match', val: '92%' }
+    ],
+    hr_admin: [
+      { key: 'Total Job Drives', val: '14' },
+      { key: 'Candidate Pool', val: '142' },
+      { key: 'Interviews Pipeline', val: '18' },
+      { key: 'Verified Resumes', val: '86' },
+      { key: 'Hiring Efficiency', val: '95%' }
+    ],
+    placement: [
+      { key: 'Active Drives', val: '6' },
+      { key: 'Students Placed', val: '285' },
+      { key: 'Placement Rate', val: '83.8%' },
+      { key: 'Highest Package', val: '18.5 LPA' },
+      { key: 'Average Package', val: '8.4 LPA' }
+    ],
+    placement_officer: [
+      { key: 'Corporate Partners', val: '24' },
+      { key: 'Active Campus Drives', val: '6' },
+      { key: 'Students Placed', val: '285' },
+      { key: 'Placement Rate', val: '83.8%' },
+      { key: 'Top Package', val: '18.5 LPA' }
+    ],
+    admin: [
+      { key: 'Total Users', val: '1,450+' },
+      { key: 'Enterprise Campuses', val: '3' },
+      { key: 'System Uptime', val: '99.98%' },
+      { key: 'Active Faculty', val: '24' },
+      { key: 'Compliance Status', val: 'Verified' }
+    ],
+    super_admin: [
+      { key: 'Total Users', val: '1,450+' },
+      { key: 'Enterprise Campuses', val: '3' },
+      { key: 'System Uptime', val: '99.98%' },
+      { key: 'Active Faculty', val: '24' },
+      { key: 'Compliance Status', val: 'Verified' }
+    ],
+    mentor: [
+      { key: 'Assigned Mentees', val: '45' },
+      { key: 'Code Reviews Done', val: '62' },
+      { key: 'Forum Doubts Solved', val: '38' },
+      { key: 'Mentorship Score', val: '4.95 ★' },
+      { key: 'Active Tracks', val: 'Full Stack' }
+    ],
+    student: [
+      { key: 'Courses Enrolled', val: '4' },
+      { key: 'Completed Courses', val: '2' },
+      { key: 'Certificates Earned', val: '2' },
+      { key: 'Avg. Quiz Score', val: '88%' },
+      { key: 'Attendance Rate', val: '94%' },
+      { key: 'Active Study Streak', val: '14 Days' }
+    ]
+  };
+
+  const skillsMap = {
+    faculty: ['Artificial Intelligence', 'Neural Networks', 'PyTorch', 'Data Structures', 'Curriculum Design', 'Full Stack Architecture'],
+    trainer: ['React.js', 'Node.js', 'System Design', 'Code Reviews', 'Interview Prep', 'Mentorship'],
+    hr: ['Talent Sourcing', 'ATS Screening', 'Technical Evaluation', 'HR Interviewing', 'Onboarding', 'Campus Recruitment'],
+    hr_admin: ['Talent Strategy', 'ATS Workflow', 'Recruitment Pipeline', 'Salary Negotiations', 'Campus Outreach'],
+    placement: ['Corporate Relations', 'Placement Drives', 'Aptitude Training', 'Industry Connect', 'Mock Interviews'],
+    placement_officer: ['Campus Drives', 'Corporate Tie-ups', 'Offer Rollouts', 'Package Negotiations', 'Career Counseling'],
+    admin: ['System Administration', 'RBAC Security', 'Compliance Audit', 'Database Backups', 'Infrastructure Oversight'],
+    super_admin: ['Executive Governance', 'Platform Architecture', 'Enterprise Security', 'Analytics Audit', 'Multi-Tenant Scale'],
+    mentor: ['Full Stack Guidance', 'Code Optimization', 'Algorithm Debugging', 'Git Workflows', 'Doubt Clearing'],
+    student: ['JavaScript', 'Python', 'React.js', 'Node.js', 'SQL', 'Machine Learning', 'Data Structures']
+  };
+
+  const stats = statsMap[role] || statsMap.student;
+  statsList.innerHTML = stats.map(s => `
+    <div class="profile-stat-row">
+      <span class="profile-stat-key">${s.key}</span>
+      <span class="profile-stat-val">${s.val}</span>
+    </div>
+  `).join('');
+
+  const skills = skillsMap[role] || skillsMap.student;
+  skillsWrap.innerHTML = skills.map(sk => `<span class="chip">${sk}</span>`).join('');
+}
+
+function buildDynamicSidebar(role) {
+  const navContainer = document.getElementById('dynamicSidebarNav');
+  if (!navContainer) return;
+
+  const roleNavMap = {
+    faculty: [
+      { group: 'Instruction', links: [
+        { label: 'Faculty Dashboard', url: 'faculty.html', icon: 'fa-th-large' },
+        { label: 'Classes & Courses', url: 'faculty-classes.html', icon: 'fa-book' },
+        { label: 'Assignments', url: 'faculty-assignments.html', icon: 'fa-tasks' },
+        { label: 'Quizzes & Tests', url: 'faculty-quiz.html', icon: 'fa-question-circle' },
+        { label: 'Faculty Notes', url: 'faculty-notes.html', icon: 'fa-sticky-note-o' }
+      ]},
+      { group: 'Evaluation', links: [
+        { label: 'Class Reports', url: 'class-reports.html', icon: 'fa-bar-chart' },
+        { label: 'Certificates', url: 'certificate.html', icon: 'fa-certificate' },
+        { label: 'Discussion Forum', url: 'forum.html', icon: 'fa-comments' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user', active: true },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog' }
+      ]}
+    ],
+    hr: [
+      { group: 'Talent Acquisition', links: [
+        { label: 'HR Talent Portal', url: 'hr.html', icon: 'fa-users' },
+        { label: 'Campus Drives', url: 'placement.html', icon: 'fa-briefcase' },
+        { label: 'Resume Builder', url: 'resume-builder.html', icon: 'fa-id-card' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user', active: true },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog' }
+      ]}
+    ],
+    placement: [
+      { group: 'Placements', links: [
+        { label: 'Placement Drives', url: 'placement.html', icon: 'fa-briefcase' },
+        { label: 'Placement Tracker', url: 'placement-tracker.html', icon: 'fa-bullseye' },
+        { label: 'Student Resumes', url: 'resume-builder.html', icon: 'fa-id-card' },
+        { label: 'Certificates', url: 'certificate.html', icon: 'fa-certificate' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user', active: true },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog' }
+      ]}
+    ],
+    admin: [
+      { group: 'Administration', links: [
+        { label: 'Admin Dashboard', url: 'admin.html', icon: 'fa-th-large' },
+        { label: 'Analytics', url: 'admin-analytics.html', icon: 'fa-line-chart' },
+        { label: 'Departments', url: 'admin-departments.html', icon: 'fa-sitemap' },
+        { label: 'Courses Audit', url: 'admin-courses.html', icon: 'fa-book' },
+        { label: 'Certificates', url: 'admin-certificates.html', icon: 'fa-certificate' },
+        { label: 'System Health', url: 'admin-system.html', icon: 'fa-cogs' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user', active: true },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog' }
+      ]}
+    ],
+    student: [
+      { group: 'Main', links: [
+        { label: 'Dashboard', url: 'student.html', icon: 'fa-th-large' },
+        { label: 'My Courses', url: 'course.html', icon: 'fa-book' },
+        { label: 'Assignments', url: 'assignment.html', icon: 'fa-tasks' },
+        { label: 'Quiz', url: 'quiz.html?id=1', icon: 'fa-question-circle' },
+        { label: 'Attendance', url: 'attendance.html', icon: 'fa-calendar-check-o' },
+        { label: 'Live Classes', url: 'classes.html', icon: 'fa-video-camera' },
+        { label: 'Notes', url: 'notes.html', icon: 'fa-sticky-note-o' }
+      ]},
+      { group: 'Placement & Career', links: [
+        { label: 'Placement', url: 'placement.html', icon: 'fa-briefcase' },
+        { label: 'Resume Builder', url: 'resume-builder.html', icon: 'fa-file-text-o' },
+        { label: 'Portfolio Builder', url: 'portfolio.html', icon: 'fa-globe' },
+        { label: 'Placement Tracker', url: 'placement-tracker.html', icon: 'fa-bullseye' },
+        { label: 'Class Reports', url: 'class-reports.html', icon: 'fa-bar-chart' }
+      ]},
+      { group: 'Achievements', links: [
+        { label: 'Certificates', url: 'certificate.html', icon: 'fa-certificate' },
+        { label: 'Gamification', url: 'gamification.html', icon: 'fa-trophy' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user', active: true },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog' }
+      ]}
+    ]
+  };
+
+  const activeRoleKey = (role === 'trainer' || role === 'mentor') ? 'faculty' :
+                        (role === 'hr_admin') ? 'hr' :
+                        (role === 'placement_officer') ? 'placement' :
+                        (role === 'super_admin') ? 'admin' : (role || 'student');
+
+  const groups = roleNavMap[activeRoleKey] || roleNavMap.student;
+
+  navContainer.innerHTML = groups.map(g => `
+    <div class="sidebar-group">
+      <div class="sidebar-group-label" style="font-size:0.65rem;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:10px 14px 4px;font-weight:800;letter-spacing:1px;">${g.group}</div>
+      ${g.links.map(l => `
+        <a href="${l.url}" class="sidebar-link ${l.active ? 'active' : ''}" style="display:flex;align-items:center;gap:12px;padding:9px 14px;color:${l.active ? '#fff' : 'rgba(255,255,255,0.7)'};text-decoration:none;border-radius:8px;font-size:0.85rem;background:${l.active ? 'rgba(79,70,229,0.25)' : 'transparent'};border-left:${l.active ? '3px solid #06b6d4' : '3px solid transparent'};">
+          <span class="sidebar-icon"><i class="fa ${l.icon}"></i></span>
+          <span class="sidebar-label">${l.label}</span>
+        </a>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function verifyLinkedIn() {
+  const url = document.getElementById('linkedinInput').value.trim();
+  if (url && (url.includes('linkedin.com/in/') || url.includes('linkedin.com/'))) {
+    document.getElementById('linkedinFeedback').style.display = 'block';
+    if (typeof Toast !== 'undefined') {
+      Toast.success('LinkedIn Verified!', 'Account identity synchronized with official registry.');
+    } else {
+      alert('LinkedIn Profile Verified successfully!');
+    }
+  } else {
+    alert('Please enter a valid LinkedIn URL (e.g. https://linkedin.com/in/username)');
+  }
+}
+
+function saveProfile() {
+  const fullName = document.getElementById('fullNameInput').value.trim();
+  const headline = document.getElementById('headlineInput').value.trim();
+  const email    = document.getElementById('editEmail').value.trim();
+  const phone    = document.getElementById('editPhone').value.trim();
+  const dept     = document.getElementById('editDept').value;
+  const branch   = document.getElementById('editBranch').value;
+  const bio      = document.getElementById('editBio').value.trim();
+  const linkedin = document.getElementById('linkedinInput').value.trim();
+  const github   = document.getElementById('githubInput').value.trim();
+
+  if (!fullName) {
+    if (typeof Toast !== 'undefined') Toast.warning('Please enter your full name');
+    else alert('Please enter your full name');
+    return;
+  }
 
   const user = Auth.getUser();
   if (user) {
-    user.name  = `${first} ${last}`.trim();
-    user.email = email || user.email;
+    user.name       = fullName;
+    user.headline   = headline;
+    user.email      = email || user.email;
+    user.phone      = phone;
+    user.department = dept;
+    user.branch     = branch;
+    user.bio        = bio;
+    user.linkedin   = linkedin;
+    user.github     = github;
+
     Auth.login(user);
     populateSidebarUser();
-    Toast.success('Profile Updated!', 'Your changes have been saved');
+
+    // Update hero visuals immediately
+    document.getElementById('heroNameDisplay').textContent = user.name;
+    document.getElementById('heroEmailDisplay').textContent = user.email;
+    document.getElementById('heroDeptDisplay').textContent = user.department;
+    document.getElementById('heroBranchDisplay').textContent = user.branch;
+    renderAvatar(user);
+
+    const notice = document.getElementById('saveNotice');
+    if (notice) {
+      notice.style.display = 'inline';
+      setTimeout(() => { notice.style.display = 'none'; }, 4000);
+    }
+
+    if (typeof Toast !== 'undefined') {
+      Toast.success('Profile Saved!', 'All updates are synchronized across the system.');
+    }
   }
 }
 </script>

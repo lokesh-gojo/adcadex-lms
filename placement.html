@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement & Campus Drives — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/placement.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="placementPage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">ACAD<span>EX</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link " data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link " data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link " data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link active" data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link " data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link " data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Inner Navbar -->
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <button class="notif-btn" data-dropdown-toggle title="Notifications">
+            <i class="fa fa-bell"></i>
+            <span class="notif-badge">3</span>
+          </button>
+          <div class="dropdown-menu notif-dropdown" style="min-width:320px">
+            <div class="notif-dropdown-header">
+              <span class="notif-dropdown-title">Notifications</span>
+              <span class="notif-mark-all">Mark all read</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--primary-light);color:var(--primary)"><i class="fa fa-book"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">New lesson added to Web Development</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--danger-light);color:var(--danger)"><i class="fa fa-clock-o"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Assignment due in 2 days: Build REST API</div>
+                <div class="notif-time">4 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-avatar" style="background:var(--success-light);color:var(--success)"><i class="fa fa-check"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Quiz graded: JavaScript Fundamentals — 88%</div>
+                <div class="notif-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Student</span>
+              <span class="user-role">student</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <div class="page-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+        <div>
+          <h1 class="page-title">Placement & Training Dashboard</h1>
+          <p class="page-subtitle">Track your placement readiness and training progress.</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a href="resume-builder.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(79,70,229,0.3)">
+            <i class="fa fa-magic"></i> AI ATS Resume Builder
+          </a>
+        </div>
+      </div>
+      
+      <!-- Stats Box -->
+      <div class="placement-stats-grid">
+        <div class="placement-stat-card">
+          <div class="placement-stat-val" id="placementReadiness">85%</div>
+          <div class="placement-stat-label">Placement Readiness Score</div>
+        </div>
+        <div class="placement-stat-card">
+          <div class="placement-stat-val" id="aptitudeScore">78%</div>
+          <div class="placement-stat-label">Aptitude Score</div>
+        </div>
+        <div class="placement-stat-card">
+          <div class="placement-stat-val" id="technicalScore">92%</div>
+          <div class="placement-stat-label">Technical Score</div>
+        </div>
+        <div class="placement-stat-card">
+          <div class="placement-stat-val" id="softSkillsScore">80%</div>
+          <div class="placement-stat-label">Soft Skills</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+        <div>
+          <!-- Current Training -->
+          <div class="placement-panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-briefcase text-primary"></i> Current Training Program</div>
+            </div>
+            <div style="display:flex;gap:20px;align-items:start">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" alt="Training" style="width:150px;height:100px;object-fit:cover;border-radius:var(--radius)">
+              <div style="flex:1">
+                <h3 style="margin-bottom:8px">Full-Stack Developer Bootcamp</h3>
+                <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:12px">Duration: 12 Weeks &nbsp;|&nbsp; Instructor: Sarah Jenkins</p>
+                <div class="course-progress-wrap">
+                  <div class="course-progress-label">
+                    <span>Overall Completion</span>
+                    <span class="course-progress-percent">65%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width:65%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Training Categories Progress -->
+          <div class="placement-panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-line-chart text-primary"></i> Placement Training Progress</div>
+            </div>
+            <div class="progress-list" id="trainingCategoriesList">
+               <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Analytics Chart -->
+          <div class="placement-panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-pie-chart text-primary"></i> Profile Completion</div>
+            </div>
+            <div class="chart-container" style="height: 200px;">
+              <canvas id="profileChart"></canvas>
+            </div>
+          </div>
+          
+          <!-- Job Ready Status -->
+          <div class="placement-panel text-center">
+            <div class="panel-header" style="justify-content:center">
+              <div class="panel-title">Job Ready Status</div>
+            </div>
+            <div style="display:inline-block;padding:12px 24px;border-radius:30px;background:var(--success-light);color:var(--success);font-weight:700;font-size:1.1rem;margin-bottom:16px">
+              <i class="fa fa-check-circle"></i> On Track
+            </div>
+            <p style="font-size:0.9rem;color:var(--text-muted)">Keep practicing your technical skills to improve your score to >90%.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LIVE TECH PLACEMENT OPENINGS (ONLINE DATA FEED) ── -->
+      <div class="placement-panel" style="margin-top:28px">
+        <div class="panel-header" style="flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="panel-title"><i class="fa fa-globe text-primary"></i> Live Tech Placement Openings</div>
+            <span class="badge badge-success" style="font-size:0.75rem;padding:3px 8px"><i class="fa fa-circle" style="font-size:0.5rem"></i> Live Web Feed (Remotive API)</span>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <div class="search-bar" style="width:240px;margin-bottom:0">
+              <i class="fa fa-search"></i>
+              <input type="text" id="jobSearchInput" placeholder="Filter by skill, role..." oninput="handleJobSearch()">
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="reloadLiveJobs()" id="refreshJobsBtn">
+              <i class="fa fa-refresh" id="jobRefreshIcon"></i> Refresh Feed
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Tags -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px" id="jobFilterTags">
+          <button class="filter-btn active" onclick="filterJobsByTag('all', this)">All Roles</button>
+          <button class="filter-btn" onclick="filterJobsByTag('react', this)">React</button>
+          <button class="filter-btn" onclick="filterJobsByTag('python', this)">Python</button>
+          <button class="filter-btn" onclick="filterJobsByTag('full stack', this)">Full Stack</button>
+          <button class="filter-btn" onclick="filterJobsByTag('backend', this)">Backend</button>
+          <button class="filter-btn" onclick="filterJobsByTag('data', this)">Data / AI</button>
+        </div>
+
+        <div id="liveJobsContainer" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:16px">
+          <div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--text-muted)">
+            <i class="fa fa-spinner fa-spin" style="font-size:1.5rem"></i>
+            <p style="margin-top:8px">Connecting to Live Placement Gateway...</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/online-data.js"></script>
+<script src="js/placement.js"></script>
+</body>
+</html>

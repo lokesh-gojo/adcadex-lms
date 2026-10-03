@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Dashboard — Acadex</title>
+  <title>Student Dashboard — Prime Vector LMS</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
@@ -42,34 +42,65 @@
           <span class="sidebar-label">My Courses</span>
           <span class="sidebar-badge">4</span>
         </a>
-        <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments">
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
           <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
           <span class="sidebar-label">Assignments</span>
           <span class="sidebar-badge">3</span>
         </a>
-        <a href="quiz.html?id=1" class="sidebar-link" data-tooltip="Quiz">
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
           <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
           <span class="sidebar-label">Quiz</span>
         </a>
-        <a href="attendance.html" class="sidebar-link" data-tooltip="Attendance">
+        <a href="attendance.html" class="sidebar-link " data-tooltip="Attendance">
           <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
           <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link " data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link " data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link " data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
         </a>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-group-label">Achievements</div>
-        <a href="certificate.html" class="sidebar-link" data-tooltip="Certificates">
+        <a href="certificate.html" class="sidebar-link " data-tooltip="Certificates">
           <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
           <span class="sidebar-label">Certificates</span>
         </a>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-group-label">Account</div>
-        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
           <span class="sidebar-icon"><i class="fa fa-user"></i></span>
           <span class="sidebar-label">Profile</span>
         </a>
-        <a href="settings.html" class="sidebar-link" data-tooltip="Settings">
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
           <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
           <span class="sidebar-label">Settings</span>
         </a>
@@ -83,8 +114,6 @@
       </button>
     </div>
   </aside>
-
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <!-- ── MAIN CONTENT ── -->
   <main class="main-content" id="mainContent">
@@ -134,6 +163,14 @@
                 <div class="notif-time">1 day ago</div>
               </div>
             </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--danger-light);color:var(--danger)"><i class="fa fa-exclamation-triangle"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Performance Alert: Your attendance dropped below 75%.</div>
+                <div class="notif-time">Just now</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
           </div>
         </div>
         <div class="dropdown">
@@ -160,6 +197,113 @@
       <div class="page-header">
         <h1 class="page-title">Welcome back, <span data-user-name style="color:var(--primary)">Student</span>! 👋</h1>
         <p class="page-subtitle">Here's your learning overview for today.</p>
+      <!-- Live Activity Ticker Banner -->
+      <div id="studentLiveTicker" style="margin-bottom:20px; padding:10px 16px; background:rgba(0,242,254,0.06); border:1px solid rgba(0,242,254,0.2); border-radius:var(--radius-md); font-size:0.85rem; display:flex; align-items:center; gap:10px; color:var(--text);">
+        <span style="width:8px; height:8px; border-radius:50%; background:#22c55e; display:inline-block; box-shadow:0 0 8px #22c55e; flex-shrink:0;"></span>
+        <strong style="color:var(--primary);">Real-Time Feed:</strong>
+        <span id="studentLiveTickerText" style="flex:1; color:var(--text-muted);">Priya Sharma completed Python Functions Quiz (98% Score)</span>
+      </div>
+
+      <!-- Lifecycle Overview Widget -->
+      <div class="card" style="margin-bottom:24px; border-left:4px solid var(--primary); background:var(--surface)">
+        <div class="card-body" style="padding:20px">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:14px">
+            <div>
+              <h3 style="margin-bottom:4px; display:flex; align-items:center; gap:8px; font-size:1.15rem">
+                <i class="fa fa-graduation-cap" style="color:var(--primary)"></i> 
+                Currently Enrolled: Full Stack Web Development
+              </h3>
+              <div style="font-size:0.85rem; color:var(--text-muted); display:flex; gap:16px; flex-wrap:wrap;">
+                <span><strong>Internship:</strong> Frontend Developer</span>
+                <span><strong>Project:</strong> E-Commerce Platform</span>
+                <span><strong>Mentor:</strong> Dr. Alan Turing</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:16px; text-align:right">
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted)">Remaining Duration</div>
+                <div style="font-size:1.25rem; font-weight:700; color:var(--accent)" id="lifecycleCountdown">45 Days</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted)">Stage Status</div>
+                <div style="font-size:1rem; font-weight:700; color:var(--primary)" id="lifecycleStatusLabel">Project Evaluation</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stepper Styles -->
+          <style>
+            .lifecycle-stepper {
+              display: flex;
+              gap: 12px;
+              overflow-x: auto;
+              padding: 4px 4px 12px;
+              scrollbar-width: thin;
+            }
+            .lifecycle-step {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 8px;
+              min-width: 100px;
+              padding: 10px;
+              border-radius: var(--radius);
+              background: var(--bg);
+              border: 1.5px solid var(--border);
+              cursor: pointer;
+              transition: var(--transition);
+              user-select: none;
+            }
+            .lifecycle-step:hover {
+              border-color: var(--primary);
+              background: var(--surface);
+              transform: translateY(-2px);
+            }
+            .lifecycle-step.completed {
+              border-color: var(--success);
+              background: var(--success-light);
+              color: var(--success);
+            }
+            .lifecycle-step.active {
+              border-color: var(--primary);
+              background: var(--primary-light);
+              color: var(--primary);
+              font-weight: 700;
+              box-shadow: var(--shadow-sm);
+            }
+            .lifecycle-step-num {
+              width: 22px;
+              height: 22px;
+              border-radius: 50%;
+              background: var(--border);
+              color: var(--text-muted);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.7rem;
+              font-weight: 800;
+              transition: var(--transition);
+            }
+            .lifecycle-step.completed .lifecycle-step-num {
+              background: var(--success);
+              color: white;
+            }
+            .lifecycle-step.active .lifecycle-step-num {
+              background: var(--primary);
+              color: white;
+            }
+            .lifecycle-step-label {
+              font-size: 0.72rem;
+              text-align: center;
+              line-height: 1.2;
+            }
+          </style>
+
+          <!-- Stepper HTML -->
+          <div class="lifecycle-stepper" id="lifecycleStepper">
+            <!-- Populated by JS -->
+          </div>
+        </div>
       </div>
 
       <!-- Stats Cards -->
@@ -196,6 +340,38 @@
             <div class="stat-change down"><i class="fa fa-arrow-down"></i> Due soon</div>
           </div>
         </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fa fa-line-chart"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">85%</div>
+            <div class="stat-label">Placement Readiness</div>
+            <div class="stat-change up"><i class="fa fa-arrow-up"></i> Job Ready!</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon text-danger"><i class="fa fa-briefcase"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" style="font-size:1.1rem">Full-Stack Bootcamp</div>
+            <div class="stat-label">Current Training</div>
+            <div class="stat-change up" style="color:var(--text-muted)">65% Completed</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color:var(--info); background:var(--info-light);"><i class="fa fa-file-text"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">92%</div>
+            <div class="stat-label">Resume Score</div>
+            <div class="stat-change up"><i class="fa fa-check-circle"></i> ATS Optimized</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color:var(--accent); background:var(--accent-light);"><i class="fa fa-globe"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">85%</div>
+            <div class="stat-label">Portfolio Completeness</div>
+            <div class="stat-change up"><i class="fa fa-arrow-up"></i> Add Projects</div>
+          </div>
+        </div>
       </div>
 
       <!-- Main Grid -->
@@ -218,7 +394,7 @@
           </div>
 
           <!-- Monthly Progress Chart -->
-          <div class="card">
+          <div class="card" style="margin-bottom:24px">
             <div class="card-header">
               <span class="card-title"><i class="fa fa-bar-chart" style="color:var(--primary)"></i> Monthly Attendance</span>
               <span class="badge badge-success">On Track</span>
@@ -229,10 +405,47 @@
               </div>
             </div>
           </div>
+
+          <!-- Prime Vector Skill Radar Card -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-crosshairs" style="color:var(--accent)"></i> Prime Vector Skill Competency</span>
+              <span class="badge badge-accent"><span class="pulse-dot"></span> Active Assessment</span>
+            </div>
+            <div class="card-body">
+              <div class="chart-wrapper" style="height:280px">
+                <canvas id="skillRadarChart"></canvas>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Right: Sidebar Widgets -->
         <div>
+          <!-- Live Classes -->
+          <div class="card" style="margin-bottom:24px">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-video-camera text-danger"></i> Upcoming Live Classes</span>
+              <a href="classes.html" class="btn btn-ghost btn-sm">View All</a>
+            </div>
+            <div class="card-body" style="padding:16px">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:8px;">
+                <div>
+                  <strong>System Design</strong>
+                  <div style="font-size:0.85rem; color:var(--text-muted);">Today, 4:00 PM</div>
+                </div>
+                <button class="btn btn-primary btn-sm">Join</button>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <strong>Graph Algos</strong>
+                  <div style="font-size:0.85rem; color:var(--text-muted);">Tomorrow, 10:00 AM</div>
+                </div>
+                <button class="btn btn-outline btn-sm">Join</button>
+              </div>
+            </div>
+          </div>
+
           <!-- Assignments -->
           <div class="card" style="margin-bottom:24px">
             <div class="card-header">
@@ -256,7 +469,7 @@
           </div>
 
           <!-- Quiz Results -->
-          <div class="card">
+          <div class="card" style="margin-bottom:24px;">
             <div class="card-header">
               <span class="card-title"><i class="fa fa-question-circle" style="color:var(--primary)"></i> Quiz Results</span>
               <a href="quiz.html?id=1" class="btn btn-primary btn-sm">Take Quiz</a>
@@ -265,6 +478,39 @@
               <div id="quizResults"></div>
             </div>
           </div>
+          
+          <!-- Profile & Placement Completion -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title"><i class="fa fa-user-circle text-info"></i> Profile Completion</span>
+            </div>
+            <div class="card-body">
+              <div class="course-progress-label"><span>Resume Completion</span><span>90%</span></div>
+              <div class="progress" style="margin-bottom:12px;"><div class="progress-bar success" style="width: 90%"></div></div>
+              
+              <div class="course-progress-label"><span>Portfolio Completion</span><span>60%</span></div>
+              <div class="progress" style="margin-bottom:12px;"><div class="progress-bar warning" style="width: 60%"></div></div>
+              
+              <div class="course-progress-label"><span>LinkedIn Verification</span><span>100%</span></div>
+              <div class="progress"><div class="progress-bar info" style="width: 100%"></div></div>
+            </div>
+          </div>
+
+          <!-- ── Live Tech Industry Trends & Remote Jobs (Online Data) ── -->
+          <div class="card" style="margin-top:24px">
+            <div class="card-header" style="flex-wrap:wrap;gap:8px">
+              <span class="card-title"><i class="fa fa-rss text-primary"></i> Live Tech Trends & Remote Jobs</span>
+              <a href="placement.html" class="btn btn-ghost btn-sm">Explore</a>
+            </div>
+            <div class="card-body" style="padding:16px">
+              <div id="studentLiveFeed" style="display:flex;flex-direction:column;gap:10px">
+                <div style="text-align:center;padding:12px;color:var(--text-muted);font-size:0.8rem">
+                  <i class="fa fa-spinner fa-spin"></i> Syncing online tech data...
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -272,6 +518,30 @@
 </div>
 
 <script src="js/app.js"></script>
+<script src="js/online-data.js"></script>
 <script src="js/student.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.getElementById('studentLiveFeed');
+  if (!container || !window.OnlineData) return;
+
+  try {
+    const jobs = await OnlineData.fetchPlacementJobs({ limit: 3 });
+    container.innerHTML = jobs.map(j => `
+      <div style="padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg)">
+        <div style="font-weight:700;font-size:0.85rem;color:var(--text);margin-bottom:2px">${j.title}</div>
+        <div style="font-size:0.75rem;color:var(--primary);font-weight:600;margin-bottom:4px">${j.company} · ${j.location}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:0.7rem;color:var(--text-muted)">${j.salary}</span>
+          <a href="${j.url}" target="_blank" rel="noopener noreferrer" style="font-size:0.75rem;color:var(--primary);font-weight:700">Apply →</a>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    container.innerHTML = '<div style="font-size:0.8rem;color:var(--text-muted);text-align:center">Explore full openings in Placement portal.</div>';
+  }
+});
+</script>
 </body>
 </html>
+

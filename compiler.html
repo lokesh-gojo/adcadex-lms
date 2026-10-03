@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Playground & IDE — Prime Vector LMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .compiler-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      height: calc(100vh - 180px);
+      min-height: 550px;
+    }
+    @media (max-width: 992px) {
+      .compiler-container { grid-template-columns: 1fr; height: auto; }
+    }
+    .editor-pane, .preview-pane {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .pane-header {
+      padding: 12px 18px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pane-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Outfit', sans-serif;
+    }
+    .code-textarea {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      padding: 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      background: #0F172A;
+      color: #F8FAFC;
+      border: none;
+      resize: none;
+      outline: none;
+      tab-size: 2;
+    }
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      border: none;
+      background: white;
+    }
+    .console-output {
+      height: 140px;
+      background: #090D16;
+      color: #38BDF8;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      padding: 12px 16px;
+      overflow-y: auto;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .challenge-card {
+      background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(139,92,246,0.06) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body id="compilerPage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo" style="background:var(--gradient-primary);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+        </a>
+        <a href="compiler.html" class="sidebar-link active" data-tooltip="Code IDE">
+          <span class="sidebar-icon"><i class="fa fa-code"></i></span>
+          <span class="sidebar-label">Code Playground</span>
+          <span class="sidebar-badge" style="background:var(--success);color:white">IDE</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link" data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Credentials</div>
+        <a href="placement.html" class="sidebar-link" data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume.html" class="sidebar-link" data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="student-id.html" class="sidebar-link" data-tooltip="Digital Student ID">
+          <span class="sidebar-icon"><i class="fa fa-id-card-o"></i></span>
+          <span class="sidebar-label">Digital Student ID</span>
+        </a>
+        <a href="certificate.html" class="sidebar-link" data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="student.html">Dashboard</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Code Playground</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div>
+          <h1 class="page-title"><i class="fa fa-code text-primary"></i> Prime Vector Code Playground</h1>
+          <p class="page-subtitle">Write, test, and execute code directly inside your LMS workspace.</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <select id="langSelect" class="form-control" style="width: auto; padding: 8px 16px; font-weight:600;">
+            <option value="html">HTML/CSS/JS (Web App)</option>
+            <option value="python">Python 3 (Simulator)</option>
+            <option value="dsa">JavaScript Data Structures</option>
+            <option value="cpp">C++ (GCC 12 Engine)</option>
+            <option value="java">Java 17 (Enterprise Sandbox)</option>
+          </select>
+          <button class="btn btn-primary" onclick="runCode()"><i class="fa fa-play"></i> Run Code</button>
+          <button class="btn btn-outline" onclick="resetCode()"><i class="fa fa-refresh"></i> Reset</button>
+        </div>
+      </div>
+
+      <!-- Challenge Header -->
+      <div class="challenge-card">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:38px; height:38px; border-radius:50%; background:var(--primary-light); color:var(--primary); display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+            <i class="fa fa-lightbulb-o"></i>
+          </div>
+          <div>
+            <div style="font-weight:700; font-size:0.95rem;" id="challengeTitle">Challenge: Array Two-Sum Problem</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);" id="challengeDesc">Write a function `twoSum(nums, target)` returning indices of numbers adding up to target.</div>
+          </div>
+        </div>
+        <button class="btn btn-accent btn-sm" onclick="loadChallengePreset()"><i class="fa fa-magic"></i> Load Challenge</button>
+      </div>
+
+      <!-- Compiler Grid -->
+      <div class="compiler-container">
+        <!-- Editor -->
+        <div class="editor-pane">
+          <div class="pane-header">
+            <div class="pane-title"><i class="fa fa-pencil-square-o text-primary"></i> Source Code</div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-family:'Fira Code', monospace;">UTF-8 | JavaScript / HTML</div>
+          </div>
+          <textarea id="codeEditor" class="code-textarea" spellcheck="false"></textarea>
+        </div>
+
+        <!-- Preview & Output -->
+        <div class="preview-pane">
+          <div class="pane-header">
+            <div class="pane-title"><i class="fa fa-desktop text-success"></i> Live Output / Preview</div>
+            <button class="btn btn-ghost btn-sm" onclick="clearConsole()"><i class="fa fa-eraser"></i> Clear Logs</button>
+          </div>
+          <iframe id="previewIframe" class="preview-iframe"></iframe>
+          <div class="console-output" id="consoleOutput">
+            > Prime Vector Code Engine Ready. Click "Run Code" to execute...
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/online-data.js"></script>
+<script src="js/compiler.js"></script>
+</body>
+</html>
+

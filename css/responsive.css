@@ -1,5 +1,5 @@
 /* ============================================================
-   Acadex LMS — Responsive Styles
+   Prime Vector LMS — Responsive Styles
    ============================================================ */
 
 /* ─ Breakpoints:
@@ -78,6 +78,12 @@
 
 /* ── Tablet (≤ 768px) ───────────────────────────────────────── */
 @media (max-width: 768px) {
+  .w3-sandbox-split {
+    grid-template-columns: 1fr !important;
+  }
+  .w3-sandbox-split > div {
+    min-height: 280px;
+  }
   /* Navbar */
   .hamburger { display: flex; }
   .navbar-nav { display: none; }

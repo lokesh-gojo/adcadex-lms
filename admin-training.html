@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Programs — Prime Vector LMS Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/training.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="adminTrainingPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Admin</div><div class="sidebar-user-role">admin</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Overview</div><a href="admin.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a></div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Management</div>
+        <a href="admin-enrollment.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Students</span></a>
+        <a href="admin-departments.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Departments</span></a>
+        <a href="admin-courses.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="admin-training.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-rocket"></i></span><span class="sidebar-label">Training</span></a>
+        <a href="admin-placements.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placements</span></a>
+        <a href="admin-certificates.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Analytics</div>
+        <a href="admin-analytics.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span><span class="sidebar-label">Analytics</span></a>
+        <a href="admin-system.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-server"></i></span><span class="sidebar-label">System</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="admin.html">Admin</a><span class="breadcrumb-sep">/</span><span>Training Programs</span></div>
+      </div>
+      <div class="inner-navbar-right"><button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button></div>
+    </header>
+
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+        <div><h2 class="page-title">Training Program Management</h2><p class="page-subtitle">Create and manage placement training, workshops, and skill programs</p></div>
+        <button class="btn btn-primary" onclick="Modal.open('programModal')"><i class="fa fa-plus"></i> Create Program</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-rocket"></i></div><div class="stat-card-body"><div class="stat-card-value">12</div><div class="stat-card-label">Active Programs</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-users"></i></div><div class="stat-card-body"><div class="stat-card-value">892</div><div class="stat-card-label">Enrolled Students</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-clock-o"></i></div><div class="stat-card-body"><div class="stat-card-value">480h</div><div class="stat-card-label">Total Training Hours</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-check-circle"></i></div><div class="stat-card-body"><div class="stat-card-value">78%</div><div class="stat-card-label">Completion Rate</div></div></div>
+      </div>
+
+      <!-- Program Cards -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-bottom:28px" id="programsGrid"></div>
+
+      <!-- Schedule Table -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-calendar"></i> Training Schedule</div>
+          <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem"><i class="fa fa-download"></i> Export</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th>Program</th><th>Category</th><th>Instructor</th><th>Students</th><th>Start</th><th>End</th><th>Duration</th><th>Status</th></tr></thead>
+            <tbody id="scheduleTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Program Modal -->
+<div class="modal-overlay" id="programModal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-header"><div class="modal-title">Create Training Program</div><button class="modal-close" onclick="Modal.close('programModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="form-group" style="grid-column:1/-1"><label class="form-label">Program Name</label><input type="text" class="form-input" placeholder="e.g. Full Stack Placement Training"></div>
+        <div class="form-group"><label class="form-label">Category</label><select class="form-input"><option>Placement Training</option><option>Aptitude</option><option>Coding</option><option>Soft Skills</option><option>Technical</option></select></div>
+        <div class="form-group"><label class="form-label">Instructor</label><input type="text" class="form-input" placeholder="Instructor name"></div>
+        <div class="form-group"><label class="form-label">Start Date</label><input type="date" class="form-input"></div>
+        <div class="form-group"><label class="form-label">End Date</label><input type="date" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Total Hours</label><input type="number" class="form-input" value="120"></div>
+        <div class="form-group"><label class="form-label">Weekly Hours</label><input type="number" class="form-input" value="20"></div>
+        <div class="form-group" style="grid-column:1/-1"><label class="form-label">Learning Objectives (one per line)</label><textarea class="form-input" rows="3" placeholder="DSA fundamentals&#10;System Design&#10;Problem solving"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('programModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="Modal.close('programModal');Toast.success('Created!','Training program is now active')">Create Program</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const PROGRAMS = [
+    { name:'Full Stack Placement Training', cat:'Placement', icon:'🚀', color:'#2563EB', instructor:'Rahul Sharma', students:248, hours:120, weeklyHours:20, start:'2025-06-01', end:'2025-07-31', status:'active', progress:65 },
+    { name:'Aptitude & Reasoning Boot Camp', cat:'Aptitude', icon:'🧠', color:'#10B981', instructor:'Priya Singh', students:312, hours:60, weeklyHours:15, start:'2025-06-15', end:'2025-07-15', status:'active', progress:80 },
+    { name:'Coding Challenge Series', cat:'Coding', icon:'💻', color:'#8B5CF6', instructor:'Arun Kumar', students:180, hours:80, weeklyHours:16, start:'2025-07-01', end:'2025-08-15', status:'active', progress:40 },
+    { name:'Communication & HR Prep', cat:'Soft Skills', icon:'🎤', color:'#F59E0B', instructor:'Meena Iyer', students:420, hours:40, weeklyHours:10, start:'2025-07-10', end:'2025-08-10', status:'active', progress:25 },
+  ];
+
+  const SCHEDULE = [
+    { name:'Full Stack Placement Training', cat:'Placement', instructor:'Rahul Sharma', students:248, start:'2025-06-01', end:'2025-07-31', duration:'60 days', status:'ongoing' },
+    { name:'Aptitude Boot Camp', cat:'Aptitude', instructor:'Priya Singh', students:312, start:'2025-06-15', end:'2025-07-15', duration:'30 days', status:'ongoing' },
+    { name:'Coding Challenge Series', cat:'Coding', instructor:'Arun Kumar', students:180, start:'2025-07-01', end:'2025-08-15', duration:'45 days', status:'ongoing' },
+    { name:'HR & Communication Prep', cat:'Soft Skills', instructor:'Meena Iyer', students:420, start:'2025-07-10', end:'2025-08-10', duration:'31 days', status:'upcoming' },
+    { name:'Mock Interview Sessions', cat:'Placement', instructor:'Team', students:89, start:'2025-07-20', end:'2025-07-31', duration:'11 days', status:'upcoming' },
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+
+    document.getElementById('programsGrid').innerHTML = PROGRAMS.map(p => `
+      <div class="section-card">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:48px;height:48px;border-radius:var(--radius-md);background:${p.color}15;display:flex;align-items:center;justify-content:center;font-size:1.5rem">${p.icon}</div>
+            <div>
+              <div style="font-weight:800;font-size:0.95rem">${p.name}</div>
+              <span class="badge badge-ghost" style="font-size:0.7rem">${p.cat}</span>
+            </div>
+          </div>
+          <span class="badge badge-success">${p.status}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;font-size:0.82rem">
+          <div style="display:flex;gap:8px;color:var(--text-muted)"><i class="fa fa-user-circle" style="width:16px;color:${p.color}"></i><span>${p.instructor}</span></div>
+          <div style="display:flex;gap:8px;color:var(--text-muted)"><i class="fa fa-users" style="width:16px;color:${p.color}"></i><span>${p.students} students enrolled</span></div>
+          <div style="display:flex;gap:8px;color:var(--text-muted)"><i class="fa fa-clock-o" style="width:16px;color:${p.color}"></i><span>${p.hours}h total · ${p.weeklyHours}h/week</span></div>
+          <div style="display:flex;gap:8px;color:var(--text-muted)"><i class="fa fa-calendar" style="width:16px;color:${p.color}"></i><span>${p.start} → ${p.end}</span></div>
+        </div>
+        <div style="margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:4px"><span style="color:var(--text-muted)">Progress</span><strong style="color:${p.color}">${p.progress}%</strong></div>
+          <div class="progress" style="height:8px"><div class="progress-bar" style="width:${p.progress}%;height:100%;background:${p.color};border-radius:var(--radius-full);transition:width 1s"></div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center;font-size:0.82rem" onclick="Toast.info('View','Opening program details')"><i class="fa fa-eye"></i> View</button>
+          <button class="btn btn-ghost" style="flex:1;justify-content:center;font-size:0.82rem" onclick="Toast.info('Edit','Opening editor')"><i class="fa fa-edit"></i> Edit</button>
+        </div>
+      </div>
+    `).join('');
+
+    const statusCls = { ongoing:'badge-success', upcoming:'badge-primary', completed:'badge-ghost' };
+    document.getElementById('scheduleTable').innerHTML = SCHEDULE.map(s => `
+      <tr>
+        <td><strong>${s.name}</strong></td>
+        <td><span class="badge badge-ghost">${s.cat}</span></td>
+        <td>${s.instructor}</td>
+        <td>${s.students}</td>
+        <td>${s.start}</td>
+        <td>${s.end}</td>
+        <td>${s.duration}</td>
+        <td><span class="badge ${statusCls[s.status]}">${s.status}</span></td>
+      </tr>
+    `).join('');
+
+    App.init();
+  });
+</script>
+</body>
+</html>
+

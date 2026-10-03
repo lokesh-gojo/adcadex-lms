@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alumni Portal — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="alumniDashboard">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#10B981,#3B82F6)" data-user-avatar>🎓</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Michael Alum</div>
+        <div class="sidebar-user-role">Alumni (Google)</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Alumni Hub</div>
+        <a href="alumni.html" class="sidebar-link active" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Alumni Dashboard</span>
+        </a>
+        <a href="#network" class="sidebar-link" data-tooltip="Alumni Directory">
+          <span class="sidebar-icon"><i class="fa fa-graduation-cap"></i></span>
+          <span class="sidebar-label">Alumni Network</span>
+        </a>
+        <a href="#mentorship" class="sidebar-link" data-tooltip="Mentorship">
+          <span class="sidebar-icon"><i class="fa fa-handshake-o"></i></span>
+          <span class="sidebar-label">Mentorship Requests</span>
+        </a>
+        <a href="#jobReferrals" class="sidebar-link" data-tooltip="Job Referrals">
+          <span class="sidebar-icon"><i class="fa fa-share-alt"></i></span>
+          <span class="sidebar-label">Post Referrals</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">My Profile</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Alumni Portal</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <button class="notif-btn" title="Notifications"><i class="fa fa-bell"></i><span class="notif-badge">1</span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header flex-between">
+        <div>
+          <h1 class="page-title">Alumni Dashboard 🎓</h1>
+          <p class="page-subtitle">Welcome back, Michael! Help guide the next generation and share jobs/referrals.</p>
+        </div>
+        <button class="btn btn-primary" onclick="Modal.open('referralModal')"><i class="fa fa-plus"></i> Post Referral</button>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid" style="margin-bottom:24px">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa fa-users"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">1,480+</div>
+            <div class="stat-label">Total Placed Alumni</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon teal"><i class="fa fa-handshake-o"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="alumActiveMentees">4</div>
+            <div class="stat-label">Active Student Mentees</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fa fa-bullhorn"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="alumReferralsPosted">8</div>
+            <div class="stat-label">Referrals Posted</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fa fa-trophy"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">₹45.6L</div>
+            <div class="stat-label">Highest Package Placed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- Funnel Charts of Alumni Distribution -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-building-o" style="color:var(--primary)"></i> Alumni Company Distribution</span>
+          </div>
+          <div class="card-body">
+            <canvas id="alumniDistributionChart" height="240"></canvas>
+          </div>
+        </div>
+
+        <!-- Job Referral Poster -->
+        <div class="card" id="jobReferrals">
+          <div class="card-header flex-between">
+            <span class="card-title"><i class="fa fa-share-alt" style="color:var(--accent)"></i> Internal Referrals Shared</span>
+          </div>
+          <div class="table-container">
+            <table class="table" id="referralsTable">
+              <thead>
+                <tr>
+                  <th>Job Title</th>
+                  <th>Company</th>
+                  <th>Location</th>
+                  <th>Referral Code</th>
+                </tr>
+              </thead>
+              <tbody id="referralsTableBody">
+                <tr>
+                  <td class="font-semi">Software Engineer (L3)</td>
+                  <td>Google</td>
+                  <td>Bangalore, India</td>
+                  <td><code>GOOG-REF-892</code></td>
+                </tr>
+                <tr>
+                  <td class="font-semi">Frontend Specialist</td>
+                  <td>TechCorp</td>
+                  <td>Remote</td>
+                  <td><code>CORP-REF-420</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alumni Network & Mentorship Requests -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- Mentorship Booking Requests -->
+        <div class="card" id="mentorship">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-handshake-o" style="color:var(--warning)"></i> Active Student Mentorship Requests</span>
+          </div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:14px" id="mentorshipContainer">
+            <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;animation:animate-fade-up 0.4s ease forwards" id="mentorshipReq1">
+              <div>
+                <div class="font-semi" style="color:var(--text);font-size:0.95rem">Alex Johnson</div>
+                <div class="text-xs text-muted">Web Dev Student (Sem 4)</div>
+                <div style="font-size:0.8rem;margin-top:6px;color:var(--text-muted)">"Hi Michael, I would love some feedback on my Portfolio dashboard project before the hiring drives start."</div>
+              </div>
+              <div class="flex gap-8">
+                <button class="btn btn-primary btn-sm" onclick="approveMentorship('1', 'Alex Johnson')"><i class="fa fa-check"></i> Accept</button>
+                <button class="btn btn-ghost btn-sm" onclick="rejectMentorship('1')"><i class="fa fa-times"></i> Reject</button>
+              </div>
+            </div>
+            <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="font-semi" style="color:var(--text);font-size:0.95rem">Marcus Lee</div>
+                <div class="text-xs text-muted">React Learner (Sem 4)</div>
+                <div style="font-size:0.8rem;margin-top:6px;color:var(--text-muted)">"Need advice on full-stack roadmaps and interview preparation at Google."</div>
+              </div>
+              <span class="badge badge-success">Approved (Active Mentee)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alumni Directory Grid -->
+        <div class="card" id="network">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-address-book-o" style="color:var(--primary)"></i> Quick Alumni Network</span>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Alum Name</th>
+                  <th>Grad Year</th>
+                  <th>Employer</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-semi">Rohan Das</td>
+                  <td>2023</td>
+                  <td>Microsoft</td>
+                  <td>SDE 1</td>
+                </tr>
+                <tr>
+                  <td class="font-semi">Neha Nair</td>
+                  <td>2024</td>
+                  <td>Amazon</td>
+                  <td>Cloud Engineer</td>
+                </tr>
+                <tr>
+                  <td class="font-semi">Abhishek Sen</td>
+                  <td>2022</td>
+                  <td>Meta</td>
+                  <td>Data Scientist</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Post Referral Modal -->
+<div class="modal-overlay" id="referralModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <h3 class="modal-title">Share Job Referral</h3>
+      <button class="modal-close" onclick="Modal.close('referralModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="referralForm" onsubmit="event.preventDefault(); submitAlumniReferral();" style="display:flex;flex-direction:column;gap:12px">
+        <div class="form-group">
+          <label class="form-label">Job Title</label>
+          <input type="text" class="form-control" id="refTitle" placeholder="e.g. Backend Engineer Intern" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company Name</label>
+          <input type="text" class="form-control" id="refCompany" value="Google" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Job Location</label>
+          <input type="text" class="form-control" id="refLoc" placeholder="e.g. Remote" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Referral Code / Link</label>
+          <input type="text" class="form-control" id="refCode" placeholder="e.g. GOOG-REF-100" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center">Publish Referral</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/alumni.js"></script>
+</body>
+</html>
+

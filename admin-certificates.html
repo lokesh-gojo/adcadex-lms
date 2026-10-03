@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificates — Prime Vector LMS Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="adminCertsPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Admin</div><div class="sidebar-user-role">admin</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Overview</div><a href="admin.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a></div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Management</div>
+        <a href="admin-enrollment.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Students</span></a>
+        <a href="admin-departments.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Departments</span></a>
+        <a href="admin-courses.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="admin-placements.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placements</span></a>
+        <a href="admin-certificates.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Analytics</div>
+        <a href="admin-analytics.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span><span class="sidebar-label">Analytics</span></a>
+        <a href="admin-system.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-server"></i></span><span class="sidebar-label">System</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="admin.html">Admin</a><span class="breadcrumb-sep">/</span><span>Certificates</span></div>
+      </div>
+      <div class="inner-navbar-right"><button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button></div>
+    </header>
+
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+        <div><h2 class="page-title">Certificate Management</h2><p class="page-subtitle">Generate, manage, and verify certificates with QR codes</p></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost" onclick="Modal.open('bulkModal')"><i class="fa fa-download"></i> Bulk Generate</button>
+          <button class="btn btn-primary" onclick="Modal.open('singleModal')"><i class="fa fa-plus"></i> Issue Certificate</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-certificate"></i></div><div class="stat-card-body"><div class="stat-card-value">2,841</div><div class="stat-card-label">Total Issued</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-graduation-cap"></i></div><div class="stat-card-body"><div class="stat-card-value">1,240</div><div class="stat-card-label">Course Certificates</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-building"></i></div><div class="stat-card-body"><div class="stat-card-value">842</div><div class="stat-card-label">Internship Certificates</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-code-fork"></i></div><div class="stat-card-body"><div class="stat-card-value">312</div><div class="stat-card-label">Project Certificates</div></div></div>
+      </div>
+
+      <!-- Certificate Types Overview -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <div class="section-card">
+          <div class="section-header"><div class="section-title"><i class="fa fa-certificate"></i> Recent Certificates</div></div>
+          <div style="overflow-x:auto">
+            <table class="data-table" id="certsTable">
+              <thead><tr><th>Student</th><th>Type</th><th>Course / Program</th><th>Cert ID</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="certsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <!-- Certificate Types -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-tag"></i> Certificate Types</div></div>
+            <div style="display:flex;flex-direction:column;gap:12px" id="certTypes"></div>
+          </div>
+          <!-- Verification Widget -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-search"></i> Verify Certificate</div></div>
+            <div class="form-group">
+              <input type="text" class="form-input" id="verifyCertId" placeholder="Enter Certificate ID (e.g. AX-2025-00123)">
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="verifyCert()">
+              <i class="fa fa-check-circle"></i> Verify
+            </button>
+            <div id="verifyResult" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Issue Single Certificate Modal -->
+<div class="modal-overlay" id="singleModal">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header"><div class="modal-title">Issue Certificate</div><button class="modal-close" onclick="Modal.close('singleModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Student Name</label><input type="text" class="form-input" placeholder="Full Name"></div>
+      <div class="form-group"><label class="form-label">Certificate Type</label><select class="form-input"><option>Course Certificate</option><option>Internship Certificate</option><option>Project Certificate</option><option>Placement Training</option><option>Workshop</option></select></div>
+      <div class="form-group"><label class="form-label">Course / Program</label><input type="text" class="form-input" placeholder="e.g. Web Development Bootcamp"></div>
+      <div class="form-group"><label class="form-label">Issue Date</label><input type="date" class="form-input" id="certDate"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('singleModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="Modal.close('singleModal');Toast.success('Issued!','Certificate generated with QR code')"><i class="fa fa-certificate"></i> Issue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bulk Generate Modal -->
+<div class="modal-overlay" id="bulkModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header"><div class="modal-title">Bulk Certificate Generation</div><button class="modal-close" onclick="Modal.close('bulkModal')"><i class="fa fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Certificate Type</label><select class="form-input" id="bulkType"><option>Course Certificate</option><option>Internship Certificate</option><option>Project Certificate</option></select></div>
+      <div class="form-group"><label class="form-label">Department</label><select class="form-input"><option>All Departments</option><option>CS</option><option>ECE</option><option>IT</option><option>ME</option></select></div>
+      <div class="form-group"><label class="form-label">Batch / Year</label><select class="form-input"><option>2025</option><option>2024</option><option>2023</option></select></div>
+      <div style="background:var(--info-light);border:1px solid rgba(59,130,246,0.2);border-radius:var(--radius-md);padding:14px;font-size:0.85rem;color:var(--info)">
+        <i class="fa fa-info-circle" style="margin-right:6px"></i>
+        This will generate certificates for all eligible students who have completed the selected program. QR codes will be automatically embedded.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('bulkModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="startBulkGenerate()"><i class="fa fa-magic"></i> Generate All</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const CERTS = [
+    { student:'Arjun Mehta',   type:'Course',      course:'Web Development',      id:'AX-2025-00421', date:'2025-07-10', status:'issued' },
+    { student:'Priya Sharma',  type:'Internship',  course:'TechCorp Solutions',   id:'AX-2025-00420', date:'2025-07-09', status:'issued' },
+    { student:'Rohit Kumar',   type:'Project',     course:'E-Commerce AI Project',id:'AX-2025-00419', date:'2025-07-08', status:'issued' },
+    { student:'Sneha Nair',    type:'Course',      course:'Machine Learning A-Z', id:'AX-2025-00418', date:'2025-07-07', status:'issued' },
+    { student:'Kiran Patel',   type:'Workshop',    course:'DevOps Masterclass',   id:'AX-2025-00417', date:'2025-07-06', status:'pending' },
+    { student:'Deepa Reddy',   type:'Internship',  course:'InfoSys',              id:'AX-2025-00416', date:'2025-07-05', status:'issued' },
+  ];
+  const CERT_TYPES = [
+    { name:'Course Certificate',       count:1240, color:'#2563EB', icon:'fa-graduation-cap' },
+    { name:'Internship Certificate',   count:842,  color:'#10B981', icon:'fa-building' },
+    { name:'Project Certificate',      count:312,  color:'#8B5CF6', icon:'fa-code-fork' },
+    { name:'Placement Training',       count:286,  color:'#F59E0B', icon:'fa-briefcase' },
+    { name:'Workshop Certificate',     count:161,  color:'#EF4444', icon:'fa-star' },
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    document.getElementById('certDate').value = new Date().toISOString().slice(0,10);
+
+    document.getElementById('certsBody').innerHTML = CERTS.map(c => `
+      <tr>
+        <td><strong>${c.student}</strong></td>
+        <td><span class="badge badge-ghost">${c.type}</span></td>
+        <td style="font-size:0.85rem">${c.course}</td>
+        <td><code style="font-size:0.78rem">${c.id}</code></td>
+        <td>${c.date}</td>
+        <td><span class="badge ${c.status==='issued'?'badge-success':'badge-warning'}">${c.status}</span></td>
+        <td>
+          <button class="btn btn-ghost" style="padding:5px 9px;font-size:0.78rem" onclick="Toast.info('Download','Downloading ${c.id}')"><i class="fa fa-download"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 9px;font-size:0.78rem" onclick="Toast.info('View','Preview certificate')"><i class="fa fa-eye"></i></button>
+        </td>
+      </tr>
+    `).join('');
+
+    document.getElementById('certTypes').innerHTML = CERT_TYPES.map(t => `
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:var(--radius);background:${t.color}20;display:flex;align-items:center;justify-content:center;color:${t.color};flex-shrink:0"><i class="fa ${t.icon}"></i></div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:3px">
+            <span style="font-weight:600">${t.name}</span>
+            <span style="font-weight:800;color:${t.color}">${t.count.toLocaleString()}</span>
+          </div>
+          <div class="storage-bar-wrap" style="height:6px"><div class="storage-bar-fill" style="width:${Math.round(t.count/2841*100)}%;background:${t.color}"></div></div>
+        </div>
+      </div>
+    `).join('');
+
+    App.init();
+  });
+
+  function verifyCert() {
+    const id = document.getElementById('verifyCertId').value.trim();
+    const result = document.getElementById('verifyResult');
+    if (!id) { Toast.error('Required', 'Enter a certificate ID'); return; }
+    const cert = CERTS.find(c => c.id === id);
+    if (cert) {
+      result.innerHTML = `
+        <div style="background:var(--success-light);border:1px solid rgba(16,185,129,0.3);border-radius:var(--radius-md);padding:14px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <i class="fa fa-check-circle" style="color:var(--success);font-size:1.1rem"></i>
+            <strong style="color:var(--success)">Certificate Verified ✓</strong>
+          </div>
+          <div style="font-size:0.85rem"><strong>${cert.student}</strong> — ${cert.course}</div>
+          <div style="font-size:0.78rem;color:var(--text-muted)">Issued: ${cert.date} · Type: ${cert.type}</div>
+        </div>
+      `;
+    } else {
+      result.innerHTML = `<div style="background:var(--danger-light);border:1px solid rgba(239,68,68,0.3);border-radius:var(--radius-md);padding:14px;color:var(--danger)"><i class="fa fa-times-circle"></i> Certificate not found. Please check the ID.</div>`;
+    }
+  }
+
+  function startBulkGenerate() {
+    Modal.close('bulkModal');
+    Toast.info('Generating...', 'Bulk generation started in background');
+    setTimeout(() => Toast.success('Done!', '248 certificates generated successfully'), 2500);
+  }
+</script>
+</body>
+</html>
+

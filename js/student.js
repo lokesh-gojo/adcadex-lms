@@ -1,5 +1,5 @@
 /* ============================================================
-   Acadex LMS — student.js
+   Prime Vector LMS — student.js
    ============================================================ */
 
 // Sample data
@@ -211,6 +211,146 @@ function renderProgressChart() {
   });
 }
 
+// ── Student Lifecycle Configuration ───────────────────────────
+const LIFECYCLE_STAGES = [
+  'Admission',
+  'Course Enrollment',
+  'Training Program',
+  'Daily Classes',
+  'Assignments',
+  'Assessment',
+  'Project',
+  'Internship',
+  'Certification',
+  'Placement Training',
+  'Interview Drive',
+  'Placement Stage',
+  'Alumni Network'
+];
+
+function renderLifecycleStepper() {
+  const container = document.getElementById('lifecycleStepper');
+  if (!container) return;
+
+  const currentStageIndex = parseInt(localStorage.getItem('Prime Vector_lifecycle_stage')) || 6; // Default to 'Project' (index 6)
+  
+  // Set widgets
+  updateLifecycleWidgets(currentStageIndex);
+
+  container.innerHTML = LIFECYCLE_STAGES.map((stage, idx) => {
+    let statusClass = '';
+    if (idx < currentStageIndex) statusClass = 'completed';
+    else if (idx === currentStageIndex) statusClass = 'active';
+
+    return `
+      <div class="lifecycle-step ${statusClass}" onclick="changeLifecycleStage(${idx})">
+        <div class="lifecycle-step-num">
+          ${idx < currentStageIndex ? '✓' : idx + 1}
+        </div>
+        <div class="lifecycle-step-label">${stage}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+window.changeLifecycleStage = function(index) {
+  const oldIndex = parseInt(localStorage.getItem('Prime Vector_lifecycle_stage')) || 6;
+  if (oldIndex === index) return;
+
+  localStorage.setItem('Prime Vector_lifecycle_stage', index);
+  renderLifecycleStepper();
+  
+  Toast.success(
+    'Lifecycle Status Updated', 
+    `Transitioned from ${LIFECYCLE_STAGES[oldIndex]} ➔ ${LIFECYCLE_STAGES[index]}.`
+  );
+};
+
+function updateLifecycleWidgets(index) {
+  const countdownEl = document.getElementById('lifecycleCountdown');
+  const labelEl = document.getElementById('lifecycleStatusLabel');
+  
+  if (labelEl) labelEl.textContent = LIFECYCLE_STAGES[index];
+
+  // Dynamic countdown days depending on index
+  if (countdownEl) {
+    const daysLeftMap = [120, 110, 95, 80, 70, 60, 45, 30, 20, 15, 10, 5, 0];
+    const days = daysLeftMap[index] !== undefined ? daysLeftMap[index] : 0;
+    countdownEl.textContent = days > 0 ? `${days} Days Remaining` : 'Completed';
+  }
+}
+
+// ── Assignment Submission Interactive Handler ─────────────────
+window.submitAssignment = function(id) {
+  const item = STUDENT_DATA.assignments.find(a => a.id === id);
+  if (!item) return;
+  
+  if (item.status === 'submitted') {
+    Toast.info('Already Submitted', `You have submitted "${item.title}".`);
+    return;
+  }
+
+  item.status = 'submitted';
+  renderAssignments('assignmentList');
+  
+  const pendEl = document.getElementById('pendingAssignments');
+  if (pendEl) {
+    pendEl.textContent = STUDENT_DATA.assignments.filter(a => a.status === 'pending').length;
+  }
+  
+  Toast.success('Assignment Submitted!', `Successfully submitted "${item.title}". 100 XP gained!`);
+};
+
+// ── Live Masterclass Launcher ─────────────────────────────────
+window.joinLiveSession = function(sessionTitle) {
+  Toast.info('Joining Live Masterclass', `Connecting to "${sessionTitle}" stream...`);
+  setTimeout(() => {
+    window.location.href = 'classes.html';
+  }, 800);
+};
+
+// ── Skill Radar Chart ──────────────────────────────────────────
+function renderSkillRadarChart() {
+  const canvas = document.getElementById('skillRadarChart');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  const isDark = Theme.isDark();
+  const textColor = isDark ? '#94A3B8' : '#64748B';
+  const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
+
+  new Chart(canvas, {
+    type: 'radar',
+    data: {
+      labels: ['AI & ML', 'Full Stack', 'Data Science', 'Problem Solving', 'Cloud & DevOps', 'Communication'],
+      datasets: [{
+        label: 'Prime Vector Skill Score',
+        data: [85, 92, 78, 88, 70, 85],
+        backgroundColor: 'rgba(79,70,229,0.25)',
+        borderColor: '#4F46E5',
+        borderWidth: 2,
+        pointBackgroundColor: '#06B6D4',
+        pointBorderColor: '#fff',
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          angleLines: { color: gridColor },
+          grid: { color: gridColor },
+          pointLabels: { color: textColor, font: { size: 11, weight: '600' } },
+          ticks: { backdropColor: 'transparent', color: textColor }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+}
+
 // ── Init Student Dashboard ─────────────────────────────────────
 function initStudentDashboard() {
   if (!document.getElementById('studentDashboard')) return;
@@ -238,6 +378,9 @@ function initStudentDashboard() {
   renderQuizResults('quizResults');
   renderAttendanceChart();
   renderProgressChart();
+  renderSkillRadarChart();
+  renderLifecycleStepper();
 }
 
 document.addEventListener('DOMContentLoaded', initStudentDashboard);
+

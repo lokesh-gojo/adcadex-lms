@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar — Prime Vector LMS</title>
+  <meta name="description" content="Academic calendar with scheduled classes, assignments, exams and events on Prime Vector LMS.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .calendar-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:4px; }
+    .cal-header-day { text-align:center;font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;padding:6px 0;letter-spacing:0.5px; }
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+      min-height: 36px;
+    }
+    .cal-day:not(.other-month):hover { background: var(--primary-light); color: var(--primary); }
+    .cal-day.today { background: var(--gradient-primary); color: #fff; font-weight: 800; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+    .cal-day.other-month { color: var(--border); cursor: default; }
+    .cal-day.has-event::after { content:''; position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--primary); }
+    .cal-day.today.has-event::after { background: #fff; }
+    .cal-day.selected { background: var(--primary-light); color: var(--primary); font-weight: 700; outline: 2px solid var(--primary); }
+    .event-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .event-item:hover { border-color: var(--primary); background: var(--primary-light); }
+    .event-title { font-weight: 600; font-size: 0.875rem; }
+    .event-subtitle { font-size: 0.75rem; color: var(--text-muted); }
+    .event-time { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); min-width: 36px; text-align: center; }
+  </style>
+</head>
+<body id="calendarPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Student</div><div class="sidebar-user-role">student</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+        <a href="course.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">My Courses</span></a>
+        <a href="assignment.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
+        <a href="attendance.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
+        <a href="classes.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-video-camera"></i></span><span class="sidebar-label">Live Classes</span></a>
+        <a href="forum.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-comments"></i></span><span class="sidebar-label">Forum</span></a>
+        <a href="calendar.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-calendar"></i></span><span class="sidebar-label">Calendar</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Career</div>
+        <a href="internship.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-building"></i></span><span class="sidebar-label">Internship</span></a>
+        <a href="project.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-code-fork"></i></span><span class="sidebar-label">Project</span></a>
+        <a href="placement.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-briefcase"></i></span><span class="sidebar-label">Placement</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Achievements</div>
+        <a href="gamification.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-trophy"></i></span><span class="sidebar-label">Achievements</span></a>
+        <a href="certificate.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
+        <a href="student-id.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-id-card-o"></i></span><span class="sidebar-label">Digital ID Card</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+        <a href="settings.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="student.html">Dashboard</a><span class="breadcrumb-sep">/</span><span>Calendar</span></div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+        <button class="btn btn-primary" style="padding:8px 16px;font-size:0.85rem" onclick="Modal.open('addEventModal')"><i class="fa fa-plus"></i> Add Event</button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h2 class="page-title">Academic Calendar</h2>
+        <p class="page-subtitle">Track classes, assignments, exams, and events</p>
+      </div>
+
+      <!-- Legend -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.82rem"><div style="width:12px;height:12px;border-radius:50%;background:var(--primary)"></div> Classes</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.82rem"><div style="width:12px;height:12px;border-radius:50%;background:var(--danger)"></div> Exams</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.82rem"><div style="width:12px;height:12px;border-radius:50%;background:var(--warning)"></div> Assignments</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.82rem"><div style="width:12px;height:12px;border-radius:50%;background:var(--success)"></div> Events</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start">
+        <!-- Calendar Grid -->
+        <div class="section-card">
+          <div id="calendarGrid"></div>
+        </div>
+
+        <!-- Sidebar: Events -->
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-title" id="eventsTitle"><i class="fa fa-calendar-o"></i> Selected Day</div>
+            </div>
+            <div id="dayEvents">
+              <div class="empty-state">
+                <div class="empty-state-icon"><i class="fa fa-hand-pointer-o"></i></div>
+                <div class="empty-state-title">Select a day</div>
+                <div class="empty-state-desc">Click on any date to see its events</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-title"><i class="fa fa-clock-o"></i> Upcoming Events</div>
+            </div>
+            <div id="upcomingEvents" style="display:flex;flex-direction:column;gap:8px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Add Event Modal -->
+<div class="modal-overlay" id="addEventModal">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa fa-calendar-plus-o"></i> Add Event</div>
+      <button class="modal-close" onclick="Modal.close('addEventModal')"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Event Title</label><input type="text" class="form-input" id="evtTitle" placeholder="e.g. Study Session"></div>
+      <div class="form-group"><label class="form-label">Type</label>
+        <select class="form-input" id="evtType">
+          <option value="class">Class / Live Session</option>
+          <option value="exam">Exam</option>
+          <option value="assignment">Assignment Due</option>
+          <option value="event">Event / Webinar</option>
+        </select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group"><label class="form-label">Date</label><input type="date" class="form-input" id="evtDate"></div>
+        <div class="form-group"><label class="form-label">Time</label><input type="time" class="form-input" id="evtTime" value="09:00"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Description (optional)</label><input type="text" class="form-input" id="evtDesc" placeholder="Additional details..."></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('addEventModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveEvent()"><i class="fa fa-check"></i> Add Event</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/calendar.js"></script>
+<script>
+  Theme.init();
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+
+    document.getElementById('evtDate').value = new Date().toISOString().slice(0,10);
+
+    const now = new Date();
+    CalendarEngine.setEventsContainer('dayEvents');
+    CalendarEngine.renderCalendar('calendarGrid', now.getFullYear(), now.getMonth());
+    CalendarEngine.renderEvents('upcomingEvents', now.getFullYear(), now.getMonth());
+
+    App.init();
+  });
+
+  function saveEvent() {
+    const title = document.getElementById('evtTitle').value.trim();
+    const type  = document.getElementById('evtType').value;
+    const date  = document.getElementById('evtDate').value;
+    const time  = document.getElementById('evtTime').value;
+    const desc  = document.getElementById('evtDesc').value.trim();
+    if (!title) { Toast.error('Required', 'Please enter an event title'); return; }
+    if (!date)  { Toast.error('Required', 'Please select a date'); return; }
+
+    CalendarEngine.addEvent({ title, type, date, time, desc });
+    Modal.close('addEventModal');
+    const now = new Date();
+    CalendarEngine.renderCalendar('calendarGrid', now.getFullYear(), now.getMonth());
+    CalendarEngine.renderEvents('upcomingEvents', now.getFullYear(), now.getMonth());
+    Toast.success('Added!', title + ' added to your calendar');
+    document.getElementById('evtTitle').value = '';
+    document.getElementById('evtDesc').value = '';
+  }
+</script>
+</body>
+</html>
+

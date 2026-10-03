@@ -1,0 +1,399 @@
+/* ============================================================
+   Prime Vector LMS — Placement Module Styles
+   ============================================================ */
+
+/* ── Placement Category Grid ── */
+.placement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.placement-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.placement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.placement-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin: 0 auto 16px;
+}
+
+.placement-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+/* ── Resume Builder Grid & Editor ── */
+.resume-builder-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .resume-builder-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resume-editor {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px;
+  width: 100%;
+}
+
+.resume-editor .card {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.resume-editor .card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.resume-editor .card-header {
+  padding: 14px 20px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.resume-editor .card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.resume-editor .card-body {
+  padding: 20px;
+}
+
+/* ── Live Resume Document Preview ── */
+.resume-preview-sticky {
+  position: sticky;
+  top: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resume-paper-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-lg);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.resume-sheet {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border-radius: 4px;
+  padding: 40px 36px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  min-height: 800px;
+  line-height: 1.5;
+  font-size: 13px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+/* Accent Variable */
+:root {
+  --resume-accent: #2563EB;
+}
+
+/* Modern Template */
+.resume-sheet.template-modern {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.resume-sheet.template-modern .resume-name {
+  color: #0f172a;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 2px;
+}
+.resume-sheet.template-modern .resume-role {
+  color: var(--resume-accent);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.resume-sheet.template-modern .resume-sec-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 2px solid var(--resume-accent);
+  padding-bottom: 4px;
+  margin: 16px 0 8px;
+}
+
+/* Ivy League Classic Template */
+.resume-sheet.template-ivy {
+  font-family: 'Georgia', serif;
+}
+.resume-sheet.template-ivy .resume-name {
+  color: #111;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.resume-sheet.template-ivy .resume-role {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.resume-sheet.template-ivy .resume-contact-bar {
+  justify-content: center !important;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 8px;
+}
+.resume-sheet.template-ivy .resume-sec-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #0f172a;
+  padding-bottom: 3px;
+  margin: 16px 0 8px;
+}
+
+/* Minimalist Tech Template */
+.resume-sheet.template-minimal {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 12px;
+}
+.resume-sheet.template-minimal .resume-name {
+  color: #000;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+.resume-sheet.template-minimal .resume-role {
+  color: var(--resume-accent);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.resume-sheet.template-minimal .resume-sec-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #000;
+  text-transform: uppercase;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-left: 3px solid var(--resume-accent);
+  margin: 14px 0 8px;
+}
+
+.resume-contact-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11.5px;
+  color: #64748b;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.resume-skill-pill {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+  font-weight: 600;
+}
+
+/* ── Print / PDF Engine Styles ── */
+@media print {
+  body {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .sidebar, .inner-navbar, .page-header, .resume-editor, .resume-preview-controls, #pwa-offline-badge, #ai-assistant-widget-btn, #ai-assistant-chat-panel, .sidebar-overlay, .theme-toggle {
+    display: none !important;
+  }
+  .dashboard-layout, .main-content, .page-content, .resume-builder-grid, .resume-paper-container {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  .resume-sheet {
+    box-shadow: none !important;
+    padding: 20mm !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+  }
+}
+
+/* ── Portfolio Builder ── */
+.portfolio-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  text-align: center;
+}
+
+.portfolio-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  object-fit: cover;
+  border: 4px solid var(--primary-light);
+}
+
+.portfolio-name {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.portfolio-role {
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.portfolio-socials {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.portfolio-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.portfolio-socials a:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ── Placement Score Gauge ── */
+.score-gauge-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.score-gauge {
+  position: relative;
+  width: 250px;
+  height: 125px;
+  overflow: hidden;
+}
+
+.score-gauge svg {
+  width: 100%;
+  height: 200%;
+  transform: rotate(-180deg);
+}
+
+.score-gauge circle {
+  fill: none;
+  stroke-width: 12;
+  stroke-dasharray: 377; /* pi * r */
+  stroke-dashoffset: 377;
+}
+
+.score-gauge .bg-arc {
+  stroke: var(--border);
+  stroke-dashoffset: 0;
+}
+
+.score-gauge .progress-arc {
+  stroke: url(#score-gradient);
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.score-value {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: 16px;
+  font-weight: 600;
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificates — Acadex</title>
+  <title>Certificates — Prime Vector LMS</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
@@ -13,21 +13,102 @@
 </head>
 <body>
 <div class="dashboard-layout">
-  <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
       <span class="sidebar-brand">ACAD<span>EX</span></span>
     </div>
-    <nav class="sidebar-nav" style="padding-top:20px">
-      <a href="student.html" class="sidebar-link" data-tooltip="Dashboard"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
-      <a href="course.html" class="sidebar-link" data-tooltip="Courses"><span class="sidebar-icon"><i class="fa fa-book"></i></span><span class="sidebar-label">My Courses</span></a>
-      <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
-      <a href="attendance.html" class="sidebar-link" data-tooltip="Attendance"><span class="sidebar-icon"><i class="fa fa-calendar"></i></span><span class="sidebar-label">Attendance</span></a>
-      <a href="certificate.html" class="sidebar-link active" data-tooltip="Certificates"><span class="sidebar-icon"><i class="fa fa-certificate"></i></span><span class="sidebar-label">Certificates</span></a>
-      <a href="profile.html" class="sidebar-link" data-tooltip="Profile"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link " data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link " data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link " data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link " data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link " data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link active" data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
     </nav>
+
     <div class="sidebar-footer">
-      <button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button>
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
     </div>
   </aside>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -81,14 +162,14 @@
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:32px" id="certGrid">
         <!-- Certificate 1 -->
         <div class="certificate-card" id="cert1">
-          <div class="certificate-logo">Acadex</div>
-          <div class="certificate-title-text">Certificate of Completion</div>
-          <div class="certificate-course-name">HTML & CSS Mastery</div>
-          <div class="certificate-student">This certifies that <strong data-user-name>Student Name</strong> has successfully completed this course with distinction.</div>
+          <div class="certificate-logo" style="font-weight:800">Prime Vector Private Limited</div>
+          <div class="certificate-title-text">Certificate of Skill Mastery</div>
+          <div class="certificate-course-name">Full Stack & AI Development</div>
+          <div class="certificate-student">This certifies that <strong data-user-name>Student Name</strong> has successfully completed the Prime Vector Industry Bootcamp with distinction.</div>
           <div class="certificate-footer-row">
             <div>
-              <div class="certificate-date">Issued: October 15, 2024</div>
-              <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px">ID: LQ-2024-001</div>
+              <div class="certificate-date">Issued: October 15, 2025</div>
+              <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px">ID: PV-2026-001 | https://primevector.in/</div>
             </div>
             <div class="certificate-seal">🏆</div>
           </div>
@@ -104,14 +185,14 @@
 
         <!-- Certificate 2 -->
         <div class="certificate-card" id="cert2" style="background:linear-gradient(135deg,#064E3B,#065F46)">
-          <div class="certificate-logo">Acadex</div>
+          <div class="certificate-logo" style="font-weight:800">Prime Vector Private Limited</div>
           <div class="certificate-title-text">Certificate of Completion</div>
-          <div class="certificate-course-name">Python Basics</div>
+          <div class="certificate-course-name">Data Science & AI Analytics</div>
           <div class="certificate-student">This certifies that <strong data-user-name>Student Name</strong> has successfully completed this course.</div>
           <div class="certificate-footer-row">
             <div>
-              <div class="certificate-date">Issued: November 2, 2024</div>
-              <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px">ID: LQ-2024-042</div>
+              <div class="certificate-date">Issued: November 2, 2025</div>
+              <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px">ID: PV-2026-042 | primevector.in</div>
             </div>
             <div class="certificate-seal">🎓</div>
           </div>
@@ -159,3 +240,4 @@
 <script src="js/app.js"></script>
 </body>
 </html>
+

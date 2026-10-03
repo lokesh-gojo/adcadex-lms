@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Management — Prime Vector LMS</title>
+  <meta name="description" content="Manage your project milestones, team, GitHub link, and submissions on Prime Vector LMS.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="projectPage">
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR (student) -->
+    <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">ACAD<span>EX</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link " data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link " data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link " data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link " data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link " data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link " data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="student.html">Dashboard</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Project</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <!-- Project Hero -->
+      <div style="background:linear-gradient(135deg,#1E1B4B,#312E81,#1E1B4B);border-radius:var(--radius-xl);padding:32px;color:#fff;margin-bottom:28px;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(99,102,241,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.08) 1px,transparent 1px);background-size:40px 40px"></div>
+        <div style="position:relative;z-index:1">
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Final Year Project</div>
+          <h2 style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;margin-bottom:8px" id="projTitle">Loading...</h2>
+          <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;max-width:600px;margin-bottom:20px" id="projDesc"></p>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:0.85rem;color:rgba(255,255,255,0.7)" id="projMeta"></div>
+          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+            <a id="githubBtn" href="#" target="_blank" class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3)"><i class="fa fa-github"></i> GitHub Repository</a>
+            <button class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3)" onclick="Modal.open('submitModal')"><i class="fa fa-upload"></i> Submit Project</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#6366F1,#4F46E5)"><i class="fa fa-flag-checkered"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statMiles">—</div>
+            <div class="stat-card-label">Milestones Done</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-percent"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statProgPct">—</div>
+            <div class="stat-card-label">Overall Progress</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-users"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statTeam">—</div>
+            <div class="stat-card-label">Team Members</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#EF4444,#DC2626)"><i class="fa fa-calendar-o"></i></div>
+          <div class="stat-card-body">
+            <div class="stat-card-value" id="statDaysLeft">—</div>
+            <div class="stat-card-label">Days to Submit</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- Milestones -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title"><i class="fa fa-flag"></i> Project Milestones</div>
+          </div>
+          <div id="milestonesContainer"></div>
+        </div>
+
+        <!-- Right column -->
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <!-- Progress chart -->
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-title"><i class="fa fa-pie-chart"></i> Progress</div>
+            </div>
+            <canvas id="progressChart" height="180"></canvas>
+          </div>
+
+          <!-- GitHub -->
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-title"><i class="fa fa-github"></i> Repository</div>
+              <button class="btn btn-ghost" style="padding:6px 12px;font-size:0.8rem" onclick="Modal.open('githubModal')"><i class="fa fa-edit"></i></button>
+            </div>
+            <div id="githubBox"></div>
+          </div>
+
+          <!-- Tech Stack -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title"><i class="fa fa-code"></i> Tech Stack</div></div>
+            <div id="techStack" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div class="section-card" style="margin-bottom:24px">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-users"></i> Team Members</div>
+        </div>
+        <div id="teamContainer"></div>
+      </div>
+
+      <!-- Faculty Guide -->
+      <div class="section-card">
+        <div class="section-header"><div class="section-title"><i class="fa fa-user-circle"></i> Faculty Guide</div></div>
+        <div id="guideCard"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Submit Modal -->
+<div class="modal-overlay" id="submitModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa fa-upload"></i> Submit Final Project</div>
+      <button class="modal-close" onclick="Modal.close('submitModal')"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Project Title</label>
+        <input type="text" class="form-input" id="submitTitle" placeholder="Final project title">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Documentation Link (Google Drive / OneDrive)</label>
+        <input type="url" class="form-input" id="submitDocs" placeholder="https://drive.google.com/...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Remarks / Comments</label>
+        <textarea class="form-input" id="submitRemarks" rows="3" placeholder="Any special notes for your guide..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('submitModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitProject()"><i class="fa fa-check"></i> Submit</button>
+    </div>
+  </div>
+</div>
+
+<!-- GitHub Modal -->
+<div class="modal-overlay" id="githubModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa fa-github"></i> Update GitHub Link</div>
+      <button class="modal-close" onclick="Modal.close('githubModal')"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Repository URL</label>
+        <input type="url" class="form-input" id="githubInput" placeholder="https://github.com/username/repo">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="Modal.close('githubModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveGithub()"><i class="fa fa-save"></i> Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/project.js"></script>
+<script>
+  Theme.init();
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    const data = ProjectModule.getData();
+
+    document.getElementById('projTitle').textContent = data.title;
+    document.getElementById('projDesc').textContent = data.description;
+    document.getElementById('projMeta').innerHTML = `
+      <span><i class="fa fa-user-circle" style="margin-right:4px"></i>Guide: ${data.guide}</span>
+      <span><i class="fa fa-laptop" style="margin-right:4px"></i>${data.domain}</span>
+      <span><i class="fa fa-calendar" style="margin-right:4px"></i>${data.startDate} → ${data.endDate}</span>
+    `;
+
+    const githubBtn = document.getElementById('githubBtn');
+    if (data.githubUrl) githubBtn.href = data.githubUrl;
+
+    const prog = ProjectModule.calcProgress(data);
+    const daysLeft = Math.max(0, Math.ceil((new Date(data.endDate) - new Date()) / 86400000));
+    document.getElementById('statMiles').textContent = data.milestones.filter(m=>m.status==='done').length + '/' + data.milestones.length;
+    document.getElementById('statProgPct').textContent = prog + '%';
+    document.getElementById('statTeam').textContent = data.team.length;
+    document.getElementById('statDaysLeft').textContent = daysLeft;
+
+    ProjectModule.renderMilestones('milestonesContainer');
+    ProjectModule.renderTeam('teamContainer');
+
+    // GitHub box
+    document.getElementById('githubBox').innerHTML = data.githubUrl ? `
+      <div class="github-link-box">
+        <div class="github-link-icon"><i class="fa fa-github"></i></div>
+        <div class="github-link-url">${data.githubUrl}</div>
+        <a href="${data.githubUrl}" target="_blank" class="btn btn-ghost" style="padding:8px 12px"><i class="fa fa-external-link"></i></a>
+      </div>
+    ` : `<div class="empty-state"><div class="empty-state-icon"><i class="fa fa-github"></i></div><div class="empty-state-title">No repo linked</div><button class="btn btn-primary" onclick="Modal.open('githubModal')">Link Repository</button></div>`;
+
+    // Tech stack
+    document.getElementById('techStack').innerHTML = data.techStack.map(t =>
+      `<span class="badge" style="background:var(--primary-light);color:var(--primary);font-size:0.82rem;padding:6px 14px">${t}</span>`
+    ).join('');
+
+    // Guide
+    document.getElementById('guideCard').innerHTML = `
+      <div style="display:flex;align-items:center;gap:16px;padding:16px;background:var(--bg);border-radius:var(--radius-md)">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;font-weight:700">
+          ${data.guide.split(' ').map(w=>w[0]).join('').slice(0,2)}
+        </div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:1rem">${data.guide}</div>
+          <div style="font-size:0.85rem;color:var(--primary)">${data.guideEmail}</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:2px">Faculty Guide — ${data.domain}</div>
+        </div>
+        <a href="mailto:${data.guideEmail}" class="btn btn-primary" style="padding:10px 16px"><i class="fa fa-envelope"></i> Contact</a>
+      </div>
+    `;
+
+    // Progress chart
+    const done = data.milestones.filter(m=>m.status==='done').length;
+    const active = data.milestones.filter(m=>m.status==='active').length;
+    const pending = data.milestones.filter(m=>m.status==='pending').length;
+    const isDark = Theme.isDark();
+    new Chart(document.getElementById('progressChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Completed', 'In Progress', 'Pending'],
+        datasets: [{ data: [done, active, pending], backgroundColor: ['#10B981','#2563EB','#CBD5E1'], borderWidth: 0, hoverOffset: 4 }]
+      },
+      options: {
+        responsive: true,
+        cutout: '65%',
+        plugins: {
+          legend: { position: 'bottom', labels: { color: isDark ? '#94A3B8' : '#64748B', padding: 12, font: { size: 11 } } }
+        }
+      }
+    });
+
+    App.init();
+  });
+
+  function submitProject() {
+    Toast.success('Submitted!', 'Your project has been submitted for faculty review');
+    Modal.close('submitModal');
+  }
+
+  function saveGithub() {
+    const url = document.getElementById('githubInput').value.trim();
+    if (!url) { Toast.error('Required', 'Please enter a GitHub URL'); return; }
+    const data = ProjectModule.getData();
+    data.githubUrl = url;
+    ProjectModule.saveData(data);
+    Modal.close('githubModal');
+    Toast.success('Saved!', 'GitHub link updated');
+    location.reload();
+  }
+</script>
+</body>
+</html>
+

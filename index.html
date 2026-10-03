@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acadex — Smart Learning Platform</title>
-  <meta name="description" content="Acadex is a modern Learning Management System for students, faculty, and administrators. Manage courses, assignments, quizzes, and more.">
+  <title>Prime Vector LMS — Skill Development & Industry Learning Platform</title>
+  <meta name="description" content="Prime Vector Private Limited is a leading EdTech startup bridging academia and industry with hands-on AI, Data Science, Full Stack, IoT, and Campus Placement training.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/hero.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -19,22 +23,29 @@
 <nav class="navbar hero-nav" id="mainNavbar">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-brand">
-      <div class="logo-icon"><i class="fa fa-graduation-cap"></i></div>
-      <span class="logo-text">ACAD<span>EX</span></span>
+      <div class="logo-icon" style="background:var(--gradient-primary);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 14px rgba(79,70,229,0.4)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="logo-text" style="font-weight:800;font-family:var(--font-display);letter-spacing:-0.5px">PRIME <span style="color:var(--primary)">VECTOR</span></span>
     </a>
 
     <ul class="navbar-nav">
-      <li><a href="#about"         class="nav-link">About</a></li>
+      <li><a href="#about"         class="nav-link">About Us</a></li>
       <li><a href="#features"      class="nav-link">Features</a></li>
-      <li><a href="#courses"       class="nav-link">Courses</a></li>
-      <li><a href="#pricing"       class="nav-link">Pricing</a></li>
+      <li><a href="#courses"       class="nav-link">Bootcamps & Courses</a></li>
+      <li><a href="placement.html" class="nav-link">Placements</a></li>
+      <li><a href="#pricing"       class="nav-link">Programs</a></li>
       <li><a href="contact.html"   class="nav-link">Contact</a></li>
     </ul>
 
     <div class="navbar-actions">
       <button class="theme-toggle" title="Toggle dark mode"><i class="fa fa-moon"></i></button>
       <a href="login.html"    class="btn btn-ghost">Sign In</a>
-      <a href="register.html" class="btn btn-primary">Get Started</a>
+      <a href="register.html" class="btn btn-primary">Join LMS</a>
     </div>
 
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -45,14 +56,15 @@
 
 <!-- Mobile Nav -->
 <div class="mobile-nav" id="mobileNav">
-  <a href="#about"       class="nav-link">About</a>
-  <a href="#features"    class="nav-link">Features</a>
-  <a href="#courses"     class="nav-link">Courses</a>
-  <a href="#pricing"     class="nav-link">Pricing</a>
-  <a href="contact.html" class="nav-link">Contact</a>
+  <a href="#about"         class="nav-link">About Us</a>
+  <a href="#features"      class="nav-link">Features</a>
+  <a href="#courses"       class="nav-link">Bootcamps & Courses</a>
+  <a href="placement.html" class="nav-link">Placements</a>
+  <a href="#pricing"       class="nav-link">Programs</a>
+  <a href="contact.html"   class="nav-link">Contact</a>
   <div class="navbar-actions">
     <a href="login.html"    class="btn btn-outline">Sign In</a>
-    <a href="register.html" class="btn btn-primary">Get Started</a>
+    <a href="register.html" class="btn btn-primary">Join LMS</a>
   </div>
 </div>
 
@@ -68,74 +80,89 @@
     <div class="hero-content animate-fade-up">
       <div class="hero-tag">
         <span class="dot"></span>
-        🎓 Modern Learning Management System
+        ⚡ Prime Vector Private Limited | Official LMS Portal
       </div>
 
       <h1 class="hero-title">
-        Transform Your Learning Journey with <span class="highlight">Acadex</span>
+        Expert-led Upskilling Programs. <span class="highlight">Real-world skills.</span>
       </h1>
 
       <p class="hero-desc">
-        A modern Learning Management System designed to simplify online education with intuitive course management, interactive assessments, progress tracking, and a seamless learning experience.
+        Gain in-demand skills with industry-crafted courses. Learn anytime, anywhere, and take the next step in your career journey with Prime Vector Private Limited.
       </p>
 
       <div class="hero-actions">
         <a href="register.html" class="btn btn-accent btn-lg">
-          <i class="fa fa-rocket"></i> Get Started
+          <i class="fa fa-rocket"></i> Enroll Now
         </a>
-        <a href="course.html" class="btn btn-lg" style="background:rgba(255,255,255,0.1);color:#fff;border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px)">
-          <i class="fa fa-book"></i> Explore Courses
+        <a href="#courses" class="btn btn-lg" style="background:rgba(255,255,255,0.1);color:#fff;border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px)">
+          <i class="fa fa-book"></i> Browse Courses
+        </a>
+        <a href="#sandbox" class="btn btn-lg" style="background:rgba(14,165,233,0.2);color:#0EA5E9;border:1.5px solid rgba(14,165,233,0.4)">
+          <i class="fa fa-code"></i> Try-It-Yourself Sandbox
         </a>
       </div>
 
       <div class="hero-stats">
         <div>
-          <div class="hero-stat-value" data-counter="50000" data-suffix="+">0+</div>
+          <div class="hero-stat-value" data-counter="643" data-suffix="+">0+</div>
           <div class="hero-stat-label">Students Enrolled</div>
         </div>
         <div>
-          <div class="hero-stat-value" data-counter="1200" data-suffix="+">0+</div>
-          <div class="hero-stat-label">Courses Available</div>
+          <div class="hero-stat-value" data-counter="15" data-suffix="+">0+</div>
+          <div class="hero-stat-label">Expert Courses</div>
         </div>
         <div>
-          <div class="hero-stat-value" data-counter="98.5" data-suffix="%">0%</div>
-          <div class="hero-stat-label">Satisfaction Rate</div>
+          <div class="hero-stat-value" data-counter="98" data-suffix="%">0%</div>
+          <div class="hero-stat-label">Success Rate</div>
         </div>
       </div>
     </div>
 
     <div class="hero-visual animate-fade-in-right delay-300">
-      <div class="hero-card-main">
-        <img src="images/hero-banner.jpg" alt="LMS Dashboard" class="hero-img"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div style="display:none;height:300px;border-radius:var(--radius-lg);background:var(--gradient-primary);align-items:center;justify-content:center;margin-bottom:20px;font-size:4rem">🎓</div>
+      <div class="hero-card-main" style="border: 1px solid rgba(255,255,255,0.2); background: rgba(15,23,42,0.85); backdrop-filter: blur(16px); padding: 24px; border-radius: var(--radius-lg); color: #fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="background:var(--gradient-primary);padding:8px 12px;border-radius:8px;font-size:0.8rem;font-weight:700;color:#fff">LIVE BOOTCAMP</span>
+            <span style="font-size:0.85rem;color:var(--text-light)">AI & Full Stack Engineering</span>
+          </div>
+          <span class="badge badge-success"><i class="fa fa-circle" style="font-size:0.6rem"></i> Active</span>
+        </div>
+        
+        <div style="height:180px;border-radius:var(--radius);background:linear-gradient(135deg, rgba(79,70,229,0.3) 0%, rgba(6,182,212,0.3) 100%), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80') center/cover;display:flex;align-items:flex-end;padding:16px;margin-bottom:16px">
+          <div style="background:rgba(11,15,25,0.8);padding:10px 14px;border-radius:8px;width:100%;backdrop-filter:blur(8px)">
+            <div style="font-weight:700;font-size:0.95rem">Prime Vector Industry Capstone</div>
+            <div style="font-size:0.8rem;color:var(--text-light)">Real-world Project · Hosur Innovation Hub</div>
+          </div>
+        </div>
+
         <div class="hero-course-info">
           <div>
-            <div class="hero-course-title">Web Development Bootcamp</div>
-            <div class="hero-course-meta">Progress: 72% Complete · 48 Lessons</div>
+            <div class="hero-course-title" style="color:#fff">Full-Stack MERN & AI Agent Integration</div>
+            <div class="hero-course-meta" style="color:var(--text-light)">Module 4 of 6 · 85% Complete</div>
           </div>
-          <span class="badge badge-success">Enrolled</span>
+          <span class="badge badge-accent">Certified Track</span>
         </div>
         <div style="margin-top:14px">
-          <div class="progress">
-            <div class="progress-bar" style="width:72%"></div>
+          <div class="progress" style="background:rgba(255,255,255,0.1)">
+            <div class="progress-bar" style="width:85%;background:var(--gradient-accent)"></div>
           </div>
         </div>
       </div>
 
-      <div class="hero-floating hero-floating-1">
-        <div class="floating-icon blue"><i class="fa fa-trophy"></i></div>
+      <div class="hero-floating hero-floating-1" style="background:rgba(15,23,42,0.9);border:1px solid rgba(255,255,255,0.15)">
+        <div class="floating-icon blue"><i class="fa fa-certificate"></i></div>
         <div>
-          <div class="floating-value">4.9 ★</div>
-          <div class="floating-label">Top Rated</div>
+          <div class="floating-value" style="color:#fff">ISO 9001:2015</div>
+          <div class="floating-label">Certified EdTech</div>
         </div>
       </div>
 
-      <div class="hero-floating hero-floating-2">
-        <div class="floating-icon green"><i class="fa fa-check-circle"></i></div>
+      <div class="hero-floating hero-floating-2" style="background:rgba(15,23,42,0.9);border:1px solid rgba(255,255,255,0.15)">
+        <div class="floating-icon green"><i class="fa fa-building"></i></div>
         <div>
-          <div class="floating-value">Quiz Passed</div>
-          <div class="floating-label">Score: 92%</div>
+          <div class="floating-value" style="color:#fff">Campus Drives</div>
+          <div class="floating-label">Active Recruitment</div>
         </div>
       </div>
     </div>
@@ -150,23 +177,23 @@
     <div class="stats-inner">
       <div data-animate="animate-fade-up">
         <div class="counter-icon">👨‍🎓</div>
-        <div class="counter-value" data-counter="50000" data-suffix="+">0+</div>
-        <div class="counter-label">Active Students</div>
+        <div class="counter-value" data-counter="15000" data-suffix="+">0+</div>
+        <div class="counter-label">Trained Graduates</div>
       </div>
       <div data-animate="animate-fade-up" style="animation-delay:0.1s">
-        <div class="counter-icon">📚</div>
-        <div class="counter-value" data-counter="1200" data-suffix="+">0+</div>
-        <div class="counter-label">Courses</div>
+        <div class="counter-icon">💻</div>
+        <div class="counter-value" data-counter="45" data-suffix="+">0+</div>
+        <div class="counter-label">Industry Modules</div>
       </div>
       <div data-animate="animate-fade-up" style="animation-delay:0.2s">
-        <div class="counter-icon">👩‍🏫</div>
-        <div class="counter-value" data-counter="350" data-suffix="+">0+</div>
-        <div class="counter-label">Expert Faculty</div>
+        <div class="counter-icon">🏢</div>
+        <div class="counter-value" data-counter="120" data-suffix="+">0+</div>
+        <div class="counter-label">Placement Partners</div>
       </div>
       <div data-animate="animate-fade-up" style="animation-delay:0.3s">
         <div class="counter-icon">🏆</div>
-        <div class="counter-value" data-counter="98" data-suffix="%">0%</div>
-        <div class="counter-label">Satisfaction Rate</div>
+        <div class="counter-value" data-counter="96" data-suffix="%">0%</div>
+        <div class="counter-label">Placement Success</div>
       </div>
     </div>
   </div>
@@ -180,32 +207,37 @@
     <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center;">
       <div data-animate="animate-fade-in-left">
         <div class="section-tag" style="background:var(--primary-light); color:var(--primary); display: inline-flex; margin-bottom: 16px;">
-          <i class="fa fa-info-circle"></i> About Acadex
+          <i class="fa fa-info-circle"></i> About Prime Vector Private Limited
         </div>
         <h2 class="section-title" style="margin-bottom: 20px; font-family: var(--font-display); font-size: 2.25rem; font-weight: 800;">
-          Empowering Digital Education Beyond Boundaries
+          Building Next-Gen Tech Talent for the Global Industry
         </h2>
         <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 1.05rem; line-height: 1.75;">
-          Acadex is a professional, intelligent, and highly accessible Learning Management System (LMS). We provide a unified digital campus that bridges the gap between students, educators, and administrators, turning education into a collaborative and data-driven experience.
+          <strong>Prime Vector Private Limited</strong> (<a href="https://primevector.in/" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:600">primevector.in</a>) is a premier EdTech company headquartered in Hosur, Tamil Nadu. We specialize in skill development, industry internships, corporate training, and campus placement drives.
+        </p>
+        <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 1.00rem; line-height: 1.75;">
+          Our state-of-the-art LMS connects students, educators, and enterprise hiring teams to deliver job-ready technical mastery in AI, Data Science, Cloud, IoT, and Software Engineering.
         </p>
         <div style="background: var(--bg); padding: 24px; border-left: 4px solid var(--primary); border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-sm);">
           <h4 style="font-family: var(--font-display); font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
             🎯 Our Mission
           </h4>
           <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">
-            Empower students, educators, and institutions with an intelligent, engaging, and efficient digital learning platform that transforms education into an accessible, collaborative, and data-driven experience.
+            To transform academic learning into practical industry capability by providing high-impact skill training, real project experiences, and seamless career placements for every ambitious learner.
           </p>
         </div>
       </div>
       <div data-animate="animate-fade-in-right" class="text-center" style="position: relative;">
         <div style="position: absolute; inset: 0; background: var(--gradient-primary); filter: blur(40px); opacity: 0.15; border-radius: 50%;"></div>
-        <div style="position: relative; background: var(--gradient-primary); padding: 48px 32px; border-radius: var(--radius-lg); color: #fff; box-shadow: var(--shadow-md); text-align: left; overflow: hidden;">
-          <div style="position: absolute; top: -20px; right: -20px; font-size: 8rem; opacity: 0.1;"><i class="fa fa-graduation-cap"></i></div>
-          <h3 style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; margin-bottom: 12px;">Learn Smarter.<br>Achieve More.</h3>
-          <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 24px; line-height: 1.5;">Join a community of learners and educators worldwide building the future of classroom management.</p>
-          <div style="display: flex; gap: 16px;">
-            <a href="register.html" class="btn btn-accent btn-sm">Get Started Now</a>
-            <a href="#features" class="btn btn-sm" style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25);">Learn More</a>
+        <div style="position: relative; background: var(--gradient-hero); padding: 48px 32px; border-radius: var(--radius-lg); color: #fff; box-shadow: var(--shadow-md); text-align: left; overflow: hidden; border: 1px solid rgba(255,255,255,0.15)">
+          <div style="position: absolute; top: -20px; right: -20px; font-size: 8rem; opacity: 0.1;"><i class="fa fa-laptop"></i></div>
+          <h3 style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; margin-bottom: 12px; color:#fff">Empower Your Career.<br>Accelerate Growth.</h3>
+          <p style="opacity: 0.85; font-size: 0.9rem; margin-bottom: 24px; line-height: 1.6; color:var(--text-light)">
+            Join thousands of engineering and technology students stepping directly from college classrooms into top corporate tech positions.
+          </p>
+          <div style="display: flex; gap: 16px; flex-wrap:wrap">
+            <a href="register.html" class="btn btn-accent btn-sm"><i class="fa fa-user-plus"></i> Join Student Portal</a>
+            <a href="placement.html" class="btn btn-sm" style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25);"><i class="fa fa-briefcase"></i> View Placements</a>
           </div>
         </div>
       </div>
@@ -219,42 +251,100 @@
 <section class="features-section" id="features">
   <div class="container">
     <div class="section-header">
-      <div class="section-tag"><i class="fa fa-star"></i> Key Features</div>
-      <h2 class="section-title">Everything You Need to Learn Smarter</h2>
-      <p class="section-subtitle">A complete ecosystem for modern education — built for students, instructors, and administrators.</p>
+      <div class="section-tag"><i class="fa fa-star"></i> LMS Capabilities</div>
+      <h2 class="section-title">Prime Vector LMS Feature Suite</h2>
+      <p class="section-subtitle">A comprehensive digital learning ecosystem for students, trainers, and enterprise hiring partners.</p>
     </div>
 
     <div class="features-grid">
       <div class="feature-card" data-animate="animate-fade-up">
-        <div class="feature-icon"><i class="fa fa-play-circle"></i></div>
-        <h3 class="feature-title">Interactive Courses</h3>
-        <p class="feature-desc">Access video lectures, reading materials, and hands-on labs. Track your progress in real-time with smart progress bars.</p>
+        <div class="feature-icon"><i class="fa fa-code"></i></div>
+        <h3 class="feature-title">Live Code Compiler</h3>
+        <p class="feature-desc">Practice Python, C++, Java, and JavaScript right inside your browser with automated unit tests and performance scoring.</p>
       </div>
       <div class="feature-card" data-animate="animate-fade-up" style="animation-delay:0.1s">
-        <div class="feature-icon"><i class="fa fa-question-circle"></i></div>
-        <h3 class="feature-title">Smart Quiz Engine</h3>
-        <p class="feature-desc">Timed MCQ quizzes with instant feedback, detailed explanations, and result analytics to identify weak areas.</p>
+        <div class="feature-icon"><i class="fa fa-briefcase"></i></div>
+        <h3 class="feature-title">Placement & Internship Portal</h3>
+        <p class="feature-desc">Direct campus hiring drives, mock interviews, AI resume builders, and real-time interview invitation tracking.</p>
       </div>
       <div class="feature-card" data-animate="animate-fade-up" style="animation-delay:0.2s">
-        <div class="feature-icon"><i class="fa fa-calendar-check-o"></i></div>
-        <h3 class="feature-title">Attendance Tracking</h3>
-        <p class="feature-desc">Visual calendar-based attendance system. Get alerts when your attendance falls below the required threshold.</p>
+        <div class="feature-icon"><i class="fa fa-flask"></i></div>
+        <h3 class="feature-title">Hands-on Industry Labs</h3>
+        <p class="feature-desc">Work on enterprise-grade capstone projects, cloud deployments, IoT hardware simulations, and machine learning models.</p>
       </div>
       <div class="feature-card" data-animate="animate-fade-up" style="animation-delay:0.3s">
         <div class="feature-icon"><i class="fa fa-bar-chart"></i></div>
-        <h3 class="feature-title">Analytics Dashboard</h3>
-        <p class="feature-desc">Beautiful charts and insights for all roles. Monitor performance, identify trends, and make data-driven decisions.</p>
+        <h3 class="feature-title">Skill Assessment Engine</h3>
+        <p class="feature-desc">Proctored quizzes, timed coding tests, skill radar charts, and personalized learning path recommendations.</p>
       </div>
       <div class="feature-card" data-animate="animate-fade-up" style="animation-delay:0.4s">
         <div class="feature-icon"><i class="fa fa-certificate"></i></div>
-        <h3 class="feature-title">Certificates</h3>
-        <p class="feature-desc">Earn printable, shareable certificates upon course completion. Showcase your achievements professionally.</p>
+        <h3 class="feature-title">Verified Certifications</h3>
+        <p class="feature-desc">Earn cryptographically verified, QR-coded Prime Vector certificates upon successfully completing bootcamps and projects.</p>
       </div>
       <div class="feature-card" data-animate="animate-fade-up" style="animation-delay:0.5s">
         <div class="feature-icon"><i class="fa fa-users"></i></div>
-        <h3 class="feature-title">Multi-Role System</h3>
-        <p class="feature-desc">Separate tailored dashboards for Students, Faculty, and Admins. Everyone gets exactly what they need.</p>
+        <h3 class="feature-title">Multi-Role Governance</h3>
+        <p class="feature-desc">Customized dashboards and permission controls for Students, Mentors, Institution Heads, and HR Recruiters.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     W3SCHOOLS INTERACTIVE CODE SANDBOX
+══════════════════════════════════════════════════════════════ -->
+<section class="sandbox-section" id="sandbox" style="padding: 80px 0; background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header text-center" style="margin-bottom: 40px;">
+      <div class="section-tag" style="background: rgba(0, 242, 254, 0.15); color: #00F2FE;"><i class="fa fa-code"></i> Learn by Doing</div>
+      <h2 class="section-title">W3Schools-Style Interactive Code Sandbox</h2>
+      <p class="section-subtitle">Practice HTML, CSS, JavaScript, Python, C++, and SQL directly in your browser with real-time feedback.</p>
+    </div>
+
+    <!-- Sandbox Container -->
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow: hidden;">
+      <!-- Language Header Bar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); padding: 12px 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="filter-btn active" data-w3-lang="html" onclick="selectW3Language('html')"><i class="fa fa-html5"></i> HTML / CSS</button>
+          <button class="filter-btn" data-w3-lang="js" onclick="selectW3Language('js')"><i class="fa fa-code"></i> JavaScript</button>
+          <button class="filter-btn" data-w3-lang="python" onclick="selectW3Language('python')"><i class="fa fa-terminal"></i> Python</button>
+          <button class="filter-btn" data-w3-lang="cpp" onclick="selectW3Language('cpp')"><i class="fa fa-cogs"></i> C++</button>
+          <button class="filter-btn" data-w3-lang="sql" onclick="selectW3Language('sql')"><i class="fa fa-database"></i> SQL Query</button>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-sm btn-ghost" onclick="resetW3Code()"><i class="fa fa-refresh"></i> Reset</button>
+          <button class="btn btn-sm btn-primary" onclick="runW3Code()"><i class="fa fa-play"></i> Run Code (Try It Yourself)</button>
+        </div>
+      </div>
+
+      <!-- Split Screen Editor Window -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; background: #0f172a;" class="w3-sandbox-split">
+        <!-- Left: Code Input -->
+        <div style="display: flex; flex-direction: column; border-right: 1px solid #1e293b;">
+          <div style="background: #1e293b; color: #94a3b8; padding: 8px 16px; font-size: 0.8rem; font-weight: 600; font-family: var(--font-mono); display: flex; justify-content: space-between; align-items: center;">
+            <span>SOURCE CODE (Editable)</span>
+            <span style="color: #00F2FE;">Try-It-Yourself Editor</span>
+          </div>
+          <textarea id="w3CodeInput" style="flex: 1; width: 100%; height: 100%; background: #0f172a; color: #f8fafc; border: none; padding: 16px; font-family: var(--font-mono), monospace; font-size: 0.9rem; line-height: 1.6; resize: none; outline: none; tab-size: 2;"></textarea>
+        </div>
+
+        <!-- Right: Output Area -->
+        <div style="display: flex; flex-direction: column; background: #020617; position: relative;">
+          <div style="background: #1e293b; color: #94a3b8; padding: 8px 16px; font-size: 0.8rem; font-weight: 600; font-family: var(--font-mono); display: flex; justify-content: space-between; align-items: center;">
+            <span>LIVE RESULT OUTPUT</span>
+            <span style="color: #38BDF8;"><i class="fa fa-circle" style="color: #22c55e; font-size: 0.6rem;"></i> Live Sandbox</span>
+          </div>
+          
+          <iframe id="w3OutputFrame" style="width: 100%; height: 100%; border: none; background: #ffffff; flex: 1;"></iframe>
+          <pre id="w3ConsoleOutput" style="display: none; width: 100%; height: 100%; margin: 0; padding: 20px; background: #090d16; color: #00F2FE; font-family: var(--font-mono), monospace; font-size: 0.88rem; line-height: 1.6; overflow-y: auto; flex: 1; white-space: pre-wrap;"></pre>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 24px;">
+      <a href="compiler.html" class="btn btn-outline"><i class="fa fa-laptop"></i> Open Fullscreen Code Compiler & Practice Labs</a>
     </div>
   </div>
 </section>
@@ -265,105 +355,116 @@
 <section class="courses-section" id="courses">
   <div class="container">
     <div class="section-header">
-      <div class="section-tag"><i class="fa fa-book"></i> Courses</div>
-      <h2 class="section-title">Explore Popular Courses</h2>
-      <p class="section-subtitle">Hundreds of expertly crafted courses across technology, design, business, and more.</p>
+      <div class="section-tag"><i class="fa fa-book"></i> Featured Programs</div>
+      <h2 class="section-title">Industry-Designed Skill Bootcamps</h2>
+      <p class="section-subtitle">Hands-on programs crafted by lead engineers and industry experts at Prime Vector.</p>
     </div>
 
     <div class="courses-filter">
-      <button class="filter-btn active" data-cat="all">All</button>
-      <button class="filter-btn" data-cat="web">Web Dev</button>
-      <button class="filter-btn" data-cat="ai">AI & ML</button>
-      <button class="filter-btn" data-cat="design">Design</button>
+      <button class="filter-btn active" data-cat="all">All Bootcamps</button>
+      <button class="filter-btn" data-cat="ai">AI & Machine Learning</button>
+      <button class="filter-btn" data-cat="web">Full Stack Web</button>
       <button class="filter-btn" data-cat="data">Data Science</button>
-      <button class="filter-btn" data-cat="mobile">Mobile</button>
+      <button class="filter-btn" data-cat="iot">IoT & Robotics</button>
+      <button class="filter-btn" data-cat="cloud">Cloud & Cyber Security</button>
     </div>
 
     <div class="courses-grid" id="homeCourseGrid">
-      <!-- Populated by JS or static -->
+      <!-- Course 1: AI & ML -->
       <div class="course-card" data-animate="animate-fade-up">
         <div class="course-thumbnail">
-          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80" alt="Web Dev" onerror="this.parentElement.style.background='var(--gradient-primary)';this.style.display='none'">
-          <span class="course-category-tag">Web Dev</span>
-          <div class="course-bookmark"><i class="fa fa-bookmark-o"></i></div>
-        </div>
-        <div class="course-body">
-          <h4 class="course-title">Complete Web Development Bootcamp 2024</h4>
-          <div class="course-instructor">
-            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-size:0.7rem;font-weight:700;width:28px;height:28px;display:flex;align-items:center;justify-content:center">A</div>
-            <span class="course-instructor-name">Dr. Angela Yu</span>
-          </div>
-          <div class="course-rating">
-            <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
-            <span class="rating-value">4.8</span>
-            <span class="rating-count">(12.4k)</span>
-          </div>
-          <div class="course-meta">
-            <div class="course-meta-item"><i class="fa fa-clock-o"></i> 48h</div>
-            <div class="course-meta-item"><i class="fa fa-file-video-o"></i> 180 lessons</div>
-            <div class="course-meta-item"><i class="fa fa-signal"></i> Beginner</div>
-          </div>
-          <div class="course-footer">
-            <span class="course-price">₹ 1,299</span>
-            <a href="course-details.html?id=1" class="btn btn-primary btn-sm">Enroll</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="course-card" data-animate="animate-fade-up" style="animation-delay:0.15s">
-        <div class="course-thumbnail">
-          <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=500&q=80" alt="ML" onerror="this.parentElement.style.background='var(--gradient-accent)';this.style.display='none'">
+          <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=500&q=80" alt="AI & ML" onerror="this.parentElement.style.background='var(--gradient-primary)';this.style.display='none'">
           <span class="course-category-tag">AI & ML</span>
           <div class="course-bookmark"><i class="fa fa-bookmark-o"></i></div>
         </div>
         <div class="course-body">
-          <h4 class="course-title">Machine Learning A-Z: From Zero to Expert</h4>
+          <h4 class="course-title">Artificial Intelligence & Deep Learning</h4>
           <div class="course-instructor">
-            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-accent);color:#fff;font-size:0.7rem;font-weight:700;width:28px;height:28px;display:flex;align-items:center;justify-content:center">H</div>
-            <span class="course-instructor-name">Prof. Hadelin</span>
-          </div>
-          <div class="course-rating">
-            <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
-            <span class="rating-value">4.7</span>
-            <span class="rating-count">(9.8k)</span>
-          </div>
-          <div class="course-meta">
-            <div class="course-meta-item"><i class="fa fa-clock-o"></i> 36h</div>
-            <div class="course-meta-item"><i class="fa fa-file-video-o"></i> 120 lessons</div>
-            <div class="course-meta-item"><i class="fa fa-signal"></i> Intermediate</div>
-          </div>
-          <div class="course-footer">
-            <span class="course-price">₹ 1,499</span>
-            <a href="course-details.html?id=2" class="btn btn-primary btn-sm">Enroll</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="course-card" data-animate="animate-fade-up" style="animation-delay:0.3s">
-        <div class="course-thumbnail">
-          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&q=80" alt="UX" onerror="this.parentElement.style.background='linear-gradient(135deg,#F59E0B,#EF4444)';this.style.display='none'">
-          <span class="course-category-tag">Design</span>
-          <div class="course-bookmark"><i class="fa fa-bookmark-o"></i></div>
-        </div>
-        <div class="course-body">
-          <h4 class="course-title">UI/UX Design Masterclass: Figma to Prototype</h4>
-          <div class="course-instructor">
-            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;font-size:0.7rem;font-weight:700;width:28px;height:28px;display:flex;align-items:center;justify-content:center">S</div>
-            <span class="course-instructor-name">Dr. Sarah Kim</span>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-size:0.7rem;font-weight:700;width:28px;height:28px;display:flex;align-items:center;justify-content:center">PV</div>
+            <span class="course-instructor-name">Prime Vector AI Research Team</span>
           </div>
           <div class="course-rating">
             <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
             <span class="rating-value">4.9</span>
-            <span class="rating-count">(15.2k)</span>
+            <span class="rating-count">(3.4k students)</span>
           </div>
           <div class="course-meta">
-            <div class="course-meta-item"><i class="fa fa-clock-o"></i> 24h</div>
-            <div class="course-meta-item"><i class="fa fa-file-video-o"></i> 95 lessons</div>
+            <div class="course-meta-item"><i class="fa fa-clock-o"></i> 60 hours</div>
+            <div class="course-meta-item"><i class="fa fa-laptop"></i> 12 Capstone Projects</div>
+            <div class="course-meta-item"><i class="fa fa-signal"></i> Advanced</div>
+          </div>
+          <div class="course-footer">
+            <div>
+              <span style="color:var(--text-muted); text-decoration:line-through; font-size:0.85rem;">₹ 13,000</span>
+              <span class="course-price" style="color:var(--danger); font-weight:800; font-size:1.2rem; display:block;">₹ 6,550</span>
+            </div>
+            <a href="course-details.html?id=1" class="btn btn-primary btn-sm">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 2: Full Stack -->
+      <div class="course-card" data-animate="animate-fade-up" style="animation-delay:0.15s">
+        <div class="course-thumbnail">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80" alt="Full Stack" onerror="this.parentElement.style.background='var(--gradient-accent)';this.style.display='none'">
+          <span class="course-category-tag">Full Stack</span>
+          <div class="course-bookmark"><i class="fa fa-bookmark-o"></i></div>
+        </div>
+        <div class="course-body">
+          <h4 class="course-title">Full Stack Web Development</h4>
+          <div class="course-instructor">
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-accent);color:#fff;font-size:0.7rem;font-weight:700;width:28px;height:28px;display:flex;align-items:center;justify-content:center">PV</div>
+            <span class="course-instructor-name">Prime Vector Web Mentors</span>
+          </div>
+          <div class="course-rating">
+            <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
+            <span class="rating-value">4.8</span>
+            <span class="rating-count">(4.8k students)</span>
+          </div>
+          <div class="course-meta">
+            <div class="course-meta-item"><i class="fa fa-clock-o"></i> 75 hours</div>
+            <div class="course-meta-item"><i class="fa fa-code"></i> Live Labs</div>
+            <div class="course-meta-item"><i class="fa fa-signal"></i> Intermediate</div>
+          </div>
+          <div class="course-footer">
+            <div>
+              <span style="color:var(--text-muted); text-decoration:line-through; font-size:0.85rem;">₹ 13,000</span>
+              <span class="course-price" style="color:var(--danger); font-weight:800; font-size:1.2rem; display:block;">₹ 6,550</span>
+            </div>
+            <a href="course-details.html?id=2" class="btn btn-primary btn-sm">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 3: Data Science -->
+      <div class="course-card" data-animate="animate-fade-up" style="animation-delay:0.3s">
+        <div class="course-thumbnail">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80" alt="Data Science" onerror="this.parentElement.style.background='linear-gradient(135deg,#0EA5E9,#6366F1)';this.style.display='none'">
+          <span class="course-category-tag">Data Science</span>
+          <div class="course-bookmark"><i class="fa fa-bookmark-o"></i></div>
+        </div>
+        <div class="course-body">
+          <h4 class="course-title">Data Science & Analytics Toolkit</h4>
+          <div class="course-instructor">
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:linear-gradient(135deg,#0EA5E9,#6366F1);color:#fff;font-size:0.7rem;font-weight:700;width:28px;height:28px;display:flex;align-items:center;justify-content:center">PV</div>
+            <span class="course-instructor-name">Prime Vector Data Lab</span>
+          </div>
+          <div class="course-rating">
+            <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+            <span class="rating-value">4.9</span>
+            <span class="rating-count">(2.9k students)</span>
+          </div>
+          <div class="course-meta">
+            <div class="course-meta-item"><i class="fa fa-clock-o"></i> 50 hours</div>
+            <div class="course-meta-item"><i class="fa fa-bar-chart"></i> Real Datasets</div>
             <div class="course-meta-item"><i class="fa fa-signal"></i> All Levels</div>
           </div>
           <div class="course-footer">
-            <span class="course-price free">FREE</span>
-            <a href="course-details.html?id=3" class="btn btn-accent btn-sm">Enroll</a>
+            <div>
+              <span style="color:var(--text-muted); text-decoration:line-through; font-size:0.85rem;">₹ 13,000</span>
+              <span class="course-price" style="color:var(--danger); font-weight:800; font-size:1.2rem; display:block;">₹ 6,550</span>
+            </div>
+            <a href="course-details.html?id=3" class="btn btn-accent btn-sm">Enroll Now</a>
           </div>
         </div>
       </div>
@@ -371,52 +472,52 @@
 
     <div class="text-center" style="margin-top:40px">
       <a href="course.html" class="btn btn-outline btn-lg">
-        <i class="fa fa-th-large"></i> View All Courses
+        <i class="fa fa-th-large"></i> Explore All Prime Vector Courses
       </a>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     WHY CHOOSE US
-══════════════════════════════════════════════════════════════ -->
+     WHY CHOOSE PRIME VECTOR
+═══════════════════════════════════════════════════════════ -->
 <section class="why-section" id="why">
   <div class="container">
     <div class="why-inner">
       <div data-animate="animate-fade-in-left">
-        <div class="section-tag" style="background:rgba(37,99,235,0.2);color:#93C5FD">
-          <i class="fa fa-check-circle"></i> Why Acadex
+        <div class="section-tag" style="background:rgba(79,70,229,0.2);color:#A5B4FC">
+          <i class="fa fa-check-circle"></i> Why Prime Vector
         </div>
-        <h2 class="why-title section-title" style="margin-bottom:14px">Learn Smarter, Not Just Harder</h2>
-        <p class="why-desc" style="margin-bottom:32px">Our intelligent platform adapts to your learning style and helps you achieve mastery faster with evidence-based techniques.</p>
+        <h2 class="why-title section-title" style="margin-bottom:14px">Accelerate Your Transition from Campus to Corporate</h2>
+        <p class="why-desc" style="margin-bottom:32px">Prime Vector Private Limited equips university graduates with practical skills, resume-worthy projects, and direct access to top tech recruiters.</p>
 
         <div class="why-list">
           <div class="why-item">
-            <div class="why-icon"><i class="fa fa-bolt"></i></div>
+            <div class="why-icon"><i class="fa fa-rocket"></i></div>
             <div>
-              <div class="why-item-title">Adaptive Learning Paths</div>
-              <p class="why-item-desc">AI-powered recommendations guide you through the most effective learning sequence for your goals.</p>
+              <div class="why-item-title">Industry-Aligned Curriculum</div>
+              <p class="why-item-desc">Designed alongside industry leads to reflect current tech stack demands in AI, Cloud, and Full Stack Development.</p>
             </div>
           </div>
           <div class="why-item">
-            <div class="why-icon"><i class="fa fa-bar-chart"></i></div>
+            <div class="why-icon"><i class="fa fa-briefcase"></i></div>
             <div>
-              <div class="why-item-title">Real-Time Progress Analytics</div>
-              <p class="why-item-desc">Detailed dashboards show your performance metrics, helping you focus on areas that need improvement.</p>
+              <div class="why-item-title">Placement Assistance & Campus Drives</div>
+              <p class="why-item-desc">Organized campus hiring drives, mock technical interviews, and partner university placement support.</p>
             </div>
           </div>
           <div class="why-item">
-            <div class="why-icon"><i class="fa fa-shield"></i></div>
+            <div class="why-icon"><i class="fa fa-certificate"></i></div>
             <div>
-              <div class="why-item-title">Industry-Recognized Certificates</div>
-              <p class="why-item-desc">Earn certificates upon completion that are recognized by top employers in the industry.</p>
+              <div class="why-item-title">ISO Certified Training</div>
+              <p class="why-item-desc">Recognized skill completion certificates backed by Prime Vector Private Limited.</p>
             </div>
           </div>
           <div class="why-item">
-            <div class="why-icon"><i class="fa fa-globe"></i></div>
+            <div class="why-icon"><i class="fa fa-map-marker"></i></div>
             <div>
-              <div class="why-item-title">Learn Anywhere, Anytime</div>
-              <p class="why-item-desc">Fully responsive platform works on any device. Download content for offline access on mobile.</p>
+              <div class="why-item-title">Hosur Innovation Center</div>
+              <p class="why-item-desc">Access to physical and virtual lab environments, workshops, and mentor guidance in Hosur, Tamil Nadu.</p>
             </div>
           </div>
         </div>
@@ -424,13 +525,13 @@
 
       <div class="why-image-area" data-animate="animate-fade-in-right">
         <div class="why-img-card">
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&q=80" alt="Students learning" onerror="this.parentElement.style.background='var(--gradient-primary)';this.style.height='250px';this.remove()">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&q=80" alt="Students in Prime Vector workshop" onerror="this.parentElement.style.background='var(--gradient-primary)';this.style.height='250px';this.remove()">
         </div>
         <div class="why-img-card">
-          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80" alt="Online course" onerror="this.parentElement.style.background='var(--gradient-accent)';this.style.height='150px';this.remove()">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80" alt="Tech mentor guiding students" onerror="this.parentElement.style.background='var(--gradient-accent)';this.style.height='150px';this.remove()">
         </div>
         <div class="why-img-card">
-          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80" alt="Study group" onerror="this.parentElement.style.background='linear-gradient(135deg,#8B5CF6,#EC4899)';this.style.height='150px';this.remove()">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80" alt="Campus recruitment drive" onerror="this.parentElement.style.background='linear-gradient(135deg,#6366F1,#0EA5E9)';this.style.height='150px';this.remove()">
         </div>
       </div>
     </div>
@@ -438,176 +539,83 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     TESTIMONIALS
+     LIVE INDUSTRY TECH TRENDS & KNOWLEDGE FEED (ONLINE DATA)
 ══════════════════════════════════════════════════════════════ -->
-<section class="testimonials-section" id="testimonials">
+<section style="padding:80px 0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)" id="live-tech-feed">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag"><i class="fa fa-heart"></i> Testimonials</div>
-      <h2 class="section-title">Loved by Thousands of Learners</h2>
-      <p class="section-subtitle">Hear from students and educators who transformed their learning with Acadex.</p>
+    <div class="section-header" style="text-align:center;margin-bottom:40px">
+      <div class="section-tag" style="background:rgba(16,185,129,0.15);color:var(--success)">
+        <i class="fa fa-wifi"></i> Live Industry Knowledge Feed
+      </div>
+      <h2 class="section-title">Trending Engineering & Developer Insights</h2>
+      <p class="section-subtitle">Real-time technology tutorials and software engineering articles directly syndicated from the developer web.</p>
     </div>
 
-    <div class="testimonials-grid">
-      <div class="testimonial-card" data-animate="animate-fade-up">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">Acadex completely changed how I approach studying. The progress tracking and quiz system helped me ace my exams with confidence. Best LMS I've ever used!</p>
-        <div class="testimonial-author">
-          <div class="avatar-placeholder avatar" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700">A</div>
-          <div>
-            <div class="testimonial-name">Alex Johnson</div>
-            <div class="testimonial-role">CS Student</div>
-          </div>
-          <div class="stars" style="margin-left:auto"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-        </div>
-      </div>
-      <div class="testimonial-card" data-animate="animate-fade-up" style="animation-delay:0.15s">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">As a faculty member, Acadex makes course management a breeze. I can create quizzes, track student performance, and grade assignments all in one place.</p>
-        <div class="testimonial-author">
-          <div class="avatar-placeholder avatar" style="border-radius:50%;background:var(--gradient-accent);color:#fff;font-weight:700">S</div>
-          <div>
-            <div class="testimonial-name">Dr. Sarah Chen</div>
-            <div class="testimonial-role">Professor, Computer Science</div>
-          </div>
-          <div class="stars" style="margin-left:auto"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-        </div>
-      </div>
-      <div class="testimonial-card" data-animate="animate-fade-up" style="animation-delay:0.3s">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">The admin panel gives me complete control over the institution. User management, department analytics, and reports are incredibly well designed.</p>
-        <div class="testimonial-author">
-          <div class="avatar-placeholder avatar" style="border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-weight:700">M</div>
-          <div>
-            <div class="testimonial-name">Marcus Thompson</div>
-            <div class="testimonial-role">Academic Director</div>
-          </div>
-          <div class="stars" style="margin-left:auto"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
-        </div>
+    <div id="indexTechFeedGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:24px">
+      <div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--text-muted)">
+        <i class="fa fa-spinner fa-spin" style="font-size:1.8rem"></i>
+        <p style="margin-top:8px">Loading live articles from developer web...</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     PRICING
+     PROGRAMS & PRICING
 ══════════════════════════════════════════════════════════════ -->
 <section class="pricing-section" id="pricing">
   <div class="container">
     <div class="section-header">
-      <div class="section-tag"><i class="fa fa-tag"></i> Pricing</div>
-      <h2 class="section-title">Simple, Transparent Pricing</h2>
-      <p class="section-subtitle">Choose the plan that fits your institution. No hidden fees, cancel anytime.</p>
+      <div class="section-tag"><i class="fa fa-tag"></i> Learning Paths</div>
+      <h2 class="section-title">Transparent Student & College Plans</h2>
+      <p class="section-subtitle">Tailored options for individual learners, academic departments, and partner colleges.</p>
     </div>
 
     <div class="pricing-grid">
-      <!-- Free -->
+      <!-- Student Track -->
       <div class="pricing-card" data-animate="animate-fade-up">
-        <div class="pricing-plan">Free</div>
-        <div class="pricing-price"><sup>₹</sup>0<span>/mo</span></div>
-        <p class="pricing-desc">Perfect for individual students getting started with online learning.</p>
+        <div class="pricing-plan">Student Track</div>
+        <div class="pricing-price"><sup>₹</sup>0<span> / Starter</span></div>
+        <p class="pricing-desc">Access foundation modules, coding sandbox, and open skill challenges.</p>
         <div class="pricing-features">
-          <div class="pricing-feature"><i class="fa fa-check"></i> 5 Course Access</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Basic Quizzes</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Progress Tracking</div>
-          <div class="pricing-feature disabled"><i class="fa fa-times"></i> Certificates</div>
-          <div class="pricing-feature disabled"><i class="fa fa-times"></i> Priority Support</div>
-          <div class="pricing-feature disabled"><i class="fa fa-times"></i> Analytics</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Starter Tech Courses</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Basic Code Compiler</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> LMS Dashboard</div>
+          <div class="pricing-feature disabled"><i class="fa fa-times"></i> Verified Certificate</div>
+          <div class="pricing-feature disabled"><i class="fa fa-times"></i> Placement Drive Access</div>
         </div>
-        <a href="register.html" class="btn btn-outline" style="width:100%;justify-content:center">Get Started Free</a>
+        <a href="register.html" class="btn btn-outline" style="width:100%;justify-content:center">Join Starter Plan</a>
       </div>
 
-      <!-- Pro (Popular) -->
+      <!-- Professional Bootcamp (Popular) -->
       <div class="pricing-card popular" data-animate="animate-fade-up" style="animation-delay:0.15s">
         <div class="pricing-badge">Most Popular</div>
-        <div class="pricing-plan">Pro</div>
-        <div class="pricing-price"><sup>₹</sup>499<span>/mo</span></div>
-        <p class="pricing-desc">For serious learners who want full access to all features and courses.</p>
+        <div class="pricing-plan">Pro Skill Bootcamp</div>
+        <div class="pricing-price"><sup>₹</sup>1,499<span> / course</span></div>
+        <p class="pricing-desc">Full access to intensive bootcamps, capstone projects, and placement assistance.</p>
         <div class="pricing-features">
-          <div class="pricing-feature"><i class="fa fa-check"></i> Unlimited Courses</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> All Quiz Types</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Progress Tracking</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Certificates</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Priority Support</div>
-          <div class="pricing-feature disabled"><i class="fa fa-times"></i> Custom Analytics</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Full Bootcamp Access</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Proctored Assessments & Quizzes</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Verified Digital Certificate</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Resume Builder & Mock Interviews</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Campus Placement Invites</div>
         </div>
-        <a href="register.html" class="btn btn-primary" style="width:100%;justify-content:center">Start Pro Trial</a>
+        <a href="register.html" class="btn btn-primary" style="width:100%;justify-content:center">Enroll in Pro Bootcamp</a>
       </div>
 
-      <!-- Enterprise -->
+      <!-- Enterprise & Institutional -->
       <div class="pricing-card" data-animate="animate-fade-up" style="animation-delay:0.3s">
-        <div class="pricing-plan">Enterprise</div>
-        <div class="pricing-price"><sup>₹</sup>1999<span>/mo</span></div>
-        <p class="pricing-desc">For institutions needing full control with multi-role management and analytics.</p>
+        <div class="pricing-plan">Institutional Partnership</div>
+        <div class="pricing-price">Custom<span> / Campus</span></div>
+        <p class="pricing-desc">For colleges and universities seeking structured student skill development drives.</p>
         <div class="pricing-features">
-          <div class="pricing-feature"><i class="fa fa-check"></i> Unlimited Everything</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> All Quiz Types</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Advanced Analytics</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Certificates</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> 24/7 Dedicated Support</div>
-          <div class="pricing-feature"><i class="fa fa-check"></i> Custom Branding</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Unlimited Campus Seats</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Dedicated Mentors & Trainers</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Custom Curriculum Alignment</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> On-Campus Recruitment Drives</div>
+          <div class="pricing-feature"><i class="fa fa-check"></i> Executive Analytics Suite</div>
         </div>
-        <a href="contact.html" class="btn btn-outline" style="width:100%;justify-content:center">Contact Sales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     FAQ
-══════════════════════════════════════════════════════════════ -->
-<section class="faq-section" id="faq">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag"><i class="fa fa-question-circle"></i> FAQ</div>
-      <h2 class="section-title">Frequently Asked Questions</h2>
-    </div>
-
-    <div class="faq-inner accordion-single">
-      <div class="accordion-item">
-        <div class="accordion-header">
-          How do I get started with Acadex?
-          <i class="fa fa-chevron-down icon"></i>
-        </div>
-        <div class="accordion-body">
-          <div class="accordion-content">Simply click "Get Started Free" and create your account. Choose your role (Student, Faculty, or Admin), and you'll be redirected to your personalized dashboard within seconds.</div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <div class="accordion-header">
-          Can I switch between roles?
-          <i class="fa fa-chevron-down icon"></i>
-        </div>
-        <div class="accordion-body">
-          <div class="accordion-content">Each account has one role assigned during registration. If you need a different role, you can create a separate account. Contact support to upgrade or change your role.</div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <div class="accordion-header">
-          Are the certificates globally recognized?
-          <i class="fa fa-chevron-down icon"></i>
-        </div>
-        <div class="accordion-body">
-          <div class="accordion-content">Acadex certificates are issued upon course completion and recognized by our industry partners. Each certificate has a unique verification code. Pro and Enterprise plans include certificates.</div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <div class="accordion-header">
-          Is there a mobile app?
-          <i class="fa fa-chevron-down icon"></i>
-        </div>
-        <div class="accordion-body">
-          <div class="accordion-content">Acadex is fully responsive and works perfectly on all mobile browsers. A dedicated native app is coming soon for iOS and Android.</div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <div class="accordion-header">
-          Can I try the platform before subscribing?
-          <i class="fa fa-chevron-down icon"></i>
-        </div>
-        <div class="accordion-body">
-          <div class="accordion-content">Yes! Our Free plan lets you explore the platform with access to 5 courses. Pro plan includes a 14-day free trial with no credit card required.</div>
-        </div>
+        <a href="contact.html" class="btn btn-outline" style="width:100%;justify-content:center">Contact Campus Team</a>
       </div>
     </div>
   </div>
@@ -619,14 +627,14 @@
 <section class="cta-section">
   <div class="container">
     <div class="cta-inner">
-      <h2 class="cta-title">Ready to Transform Your Learning?</h2>
-      <p class="cta-desc">Join 50,000+ students and educators already using Acadex to achieve their goals.</p>
+      <h2 class="cta-title">Ready to Elevate Your Skill Vector?</h2>
+      <p class="cta-desc">Join Prime Vector Private Limited today and kickstart your journey toward top tech career opportunities.</p>
       <div class="cta-actions">
         <a href="register.html" class="btn btn-lg" style="background:#fff;color:var(--primary);box-shadow:0 4px 15px rgba(0,0,0,0.2)">
-          <i class="fa fa-rocket"></i> Start for Free
+          <i class="fa fa-rocket"></i> Get Started Now
         </a>
         <a href="login.html" class="btn btn-lg" style="background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.4)">
-          <i class="fa fa-sign-in"></i> Sign In
+          <i class="fa fa-sign-in"></i> Sign In to LMS
         </a>
       </div>
     </div>
@@ -641,61 +649,112 @@
     <div class="footer-top">
       <div>
         <a href="index.html" class="footer-brand">
-          <div class="logo-icon"><i class="fa fa-graduation-cap"></i></div>
-          <span class="logo-text" style="color:#fff">ACAD<span>EX</span></span>
+          <div class="logo-icon" style="background:var(--gradient-primary);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="logo-text" style="color:#fff">PRIME <span style="color:var(--accent)">VECTOR</span></span>
         </a>
-        <p class="footer-desc">A next-generation Learning Management System built for modern education. Smart, fast, and beautifully designed.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn" title="Twitter"><i class="fa fa-twitter"></i></a>
+        <p class="footer-desc" style="margin-top:12px">
+          <strong>Prime Vector Private Limited</strong> — EdTech Startup committed to skill development, practical technology education, and career placements.
+        </p>
+        <p class="footer-desc" style="font-size:0.85rem;color:var(--text-light)">
+          📍 No. 74/22f11, 3rd Floor, HV Arcade, Bagalur Road, Hosur, Krishnagiri, Tamil Nadu - 635109
+        </p>
+        <p class="footer-desc" style="font-size:0.85rem;color:var(--text-light)">
+          📞 +91 8220082896 | ✉️ primevectorprivatelimited@gmail.com
+        </p>
+        <div class="footer-socials" style="margin-top:16px">
+          <a href="https://primevector.in/" target="_blank" class="social-btn" title="Official Website"><i class="fa fa-globe"></i></a>
           <a href="#" class="social-btn" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
           <a href="#" class="social-btn" title="YouTube"><i class="fa fa-youtube"></i></a>
-          <a href="#" class="social-btn" title="GitHub"><i class="fa fa-github"></i></a>
           <a href="#" class="social-btn" title="Instagram"><i class="fa fa-instagram"></i></a>
         </div>
       </div>
 
       <div>
-        <div class="footer-col-title">Platform</div>
+        <div class="footer-col-title">LMS Navigation</div>
         <div class="footer-links">
-          <a href="course.html"      class="footer-link">Browse Courses</a>
-          <a href="register.html"    class="footer-link">Get Started</a>
-          <a href="#pricing"         class="footer-link">Pricing</a>
-          <a href="#faq"             class="footer-link">FAQ</a>
+          <a href="course.html"      class="footer-link">Skill Bootcamps</a>
+          <a href="placement.html"   class="footer-link">Placement Tracker</a>
+          <a href="compiler.html"    class="footer-link">Code Compiler</a>
+          <a href="certificate.html" class="footer-link">Certificates</a>
         </div>
       </div>
 
       <div>
-        <div class="footer-col-title">For Users</div>
+        <div class="footer-col-title">User Portals</div>
         <div class="footer-links">
           <a href="student.html"  class="footer-link">Student Portal</a>
-          <a href="faculty.html"  class="footer-link">Faculty Portal</a>
-          <a href="admin.html"    class="footer-link">Admin Panel</a>
-          <a href="profile.html"  class="footer-link">My Profile</a>
+          <a href="faculty.html"  class="footer-link">Faculty / Trainer</a>
+          <a href="admin.html"    class="footer-link">Admin Dashboard</a>
+          <a href="hr.html"       class="footer-link">HR & Recruiter</a>
         </div>
       </div>
 
       <div>
-        <div class="footer-col-title">Company</div>
+        <div class="footer-col-title">Prime Vector</div>
         <div class="footer-links">
+          <a href="https://primevector.in/" target="_blank" class="footer-link">Official Website</a>
           <a href="contact.html" class="footer-link">Contact Us</a>
-          <a href="#"            class="footer-link">Privacy Policy</a>
-          <a href="#"            class="footer-link">Terms of Service</a>
-          <a href="#"            class="footer-link">Careers</a>
+          <a href="contact.html#address" class="footer-link">Hosur Center</a>
+          <a href="register.html" class="footer-link">Partner Registration</a>
         </div>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 Acadex. All Rights Reserved.</p>
+      <p class="footer-copy">© 2026 Prime Vector Private Limited (<a href="https://primevector.in/" target="_blank" style="color:var(--text-light);text-decoration:underline">primevector.in</a>). All Rights Reserved.</p>
       <div class="footer-bottom-links">
-        <a href="#" class="footer-bottom-link">Privacy</a>
-        <a href="#" class="footer-bottom-link">Terms</a>
-        <a href="#" class="footer-bottom-link">Cookies</a>
+        <a href="#" class="footer-bottom-link">Privacy Policy</a>
+        <a href="#" class="footer-bottom-link">Terms of Service</a>
+        <a href="contact.html" class="footer-bottom-link">Support</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script src="js/app.js"></script>
+<script src="js/online-data.js"></script>
+<script src="js/w3-sandbox.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.getElementById('indexTechFeedGrid');
+  if (!container || !window.OnlineData) return;
+
+  try {
+    const articles = await OnlineData.fetchTechNews({ limit: 6 });
+    container.innerHTML = articles.map(a => `
+      <div class="card" style="border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);display:flex;flex-direction:column;justify-content:space-between;transition:var(--transition)" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div>
+          <div style="height:160px;position:relative;overflow:hidden">
+            <img src="${a.coverImage}" alt="${a.title}" style="width:100%;height:100%;object-fit:cover" onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80'">
+            <span style="position:absolute;bottom:8px;left:8px;background:rgba(15,23,42,0.85);color:#fff;padding:2px 8px;border-radius:4px;font-size:0.7rem;font-weight:600">${a.readingTime}</span>
+          </div>
+          <div style="padding:20px">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+              ${(a.tags || []).slice(0, 3).map(t => `<span style="font-size:0.7rem;background:var(--primary-light);color:var(--primary);padding:2px 6px;border-radius:4px;font-weight:600">#${t}</span>`).join('')}
+            </div>
+            <h4 style="font-size:1rem;font-weight:700;margin:0 0 8px;color:var(--text);line-height:1.4">${a.title}</h4>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${a.description}</p>
+          </div>
+        </div>
+        <div style="padding:16px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg)">
+          <span style="font-size:0.8rem;color:var(--text-muted)">By ${a.author}</span>
+          <a href="${a.url}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="font-size:0.8rem">
+            Read Article <i class="fa fa-external-link" style="font-size:0.7rem"></i>
+          </a>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    console.warn('Index news feed load error:', e);
+  }
+});
+</script>
 </body>
 </html>
+

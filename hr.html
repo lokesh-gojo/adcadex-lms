@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter & HR Portal — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="hrDashboard">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#EC4899,#F59E0B)" data-user-avatar>💼</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Jane Recruiter</div>
+        <div class="sidebar-user-role">Recruiter (TechCorp)</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Recruitment</div>
+        <a href="hr.html" class="sidebar-link active" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">HR Dashboard</span>
+        </a>
+        <a href="#talentSearch" class="sidebar-link" data-tooltip="Search Candidates">
+          <span class="sidebar-icon"><i class="fa fa-search"></i></span>
+          <span class="sidebar-label">Search Candidates</span>
+        </a>
+        <a href="#jobPosting" class="sidebar-link" data-tooltip="Post Job">
+          <span class="sidebar-icon"><i class="fa fa-pencil-square-o"></i></span>
+          <span class="sidebar-label">Post New Job</span>
+        </a>
+        <a href="#interviewScheduler" class="sidebar-link" data-tooltip="Interviews">
+          <span class="sidebar-icon"><i class="fa fa-calendar"></i></span>
+          <span class="sidebar-label">Interviews</span>
+        </a>
+        <a href="#offersManagement" class="sidebar-link" data-tooltip="Offers">
+          <span class="sidebar-icon"><i class="fa fa-envelope-open-o"></i></span>
+          <span class="sidebar-label">Offer Manager</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Company Profile</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>HR Portal</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <button class="notif-btn" title="Notifications"><i class="fa fa-bell"></i><span class="notif-badge">3</span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header flex-between">
+        <div>
+          <h1 class="page-title">Recruiter Dashboard 💼</h1>
+          <p class="page-subtitle">Post jobs, search verified students, and schedule recruitment interviews.</p>
+        </div>
+        <button class="btn btn-primary" onclick="location.hash='#jobPosting'"><i class="fa fa-plus"></i> Post a Job</button>
+      </div>
+
+      <!-- Key Recruitment Stats -->
+      <div class="stats-grid" style="margin-bottom:24px">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa fa-briefcase"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="hrActiveJobs">3</div>
+            <div class="stat-label">Active Job Openings</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon teal"><i class="fa fa-users"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="hrTotalInvites">12</div>
+            <div class="stat-label">Invited Candidates</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fa fa-calendar"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Interviews Scheduled</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fa fa-check-circle"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="hrOffersAccepted">2</div>
+            <div class="stat-label">Offers Accepted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funnel Chart & Recent Hires -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-bar-chart" style="color:var(--primary)"></i> Recruitment Funnel Analytics</span>
+          </div>
+          <div class="card-body">
+            <canvas id="recruitmentFunnelChart" height="240"></canvas>
+          </div>
+        </div>
+
+        <div class="card" id="jobPosting">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-pencil-square-o" style="color:var(--accent)"></i> Post New Job Drive</span>
+          </div>
+          <div class="card-body">
+            <form id="postJobForm" style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div>
+                  <label class="form-label">Job Title</label>
+                  <input type="text" class="form-control" id="jobTitle" placeholder="e.g. Software Engineer" required>
+                </div>
+                <div>
+                  <label class="form-label">Compensation Package (LPA)</label>
+                  <input type="text" class="form-control" id="jobLpa" placeholder="e.g. 12 LPA" required>
+                </div>
+              </div>
+              <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div>
+                  <label class="form-label">Eligible Min CGPA</label>
+                  <input type="number" step="0.1" min="1" max="10" class="form-control" id="jobGpa" value="7.0" required>
+                </div>
+                <div>
+                  <label class="form-label">Target Department</label>
+                  <select class="form-control" id="jobDept">
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Design">Design</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Required Skills (Comma separated)</label>
+                <input type="text" class="form-control" id="jobSkills" placeholder="JavaScript, Node.js, SQL" required>
+              </div>
+              <button type="submit" class="btn btn-primary" style="justify-content:center"><i class="fa fa-bullhorn"></i> Launch Recruitment Drive</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Talent Search Section -->
+      <div class="card" id="talentSearch" style="margin-bottom:24px">
+        <div class="card-header flex-between">
+          <span class="card-title"><i class="fa fa-users" style="color:var(--primary)"></i> Advanced Student Talent Finder</span>
+          <div class="flex gap-8">
+            <button class="btn btn-ghost btn-sm" data-export="csv" data-export-target="#talentSearchTable"><i class="fa fa-file-excel-o"></i> Export Selected</button>
+          </div>
+        </div>
+        <div class="card-body" style="border-bottom:1px solid var(--border)">
+          <!-- Filters row -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px">
+            <div class="form-group">
+              <label class="form-label" style="font-size:0.75rem">Keyword Search</label>
+              <input type="text" class="form-control" id="filterKeyword" placeholder="Search name/skills...">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:0.75rem">Min CGPA</label>
+              <input type="number" step="0.5" min="5" max="10" class="form-control" id="filterGpa" value="6.0">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:0.75rem">Min Resume Score</label>
+              <input type="number" min="50" max="100" class="form-control" id="filterResume" value="60">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:0.75rem">Department</label>
+              <select class="form-control" id="filterDept">
+                <option value="All">All Departments</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Design">Design</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="table" id="talentSearchTable">
+            <thead>
+              <tr>
+                <th>Student Candidate</th>
+                <th>CGPA / Academic Score</th>
+                <th>Resume ATS Score</th>
+                <th>Strong Skill Set Tags</th>
+                <th>Placement Readiness</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="talentTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- Interview Scheduler Panel -->
+        <div class="card" id="interviewScheduler">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-calendar-check-o" style="color:var(--warning)"></i> Scheduled Recruiter Interviews</span>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Date & Time</th>
+                  <th>Interview Type</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="interviewsTableBody">
+                <tr>
+                  <td class="font-semi">Emily Davis</td>
+                  <td>July 18, 2026 - 11:00 AM</td>
+                  <td>Technical (Coding Round)</td>
+                  <td><span class="badge badge-primary">Scheduled</span></td>
+                </tr>
+                <tr>
+                  <td class="font-semi">Priya Sharma</td>
+                  <td>July 19, 2026 - 03:00 PM</td>
+                  <td>System Design Review</td>
+                  <td><span class="badge badge-primary">Scheduled</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Offers Management -->
+        <div class="card" id="offersManagement">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-envelope-open-o" style="color:var(--primary)"></i> Active Employment Offer Tracking</span>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Designation Offered</th>
+                  <th>Compensation</th>
+                  <th>Acceptance Status</th>
+                </tr>
+              </thead>
+              <tbody id="offersTableBody">
+                <tr>
+                  <td class="font-semi">Alex Johnson</td>
+                  <td>Full Stack Intern</td>
+                  <td>10 LPA</td>
+                  <td><span class="badge badge-success">Accepted</span></td>
+                </tr>
+                <tr>
+                  <td class="font-semi">Emily Davis</td>
+                  <td>Associate Developer</td>
+                  <td>14 LPA</td>
+                  <td><span class="badge badge-warning">Offered</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Scheduling Modal -->
+<div class="modal-overlay" id="scheduleModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <h3 class="modal-title">Schedule Interview</h3>
+      <button class="modal-close" onclick="Modal.close('scheduleModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="scheduleInterviewForm" onsubmit="event.preventDefault(); submitScheduleInterview();" style="display:flex;flex-direction:column;gap:12px">
+        <input type="hidden" id="schedStudentName">
+        <div class="form-group">
+          <label class="form-label">Candidate Name</label>
+          <input type="text" class="form-control" id="schedDisplayStudent" readonly>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Interview Date & Time</label>
+          <input type="datetime-local" class="form-control" id="schedDateTime" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Interview Type</label>
+          <select class="form-control" id="schedType">
+            <option value="Technical Interview">Technical Interview</option>
+            <option value="System Design">System Design Round</option>
+            <option value="HR & Culture Fit">HR & Culture Fit</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center">Submit Invite</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/hr.js"></script>
+</body>
+</html>
+

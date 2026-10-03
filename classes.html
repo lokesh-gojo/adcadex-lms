@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes — — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="classesPage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">ACAD<span>EX</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link " data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link " data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link " data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link " data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link active" data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link " data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link " data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume-builder.html" class="sidebar-link " data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link " data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+        <a href="placement-tracker.html" class="sidebar-link " data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link " data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link " data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link " data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link " data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Inner Navbar -->
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <button class="notif-btn" data-dropdown-toggle title="Notifications">
+            <i class="fa fa-bell"></i>
+            <span class="notif-badge">3</span>
+          </button>
+          <div class="dropdown-menu notif-dropdown" style="min-width:320px">
+            <div class="notif-dropdown-header">
+              <span class="notif-dropdown-title">Notifications</span>
+              <span class="notif-mark-all">Mark all read</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--primary-light);color:var(--primary)"><i class="fa fa-book"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">New lesson added to Web Development</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--danger-light);color:var(--danger)"><i class="fa fa-clock-o"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Assignment due in 2 days: Build REST API</div>
+                <div class="notif-time">4 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-avatar" style="background:var(--success-light);color:var(--success)"><i class="fa fa-check"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Quiz graded: JavaScript Fundamentals — 88%</div>
+                <div class="notif-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Student</span>
+              <span class="user-role">student</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <div class="page-header">
+        <h1 class="page-title">Live & Recorded Classes</h1>
+        <p class="page-subtitle">Join upcoming live sessions or watch recorded lectures.</p>
+      </div>
+
+      <!-- Live Classes Section -->
+      <div class="placement-panel">
+        <div class="panel-header">
+          <div class="panel-title"><i class="fa fa-video-camera text-danger"></i> Upcoming Live Classes</div>
+        </div>
+        <div class="class-list" id="liveClassesList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Recorded Classes Section -->
+      <div class="placement-panel">
+        <div class="panel-header">
+          <div class="panel-title"><i class="fa fa-play-circle text-primary"></i> Recorded Classes</div>
+          <div class="search-bar" style="width: 250px;">
+            <i class="fa fa-search"></i>
+            <input type="text" id="recordingsSearch" placeholder="Search recordings..." oninput="filterRecordings()">
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+          <!-- Video Player -->
+          <div>
+            <div class="video-player" style="position:relative;width:100%;height:380px;background:#0F172A;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border)">
+              <!-- Dynamic Iframe Embed Container -->
+              <iframe id="mainLectureIframe" style="width:100%;height:100%;border:none;display:none" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              <div class="video-overlay" id="videoOverlay" style="position:absolute;inset:0;background:linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80') center/cover;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;z-index:2">
+                <button class="play-btn" onclick="playCurrentVideo()" style="width:68px;height:68px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(37,99,235,0.6);transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                  <i class="fa fa-play" style="margin-left:4px"></i>
+                </button>
+                <div style="margin-top:16px;font-weight:700;font-size:1.1rem;letter-spacing:-0.3px" id="overlayTitle">System Design & Cloud Architecture</div>
+                <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:4px">Click to Stream HD Lecture</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: start; flex-wrap:wrap; gap:12px">
+              <div>
+                <h3 id="currentPlayerTitle" style="font-family:var(--font-display);font-size:1.2rem;margin:0 0 4px">System Design & Cloud Architecture</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem;" id="currentPlayerMeta">Instructor: Dr. Sarah Chen &nbsp;|&nbsp; 1h 24m &nbsp;|&nbsp; Streaming via YouTube Tech Cloud</p>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button class="btn btn-outline btn-sm" onclick="toggleBookmarkClass()"><i class="fa fa-bookmark-o"></i> Save</button>
+                <button class="btn btn-primary btn-sm" onclick="markCompleted()"><i class="fa fa-check"></i> Mark Completed</button>
+              </div>
+            </div>
+
+            <!-- Lecture Key Takeaways Panel -->
+            <div class="card" style="margin-top:18px;padding:16px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg)">
+              <h4 style="font-size:0.9rem;margin:0 0 8px;font-weight:700;display:flex;align-items:center;gap:6px">
+                <i class="fa fa-lightbulb-o text-warning"></i> Key Lecture Takeaways & Exam Points
+              </h4>
+              <ul id="lectureNotesList" style="margin:0;padding-left:20px;font-size:0.85rem;color:var(--text-muted);line-height:1.6">
+                <li>Distributed architectures use load balancing to prevent single points of failure.</li>
+                <li>Stateless microservices allow rapid auto-scaling in cloud environments.</li>
+                <li>Multi-tier database indexing dramatically reduces query latency.</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Playlist -->
+          <div>
+            <div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase">Course Video Library (Live Streamable)</div>
+            <div class="class-list" id="recordedClassesList" style="max-height: 520px; overflow-y: auto;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/online-data.js"></script>
+<script src="js/classes.js"></script>
+</body>
+</html>

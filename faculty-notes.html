@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Notes — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="faculty-notesPage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:var(--gradient-accent)" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Faculty</div>
+        <div class="sidebar-user-role">faculty</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+            <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="faculty.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="Upload Course">
+          <span class="sidebar-icon"><i class="fa fa-upload"></i></span>
+          <span class="sidebar-label">Upload Course</span>
+        </a>
+        <a href="faculty-notes.html" class="sidebar-link active" data-tooltip="Review Notes">
+          <span class="sidebar-icon"><i class="fa fa-file-text"></i></span>
+          <span class="sidebar-label">Review Notes</span>
+        </a>
+        <a href="faculty-classes.html" class="sidebar-link" data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="faculty-assignments.html" class="sidebar-link" data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge" id="pendingGradesBadge">2</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link" data-tooltip="Create Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Create Quiz</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Reports</div>
+        <a href="attendance.html" class="sidebar-link" data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tooltip="Results">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Results</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Faculty Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <button class="notif-btn" title="Notifications"><i class="fa fa-bell"></i><span class="notif-badge">2</span></button>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Faculty</span>
+              <span class="user-role">faculty</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+        <div class="page-content">
+      <div class="page-header flex-between">
+        <div>
+          <h1 class="page-title">Review Student Notes</h1>
+          <p class="page-subtitle">Approve, reject, and add feedback to notes submitted by students.</p>
+        </div>
+      </div>
+
+      <div class="filters-row" style="margin-bottom: 24px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="filter-btn active" data-filter="pending">Pending Review</button>
+          <button class="filter-btn" data-filter="approved">Approved</button>
+          <button class="filter-btn" data-filter="rejected">Rejected</button>
+        </div>
+        <select class="form-control" style="width:200px">
+          <option>All Courses</option>
+          <option>Data Structures</option>
+          <option>Web Development</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table" style="width:100%; text-align:left; border-collapse:collapse;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);">
+                <th style="padding:16px;">Student</th>
+                <th style="padding:16px;">Course</th>
+                <th style="padding:16px;">Topic</th>
+                <th style="padding:16px;">Date Submitted</th>
+                <th style="padding:16px;">File</th>
+                <th style="padding:16px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:16px;">
+                  <div style="font-weight:600;">Alex Johnson</div>
+                  <div style="font-size:0.85rem; color:var(--text-muted);">CS-101</div>
+                </td>
+                <td style="padding:16px;">Web Development</td>
+                <td style="padding:16px;">React Hooks</td>
+                <td style="padding:16px;">Oct 12, 2024</td>
+                <td style="padding:16px;">
+                  <a href="#" class="btn btn-ghost btn-sm" style="color:var(--primary);"><i class="fa fa-download"></i> notes.pdf</a>
+                </td>
+                <td style="padding:16px; display:flex; gap:8px;">
+                  <button class="btn btn-success btn-sm" onclick="alert('Notes Approved')"><i class="fa fa-check"></i></button>
+                  <button class="btn btn-danger btn-sm" onclick="alert('Notes Rejected')"><i class="fa fa-times"></i></button>
+                  <button class="btn btn-outline btn-sm" onclick="prompt('Add feedback for Alex:')"><i class="fa fa-comment"></i></button>
+                </td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:16px;">
+                  <div style="font-weight:600;">Maria Garcia</div>
+                  <div style="font-size:0.85rem; color:var(--text-muted);">CS-102</div>
+                </td>
+                <td style="padding:16px;">Data Structures</td>
+                <td style="padding:16px;">Binary Trees</td>
+                <td style="padding:16px;">Oct 11, 2024</td>
+                <td style="padding:16px;">
+                  <a href="#" class="btn btn-ghost btn-sm" style="color:var(--primary);"><i class="fa fa-download"></i> trees.docx</a>
+                </td>
+                <td style="padding:16px; display:flex; gap:8px;">
+                  <button class="btn btn-success btn-sm" onclick="alert('Notes Approved')"><i class="fa fa-check"></i></button>
+                  <button class="btn btn-danger btn-sm" onclick="alert('Notes Rejected')"><i class="fa fa-times"></i></button>
+                  <button class="btn btn-outline btn-sm" onclick="prompt('Add feedback for Maria:')"><i class="fa fa-comment"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/faculty.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const pending = document.getElementById('pendingCount');
+    if (pending) {
+      setTimeout(() => {
+        const cnt = document.querySelectorAll('#submissionsTable tr').length;
+        pending.textContent = 'Recent submissions loaded';
+      }, 1000);
+    }
+  });
+</script>
+</body>
+</html>
+

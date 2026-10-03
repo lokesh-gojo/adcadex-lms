@@ -1,5 +1,5 @@
 /* ============================================================
-   Acadex LMS — admin.js
+   Prime Vector LMS — admin.js
    ============================================================ */
 
 let adminData = {
@@ -51,10 +51,15 @@ function renderUsersTable(filter = '') {
       <td><span class="badge badge-${roleColor(u.role)}">${u.role}</span></td>
       <td>${u.department || 'N/A'}</td>
       <td>${Format.date(u.joined || new Date())}</td>
-      <td><span class="badge badge-success">Active</span></td>
+      <td><span class="badge badge-${lifecycleColor(u.lifecycleStatus || 'Active')}">${u.lifecycleStatus || 'Active'}</span></td>
       <td>
         <div class="table-actions">
           <button class="action-btn edit" title="Edit" onclick="openEditUserModal(${u.id})"><i class="fa fa-pencil"></i></button>
+          ${u.role === 'student' ? `<button class="action-btn" style="color:var(--info)" title="Extend Duration" onclick="alert('Duration Extended')"><i class="fa fa-clock-o"></i></button>` : ''}
+          ${(u.lifecycleStatus === 'Archived') 
+             ? `<button class="action-btn" style="color:var(--success)" title="Restore" onclick="alert('Student Restored')"><i class="fa fa-undo"></i></button>`
+             : `<button class="action-btn" style="color:var(--warning)" title="Archive" onclick="alert('Student Archived')"><i class="fa fa-archive"></i></button>`
+          }
           <button class="action-btn delete" title="Delete" onclick="deleteUser(${u.id})"><i class="fa fa-trash"></i></button>
         </div>
       </td>
@@ -63,10 +68,23 @@ function renderUsersTable(filter = '') {
 }
 
 function roleColor(role) {
-  return { student: 'primary', faculty: 'accent', admin: 'purple' }[role] || 'gray';
+  if (role === 'admin') return 'danger';
+  if (role === 'faculty') return 'primary';
+  return 'accent';
 }
 
-// ── Render Departments Table ───────────────────────────────────
+function lifecycleColor(status) {
+  switch (status) {
+    case 'Active': return 'success';
+    case 'In Progress': return 'primary';
+    case 'Completed': return 'accent';
+    case 'Expired': return 'danger';
+    case 'Archived': return 'muted';
+    default: return 'success';
+  }
+}
+
+// ── Render Departments ─────────────────────────────────────────
 function renderDepartmentsTable() {
   const tbody = document.getElementById('deptTableBody');
   if (!tbody) return;
@@ -310,12 +328,26 @@ function initAdminDashboard() {
   if (!Auth.requireAuth()) return;
 
   const user = Auth.getUser();
-  if (user.role !== 'admin') {
+  if (user && user.role !== 'admin') {
     window.location.href = `${user.role}.html`;
     return;
   }
 
-  adminData.users = Store.get('users', []);
+  let users = Store.get('users', []);
+  if (!users || !users.length) {
+    users = [
+      { id: 1, name: 'Alex Johnson',   email: 'student@demo.com', password: 'demo123', role: 'student', joined: '2024-09-01', department: 'Computer Science & AI', lifecycleStatus: 'Active' },
+      { id: 2, name: 'Dr. Sarah Chen', email: 'faculty@demo.com', password: 'demo123', role: 'faculty', joined: '2023-01-15', department: 'Full Stack & Cloud', lifecycleStatus: 'Active' },
+      { id: 3, name: 'Admin User',     email: 'admin@demo.com',   password: 'demo123', role: 'admin',   joined: '2022-06-01', department: 'Executive Governance', lifecycleStatus: 'Active' },
+      { id: 4, name: 'Priya Sharma',   email: 'priya@demo.com',   password: 'demo123', role: 'student', joined: '2024-10-12', department: 'Data Science', lifecycleStatus: 'Active' },
+      { id: 5, name: 'Rahul Kumar',    email: 'rahul@demo.com',   password: 'demo123', role: 'student', joined: '2024-11-05', department: 'Cybersecurity', lifecycleStatus: 'In Progress' },
+      { id: 6, name: 'Prof. Drucker',  email: 'drucker@demo.com', password: 'demo123', role: 'faculty', joined: '2023-04-20', department: 'IoT & Robotics', lifecycleStatus: 'Active' },
+      { id: 7, name: 'Ananya Roy',     email: 'ananya@demo.com',  password: 'demo123', role: 'student', joined: '2025-01-10', department: 'Full Stack Web', lifecycleStatus: 'Completed' }
+    ];
+    Store.set('users', users);
+  }
+
+  adminData.users = users;
 
   const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
@@ -334,6 +366,36 @@ function initAdminDashboard() {
   renderRevenueChart();
   renderDeptPieChart();
   initAdminSearch();
+  initRealTimeStreamInAdmin();
+}
+
+function initRealTimeStreamInAdmin() {
+  if (typeof RealTimeEngine === 'undefined') return;
+  const container = document.getElementById('realtimeStreamList');
+  if (!container) return;
+
+  const renderStream = () => {
+    const events = RealTimeEngine.events;
+    container.innerHTML = events.slice(0, 6).map(ev => `
+      <div style="display:flex; align-items:flex-start; gap:10px; padding:8px 12px; background:var(--bg); border-radius:var(--radius); border:1px solid var(--border); transition:var(--transition);">
+        <div style="width:28px; height:28px; border-radius:50%; background:${ev.color}22; color:${ev.color}; display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; margin-top:2px;">
+          <i class="fa ${ev.icon}"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:0.82rem; font-weight:600; color:var(--text); line-height:1.4;">${ev.text}</div>
+          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">${RealTimeEngine.formatRelativeTime(ev.timestamp)}</div>
+        </div>
+      </div>
+    `).join('');
+  };
+
+  RealTimeEngine.subscribe((latestEvent, metrics) => {
+    renderStream();
+    const totalUsersEl = document.getElementById('adminTotalUsers');
+    if (totalUsersEl) {
+      totalUsersEl.innerHTML = `${metrics.activeUsers} <span style="font-size:0.75rem; font-weight:500; color:var(--success); display:block; margin-top:2px;"><i class="fa fa-circle" style="font-size:0.6rem"></i> Active Live</span>`;
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', initAdminDashboard);

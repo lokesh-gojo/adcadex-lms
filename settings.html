@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings — Acadex</title>
+  <title>Settings — Prime Vector LMS</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/sidebar.css">
@@ -13,18 +13,29 @@
 </head>
 <body>
 <div class="dashboard-layout">
-  <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
       <span class="sidebar-brand">ACAD<span>EX</span></span>
     </div>
-    <nav class="sidebar-nav" style="padding-top:20px">
-      <a href="student.html" class="sidebar-link" data-tooltip="Dashboard"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
-      <a href="profile.html" class="sidebar-link" data-tooltip="Profile"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
-      <a href="settings.html" class="sidebar-link active" data-tooltip="Settings"><span class="sidebar-icon"><i class="fa fa-cog"></i></span><span class="sidebar-label">Settings</span></a>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav" id="dynamicSidebarNav">
+      <!-- Dynamically populated via buildDynamicSidebar -->
     </nav>
+
     <div class="sidebar-footer">
-      <button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button>
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
     </div>
   </aside>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -33,7 +44,7 @@
     <header class="inner-navbar" id="innerNavbar">
       <div class="inner-navbar-left">
         <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
-        <div class="breadcrumb"><a href="student.html">Dashboard</a><span class="breadcrumb-sep">/</span><span>Settings</span></div>
+        <div class="breadcrumb"><a href="student.html" id="breadcrumbHome">Dashboard</a><span class="breadcrumb-sep">/</span><span>Settings</span></div>
       </div>
       <div class="inner-navbar-right">
         <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
@@ -95,25 +106,71 @@
             <div class="card-header"><span class="card-title">Notifications</span></div>
             <div class="card-body">
               <div style="display:flex;flex-direction:column;gap:0">
-                ${[
-                  ['email-notify','Email Notifications', 'Receive notifications via email'],
-                  ['push-notify','Push Notifications', 'Browser push notifications'],
-                  ['assign-notify','Assignment Reminders', 'Get reminded about due assignments'],
-                  ['quiz-notify','Quiz Alerts', 'Notifications for upcoming quizzes'],
-                  ['grade-notify','Grade Updates', 'When your assignments are graded'],
-                  ['news-notify','Course Updates', 'New content in enrolled courses']
-                ].map(([id, title, desc]) => `
-                  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
-                    <div>
-                      <div class="font-semi">${title}</div>
-                      <div class="text-sm text-muted">${desc}</div>
-                    </div>
-                    <label class="toggle">
-                      <input type="checkbox" id="${id}" checked>
-                      <span class="toggle-slider"></span>
-                    </label>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
+                  <div>
+                    <div class="font-semi">Email Notifications</div>
+                    <div class="text-sm text-muted">Receive notifications via email</div>
                   </div>
-                `).join('')}
+                  <label class="toggle">
+                    <input type="checkbox" id="email-notify" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
+                  <div>
+                    <div class="font-semi">Push Notifications</div>
+                    <div class="text-sm text-muted">Browser push notifications</div>
+                  </div>
+                  <label class="toggle">
+                    <input type="checkbox" id="push-notify" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
+                  <div>
+                    <div class="font-semi">Assignment Reminders</div>
+                    <div class="text-sm text-muted">Get reminded about due assignments</div>
+                  </div>
+                  <label class="toggle">
+                    <input type="checkbox" id="assign-notify" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
+                  <div>
+                    <div class="font-semi">Quiz Alerts</div>
+                    <div class="text-sm text-muted">Notifications for upcoming quizzes</div>
+                  </div>
+                  <label class="toggle">
+                    <input type="checkbox" id="quiz-notify" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
+                  <div>
+                    <div class="font-semi">Grade Updates</div>
+                    <div class="text-sm text-muted">When your assignments are graded</div>
+                  </div>
+                  <label class="toggle">
+                    <input type="checkbox" id="grade-notify" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;">
+                  <div>
+                    <div class="font-semi">Course Updates</div>
+                    <div class="text-sm text-muted">New content in enrolled courses</div>
+                  </div>
+                  <label class="toggle">
+                    <input type="checkbox" id="news-notify" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -232,20 +289,175 @@
 function showSettingsSection(id, el) {
   document.querySelectorAll('.settings-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.settings-nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('section-' + id).classList.add('active');
-  el.classList.add('active');
+  const target = document.getElementById('section-' + id);
+  if (target) target.classList.add('active');
+  if (el) el.classList.add('active');
 }
 
 function setAccent(color) {
   document.documentElement.style.setProperty('--primary', color);
-  Toast.success('Accent Updated!', 'Color theme changed');
+  if (typeof Toast !== 'undefined') {
+    Toast.success('Accent Updated!', 'Color theme changed');
+  }
+}
+
+function buildDynamicSidebar(role) {
+  const navContainer = document.getElementById('dynamicSidebarNav');
+  if (!navContainer) return;
+
+  const roleNavMap = {
+    faculty: [
+      { group: 'Instruction', links: [
+        { label: 'Faculty Dashboard', url: 'faculty.html', icon: 'fa-th-large' },
+        { label: 'Classes & Courses', url: 'faculty-classes.html', icon: 'fa-book' },
+        { label: 'Assignments', url: 'faculty-assignments.html', icon: 'fa-tasks' },
+        { label: 'Quizzes & Tests', url: 'faculty-quiz.html', icon: 'fa-question-circle' },
+        { label: 'Faculty Notes', url: 'faculty-notes.html', icon: 'fa-sticky-note-o' }
+      ]},
+      { group: 'Evaluation', links: [
+        { label: 'Class Reports', url: 'class-reports.html', icon: 'fa-bar-chart' },
+        { label: 'Certificates', url: 'certificate.html', icon: 'fa-certificate' },
+        { label: 'Discussion Forum', url: 'forum.html', icon: 'fa-comments' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user' },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog', active: true }
+      ]}
+    ],
+    hr: [
+      { group: 'Talent Acquisition', links: [
+        { label: 'HR Talent Portal', url: 'hr.html', icon: 'fa-users' },
+        { label: 'Campus Drives', url: 'placement.html', icon: 'fa-briefcase' },
+        { label: 'Resume Builder', url: 'resume-builder.html', icon: 'fa-id-card' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user' },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog', active: true }
+      ]}
+    ],
+    placement: [
+      { group: 'Placements', links: [
+        { label: 'Placement Drives', url: 'placement.html', icon: 'fa-briefcase' },
+        { label: 'Placement Tracker', url: 'placement-tracker.html', icon: 'fa-bullseye' },
+        { label: 'Student Resumes', url: 'resume-builder.html', icon: 'fa-id-card' },
+        { label: 'Certificates', url: 'certificate.html', icon: 'fa-certificate' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user' },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog', active: true }
+      ]}
+    ],
+    admin: [
+      { group: 'Administration', links: [
+        { label: 'Admin Dashboard', url: 'admin.html', icon: 'fa-th-large' },
+        { label: 'Analytics', url: 'admin-analytics.html', icon: 'fa-line-chart' },
+        { label: 'Departments', url: 'admin-departments.html', icon: 'fa-sitemap' },
+        { label: 'Courses Audit', url: 'admin-courses.html', icon: 'fa-book' },
+        { label: 'Certificates', url: 'admin-certificates.html', icon: 'fa-certificate' },
+        { label: 'System Health', url: 'admin-system.html', icon: 'fa-cogs' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user' },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog', active: true }
+      ]}
+    ],
+    student: [
+      { group: 'Main', links: [
+        { label: 'Dashboard', url: 'student.html', icon: 'fa-th-large' },
+        { label: 'My Courses', url: 'course.html', icon: 'fa-book' },
+        { label: 'Assignments', url: 'assignment.html', icon: 'fa-tasks' },
+        { label: 'Quiz', url: 'quiz.html?id=1', icon: 'fa-question-circle' },
+        { label: 'Attendance', url: 'attendance.html', icon: 'fa-calendar-check-o' },
+        { label: 'Live Classes', url: 'classes.html', icon: 'fa-video-camera' },
+        { label: 'Notes', url: 'notes.html', icon: 'fa-sticky-note-o' }
+      ]},
+      { group: 'Placement & Career', links: [
+        { label: 'Placement', url: 'placement.html', icon: 'fa-briefcase' },
+        { label: 'Resume Builder', url: 'resume-builder.html', icon: 'fa-file-text-o' },
+        { label: 'Portfolio Builder', url: 'portfolio.html', icon: 'fa-globe' },
+        { label: 'Placement Tracker', url: 'placement-tracker.html', icon: 'fa-bullseye' },
+        { label: 'Class Reports', url: 'class-reports.html', icon: 'fa-bar-chart' }
+      ]},
+      { group: 'Achievements', links: [
+        { label: 'Certificates', url: 'certificate.html', icon: 'fa-certificate' },
+        { label: 'Gamification', url: 'gamification.html', icon: 'fa-trophy' }
+      ]},
+      { group: 'Account', links: [
+        { label: 'Profile', url: 'profile.html', icon: 'fa-user' },
+        { label: 'Settings', url: 'settings.html', icon: 'fa-cog', active: true }
+      ]}
+    ]
+  };
+
+  const activeRoleKey = (role === 'trainer' || role === 'mentor') ? 'faculty' :
+                        (role === 'hr_admin') ? 'hr' :
+                        (role === 'placement_officer') ? 'placement' :
+                        (role === 'super_admin') ? 'admin' : (role || 'student');
+
+  const groups = roleNavMap[activeRoleKey] || roleNavMap.student;
+
+  navContainer.innerHTML = groups.map(g => `
+    <div class="sidebar-group">
+      <div class="sidebar-group-label" style="font-size:0.65rem;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:10px 14px 4px;font-weight:800;letter-spacing:1px;">${g.group}</div>
+      ${g.links.map(l => `
+        <a href="${l.url}" class="sidebar-link ${l.active ? 'active' : ''}" style="display:flex;align-items:center;gap:12px;padding:9px 14px;color:${l.active ? '#fff' : 'rgba(255,255,255,0.7)'};text-decoration:none;border-radius:8px;font-size:0.85rem;background:${l.active ? 'rgba(79,70,229,0.25)' : 'transparent'};border-left:${l.active ? '3px solid #06b6d4' : '3px solid transparent'};">
+          <span class="sidebar-icon"><i class="fa ${l.icon}"></i></span>
+          <span class="sidebar-label">${l.label}</span>
+        </a>
+      `).join('')}
+    </div>
+  `).join('');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('darkModeToggle');
   if (toggle) toggle.checked = Theme.isDark();
   if (!Auth.requireAuth()) return;
+
+  const user = Auth.getUser() || { name: 'Demo User', role: 'student' };
+  
+  // Set breadcrumb home to role dashboard
+  const breadcrumbHome = document.getElementById('breadcrumbHome');
+  if (breadcrumbHome) {
+    const destMap = {
+      student: 'student.html',
+      trainer: 'faculty.html',
+      faculty: 'faculty.html',
+      hr_admin: 'hr.html',
+      hr: 'hr.html',
+      placement_officer: 'placement.html',
+      placement: 'placement.html',
+      super_admin: 'admin.html',
+      admin: 'admin.html',
+      mentor: 'faculty.html'
+    };
+    breadcrumbHome.href = destMap[user.role] || 'student.html';
+  }
+
+  // Populate dynamic role-aware sidebar
+  buildDynamicSidebar(user.role);
+
+  // Hook notification toggle change events
+  const notifCheckboxes = [
+    'email-notify',
+    'push-notify',
+    'assign-notify',
+    'quiz-notify',
+    'grade-notify',
+    'news-notify'
+  ];
+  notifCheckboxes.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('change', () => {
+        if (typeof Toast !== 'undefined') {
+          Toast.success('Preferences Updated', `${id.replace('-notify','').toUpperCase()} notification preference saved`);
+        }
+      });
+    }
+  });
 });
 </script>
 </body>
 </html>
+

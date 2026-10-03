@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent Portal — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="parentDashboard">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#3B82F6,#10B981)" data-user-avatar>👨</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Robert Johnson</div>
+        <div class="sidebar-user-role">Parent</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Student Details</div>
+        <a href="parent.html" class="sidebar-link active" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Parent Dashboard</span>
+        </a>
+        <a href="#studentProgress" class="sidebar-link" data-tooltip="Academic Progress">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">Academic Progress</span>
+        </a>
+        <a href="#studentAttendance" class="sidebar-link" data-tooltip="Attendance Logs">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance Status</span>
+        </a>
+        <a href="#feesManagement" class="sidebar-link" data-tooltip="Fee Center">
+          <span class="sidebar-icon"><i class="fa fa-money"></i></span>
+          <span class="sidebar-label">Fee Management</span>
+        </a>
+        <a href="#ptmScheduler" class="sidebar-link" data-tooltip="Schedule PTM">
+          <span class="sidebar-icon"><i class="fa fa-handshake-o"></i></span>
+          <span class="sidebar-label">PTM Meetings</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">My Profile</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Parent Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <button class="notif-btn" data-dropdown-toggle title="Notifications">
+            <i class="fa fa-bell"></i>
+            <span class="notif-badge">2</span>
+          </button>
+          <div class="dropdown-menu notif-dropdown" style="min-width:300px">
+            <div class="notif-dropdown-header">
+              <span class="notif-dropdown-title">Parent Notifications</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--success-light);color:var(--success)"><i class="fa fa-certificate"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Alex Johnson completed "Complete Web Development"!</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--warning-light);color:var(--warning)"><i class="fa fa-money"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Fee Reminder: Outstanding Semester Fees of ₹12,500 due.</div>
+                <div class="notif-time">3 days ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header flex-between">
+        <div>
+          <h1 class="page-title">Parent Portal 👪</h1>
+          <p class="page-subtitle">Monitoring Academic Activities & ERP for: <strong>Alex Johnson</strong> (Computer Science, Sem 4)</p>
+        </div>
+        <div class="flex gap-8">
+          <button class="btn btn-ghost" data-export="pdf"><i class="fa fa-print"></i> Print Report Card</button>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid" style="margin-bottom:24px">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa fa-line-chart"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">8.8 CGPA</div>
+            <div class="stat-label">Academic GPA</div>
+            <div class="stat-change up"><i class="fa fa-arrow-up"></i> Top 10% in Batch</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon teal"><i class="fa fa-calendar-check-o"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="parentAttendanceVal">92.0%</div>
+            <div class="stat-label">Class Attendance</div>
+            <div class="stat-change up"><i class="fa fa-check-circle"></i> Good Standing</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fa fa-money"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="pendingFeesVal">₹12,500</div>
+            <div class="stat-label">Pending Fees Due</div>
+            <div class="stat-change text-danger" id="feeStatusIndicator"><i class="fa fa-exclamation-triangle"></i> Unpaid</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fa fa-trophy"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Verified Badges Earned</div>
+            <div class="stat-change up"><i class="fa fa-arrow-up"></i> +1 New Badge</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- Student Course Progress -->
+        <div class="card" id="studentProgress">
+          <div class="card-header flex-between">
+            <span class="card-title"><i class="fa fa-book" style="color:var(--primary)"></i> Academic Performance</span>
+            <span class="badge badge-primary">Term 2026</span>
+          </div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div>
+                <div class="flex-between" style="font-size:0.875rem;margin-bottom:6px">
+                  <span class="font-semi">Complete Web Development</span>
+                  <span class="text-success font-semi">Grade: A (100% Completed)</span>
+                </div>
+                <div class="progress"><div class="progress-bar" style="width:100%;background:var(--success)"></div></div>
+              </div>
+              <div>
+                <div class="flex-between" style="font-size:0.875rem;margin-bottom:6px">
+                  <span class="font-semi">Advanced JavaScript</span>
+                  <span class="text-success font-semi">Grade: B+ (85% Completed)</span>
+                </div>
+                <div class="progress"><div class="progress-bar" style="width:85%;background:var(--primary)"></div></div>
+              </div>
+              <div>
+                <div class="flex-between" style="font-size:0.875rem;margin-bottom:6px">
+                  <span class="font-semi">Database Systems & SQL</span>
+                  <span class="text-success font-semi">Grade: A- (72% Completed)</span>
+                </div>
+                <div class="progress"><div class="progress-bar" style="width:72%;background:var(--primary)"></div></div>
+              </div>
+              <div>
+                <div class="flex-between" style="font-size:0.875rem;margin-bottom:6px">
+                  <span class="font-semi">Cloud Computing & Microservices</span>
+                  <span class="text-warning font-semi">In Progress (30% Completed)</span>
+                </div>
+                <div class="progress"><div class="progress-bar" style="width:30%;background:var(--warning)"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attendance Logs Chart View -->
+        <div class="card" id="studentAttendance">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-calendar" style="color:var(--accent)"></i> Attendance Status History</span>
+          </div>
+          <div class="card-body">
+            <canvas id="attendanceBreakdownChart" height="240"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <!-- PTM Scheduler -->
+        <div class="card" id="ptmScheduler">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-handshake-o" style="color:var(--primary)"></i> Schedule Parent-Teacher Meeting</span>
+          </div>
+          <div class="card-body">
+            <form id="ptmForm" style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group">
+                <label class="form-label">Select Faculty Member</label>
+                <select class="form-control" id="ptmFaculty" required>
+                  <option value="Dr. Sarah Chen">Dr. Sarah Chen (Web Dev / Class Mentor)</option>
+                  <option value="Prof. Alan Turing">Prof. Alan Turing (Mathematics / AI Lead)</option>
+                  <option value="Dr. Steve Jobs">Dr. Steve Jobs (Design & Portfolio)</option>
+                </select>
+              </div>
+              <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div>
+                  <label class="form-label">Preferred Date</label>
+                  <input type="date" class="form-control" id="ptmDate" required>
+                </div>
+                <div>
+                  <label class="form-label">Time Slot</label>
+                  <select class="form-control" id="ptmTime" required>
+                    <option value="10:00 AM - 10:30 AM">10:00 AM - 10:30 AM</option>
+                    <option value="02:00 PM - 02:30 PM">02:00 PM - 02:30 PM</option>
+                    <option value="04:30 PM - 05:00 PM">04:30 PM - 05:00 PM</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Agenda / Description</label>
+                <textarea class="form-control" id="ptmReason" rows="2" placeholder="Briefly specify the topic of discussion..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="justify-content:center"><i class="fa fa-calendar-plus-o"></i> Book Meeting Request</button>
+            </form>
+            <div style="margin-top:20px">
+              <div class="font-semi" style="font-size:0.875rem;margin-bottom:8px">Scheduled / Requested PTMs:</div>
+              <div style="display:flex;flex-direction:column;gap:8px" id="ptmList">
+                <div style="padding:10px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);font-size:0.8rem;display:flex;justify-content:space-between">
+                  <div>
+                    <strong style="color:var(--text)">Dr. Sarah Chen</strong><br>
+                    <span>July 20, 2026 at 10:00 AM</span>
+                  </div>
+                  <span class="badge badge-success">Approved (Zoom)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fee Management Center -->
+        <div class="card" id="feesManagement">
+          <div class="card-header">
+            <span class="card-title"><i class="fa fa-money" style="color:var(--warning)"></i> ERP Fee Management Center</span>
+          </div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
+              <div class="flex-between" style="font-size:0.85rem;padding:8px 0;border-bottom:1px dashed var(--border)">
+                <span>Tuition Fees (Semester 4)</span>
+                <span class="font-semi">₹10,000</span>
+              </div>
+              <div class="flex-between" style="font-size:0.85rem;padding:8px 0;border-bottom:1px dashed var(--border)">
+                <span>Lab & Library ERP Fee</span>
+                <span class="font-semi">₹2,500</span>
+              </div>
+              <div class="flex-between" style="font-size:0.85rem;padding:8px 0;border-bottom:1px dashed var(--border)">
+                <span>Placement Cell Registration</span>
+                <span class="font-semi" style="color:var(--success)">Paid</span>
+              </div>
+            </div>
+            <button class="btn btn-accent" style="width:100%;justify-content:center" id="payFeesBtn" onclick="Modal.open('paymentModal')"><i class="fa fa-credit-card"></i> Pay Outstanding Balance (₹12,500)</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Fee Payment Simulation Modal -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <h3 class="modal-title">Mock Fee Payment Checkout</h3>
+      <button class="modal-close" onclick="Modal.close('paymentModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center;margin-bottom:20px;padding:12px;background:var(--primary-light);color:var(--primary);border-radius:var(--radius);font-weight:700">
+        Paying ERP Fees: ₹12,500
+      </div>
+      <form id="paymentForm" onsubmit="event.preventDefault(); triggerMockPayment();" style="display:flex;flex-direction:column;gap:12px">
+        <div class="form-group">
+          <label class="form-label">Cardholder Name</label>
+          <input type="text" class="form-control" value="Robert Johnson" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Card Number</label>
+          <input type="text" class="form-control" placeholder="4111 2222 3333 4444" required>
+        </div>
+        <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <label class="form-label">Expiry</label>
+            <input type="text" class="form-control" placeholder="MM/YY" required>
+          </div>
+          <div>
+            <label class="form-label">CVV</label>
+            <input type="password" class="form-control" placeholder="***" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center" id="paymentSubmitBtn">Complete Payment</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/parent.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Analytics — Prime Vector LMS Faculty</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="facultyStudentsPage">
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div><span class="sidebar-brand">PRIME <span>VECTOR</span></span></div>
+    <a href="profile.html" class="sidebar-user"><div class="sidebar-avatar" style="background:var(--gradient-accent)" data-user-avatar></div><div class="sidebar-user-info"><div class="sidebar-user-name" data-user-name>Faculty</div><div class="sidebar-user-role">faculty</div></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-group"><div class="sidebar-group-label">Main</div>
+        <a href="faculty.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-th-large"></i></span><span class="sidebar-label">Dashboard</span></a>
+        <a href="course.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-upload"></i></span><span class="sidebar-label">Courses</span></a>
+        <a href="faculty-classes.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-video-camera"></i></span><span class="sidebar-label">Live Classes</span></a>
+        <a href="faculty-assignments.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-tasks"></i></span><span class="sidebar-label">Assignments</span></a>
+        <a href="faculty-quiz.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-question-circle"></i></span><span class="sidebar-label">Quizzes</span></a>
+        <a href="faculty-students.html" class="sidebar-link active"><span class="sidebar-icon"><i class="fa fa-users"></i></span><span class="sidebar-label">Student Analytics</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Reports</div>
+        <a href="attendance.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span><span class="sidebar-label">Attendance</span></a>
+      </div>
+      <div class="sidebar-group"><div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link"><span class="sidebar-icon"><i class="fa fa-user"></i></span><span class="sidebar-label">Profile</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><button class="sidebar-logout" data-logout><span class="sidebar-icon"><i class="fa fa-sign-out"></i></span><span class="sidebar-label">Logout</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb"><a href="faculty.html">Faculty</a><span class="breadcrumb-sep">/</span><span>Student Analytics</span></div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn"><i class="fa fa-moon"></i></button>
+        <select class="form-input" style="width:auto;padding:7px 14px;font-size:0.85rem">
+          <option>Web Development</option>
+          <option>Machine Learning</option>
+          <option>UI/UX Design</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h2 class="page-title">Student Analytics</h2>
+        <p class="page-subtitle">Monitor individual and class-level performance across your courses</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:28px">
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)"><i class="fa fa-users"></i></div><div class="stat-card-body"><div class="stat-card-value">320</div><div class="stat-card-label">Total Students</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa fa-calendar-check-o"></i></div><div class="stat-card-body"><div class="stat-card-value">88.4%</div><div class="stat-card-label">Avg Attendance</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa fa-star"></i></div><div class="stat-card-body"><div class="stat-card-value">76.8%</div><div class="stat-card-label">Avg Quiz Score</div></div></div>
+        <div class="stat-card"><div class="stat-card-icon" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa fa-tasks"></i></div><div class="stat-card-body"><div class="stat-card-value">91%</div><div class="stat-card-label">Assignment Rate</div></div></div>
+      </div>
+
+      <!-- Charts -->
+      <div class="dashboard-grid" style="margin-bottom:24px">
+        <div class="section-card">
+          <div class="section-header"><div class="section-title"><i class="fa fa-line-chart"></i> Class Progress Trend</div></div>
+          <div style="height:240px"><canvas id="progressTrendChart"></canvas></div>
+        </div>
+        <div class="section-card">
+          <div class="section-header"><div class="section-title"><i class="fa fa-pie-chart"></i> Performance Distribution</div></div>
+          <canvas id="perfDistChart" height="220"></canvas>
+        </div>
+      </div>
+
+      <!-- Students Table -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title"><i class="fa fa-users"></i> Student Performance</div>
+          <div style="display:flex;gap:8px">
+            <div style="position:relative">
+              <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:0.85rem"></i>
+              <input type="text" class="form-input" placeholder="Search student..." style="padding-left:32px;font-size:0.82rem" oninput="filterStudents(this.value)">
+            </div>
+            <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem"><i class="fa fa-download"></i></button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Student</th><th>Attendance</th><th>Assignments</th><th>Quiz Avg</th><th>Progress</th><th>Risk Level</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="studentsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  Theme.init();
+  const STUDENTS = [
+    { name:'Arjun Mehta',   att:96, assign:100, quiz:92, prog:88, color:'#2563EB', risk:'low' },
+    { name:'Priya Sharma',  att:94, assign:95,  quiz:89, prog:85, color:'#10B981', risk:'low' },
+    { name:'Rohit Kumar',   att:92, assign:90,  quiz:85, prog:82, color:'#8B5CF6', risk:'low' },
+    { name:'Sneha Nair',    att:88, assign:85,  quiz:79, prog:78, color:'#F59E0B', risk:'low' },
+    { name:'Kiran Patel',   att:80, assign:75,  quiz:68, prog:65, color:'#EF4444', risk:'medium' },
+    { name:'Deepa Reddy',   att:72, assign:65,  quiz:58, prog:55, color:'#F97316', risk:'high' },
+    { name:'Vishal Rao',    att:68, assign:55,  quiz:48, prog:42, color:'#EF4444', risk:'high' },
+    { name:'Meera Singh',   att:90, assign:88,  quiz:82, prog:80, color:'#14B8A6', risk:'low' },
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!Auth.requireAuth()) return;
+    renderTable(STUDENTS);
+
+    const isDark = Theme.isDark();
+    const textColor = isDark ? '#94A3B8' : '#64748B';
+    const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+
+    new Chart(document.getElementById('progressTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['Week 1','Week 2','Week 3','Week 4','Week 5','Week 6','Week 7','Week 8'],
+        datasets: [
+          { label:'Attendance %', data:[88,90,86,92,88,90,92,88], borderColor:'#2563EB', tension:0.4, fill:false, pointRadius:5 },
+          { label:'Avg Quiz Score', data:[70,74,72,78,76,80,77,83], borderColor:'#10B981', tension:0.4, fill:false, pointRadius:5 },
+          { label:'Assignment Rate', data:[88,92,90,94,92,95,93,96], borderColor:'#F59E0B', tension:0.4, fill:false, pointRadius:5 }
+        ]
+      },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{ labels:{ color:textColor } } },
+        scales:{ y:{ min:60, max:100, grid:{ color:gridColor }, ticks:{ color:textColor } }, x:{ grid:{ display:false }, ticks:{ color:textColor } } }
+      }
+    });
+
+    new Chart(document.getElementById('perfDistChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Excellent (>85)','Good (70-85)','Average (50-70)','Poor (<50)'],
+        datasets: [{ data:[28,42,22,8], backgroundColor:['#10B981','#2563EB','#F59E0B','#EF4444'], borderWidth:0, hoverOffset:6 }]
+      },
+      options: { responsive:true, cutout:'65%', plugins:{ legend:{ position:'bottom', labels:{ color:textColor, padding:12 } } } }
+    });
+
+    App.init();
+  });
+
+  function renderTable(students) {
+    const riskBadge = { low:'badge-success', medium:'badge-warning', high:'badge-danger' };
+    document.getElementById('studentsBody').innerHTML = students.map(s => `
+      <tr>
+        <td>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:36px;height:36px;border-radius:50%;background:${s.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;flex-shrink:0">
+              ${s.name.split(' ').map(w=>w[0]).join('')}
+            </div>
+            <strong>${s.name}</strong>
+          </div>
+        </td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="flex:1;height:6px;background:var(--border);border-radius:var(--radius-full);min-width:60px;overflow:hidden">
+              <div style="height:100%;width:${s.att}%;background:${s.att>=85?'var(--success)':s.att>=70?'var(--warning)':'var(--danger)'};border-radius:var(--radius-full)"></div>
+            </div>
+            <span style="font-size:0.82rem;font-weight:600">${s.att}%</span>
+          </div>
+        </td>
+        <td><span class="badge ${s.assign>=80?'badge-success':s.assign>=60?'badge-warning':'badge-danger'}">${s.assign}%</span></td>
+        <td><strong>${s.quiz}%</strong></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div style="flex:1;height:6px;background:var(--border);border-radius:var(--radius-full);overflow:hidden">
+              <div style="height:100%;width:${s.prog}%;background:var(--gradient-primary);border-radius:var(--radius-full)"></div>
+            </div>
+            <span style="font-size:0.8rem">${s.prog}%</span>
+          </div>
+        </td>
+        <td><span class="badge ${riskBadge[s.risk]}">${s.risk === 'low' ? '✓ On Track' : s.risk === 'medium' ? '⚠ At Risk' : '⛔ Struggling'}</span></td>
+        <td>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('Contact','Messaging ${s.name}')"><i class="fa fa-envelope"></i></button>
+          <button class="btn btn-ghost" style="padding:5px 8px;font-size:0.78rem" onclick="Toast.info('Profile','Viewing profile')"><i class="fa fa-eye"></i></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterStudents(q) {
+    const filtered = STUDENTS.filter(s => s.name.toLowerCase().includes(q.toLowerCase()));
+    renderTable(filtered);
+  }
+</script>
+</body>
+</html>
+

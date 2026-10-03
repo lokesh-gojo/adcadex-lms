@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Enrollment — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="adminDashboard">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Admin</div>
+        <div class="sidebar-user-role">admin</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Overview</div>
+        <a href="admin.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Management</div>
+        <a href="admin-reports.html" class="sidebar-link" data-tooltip="Reports">
+          <span class="sidebar-icon"><i class="fa fa-file-excel-o"></i></span>
+          <span class="sidebar-label">Reports</span>
+        </a>
+        <a href="admin-enrollment.html" class="sidebar-link active" data-tooltip="Enrollment">
+          <span class="sidebar-icon"><i class="fa fa-user-plus"></i></span>
+          <span class="sidebar-label">Enrollment</span>
+        </a>
+
+        <a href="#users" class="sidebar-link" data-tooltip="Students" onclick="showAdminSection('users')">
+          <span class="sidebar-icon"><i class="fa fa-users"></i></span>
+          <span class="sidebar-label">Students</span>
+        </a>
+        <a href="#faculty" class="sidebar-link" data-tooltip="Faculty" onclick="showAdminSection('users')">
+          <span class="sidebar-icon"><i class="fa fa-chalkboard-teacher"></i></span>
+          <span class="sidebar-label">Faculty</span>
+        </a>
+        <a href="#departments" class="sidebar-link" data-tooltip="Departments" onclick="showAdminSection('departments')">
+          <span class="sidebar-icon"><i class="fa fa-building"></i></span>
+          <span class="sidebar-label">Departments</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">Courses</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Analytics</div>
+        <a href="#analytics" class="sidebar-link" data-tooltip="Reports" onclick="showAdminSection('analytics')">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Reports</span>
+        </a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Admin Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <button class="notif-btn" title="Notifications"><i class="fa fa-bell"></i><span class="notif-badge">5</span></button>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Admin</span>
+              <span class="user-role">admin</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+        <div class="page-content">
+      <div class="page-header">
+        <h1 class="page-title">Student Enrollment</h1>
+        <p class="page-subtitle">Enroll new students into courses, internships, and projects.</p>
+      </div>
+      
+      <div class="card" style="margin-bottom:24px; border-top:4px solid var(--primary);">
+        <div class="card-header">
+          <span class="card-title">New Student Registration</span>
+        </div>
+        <div class="card-body">
+          <form id="enrollmentForm" onsubmit="event.preventDefault(); alert('Student Enrolled Successfully!');">
+            
+            <h4 style="margin-bottom:16px; color:var(--text-muted); border-bottom:1px solid var(--border); padding-bottom:8px;">Personal Details</h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+              <div class="form-group">
+                <label class="form-label">Student ID (Auto Generated)</label>
+                <input type="text" class="form-control" value="ACDX-2024-0891" readonly style="background:var(--bg-color);">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" required placeholder="e.g., Jane Doe">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Register Number</label>
+                <input type="text" class="form-control" required placeholder="University Reg. No">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Department & Year</label>
+                <div style="display:flex; gap:8px;">
+                  <select class="form-control" style="flex:2;">
+                    <option>Computer Science</option>
+                    <option>Information Technology</option>
+                    <option>Electronics</option>
+                  </select>
+                  <select class="form-control" style="flex:1;">
+                    <option>1st Year</option>
+                    <option>2nd Year</option>
+                    <option>3rd Year</option>
+                    <option>4th Year</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" required placeholder="student@example.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mobile Number</label>
+                <input type="tel" class="form-control" required placeholder="+91 9876543210">
+              </div>
+            </div>
+
+            <h4 style="margin-bottom:16px; color:var(--text-muted); border-bottom:1px solid var(--border); padding-bottom:8px;">Academic & Training Details</h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+              <div class="form-group">
+                <label class="form-label">Course Name</label>
+                <select class="form-control">
+                  <option>Full Stack Web Development</option>
+                  <option>Data Science & AI</option>
+                  <option>Cloud Computing</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Course Duration</label>
+                <select class="form-control">
+                  <option>1 Month</option>
+                  <option>2 Months</option>
+                  <option selected>3 Months</option>
+                  <option>6 Months</option>
+                  <option>Custom</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Internship Name</label>
+                <input type="text" class="form-control" placeholder="e.g., Frontend Developer Intern">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Internship Duration</label>
+                <select class="form-control">
+                  <option>1 Month</option>
+                  <option>3 Months</option>
+                  <option>6 Months</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Project Name</label>
+                <input type="text" class="form-control" placeholder="e.g., E-Commerce Platform">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Project Duration</label>
+                <select class="form-control">
+                  <option>2 Weeks</option>
+                  <option>1 Month</option>
+                  <option>2 Months</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Faculty Mentor</label>
+                <select class="form-control">
+                  <option>Dr. Alan Turing</option>
+                  <option>Prof. Grace Hopper</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Training Batch</label>
+                <input type="text" class="form-control" placeholder="e.g., BATCH-24-A">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Enrollment Date</label>
+                <input type="date" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Expected Completion Date</label>
+                <input type="date" class="form-control" readonly style="background:var(--bg-color);">
+                <small style="color:var(--text-muted); display:block; margin-top:4px;">*Auto-calculated based on durations</small>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:16px; margin-top:32px;">
+              <button type="button" class="btn btn-ghost" onclick="document.getElementById('enrollmentForm').reset()">Clear</button>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Enroll Student</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/admin.js"></script>
+<script>
+function showAdminSection(e, section) {
+  if (e && e.preventDefault) e.preventDefault();
+  const target = document.getElementById(section + 'Section') || document.getElementById('usersSection');
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
+

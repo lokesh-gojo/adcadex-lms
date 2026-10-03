@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — — Prime Vector LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/placement.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body id="resumePage">
+<div class="dashboard-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><i class="fa fa-graduation-cap"></i></div>
+      <span class="sidebar-brand">PRIME <span>VECTOR</span></span>
+    </div>
+
+    <a href="profile.html" class="sidebar-user">
+      <div class="sidebar-avatar" data-user-avatar></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" data-user-name>Student</div>
+        <div class="sidebar-user-role">student</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Main</div>
+        <a href="student.html" class="sidebar-link" data-tooltip="Dashboard">
+          <span class="sidebar-icon"><i class="fa fa-th-large"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="course.html" class="sidebar-link" data-tooltip="My Courses">
+          <span class="sidebar-icon"><i class="fa fa-book"></i></span>
+          <span class="sidebar-label">My Courses</span>
+          <span class="sidebar-badge">4</span>
+        </a>
+        <a href="assignment.html" class="sidebar-link" data-tooltip="Assignments">
+          <span class="sidebar-icon"><i class="fa fa-tasks"></i></span>
+          <span class="sidebar-label">Assignments</span>
+          <span class="sidebar-badge">3</span>
+        </a>
+        <a href="quiz.html?id=1" class="sidebar-link" data-tooltip="Quiz">
+          <span class="sidebar-icon"><i class="fa fa-question-circle"></i></span>
+          <span class="sidebar-label">Quiz</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link" data-tooltip="Attendance">
+          <span class="sidebar-icon"><i class="fa fa-calendar-check-o"></i></span>
+          <span class="sidebar-label">Attendance</span>
+        </a>
+        <a href="classes.html" class="sidebar-link" data-tooltip="Live Classes">
+          <span class="sidebar-icon"><i class="fa fa-video-camera"></i></span>
+          <span class="sidebar-label">Live Classes</span>
+        </a>
+        <a href="notes.html" class="sidebar-link" data-tooltip="Notes">
+          <span class="sidebar-icon"><i class="fa fa-sticky-note-o"></i></span>
+          <span class="sidebar-label">Notes</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Placement & Career</div>
+        <a href="placement.html" class="sidebar-link" data-tooltip="Placement Training">
+          <span class="sidebar-icon"><i class="fa fa-briefcase"></i></span>
+          <span class="sidebar-label">Placement</span>
+        </a>
+        <a href="resume.html" class="sidebar-link active" data-tooltip="Resume Builder">
+          <span class="sidebar-icon"><i class="fa fa-file-text-o"></i></span>
+          <span class="sidebar-label">Resume Builder</span>
+        </a>
+        <a href="portfolio.html" class="sidebar-link" data-tooltip="Portfolio Builder">
+          <span class="sidebar-icon"><i class="fa fa-globe"></i></span>
+          <span class="sidebar-label">Portfolio Builder</span>
+        </a>
+              <a href="placement-tracker.html" class="sidebar-link" data-tooltip="Placement Tracker">
+          <span class="sidebar-icon"><i class="fa fa-bullseye"></i></span>
+          <span class="sidebar-label">Placement Tracker</span>
+        </a>
+        <a href="class-reports.html" class="sidebar-link" data-tooltip="Class Reports">
+          <span class="sidebar-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="sidebar-label">Class Reports</span>
+        </a>
+</div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Achievements</div>
+        <a href="certificate.html" class="sidebar-link" data-tooltip="Certificates">
+          <span class="sidebar-icon"><i class="fa fa-certificate"></i></span>
+          <span class="sidebar-label">Certificates</span>
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Account</div>
+        <a href="profile.html" class="sidebar-link" data-tooltip="Profile">
+          <span class="sidebar-icon"><i class="fa fa-user"></i></span>
+          <span class="sidebar-label">Profile</span>
+        </a>
+        <a href="settings.html" class="sidebar-link" data-tooltip="Settings">
+          <span class="sidebar-icon"><i class="fa fa-cog"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-logout" data-logout data-tooltip="Logout">
+        <span class="sidebar-icon"><i class="fa fa-sign-out"></i></span>
+        <span class="sidebar-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Inner Navbar -->
+    <header class="inner-navbar" id="innerNavbar">
+      <div class="inner-navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle"><i class="fa fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>Dashboard</span>
+        </div>
+      </div>
+      <div class="inner-navbar-right">
+        <button class="theme-toggle notif-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <div class="dropdown">
+          <button class="notif-btn" data-dropdown-toggle title="Notifications">
+            <i class="fa fa-bell"></i>
+            <span class="notif-badge">3</span>
+          </button>
+          <div class="dropdown-menu notif-dropdown" style="min-width:320px">
+            <div class="notif-dropdown-header">
+              <span class="notif-dropdown-title">Notifications</span>
+              <span class="notif-mark-all">Mark all read</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--primary-light);color:var(--primary)"><i class="fa fa-book"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">New lesson added to Web Development</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-avatar" style="background:var(--danger-light);color:var(--danger)"><i class="fa fa-clock-o"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Assignment due in 2 days: Build REST API</div>
+                <div class="notif-time">4 hours ago</div>
+              </div>
+              <div class="notif-unread-dot"></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-avatar" style="background:var(--success-light);color:var(--success)"><i class="fa fa-check"></i></div>
+              <div class="notif-content">
+                <div class="notif-text">Quiz graded: JavaScript Fundamentals — 88%</div>
+                <div class="notif-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="user-menu" data-dropdown-toggle>
+            <div class="avatar-placeholder avatar-sm" style="border-radius:50%;background:var(--gradient-primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center" data-user-avatar></div>
+            <div class="user-info hide-md">
+              <span class="user-name" data-user-name>Student</span>
+              <span class="user-role">student</span>
+            </div>
+            <i class="fa fa-chevron-down" style="font-size:0.7rem;color:var(--text-muted)"></i>
+          </div>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+            <a href="settings.html" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" data-logout><i class="fa fa-sign-out"></i> Logout</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <div class="page-header">
+        <h1 class="page-title">Resume Builder</h1>
+        <p class="page-subtitle">Build your professional, ATS-friendly resume.</p>
+      </div>
+
+      <div class="resume-layout">
+        <!-- Editor Column -->
+        <div class="resume-editor">
+          <!-- Personal Details -->
+          <div class="placement-panel" style="margin-bottom:0">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-user"></i> Personal Details</div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="r_name" value="Jane Doe" oninput="updateResume()">
+              </div>
+              <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" id="r_title" value="Software Engineer" oninput="updateResume()">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="r_email" value="jane.doe@example.com" oninput="updateResume()">
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="text" id="r_phone" value="+1 234 567 890" oninput="updateResume()">
+              </div>
+              <div class="form-group">
+                <label>LinkedIn</label>
+                <input type="text" id="r_linkedin" value="linkedin.com/in/janedoe" oninput="updateResume()">
+              </div>
+              <div class="form-group">
+                <label>Location</label>
+                <input type="text" id="r_location" value="San Francisco, CA" oninput="updateResume()">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Summary -->
+          <div class="placement-panel" style="margin-bottom:0">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-align-left"></i> Professional Summary</div>
+            </div>
+            <div class="form-group">
+              <textarea id="r_summary" rows="4" oninput="updateResume()">Motivated Software Engineer with 2+ years of experience in full-stack web development. Passionate about building scalable applications and intuitive user interfaces.</textarea>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="placement-panel" style="margin-bottom:0">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-briefcase"></i> Experience</div>
+            </div>
+            <div class="form-group">
+              <textarea id="r_exp" rows="5" oninput="updateResume()">TechCorp Inc. — Frontend Developer (Jan 2023 - Present)
+- Developed responsive web applications using React.
+- Improved site performance by 30% through code splitting.</textarea>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="placement-panel" style="margin-bottom:0">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-graduation-cap"></i> Education</div>
+            </div>
+            <div class="form-group">
+              <textarea id="r_edu" rows="3" oninput="updateResume()">University of Technology — B.S. in Computer Science (2019 - 2023)
+- GPA: 3.8/4.0
+- Honors: Dean's List</textarea>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="placement-panel" style="margin-bottom:0">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fa fa-wrench"></i> Skills</div>
+            </div>
+            <div class="form-group">
+              <textarea id="r_skills" rows="3" oninput="updateResume()">JavaScript, React, Node.js, Python, SQL, Git, HTML/CSS, Agile</textarea>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" onclick="downloadPDF()"><i class="fa fa-download"></i> Download as PDF</button>
+        </div>
+
+        <!-- Preview Column -->
+        <div class="resume-preview-wrapper">
+          <div class="resume-preview" id="resumePreview">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/resume.js"></script>
+</body>
+</html>
